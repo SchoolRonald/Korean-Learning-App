@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Stats</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><a href="/">Words</a> | <a href="/sentences">Sentences</a> | <b>Stats</b></p>
+<h1>Stats</h1>
+
+<label>Up to lesson <select id="lesson"></select></label>
+<p id="summary"></p>
+
+<h2>Weakest words</h2>
+<p class="muted">Highest fail rate in the spelling drill.</p>
+<div id="weakest"></div>
+
+<h2>Not seen in a while</h2>
+<div id="stale"></div>
+
+<details>
+  <summary>All words by confidence</summary>
+  <div id="words"></div>
+</details>
+
+<h2>About confidence</h2>
+<p class="muted">Confidence estimates how likely you are to spell the word correctly right now.
+It is accuracy times memory. Accuracy is (correct + 1) / (attempts + 2), so a single lucky answer
+does not count as certain. Memory halves every few days since you last saw the word, and that
+half-life doubles with each correct answer in a row (1 day after a miss, then 2, 4, 8, up to 64).
+Unpracticed words are 0%. Only spelling-drill answers count, not sentence grading.
+The spelling drill picks randomly from the 5 least confident words.</p>
+
+<div id="feedback"></div>
+
+<script src="/static/common.js"></script>
+<script>
+const pct = (x) => `${Math.round(x * 100)}%`;
+
+function ago(days) {
+  if (days === null) return "never";
+  if (days < 1) return "today";
+  const n = Math.floor(days);
+  return n === 1 ? "1 day ago" : `${n} days ago`;
+}
+
+function confidenceCell(c) {
+  const cell = el("td", "", "num");
+  const bar = el("span", "", "bar");
+  bar.style.width = `${Math.round(c * 4)}rem`;
+  cell.append(bar, pct(c));
+  return cell;
+}
+
+// columns: [header, (word) => text or td element, numeric?]
+function table(words, columns, empty) {
+  if (!words.length) return el("p", empty, "muted");
+  const t = el("table");
+  const head = el("tr");
+  for (const [name, , num] of columns) head.append(el("th", name, num ? "num" : ""));
+  t.append(head);
+  for (const w of words) {
+    const row = el("tr");
+    for (const [, value, num] of columns) {
+      const v = value(w);
+      row.append(v instanceof Node ? v : el("td", `${v}`, num ? "num" : ""));
+    }
+    t.append(row);
+  }
+  return t;
+}
+
+const WORD = ["Korean", (w) => w.hangul];
+const ENGLISH = ["English", (w) => w.english];
+const CONFIDENCE = ["Confidence", (w) => confidenceCell(w.confidence), true];
+
+async function loadStats() {
+  try {
+    const s = await api(`/api/stats?lesson=${$("lesson").value}`);
+    $("summary").textContent =
+      `Practiced ${s.practiced} of ${s.total} words. Average confidence ${pct(s.avg_confidence)}.`;
+    $("weakest").replaceChildren(table(s.weakest, [
+      WORD, ENGLISH,
+      ["Fail rate", (w) => `${pct(w.fail_rate)} (${w.fails}/${w.attempts})`, true],
+      CONFIDENCE,
+    ], "No missed words yet."));
+    $("stale").replaceChildren(table(s.stale, [
+      WORD, ENGLISH,
+      ["Last seen", (w) => ago(w.days_since), true],
+      CONFIDENCE,
+    ], "Nothing practiced yet."));
+    $("words").replaceChildren(table(s.words, [
+      WORD, ENGLISH,
+      ["Lesson", (w) => w.lesson, true],
+      ["Attempts", (w) => w.attempts, true],
+      ["Streak", (w) => w.streak, true],
+      CONFIDENCE,
+    ], "No words."));
+  } catch (e) {
+    showError(e.message);
+  }
+}
+
+$("lesson").addEventListener("change", () => {
+  saveLesson($("lesson").value);
+  loadStats();
+});
+
+loadLessons()
+  .then((ok) => ok && loadStats())
+  .catch((e) => showError(e.message));
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Sentences</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><a href="/">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
+<h1>Sentence practice</h1>
+
+<label>Up to lesson <select id="lesson"></select></label>
+<span class="muted" id="usage"></span>
+
+<div id="prompt" style="font-size: 1.5rem"></div>
+<input id="answer" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Translate into Korean">
+<div>
+  <button id="check">Check</button>
+  <button id="next">New sentence</button>
+</div>
+
+<div id="feedback"></div>
+<p class="muted">Sentences and grading come from an AI model and have not been validated.
+Only an exact match with the reference translation is checked deterministically.</p>
+
+<script src="/static/common.js"></script>
+<script>
+let sentence = null;
+let answered = false;
+
+function showUsage(llm) {
+  if (llm) $("usage").textContent = `AI calls: ${llm.calls} / ${llm.cap}`;
+}
+
+async function nextSentence() {
+  answered = false;
+  $("feedback").replaceChildren(el("p", "Loading...", "muted"));
+  $("prompt").textContent = "";
+  $("answer").value = "";
+  $("answer").disabled = false;
+  $("check").disabled = false;
+  $("next").disabled = true;
+  try {
+    const exclude = sentence ? `&exclude=${sentence.id}` : "";
+    sentence = await api(`/api/sentence?lesson=${$("lesson").value}${exclude}`);
+    $("prompt").textContent = sentence.english;
+    $("feedback").replaceChildren();
+    if (sentence.note) $("feedback").append(el("p", sentence.note, "muted"));
+    showUsage(sentence.llm);
+  } catch (e) {
+    sentence = null;
+    showError(e.message);
+  }
+  $("next").disabled = false;
+  $("answer").focus();
+}
+
+async function checkAnswer() {
+  const answer = $("answer").value.trim();
+  if (!sentence || answered || !answer) return;
+  answered = true;
+  $("check").disabled = true;
+  $("feedback").replaceChildren(el("p", "Grading...", "muted"));
+  try {
+    const result = await api("/api/sentence/answer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sentence_id: sentence.id, answer }),
+    });
+    showResult(result);
+    showUsage(result.llm);
+    if (!result.graded_by) {
+      // Not graded or recorded, so let the user try again.
+      answered = false;
+      $("check").disabled = false;
+      return;
+    }
+  } catch (e) {
+    answered = false;
+    $("check").disabled = false;
+    showError(e.message);
+    return;
+  }
+  $("answer").disabled = true;
+  $("next").focus();
+}
+
+const VERDICT_TEXT = {
+  correct: ["Correct!", "correct"],
+  almost: ["Almost.", "verdict-almost"],
+  incorrect: ["Not quite.", "wrong"],
+  ungraded: ["Could not grade this answer.", "wrong"],
+};
+
+function showResult(result) {
+  const [text, className] = VERDICT_TEXT[result.verdict] || VERDICT_TEXT.ungraded;
+  const parts = [el("p", text, className)];
+  if (result.reason) parts.push(el("p", result.reason));
+  if (result.graded_by) parts.push(el("p", `Reference: ${result.reference}`, "syllables"));
+  if (result.graded_by === "exact") {
+    parts.push(el("p", "Graded by exact match with the reference.", "muted"));
+  } else if (result.graded_by === "llm") {
+    parts.push(el("p", "Graded by AI (unvalidated). Compare with the reference yourself.", "label"));
+  } else {
+    parts.push(el("p", "Not recorded. You can try Check again.", "muted"));
+  }
+  $("feedback").replaceChildren(...parts);
+}
+
+onEnter($("answer"), checkAnswer);
+$("check").addEventListener("click", checkAnswer);
+$("next").addEventListener("click", nextSentence);
+$("lesson").addEventListener("change", () => {
+  saveLesson($("lesson").value);
+  nextSentence();
+});
+
+loadLessons()
+  .then((ok) => ok && nextSentence())
+  .catch((e) => showError(e.message));
+</script>
+</body>
+</html>

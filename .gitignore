@@ -1,0 +1,7 @@
+data/
+*.db
+__pycache__/
+.venv/
+.pytest_cache/
+llm_usage.log
+.env

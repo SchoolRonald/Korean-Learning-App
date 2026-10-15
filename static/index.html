@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Drill</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><b>Words</b> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
+<h1>Spelling drill</h1>
+
+<label>Up to lesson <select id="lesson"></select></label>
+<span class="muted" id="tally"></span>
+
+<div id="prompt"></div>
+<input id="answer" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Type the Korean">
+<div>
+  <button id="check">Check</button>
+  <button id="next">Next</button>
+</div>
+
+<div id="feedback"></div>
+<p class="muted">Needs a Korean keyboard/input method enabled in your OS.</p>
+
+<script src="/static/common.js"></script>
+<script>
+let word = null;
+let answered = false;
+let right = 0, total = 0;
+
+async function nextWord() {
+  answered = false;
+  $("feedback").replaceChildren();
+  $("answer").value = "";
+  $("answer").disabled = false;
+  $("check").disabled = false;
+  try {
+    const exclude = word ? `&exclude=${word.id}` : "";
+    word = await api(`/api/next?lesson=${$("lesson").value}${exclude}`);
+    $("prompt").textContent = word.english;
+  } catch (e) {
+    word = null;
+    $("prompt").textContent = "";
+    showError(e.message);
+  }
+  $("answer").focus();
+}
+
+async function checkAnswer() {
+  const answer = $("answer").value.trim();
+  if (!word || answered || !answer) return;
+  answered = true;
+  $("check").disabled = true;
+  try {
+    const result = await api("/api/answer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ word_id: word.id, answer }),
+    });
+    total += 1;
+    if (result.correct) right += 1;
+    $("tally").textContent = `${right} / ${total} correct this session`;
+    showResult(result);
+  } catch (e) {
+    answered = false;
+    $("check").disabled = false;
+    showError(e.message);
+    return;
+  }
+  $("answer").disabled = true;
+  $("next").focus();
+}
+
+function showResult(result) {
+  const parts = [];
+  parts.push(el("p", result.correct ? "Correct!" : "Not quite.", result.correct ? "correct" : "wrong"));
+
+  // Expected word, syllable by syllable, with the wrong ones marked.
+  const syllables = el("p", "", "syllables");
+  syllables.append(el("span", "Answer: ", "muted"));
+  for (const s of result.syllables) {
+    if (!s.expected) continue;
+    syllables.append(el("span", s.expected, s.ok ? "" : "bad"));
+  }
+  parts.push(syllables);
+
+  if (result.note) parts.push(el("p", result.note, "muted"));
+  if (!result.correct) {
+    const list = el("ul");
+    for (const line of result.feedback) list.append(el("li", line));
+    parts.push(list);
+  }
+  if (result.hint) parts.push(el("p", result.hint, "wrong"));
+  $("feedback").replaceChildren(...parts);
+}
+
+onEnter($("answer"), checkAnswer);
+$("check").addEventListener("click", checkAnswer);
+$("next").addEventListener("click", nextWord);
+$("lesson").addEventListener("change", () => {
+  saveLesson($("lesson").value);
+  nextWord();
+});
+
+loadLessons()
+  .then((ok) => ok && nextWord())
+  .catch((e) => showError(e.message));
+</script>
+</body>
+</html>
