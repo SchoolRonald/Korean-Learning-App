@@ -93,3 +93,32 @@ def test_api_next_exclude(client, conn):
     wid = word_id(conn, "물")
     for _ in range(20):
         assert client.get("/api/next", params={"lesson": 1, "exclude": wid}).json()["id"] != wid
+
+
+@pytest.fixture
+def demonstratives(conn):
+    # The real list's entries.
+    conn.executemany("INSERT INTO words (hangul, english, lesson) VALUES (?, ?, 1)", [
+        ("그", "that"), ("그", "he, him"), ("저", "that (when something is far away)"), ("저", "I, me (formal)"),
+        ("거기", "there"), ("저기", "there (when farther away)"),
+    ])
+    return lambda hangul, english: conn.execute(
+        "SELECT id FROM words WHERE hangul = ? AND english = ?", (hangul, english)).fetchone()[0]
+
+
+@pytest.mark.parametrize("card, answer, correct", [
+    (("그", "that"), "저", True),  # plain "that": either
+    (("거기", "there"), "저기", True),  # plain "there": either
+    (("저", "that (when something is far away)"), "그", False),  # the card says far
+    (("저기", "there (when farther away)"), "거기", False),
+    (("그", "he, him"), "저", False),  # 그 as "he" is not a demonstrative
+    (("저", "I, me (formal)"), "그", False),  # nor 저 as "I"
+])
+def test_demonstrative_partner_accepted(conn, demonstratives, card, answer, correct):
+    r = grade_word(conn, demonstratives(*card), answer)
+    assert r["correct"] is correct
+
+
+def test_demonstrative_note(conn, demonstratives):
+    r = grade_word(conn, demonstratives("그", "that"), "저")
+    assert r["note"] == 'Also correct: both 그 and 저 mean "that". 그 is near the listener, 저 is far from both of you.'

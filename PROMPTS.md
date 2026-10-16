@@ -302,3 +302,25 @@
 **Issues and fixes:**
 - Real test of the first version: "food" included 학교 (school), 꼬리 (tail), 공 (ball), 바지 (pants), 트럭 (truck), and "transportation" included 가수 (singer), 퍼센트 (percent), 아프다 (to be sick). The model was picking words by numeric id and often writing the wrong ids. Fixed by having it copy the chosen lines exactly ("커피 = coffee") and mapping the text back to the word (each Korean/English pair is unique). Topics also now use medium effort, since each is resolved once and saved. After the fix the lists were on topic, and homographs were handled: 배 (pear) in food, 배 (boat) in transportation. "Food" at lesson 5 gave 16 early-lesson words; at lesson 25, 49 words including 라면 and 젓가락. Topic lookups now take 3 to 8 seconds, once.
 - Checked in Chrome on a throwaway server: applying "food" at lesson 5 showed 15 words and a food-word Learn batch, the topic carried over to Stats from the saved result (exactly one AI call in total), and Clear restored all words.
+
+## Bug: Words drill rejected 저 for "that"
+
+**Prompt:** "in words currently, there is a bug with the "there" thing again: that / 저 / Not quite. Answer: 그"
+
+**Cause (my mistake):** when fixing 그/저 for sentences I said the Words drill needed no change because the list distinguishes them. Only half true: the 저 card says "that (when something is far away)", but the 그 card just says "that", and 저 is an equally good answer to a plain "that". The same-English rule did not catch it because the two cards' English differs.
+
+**Fix:** the 그/저 pair table moved to `app/checker.py` (shared with sentences). `demonstrative_partner()` returns the other word only when the card's English is a plain "that/those/there" without a distance word (far, farther, near, close). So:
+- 그 "that" accepts 저, and 거기 "there" accepts 저기, with the note "Also correct: both 그 and 저 mean "that". 그 is near the listener, 저 is far from both of you."
+- 저 "that (when something is far away)" and 저기 "there (when farther away)" still require 저/저기, since the card says which.
+- 그 "he, him" and 저 "I, me (formal)" are never swapped.
+- 그것/저것 ("that (thing)") and 그쪽/저쪽 ("that direction") already worked, since their English is identical.
+
+Tests use the real list's entries (6 cases plus the note). 180 passing. Checked against the real database (read-only): "that" + 저 and "there" + 저기 are now correct; "that (when something is far away)" + 그 is still wrong, with syllable feedback.
+
+## Extra: "I already know this word" in Learn
+
+**Prompt:** "in the learning section, can we also add an override button for "i already know this word" which will skip the process of learning the word and allows the user to instantly use them in words or sentences"
+
+**What was generated:** a button in `static/learn.html`, available during any step. It marks the word learned at once (the existing `POST /api/learn/done`, so no server change), drops it from every remaining step of the batch, and shows "Marked as known: ..." on the page. If every word in the batch is marked known, the next batch loads. The finished screen lists "Already knew: ..." separately from "Learned: ...". A skipped word starts at 0% confidence like any new word, so the Words drill brings it up soon and checks that it really is known.
+
+**Issues and fixes:** designed around one race: in the type-over step a finished rep advances on a 250ms timer, so skipping during that window would have advanced twice. The button is ignored while that timer is pending. Checked in Chrome on a throwaway server: skipping the first word removed it from the queue and showed the next one, skipping the other four loaded a new batch, and all five were saved as learned.

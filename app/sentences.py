@@ -5,7 +5,7 @@ import re
 import threading
 
 from app import llm
-from app.checker import answer_variants, normalize
+from app.checker import DEMONSTRATIVE_SWAP, answer_variants, normalize
 from app.drill import now_iso
 from app.learn import english_ok
 from app.llm import LLMError, call_json
@@ -321,13 +321,6 @@ def prefetch(conn, max_lesson, topic_ids=None):
 
 def compact(text):
     return re.sub(r"[\s.,!?]", "", normalize(text))
-
-
-# English "that"/"there" covers both "near the listener" (그-) and "far from both" (저-) in Korean.
-DEMONSTRATIVE_SWAP = {
-    "그": "저", "저": "그", "거기": "저기", "저기": "거기", "그것": "저것", "저것": "그것",
-    "그거": "저거", "저거": "그거", "그곳": "저곳", "저곳": "그곳", "그쪽": "저쪽", "저쪽": "그쪽",
-}
 
 
 def swap_demonstrative(token):

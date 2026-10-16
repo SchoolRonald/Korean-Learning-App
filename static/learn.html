@@ -21,9 +21,11 @@
 </div>
 <div>
   <button id="next" hidden>Next</button>
+  <button id="known" hidden>I already know this word</button>
 </div>
 
 <div id="feedback"></div>
+<p class="muted" id="known-note"></p>
 <p class="muted">Each word: type it over 3 times, say what it means in English, then fill in a missing syllable.
 Words you finish here become available in Words and Sentences.</p>
 
@@ -38,6 +40,7 @@ let current = null;
 let waiting = false;  // feedback is showing; Enter or Next moves on
 let busy = false;
 let composing = false;
+let known = [];  // words skipped with "I already know this word" since the last finished batch
 
 async function startBatch() {
   $("feedback").replaceChildren();
@@ -87,6 +90,7 @@ function showItem() {
   $("answer").disabled = false;
   $("typebox").hidden = false;
   $("next").hidden = true;
+  $("known").hidden = false;
   $("feedback").replaceChildren();
   const left = `${queue.length} left in this step`;
   if (phase === "type") {
@@ -195,9 +199,16 @@ function showFinished(learned) {
   $("meaning").textContent = "";
   $("typebox").hidden = true;
   $("next").hidden = true;
+  $("known").hidden = true;
+  const skipped = known.length ? [el("p", `Already knew: ${known.map((w) => w.hangul).join(", ")}`, "muted")] : [];
+  known = [];
+  $("known-note").textContent = "";
   if (!learned.length) {
     $("step").textContent = "";
-    $("feedback").replaceChildren(el("p", `You've learned every word${topic ? " in this topic" : ""} up to this lesson. Pick a higher lesson${topic ? " or another topic" : ""}, or practice in Words.`));
+    $("feedback").replaceChildren(
+      el("p", `You've learned every word${topic ? " in this topic" : ""} up to this lesson. Pick a higher lesson${topic ? " or another topic" : ""}, or practice in Words.`),
+      ...skipped,
+    );
     return;
   }
   $("step").textContent = "Batch complete.";
@@ -207,9 +218,38 @@ function showFinished(learned) {
   practice.href = "/words";
   $("feedback").replaceChildren(
     el("p", `Learned: ${learned.map((w) => w.hangul).join(", ")}`, "correct"),
-    more, el("span", "  "), practice,
+    ...skipped, more, el("span", "  "), practice,
   );
   more.focus();
+}
+
+// Skip the learning steps for a word the user already knows: it is marked learned now
+// (so Words and Sentences can use it) and dropped from the rest of this batch.
+async function markKnown() {
+  // During type-over, a finished rep advances on a timer; skipping then would advance twice.
+  if (!current || busy || (waiting && phase === "type")) return;
+  const w = current.word;
+  busy = true;
+  try {
+    await api("/api/learn/done", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ word_id: w.id }),
+    });
+  } catch (e) {
+    showError(e.message);
+    busy = false;
+    return;
+  }
+  busy = false;
+  known.push(w);
+  $("known-note").textContent = `Marked as known: ${known.map((k) => k.hangul).join(", ")}`;
+  words = words.filter((x) => x.id !== w.id);
+  queue = queue.filter((item) => item.word.id !== w.id);
+  waiting = false;
+  if (!words.length) startBatch();  // the whole batch was known: on to the next words
+  else if (queue.length) showItem();
+  else nextPhase();
 }
 
 function onSubmit() {
@@ -229,6 +269,7 @@ $("answer").addEventListener("input", () => {
 });
 onEnter($("answer"), onSubmit);
 $("next").addEventListener("click", () => { if (waiting) advance(); });
+$("known").addEventListener("click", markKnown);
 initScope(startBatch)
   .then((ok) => ok && startBatch())
   .catch((e) => showError(e.message));

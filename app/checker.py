@@ -4,6 +4,22 @@ import unicodedata
 
 PART_NAMES = ("first consonant", "vowel", "final consonant")
 
+# English "that"/"there" covers both "near the listener" (그-) and "far from both" (저-) in Korean.
+DEMONSTRATIVE_SWAP = {
+    "그": "저", "저": "그", "거기": "저기", "저기": "거기", "그것": "저것", "저것": "그것",
+    "그거": "저거", "저거": "그거", "그곳": "저곳", "저곳": "그곳", "그쪽": "저쪽", "저쪽": "그쪽",
+}
+
+
+def demonstrative_partner(hangul, english):
+    """For a card meaning plain "that"/"there", the other demonstrative (그 -> 저), which is just as
+    right. None when the English says which (저: "that (when something is far away)") or the word
+    is not a demonstrative here (저 "I", 그 "he")."""
+    meaning = english.lower()
+    if not re.search(r"\b(that|those|there)\b", meaning) or re.search(r"\b(far|farther|near|close)\b", meaning):
+        return None
+    return DEMONSTRATIVE_SWAP.get(hangul)
+
 
 def normalize(text):
     return re.sub(r"\s+", " ", unicodedata.normalize("NFC", text or "").strip())

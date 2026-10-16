@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from app.checker import check_entry
+from app.checker import check_entry, demonstrative_partner
 
 
 def now_iso():
@@ -20,6 +20,12 @@ def grade_word(conn, word_id, answer):
         ).fetchall()
         if any(check_entry(o[0], answer)["correct"] for o in others):
             result.update(correct=True, note=f"Also correct. This card's word is {word[0]}.")
+        else:
+            partner = demonstrative_partner(word[0], word[1])
+            if partner and check_entry(partner, answer)["correct"]:
+                near, far = sorted([word[0], partner], key=lambda w: w.startswith("저"))
+                result.update(correct=True, note=f"Also correct: both {word[0]} and {partner} mean \"{word[1]}\". "
+                              f"{near} is near the listener, {far} is far from both of you.")
     return result
 
 
