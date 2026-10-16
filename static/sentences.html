@@ -51,16 +51,28 @@ function tokenMeaning(t) {
   return `${t.base} = ${t.english}${label}`;
 }
 
+// First case-insensitive occurrence of phrase in text as whole words ("is" must not match
+// inside "This") that does not overlap an existing mark. Returns {start, end} or null.
+function findPhrase(text, phrase, marks) {
+  const lower = text.toLowerCase();
+  const target = phrase.toLowerCase();
+  const isWordChar = (ch) => /[\p{L}\p{N}]/u.test(ch || "");
+  for (let start = lower.indexOf(target); start >= 0; start = lower.indexOf(target, start + 1)) {
+    const end = start + target.length;
+    const wholeWords = !isWordChar(text[start - 1]) && !isWordChar(text[end]);
+    if (wholeWords && !marks.some((m) => start < m.end && m.start < end)) return { start, end };
+  }
+  return null;
+}
+
 // Underline the English words that need a Korean word the learner has not learned yet,
 // and names, whose Hangul spelling the learner also needs.
 function renderPrompt(s) {
   const english = s.english;
-  const lower = english.toLowerCase();
   const marks = [];
   for (const t of (s.tokens || []).filter((t) => (t.new || t.name) && t.english_text)) {
-    const start = lower.indexOf(t.english_text.toLowerCase());
-    const end = start + t.english_text.length;
-    if (start >= 0 && !marks.some((m) => start < m.end && m.start < end)) marks.push({ start, end, t });
+    const found = findPhrase(english, t.english_text, marks);
+    if (found) marks.push({ ...found, t });
   }
   marks.sort((a, b) => a.start - b.start);
   const parts = [];

@@ -324,3 +324,11 @@ Tests use the real list's entries (6 cases plus the note). 180 passing. Checked 
 **What was generated:** a button in `static/learn.html`, available during any step. It marks the word learned at once (the existing `POST /api/learn/done`, so no server change), drops it from every remaining step of the batch, and shows "Marked as known: ..." on the page. If every word in the batch is marked known, the next batch loads. The finished screen lists "Already knew: ..." separately from "Learned: ...". A skipped word starts at 0% confidence like any new word, so the Words drill brings it up soon and checks that it really is known.
 
 **Issues and fixes:** designed around one race: in the type-over step a finished rep advances on a 250ms timer, so skipping during that window would have advanced twice. The button is ignored while that timer is pending. Checked in Chrome on a throwaway server: skipping the first word removed it from the queue and showed the next one, skipping the other four loaded a new batch, and all five were saved as learned.
+
+## Bug: hint underlined "is" inside "This"
+
+**Prompt:** "This tree is in Korea. 있다 = to be at a location (new word) but the wrong "is" is highlighed. it highlights "Th*is* tree is in Korea". Not "This tree *is* in Korea""
+
+**Cause (my bug):** `renderPrompt` found each token's English text with a plain `indexOf`, so "is" matched inside "This".
+
+**Fix:** new `findPhrase()` in `static/sentences.html` returns the first case-insensitive occurrence that is a whole word or phrase (no letter or digit right before or after, Unicode-aware) and does not overlap text already underlined. Checked with 7 cases run in node: "is" in "This tree is in Korea." (now position 10), an "is" already taken, a capitalized "Is", "his" vs "is", a name, a multi-word phrase, and "at" inside "cat sat" (no match).
