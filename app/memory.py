@@ -44,13 +44,13 @@ def word_stats(conn, max_lesson, now=None):
     streak_by_id = streaks(conn)
     rows = conn.execute(
         """SELECT w.id, w.hangul, w.english, w.lesson,
-                  coalesce(s.attempts, 0), coalesce(s.fails, 0), s.last_seen
-           FROM words w LEFT JOIN stats s ON s.word_id = w.id
+                  coalesce(s.attempts, 0), coalesce(s.fails, 0), s.last_seen, l.word_id IS NOT NULL
+           FROM words w LEFT JOIN stats s ON s.word_id = w.id LEFT JOIN learned l ON l.word_id = w.id
            WHERE w.lesson <= ? ORDER BY w.lesson, w.id""",
         (max_lesson,),
     ).fetchall()
     words = []
-    for word_id, hangul, english, lesson, attempts, fails, last_seen in rows:
+    for word_id, hangul, english, lesson, attempts, fails, last_seen, learned in rows:
         streak = streak_by_id.get(word_id, 0)
         words.append({
             "id": word_id, "hangul": hangul, "english": english, "lesson": lesson,
@@ -60,5 +60,14 @@ def word_stats(conn, max_lesson, now=None):
             "days_since": days_since(last_seen, now) if last_seen else None,
             "streak": streak,
             "confidence": confidence(attempts, fails, streak, last_seen, now),
+            "learned": bool(learned),
         })
     return words
+
+
+def in_scope(words, topic_ids=None, learned_only=False):
+    """Narrow word_stats() output to a topic's words and/or to learned words."""
+    return [
+        w for w in words
+        if (topic_ids is None or w["id"] in topic_ids) and (w["learned"] or not learned_only)
+    ]

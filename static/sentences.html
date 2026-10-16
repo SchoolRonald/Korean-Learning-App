@@ -7,13 +7,14 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<p><a href="/">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
+<p><a href="/">Learn</a> | <a href="/words">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
 <h1>Sentence practice</h1>
 
 <label>Up to lesson <select id="lesson"></select></label>
 <span class="muted" id="usage"></span>
 
 <div id="prompt" style="font-size: 1.5rem"></div>
+<p class="muted" id="hint"></p>
 <input id="answer" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Translate into Korean">
 <div>
   <button id="check">Check</button>
@@ -33,18 +34,81 @@ function showUsage(llm) {
   if (llm) $("usage").textContent = `AI calls: ${llm.calls} / ${llm.cap}`;
 }
 
+// A word with its meaning on hover (title) or click (shown in #hint, for touch screens).
+function hintSpan(text, meaning, kind) {
+  const span = el("span", text, kind ? `hint ${kind}` : "hint");
+  span.title = meaning;
+  span.addEventListener("click", () => { $("hint").textContent = meaning; });
+  return span;
+}
+
+function tokenKind(t) {
+  return t.name ? "name" : t.new ? "new" : "";
+}
+
+function tokenMeaning(t) {
+  const label = t.name ? " (name)" : t.new ? " (new word)" : "";
+  return `${t.base} = ${t.english}${label}`;
+}
+
+// Underline the English words that need a Korean word the learner has not learned yet,
+// and names, whose Hangul spelling the learner also needs.
+function renderPrompt(s) {
+  const english = s.english;
+  const lower = english.toLowerCase();
+  const marks = [];
+  for (const t of (s.tokens || []).filter((t) => (t.new || t.name) && t.english_text)) {
+    const start = lower.indexOf(t.english_text.toLowerCase());
+    const end = start + t.english_text.length;
+    if (start >= 0 && !marks.some((m) => start < m.end && m.start < end)) marks.push({ start, end, t });
+  }
+  marks.sort((a, b) => a.start - b.start);
+  const parts = [];
+  let pos = 0;
+  for (const m of marks) {
+    parts.push(document.createTextNode(english.slice(pos, m.start)));
+    parts.push(hintSpan(english.slice(m.start, m.end), tokenMeaning(m.t), tokenKind(m.t)));
+    pos = m.end;
+  }
+  parts.push(document.createTextNode(english.slice(pos)));
+  $("prompt").replaceChildren(...parts);
+  const unlearned = (s.tokens || []).filter((t) => t.new).length;
+  const names = (s.tokens || []).some((t) => t.name);
+  const notes = [];
+  if (unlearned) notes.push(`${unlearned} word${unlearned > 1 ? "s" : ""} you have not learned yet.`);
+  if (unlearned || names) notes.push("Underlined words show the Korean on hover or click.");
+  $("hint").textContent = notes.join(" ");
+}
+
+// The Korean reference with every word's meaning on hover or click.
+function referenceLine(s) {
+  const line = el("p", "Reference: ", "syllables");
+  const words = s.reference.split(" ");
+  if (!s.tokens || s.tokens.length !== words.length) {
+    line.append(s.reference);
+    return line;
+  }
+  words.forEach((word, i) => {
+    const t = s.tokens[i];
+    if (i) line.append(" ");
+    line.append(hintSpan(word, tokenMeaning(t), tokenKind(t)));
+  });
+  return line;
+}
+
 async function nextSentence() {
   answered = false;
   $("feedback").replaceChildren(el("p", "Loading...", "muted"));
   $("prompt").textContent = "";
+  $("hint").textContent = "";
   $("answer").value = "";
   $("answer").disabled = false;
   $("check").disabled = false;
   $("next").disabled = true;
   try {
     const exclude = sentence ? `&exclude=${sentence.id}` : "";
-    sentence = await api(`/api/sentence?lesson=${$("lesson").value}${exclude}`);
-    $("prompt").textContent = sentence.english;
+    sentence = await api(`/api/sentence?${scopeQuery()}${exclude}`);
+    renderPrompt(sentence);
     $("feedback").replaceChildren();
     if (sentence.note) $("feedback").append(el("p", sentence.note, "muted"));
     showUsage(sentence.llm);
@@ -61,29 +125,24 @@ async function checkAnswer() {
   if (!sentence || answered || !answer) return;
   answered = true;
   $("check").disabled = true;
-  $("feedback").replaceChildren(el("p", "Grading...", "muted"));
+  $("answer").disabled = true;
+  // Show the reference right away; the AI explanation takes a second or two.
+  const reference = referenceLine(sentence);
+  $("feedback").replaceChildren(reference, el("p", "Grading...", "muted"));
+  $("next").focus();
+  const graded = sentence;
   try {
     const result = await api("/api/sentence/answer", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sentence_id: sentence.id, answer }),
+      body: JSON.stringify({ sentence_id: graded.id, answer }),
     });
-    showResult(result);
     showUsage(result.llm);
-    if (!result.graded_by) {
-      // Not graded or recorded, so let the user try again.
-      answered = false;
-      $("check").disabled = false;
-      return;
-    }
+    // Skip if the user already moved on to another sentence.
+    if (sentence === graded) showResult(result, reference);
   } catch (e) {
-    answered = false;
-    $("check").disabled = false;
-    showError(e.message);
-    return;
+    if (sentence === graded) $("feedback").replaceChildren(reference, el("p", e.message, "wrong"));
   }
-  $("answer").disabled = true;
-  $("next").focus();
 }
 
 const VERDICT_TEXT = {
@@ -93,17 +152,17 @@ const VERDICT_TEXT = {
   ungraded: ["Could not grade this answer.", "wrong"],
 };
 
-function showResult(result) {
+function showResult(result, reference) {
   const [text, className] = VERDICT_TEXT[result.verdict] || VERDICT_TEXT.ungraded;
   const parts = [el("p", text, className)];
   if (result.reason) parts.push(el("p", result.reason));
-  if (result.graded_by) parts.push(el("p", `Reference: ${result.reference}`, "syllables"));
+  parts.push(reference);
   if (result.graded_by === "exact") {
     parts.push(el("p", "Graded by exact match with the reference.", "muted"));
   } else if (result.graded_by === "llm") {
     parts.push(el("p", "Graded by AI (unvalidated). Compare with the reference yourself.", "label"));
   } else {
-    parts.push(el("p", "Not recorded. You can try Check again.", "muted"));
+    parts.push(el("p", "Not recorded. Compare with the reference yourself.", "muted"));
   }
   $("feedback").replaceChildren(...parts);
 }
@@ -111,12 +170,7 @@ function showResult(result) {
 onEnter($("answer"), checkAnswer);
 $("check").addEventListener("click", checkAnswer);
 $("next").addEventListener("click", nextSentence);
-$("lesson").addEventListener("change", () => {
-  saveLesson($("lesson").value);
-  nextSentence();
-});
-
-loadLessons()
+initScope(nextSentence)
   .then((ok) => ok && nextSentence())
   .catch((e) => showError(e.message));
 </script>

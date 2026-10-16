@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<p><b>Words</b> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
+<p><a href="/">Learn</a> | <b>Words</b> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
 <h1>Spelling drill</h1>
 
 <label>Up to lesson <select id="lesson"></select></label>
@@ -37,7 +37,7 @@ async function nextWord() {
   $("check").disabled = false;
   try {
     const exclude = word ? `&exclude=${word.id}` : "";
-    word = await api(`/api/next?lesson=${$("lesson").value}${exclude}`);
+    word = await api(`/api/next?${scopeQuery()}${exclude}`);
     $("prompt").textContent = word.english;
   } catch (e) {
     word = null;
@@ -98,12 +98,7 @@ function showResult(result) {
 onEnter($("answer"), checkAnswer);
 $("check").addEventListener("click", checkAnswer);
 $("next").addEventListener("click", nextWord);
-$("lesson").addEventListener("change", () => {
-  saveLesson($("lesson").value);
-  nextWord();
-});
-
-loadLessons()
+initScope(nextWord)
   .then((ok) => ok && nextWord())
   .catch((e) => showError(e.message));
 </script>

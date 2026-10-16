@@ -1,6 +1,8 @@
 import unicodedata
 
-from app.checker import check, jamo
+import pytest
+
+from app.checker import answer_variants, check, check_entry, jamo
 
 
 def wrong(result):
@@ -80,3 +82,43 @@ def test_latin_letters_hint():
     r = check("물", "mul")
     assert not r["correct"] and "Korean keyboard" in r["hint"]
     assert "hint" not in check("물", "물")
+
+
+@pytest.mark.parametrize("entry, expected", [
+    ("물", ["물"]),
+    ("아기 / 애기", ["아기", "애기"]),
+    ("평생 (동안)", ["평생", "평생 동안"]),
+    ("냄새 (나다)", ["냄새", "냄새 나다"]),
+    ("1월 (일월)", ["1월", "일월"]),
+    ("옛 _____", ["옛"]),
+    ("어때?", ["어때"]),
+])
+def test_answer_variants(entry, expected):
+    assert answer_variants(entry) == expected
+
+
+@pytest.mark.parametrize("entry, answer", [
+    ("아기 / 애기", "애기"),
+    ("1월 (일월)", "일월"),
+    ("1월 (일월)", "1월"),
+    ("냄새 (나다)", "냄새나다"),
+    ("어때?", "어때?"),
+    ("옛 _____", "옛"),
+])
+def test_check_entry_accepts_listed_forms(entry, answer):
+    assert check_entry(entry, answer)["correct"]
+
+
+def test_spacing_ignored_with_note():
+    r = check_entry("관심이 있다", "관심이있다")
+    assert r["correct"] and r["note"] == "Correct. Usually written 관심이 있다."
+
+
+def test_check_entry_feedback_uses_closest_form():
+    r = check_entry("아기 / 애기", "애가")
+    assert not r["correct"] and r["expected"] == "애기"
+    assert r["feedback"] == ["Syllable 2: expected 기, you typed 가 (vowel wrong)"]
+
+
+def test_check_entry_still_rejects_wrong():
+    assert not check_entry("평생 (동안)", "동안")["correct"]

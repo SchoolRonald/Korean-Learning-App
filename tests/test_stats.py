@@ -17,13 +17,21 @@ def days_ago(n):
 
 
 @pytest.fixture
-def conn():
-    c = connect(":memory:")
+def db_file(tmp_path):
+    return tmp_path / "test.db"
+
+
+@pytest.fixture
+def conn(db_file):
+    # A file, not :memory:, so the app's per-thread connections see the same data.
+    c = connect(db_file)
     init_db(c)
     c.executemany(
         "INSERT INTO words (hangul, english, lesson) VALUES (?, ?, ?)",
         [("물", "water", 1), ("책", "book", 1), ("개", "dog", 1), ("집", "house", 1), ("학교", "school", 2)],
     )
+    c.execute("INSERT INTO learned (word_id, learned_at) SELECT id, '2026-10-01' FROM words")
+    c.commit()
     return c
 
 
@@ -97,8 +105,8 @@ def test_summary_empty_range(conn):
     assert s["total"] == 0 and s["avg_confidence"] == 0 and s["words"] == []
 
 
-def test_api_stats_and_page(conn, monkeypatch):
-    monkeypatch.setattr(main, "conn", conn)
+def test_api_stats_and_page(conn, db_file, monkeypatch):
+    monkeypatch.setattr(main, "db_path", db_file)
     answer(conn, "물", [False])
     with TestClient(main.app) as client:
         body = client.get("/api/stats", params={"lesson": 1}).json()

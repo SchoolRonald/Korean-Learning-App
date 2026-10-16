@@ -1,0 +1,7 @@
+start by forcing user to "learn" words first. typing monkeytype style on top of the word a few times to familiarize with the spelling, then showing the word and making user to translate to english, showing the word but removing one of the charactters so the user has to fill in the rest (if more than one syllable). this section should be an entirely new tab and the first one the user interacts with.
+
+practicing in words should only use words the user has seen in the "learn" tab before. same with practicing in sentences. if a sentence needs to use a word the user hasn't seen before, they should be able to click or hover over that word to see the meaning in english.
+
+user should be able to study not just by lesson number, but also by category of their own choice (i.e. days of week, transportation, food, etc.)
+
+also a dictionary tab to see all the words they've learned. maybe part of the stats page

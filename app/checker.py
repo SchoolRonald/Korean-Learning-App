@@ -59,3 +59,45 @@ def describe(syllables):
             parts = f" ({', '.join(s['parts'])} wrong)" if s["parts"] else ""
             lines.append(f"Syllable {pos}: expected {s['expected']}, you typed {s['typed']}{parts}")
     return lines
+
+
+def answer_variants(entry):
+    """Accepted answers for a vocab entry. Lists write notes into the Korean cell:
+    "아기 / 애기" (either), "평생 (동안)" (optional extra), "1월 (일월)" (numeral or spelled out),
+    "옛 _____" (a blank to fill), "어때?" (punctuation).
+    """
+    variants = []
+    for part in entry.split("/"):
+        part = re.sub(r"_+", "", part).strip()
+        match = re.fullmatch(r"(.*?)\s*\((.+)\)", part)
+        if match:
+            base, extra = match.group(1).strip(), match.group(2).strip()
+            # "1월 (일월)": the brackets spell out the number. Otherwise they hold an optional extra word.
+            options = [base, extra] if re.search(r"\d", base) else [base, f"{base} {extra}"]
+        else:
+            options = [part]
+        for option in options:
+            option = normalize(option).rstrip("?!.")
+            if option and option not in variants:
+                variants.append(option)
+    return variants or [normalize(entry)]
+
+
+def loose_match(expected, answer):
+    """Same word, ignoring spaces and end punctuation (Korean spacing is often flexible)."""
+    def squash(text):
+        return re.sub(r"[\s?!.]", "", normalize(text))
+    return squash(expected) == squash(answer)
+
+
+def check_entry(entry, answer):
+    """Check an answer against every accepted form of a vocab entry."""
+    results = [check(v, answer) for v in answer_variants(entry)]
+    for r in results:
+        if r["correct"]:
+            return r
+    for r in results:
+        if loose_match(r["expected"], answer):
+            return {**check(r["expected"], r["expected"]), "note": f"Correct. Usually written {r['expected']}."}
+    # Wrong: give feedback against the closest form.
+    return min(results, key=lambda r: sum(not s["ok"] for s in r["syllables"]))

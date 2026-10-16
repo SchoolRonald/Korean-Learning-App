@@ -13,3 +13,19 @@ table { border-collapse: collapse; width: 100%; margin-bottom: 1.5rem; }
 th, td { text-align: left; padding: 0.25rem 0.5rem; border-bottom: 1px solid #ddd; }
 td.num, th.num { text-align: right; }
 .bar { display: inline-block; height: 0.6rem; background: #1a7f37; vertical-align: middle; margin-right: 0.4rem; }
+#target { font-size: 2.5rem; letter-spacing: 0.05em; margin: 1rem 0 0.25rem; min-height: 3rem; }
+/* Type-over box: the input's text is transparent and #ghost draws typed text plus the gray target. */
+#typebox { position: relative; }
+#typebox #answer, #ghost { font: inherit; font-size: 1.5rem; line-height: 1.4; padding: 0.4rem; border: 1px solid #888; }
+#ghost { position: absolute; inset: 0; box-sizing: border-box; border-color: transparent;
+         white-space: pre; overflow: hidden; pointer-events: none; }
+#typebox #answer { position: relative; display: block; background: transparent; }
+#typebox.overlay #answer { color: transparent; caret-color: #222; }
+#ghost .rest { color: #aaa; }
+#ghost .ok { color: #1a7f37; }
+#ghost .bad { color: #c62828; text-decoration: underline; }
+.hint { text-decoration: underline dotted; cursor: help; }
+.hint.new { color: #6f42c1; text-decoration-style: solid; }
+.hint.name { color: #0b6e99; text-decoration-style: solid; }
+.topic { margin: 0.5rem 0; }
+#topic { font-size: 1rem; padding: 0.3rem; width: 14rem; }

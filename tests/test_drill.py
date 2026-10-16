@@ -7,13 +7,21 @@ from app.drill import grade_word, record_word_attempt
 
 
 @pytest.fixture
-def conn():
-    c = connect(":memory:")
+def db_file(tmp_path):
+    return tmp_path / "test.db"
+
+
+@pytest.fixture
+def conn(db_file):
+    # A file, not :memory:, so the app's per-thread connections see the same data.
+    c = connect(db_file)
     init_db(c)
     c.executemany(
         "INSERT INTO words (hangul, english, lesson) VALUES (?, ?, ?)",
         [("물", "water", 1), ("나", "I", 1), ("저", "I", 2), ("책", "book", 3)],
     )
+    c.execute("INSERT INTO learned (word_id, learned_at) SELECT id, '2026-10-01' FROM words")
+    c.commit()
     return c
 
 
@@ -45,8 +53,8 @@ def test_record_creates_and_updates_stats(conn):
 
 
 @pytest.fixture
-def client(conn, monkeypatch):
-    monkeypatch.setattr(main, "conn", conn)
+def client(conn, db_file, monkeypatch):
+    monkeypatch.setattr(main, "db_path", db_file)
     with TestClient(main.app) as c:
         yield c
 
@@ -72,9 +80,9 @@ def test_api_answer_unknown_word(client):
     assert client.post("/api/answer", json={"word_id": 999, "answer": "x"}).status_code == 404
 
 
-def test_index_serves_page(client):
-    res = client.get("/")
-    assert res.status_code == 200 and "Spelling drill" in res.text
+def test_pages_served(client):
+    assert "Spelling drill" in client.get("/words").text
+    assert "Learn" in client.get("/").text
 
 
 def test_api_lessons(client):

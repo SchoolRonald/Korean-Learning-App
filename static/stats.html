@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<p><a href="/">Words</a> | <a href="/sentences">Sentences</a> | <b>Stats</b></p>
+<p><a href="/">Learn</a> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <b>Stats</b></p>
 <h1>Stats</h1>
 
 <label>Up to lesson <select id="lesson"></select></label>
@@ -21,7 +21,7 @@
 <div id="stale"></div>
 
 <details>
-  <summary>All words by confidence</summary>
+  <summary>All learned words by confidence</summary>
   <div id="words"></div>
 </details>
 
@@ -78,9 +78,9 @@ const CONFIDENCE = ["Confidence", (w) => confidenceCell(w.confidence), true];
 
 async function loadStats() {
   try {
-    const s = await api(`/api/stats?lesson=${$("lesson").value}`);
+    const s = await api(`/api/stats?${scopeQuery()}`);
     $("summary").textContent =
-      `Practiced ${s.practiced} of ${s.total} words. Average confidence ${pct(s.avg_confidence)}.`;
+      `Learned ${s.learned} of ${s.total} words, practiced ${s.practiced}. Average confidence of learned words ${pct(s.avg_confidence)}.`;
     $("weakest").replaceChildren(table(s.weakest, [
       WORD, ENGLISH,
       ["Fail rate", (w) => `${pct(w.fail_rate)} (${w.fails}/${w.attempts})`, true],
@@ -97,18 +97,13 @@ async function loadStats() {
       ["Attempts", (w) => w.attempts, true],
       ["Streak", (w) => w.streak, true],
       CONFIDENCE,
-    ], "No words."));
+    ], "No learned words yet. Start in the Learn tab."));
   } catch (e) {
     showError(e.message);
   }
 }
 
-$("lesson").addEventListener("change", () => {
-  saveLesson($("lesson").value);
-  loadStats();
-});
-
-loadLessons()
+initScope(loadStats)
   .then((ok) => ok && loadStats())
   .catch((e) => showError(e.message));
 </script>

@@ -5,6 +5,7 @@ import pytest
 
 from app.db import connect, init_db
 from app.drill import record_word_attempt
+from app.learn import mark_learned
 from app.scheduler import next_word, ranked_words
 
 NOW = datetime(2026, 10, 15, 12, 0, tzinfo=timezone.utc)
@@ -17,11 +18,13 @@ def conn():
     return c
 
 
-def add_word(conn, hangul, lesson, answers=(), last_day=0):
+def add_word(conn, hangul, lesson, answers=(), last_day=0, learned=True):
     """Add a word and its answer history, oldest first; the last answer is last_day days before NOW."""
     word_id = conn.execute(
         "INSERT INTO words (hangul, english, lesson) VALUES (?, ?, ?)", (hangul, hangul, lesson)
     ).lastrowid
+    if learned:
+        mark_learned(conn, word_id)
     for i, correct in enumerate(answers):
         ts = (NOW - timedelta(days=last_day + len(answers) - 1 - i)).isoformat()
         record_word_attempt(conn, word_id, "x", correct, ts=ts)
@@ -100,3 +103,22 @@ def test_exclude_skips_last_word(conn):
 def test_exclude_falls_back_when_only_word(conn):
     only = add_word(conn, "a", 1)
     assert next_word(conn, 1, NOW, exclude=only)["id"] == only
+
+
+def test_only_learned_words(conn):
+    learned = add_word(conn, "a", 1)
+    add_word(conn, "b", 1, learned=False)
+    for seed in range(30):
+        assert next_word(conn, 1, NOW, random.Random(seed))["id"] == learned
+
+
+def test_nothing_learned_returns_none(conn):
+    add_word(conn, "a", 1, learned=False)
+    assert next_word(conn, 1, NOW) is None
+
+
+def test_topic_ids_narrow_scope(conn):
+    keep = add_word(conn, "a", 1)
+    add_word(conn, "b", 1)
+    for seed in range(30):
+        assert next_word(conn, 1, NOW, random.Random(seed), topic_ids={keep})["id"] == keep

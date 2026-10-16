@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Learn</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><b>Learn</b> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
+<h1>Learn new words</h1>
+
+<label>Up to lesson <select id="lesson"></select></label>
+<p class="muted" id="step"></p>
+
+<div id="target"></div>
+<p id="meaning"></p>
+<div id="typebox">
+  <div id="ghost" aria-hidden="true"></div>
+  <input id="answer" autocomplete="off" autocorrect="off" spellcheck="false">
+</div>
+<div>
+  <button id="next" hidden>Next</button>
+</div>
+
+<div id="feedback"></div>
+<p class="muted">Each word: type it over 3 times, say what it means in English, then fill in a missing syllable.
+Words you finish here become available in Words and Sentences.</p>
+
+<script src="/static/common.js"></script>
+<script>
+const REPS = 3;
+const PHASES = ["type", "english", "cloze"];
+let words = [];
+let phase = null;
+let queue = [];
+let current = null;
+let waiting = false;  // feedback is showing; Enter or Next moves on
+let busy = false;
+let composing = false;
+
+async function startBatch() {
+  $("feedback").replaceChildren();
+  try {
+    words = await api(`/api/learn/batch?${scopeQuery()}`);
+  } catch (e) {
+    showError(e.message);
+    return;
+  }
+  if (!words.length) {
+    showFinished([]);
+    return;
+  }
+  startPhase("type");
+}
+
+function startPhase(name) {
+  phase = name;
+  if (name === "type") {
+    queue = words.flatMap((w) => Array.from({ length: REPS }, (_, i) => ({ word: w, rep: i + 1 })));
+  } else if (name === "english") {
+    queue = words.map((w) => ({ word: w }));
+  } else {
+    queue = words.filter((w) => w.cloze).map((w) => ({ word: w }));
+  }
+  if (queue.length) showItem();
+  else nextPhase();
+}
+
+function nextPhase() {
+  const i = PHASES.indexOf(phase);
+  if (i < PHASES.length - 1) startPhase(PHASES[i + 1]);
+  else finishBatch();
+}
+
+function advance() {
+  queue.shift();
+  waiting = false;
+  if (queue.length) showItem();
+  else nextPhase();
+}
+
+function showItem() {
+  current = queue[0];
+  const w = current.word;
+  $("answer").value = "";
+  $("answer").disabled = false;
+  $("typebox").hidden = false;
+  $("next").hidden = true;
+  $("feedback").replaceChildren();
+  const left = `${queue.length} left in this step`;
+  if (phase === "type") {
+    $("step").textContent = `Step 1 of 3: type over the gray word (${current.rep}/${REPS}), then space or Enter. ${left}.`;
+    $("target").textContent = w.form;
+    $("meaning").textContent = w.english;
+    $("answer").placeholder = "";
+  } else if (phase === "english") {
+    $("step").textContent = `Step 2 of 3: what does it mean? ${left}.`;
+    $("target").textContent = w.hangul;
+    $("meaning").textContent = "";
+    $("answer").placeholder = "Type the English meaning";
+  } else {
+    $("step").textContent = `Step 3 of 3: type over the word, filling in the blank, then Enter. ${left}.`;
+    $("target").textContent = w.cloze.masked;
+    $("meaning").textContent = w.english;
+    $("answer").placeholder = "";
+  }
+  renderGhost();
+  $("answer").focus();
+}
+
+// Steps 1 and 3 draw the target in gray inside the box. The input's own text is transparent,
+// and this layer shows what was typed (same text, so it lines up) followed by the rest of the
+// target. In step 1 typed syllables are colored; the one still being composed by the IME is
+// left uncolored, since it is often only half built. Step 3 does not color, to not give away the blank.
+function renderGhost() {
+  const overlay = current && (phase === "type" || phase === "cloze");
+  $("typebox").classList.toggle("overlay", Boolean(overlay));
+  if (!overlay) {
+    $("ghost").replaceChildren();
+    return;
+  }
+  const w = current.word;
+  const target = Array.from(phase === "type" ? w.form : w.cloze.masked);
+  const typed = Array.from($("answer").value);
+  const spans = typed.map((ch, i) => {
+    let cls = "";
+    if (phase === "type") {
+      if (ch === target[i]) cls = "ok";
+      else if (!(i === typed.length - 1 && composing)) cls = "bad";
+    }
+    return el("span", ch, cls);
+  });
+  spans.push(el("span", target.slice(typed.length).join(""), "rest"));
+  $("ghost").replaceChildren(...spans);
+}
+
+function typingDone() {
+  if (phase !== "type" || waiting) return;
+  const squash = (t) => t.normalize("NFC").replace(/\s/g, "");
+  if (squash($("answer").value) !== squash(current.word.form)) return;
+  waiting = true;
+  setTimeout(advance, 250);
+}
+
+async function checkAnswer() {
+  const answer = $("answer").value.trim();
+  if (busy || !answer) return;
+  const w = current.word;
+  const body = phase === "english"
+    ? { word_id: w.id, step: "english", answer }
+    : { word_id: w.id, step: "cloze", answer, index: w.cloze.index };
+  busy = true;
+  try {
+    const r = await api("/api/learn/check", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const parts = [el("p", r.correct ? "Correct!" : "Not quite. You'll see this one again.", r.correct ? "correct" : "wrong")];
+    if (phase === "english") parts.push(el("p", `${w.hangul} means: ${w.english}`));
+    else {
+      parts.push(el("p", `The word is ${w.form}`, "syllables"));
+      if (!r.correct) for (const line of r.feedback) parts.push(el("p", line, "muted"));
+    }
+    if (!r.correct) queue.push(current);
+    $("feedback").replaceChildren(...parts);
+    waiting = true;
+    $("answer").disabled = true;
+    $("next").hidden = false;
+    $("next").focus();
+  } catch (e) {
+    showError(e.message);
+  }
+  busy = false;
+}
+
+async function finishBatch() {
+  try {
+    await Promise.all(words.map((w) => api("/api/learn/done", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ word_id: w.id }),
+    })));
+  } catch (e) {
+    showError(e.message);
+    return;
+  }
+  showFinished(words);
+}
+
+function showFinished(learned) {
+  phase = null;
+  $("target").replaceChildren();
+  $("meaning").textContent = "";
+  $("typebox").hidden = true;
+  $("next").hidden = true;
+  if (!learned.length) {
+    $("step").textContent = "";
+    $("feedback").replaceChildren(el("p", `You've learned every word${topic ? " in this topic" : ""} up to this lesson. Pick a higher lesson${topic ? " or another topic" : ""}, or practice in Words.`));
+    return;
+  }
+  $("step").textContent = "Batch complete.";
+  const more = el("button", "Learn 5 more");
+  more.addEventListener("click", startBatch);
+  const practice = el("a", "Practice them in Words");
+  practice.href = "/words";
+  $("feedback").replaceChildren(
+    el("p", `Learned: ${learned.map((w) => w.hangul).join(", ")}`, "correct"),
+    more, el("span", "  "), practice,
+  );
+  more.focus();
+}
+
+function onSubmit() {
+  if (phase === "type") typingDone();
+  else if (phase && !waiting) checkAnswer();
+}
+
+$("answer").addEventListener("compositionstart", () => { composing = true; });
+$("answer").addEventListener("compositionend", () => {
+  composing = false;
+  renderGhost();
+  typingDone();
+});
+$("answer").addEventListener("input", () => {
+  renderGhost();
+  if (!composing) typingDone();
+});
+onEnter($("answer"), onSubmit);
+$("next").addEventListener("click", () => { if (waiting) advance(); });
+initScope(startBatch)
+  .then((ok) => ok && startBatch())
+  .catch((e) => showError(e.message));
+</script>
+</body>
+</html>

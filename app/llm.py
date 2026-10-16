@@ -1,6 +1,8 @@
 import json
 import logging
 import os
+import threading
+import time
 
 import anthropic
 
@@ -17,6 +19,7 @@ if not log.handlers:
 
 # Totals since the server started; the cap resets on restart.
 usage = {"calls": 0, "input_tokens": 0, "output_tokens": 0}
+_usage_lock = threading.Lock()
 _client = None
 
 
@@ -39,19 +42,23 @@ def usage_summary():
     return {"calls": usage["calls"], "cap": CALL_CAP}
 
 
-def call_json(purpose, system, prompt, schema, max_tokens=2048):
+def call_json(purpose, system, prompt, schema, max_tokens=2048, effort="low"):
     """One Claude call that must return a JSON object matching schema."""
-    if usage["calls"] >= CALL_CAP:
-        raise LLMError(f"LLM call limit ({CALL_CAP}) reached for this session. Restart the server to reset it.")
     client = get_client()
-    # Count before calling so failing requests also use up the cap.
-    usage["calls"] += 1
+    # Count before calling so failing requests also use up the cap. Locked because the
+    # background prefetch can call at the same time as a request.
+    with _usage_lock:
+        if usage["calls"] >= CALL_CAP:
+            raise LLMError(f"LLM call limit ({CALL_CAP}) reached for this session. Restart the server to reset it.")
+        usage["calls"] += 1
+        call_no = usage["calls"]
+    start = time.perf_counter()
     try:
         response = client.messages.create(
             model=MODEL,
             max_tokens=max_tokens,
             system=system,
-            output_config={"effort": "low", "format": {"type": "json_schema", "schema": schema}},
+            output_config={"effort": effort, "format": {"type": "json_schema", "schema": schema}},
             messages=[{"role": "user", "content": prompt}],
         )
     except anthropic.AuthenticationError:
@@ -65,12 +72,14 @@ def call_json(purpose, system, prompt, schema, max_tokens=2048):
     except anthropic.AnthropicError as e:
         raise LLMError(f"LLM unavailable: {e}")
 
-    usage["input_tokens"] += response.usage.input_tokens
-    usage["output_tokens"] += response.usage.output_tokens
+    seconds = time.perf_counter() - start
+    with _usage_lock:
+        usage["input_tokens"] += response.usage.input_tokens
+        usage["output_tokens"] += response.usage.output_tokens
+        totals = usage["input_tokens"], usage["output_tokens"]
     log.info(
-        "%s call %d/%d: in=%d out=%d (session total in=%d out=%d)",
-        purpose, usage["calls"], CALL_CAP, response.usage.input_tokens, response.usage.output_tokens,
-        usage["input_tokens"], usage["output_tokens"],
+        "%s call %d/%d: %.2fs in=%d out=%d (session total in=%d out=%d)",
+        purpose, call_no, CALL_CAP, seconds, response.usage.input_tokens, response.usage.output_tokens, *totals,
     )
 
     if response.stop_reason == "refusal":

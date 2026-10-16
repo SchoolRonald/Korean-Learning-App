@@ -22,7 +22,21 @@ CREATE TABLE IF NOT EXISTS sentences (
     english TEXT NOT NULL,
     korean_ref TEXT NOT NULL,
     word_ids TEXT NOT NULL,
+    tokens TEXT,
     created_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS learned (
+    word_id INTEGER PRIMARY KEY REFERENCES words(id),
+    learned_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS topics (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    max_lesson INTEGER NOT NULL,
+    interpretation TEXT NOT NULL,
+    word_ids TEXT NOT NULL,
+    created_at TEXT NOT NULL,
+    UNIQUE (name, max_lesson)
 );
 CREATE TABLE IF NOT EXISTS attempts (
     id INTEGER PRIMARY KEY,
@@ -44,4 +58,8 @@ def connect(path=None):
 
 def init_db(conn):
     conn.executescript(SCHEMA)
+    # Columns added after the first version; CREATE TABLE IF NOT EXISTS skips existing tables.
+    columns = {r[1] for r in conn.execute("PRAGMA table_info(sentences)")}
+    if "tokens" not in columns:
+        conn.execute("ALTER TABLE sentences ADD COLUMN tokens TEXT")
     conn.commit()
