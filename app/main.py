@@ -91,6 +91,11 @@ def learn_page():
     return FileResponse(STATIC / "learn.html")
 
 
+@app.get("/basics")
+def basics_page():
+    return FileResponse(STATIC / "basics.html")
+
+
 @app.get("/words")
 def words_page():
     return FileResponse(STATIC / "words.html")

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Basics</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><b>Basics and Introduction</b> | <a href="/">Learn</a> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
+<h1>Basics and Introduction</h1>
+<p>New to Korean? Start here: turn on Korean typing, meet the alphabet (한글, Hangul), then try the letter quiz.</p>
+
+<h2>1. Turn on Korean typing</h2>
+<p><b>Windows:</b> Settings → Time &amp; language → Language &amp; region → Add a language → Korean.
+Switch between English and Korean with <b>Win + Space</b>.</p>
+<p><b>Mac:</b> System Settings → Keyboard → Input Sources → Edit → + → Korean → 2-Set Korean.
+Switch with <b>Ctrl + Space</b>.</p>
+<p>Letters stack into syllable blocks as you type. Type the letters in order and the keyboard builds the block for you:
+ㅎ + ㅏ + ㄴ = 한, typed as <b>G K S</b>.</p>
+
+<h2>2. The alphabet</h2>
+<p class="muted">Click a letter to see which key types it. "Strong" consonants are said with a puff of air.</p>
+<div id="alphabet"></div>
+
+<h2>3. The keyboard</h2>
+<p class="muted">Korean 2-set (두벌식) layout. The small letter at the top right is what Shift gives.</p>
+<div id="keyboard"></div>
+<p id="key-help" class="muted"></p>
+<label for="practice">Practice: type here and watch the keys light up</label>
+<input id="practice" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Type in Korean">
+<p id="practice-hint" class="wrong"></p>
+
+<h2>4. Letter quiz</h2>
+<label>Mode
+  <select id="mode">
+    <option value="letter">See letter, type it</option>
+    <option value="sound">See sound, type the letter</option>
+  </select>
+</label>
+<button id="start">Start quiz</button>
+<div id="quiz-play" hidden>
+  <p class="muted" id="quiz-progress"></p>
+  <p id="quiz-ask"></p>
+  <div id="prompt"></div>
+  <input id="quiz-answer" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Type the letter, then Enter">
+  <p id="quiz-hint" class="wrong"></p>
+  <div id="quiz-feedback"></div>
+  <button id="quiz-next" hidden>Next</button>
+</div>
+<div id="quiz-results"></div>
+<div id="feedback"></div>
+
+<script src="/static/common.js"></script>
+<script>
+const QUIZ_LENGTH = 10;
+const LATIN = /[a-z]/i;
+const SWITCH_HINT = "That's English. Switch to the Korean keyboard: Win + Space on Windows, Ctrl + Space on Mac.";
+const keyEls = {};  // key code -> key element
+let letters = [];
+let quiz = null;  // {mode, questions, answers, checked}
+
+// "Shift+KeyR" -> {code: "KeyR", shift: true}
+function parseKey(k) {
+  const shift = k.startsWith("Shift+");
+  return { code: shift ? k.slice(6) : k, shift };
+}
+
+function keysText(keys) {
+  return keys.map((k) => {
+    const { code, shift } = parseKey(k);
+    return (shift ? "Shift + " : "") + code.slice(3);
+  }).join(" then ");
+}
+
+// Light up the keys that type a letter; with two presses, number them in order.
+function light(keys) {
+  for (const key of document.querySelectorAll(".key.lit")) {
+    key.classList.remove("lit");
+    delete key.dataset.step;
+  }
+  keys.forEach((k, i) => {
+    const { code, shift } = parseKey(k);
+    if (!keyEls[code]) return;
+    keyEls[code].classList.add("lit");
+    if (keys.length > 1) keyEls[code].dataset.step = i + 1;
+    if (shift) keyEls.Shift.classList.add("lit");
+  });
+}
+
+function drawAlphabet(groups) {
+  for (const group of groups) {
+    const grid = el("div", "", "cards");
+    for (const letter of group.letters) {
+      const card = el("button", "", "card");
+      card.append(
+        el("span", letter.char, "char"),
+        el("span", letter.roman, "roman"),
+        el("span", letter.name, "muted"),
+        el("span", `${letter.example.word} (${letter.example.english})`, "example"),
+      );
+      card.addEventListener("click", () => {
+        for (const c of document.querySelectorAll(".card.on")) c.classList.remove("on");
+        card.classList.add("on");
+        light(letter.keys);
+        $("key-help").textContent = `${letter.char} is typed with ${keysText(letter.keys)}.`;
+        $("keyboard").scrollIntoView({ block: "nearest", behavior: "smooth" });
+      });
+      grid.append(card);
+    }
+    $("alphabet").append(el("h3", group.name), grid);
+  }
+}
+
+function drawKeyboard(rows) {
+  rows.forEach((row, i) => {
+    const line = el("div", "", `keyrow row${i}`);
+    if (i === rows.length - 1) {
+      keyEls.Shift = el("div", "Shift", "key shift");
+      line.append(keyEls.Shift);
+    }
+    for (const k of row) {
+      const key = el("div", "", "key");
+      key.append(el("span", k.char, "kchar"), el("span", k.shift || "", "kshift"), el("span", k.latin, "klatin"));
+      keyEls[k.code] = key;
+      line.append(key);
+    }
+    $("keyboard").append(line);
+  });
+}
+
+function shuffled(items) {
+  const a = [...items];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// The vowel with the silent ㅇ in front: ㅏ -> 아. Null for consonants.
+function silentForm(char) {
+  const vowel = char.codePointAt(0) - 0x314F;  // ㅏ..ㅣ are in syllable-block order
+  return vowel >= 0 && vowel <= 20 ? String.fromCodePoint(0xAC00 + (11 * 21 + vowel) * 28) : null;
+}
+
+// {ok, note}: a vowel typed with the silent ㅇ in front (아 for ㅏ) also counts, with a note.
+function grade(letter, answer) {
+  if (answer === letter.char) return { ok: true, note: "" };
+  if (answer === silentForm(letter.char)) {
+    return { ok: true, note: `${answer} is ${letter.char} with the silent ㅇ in front. Both count; the letter on its own is ${letter.char}.` };
+  }
+  return { ok: false, note: "" };
+}
+
+function startQuiz() {
+  quiz = { mode: $("mode").value, questions: shuffled(letters).slice(0, QUIZ_LENGTH), answers: [], checked: false };
+  $("quiz-results").replaceChildren();
+  $("quiz-play").hidden = false;
+  showQuestion();
+}
+
+function asked(letter) {
+  return quiz.mode === "letter" ? letter.char : letter.roman;
+}
+
+function showQuestion() {
+  const q = quiz.questions[quiz.answers.length];
+  quiz.checked = false;
+  $("quiz-progress").textContent = `Question ${quiz.answers.length + 1} of ${quiz.questions.length}`;
+  $("quiz-ask").textContent = quiz.mode === "letter" ? "Type this letter:" : "Type the letter that makes this sound:";
+  $("prompt").textContent = asked(q);
+  $("quiz-answer").value = "";
+  $("quiz-answer").readOnly = false;
+  $("quiz-hint").textContent = "";
+  $("quiz-feedback").replaceChildren();
+  $("quiz-next").hidden = true;
+  $("quiz-answer").focus();
+}
+
+// Enter checks the answer and shows ✓ or ✗; Enter again (or Next) moves on.
+function submitAnswer() {
+  if (!quiz) return;
+  if (quiz.checked) return nextQuestion();
+  const answer = $("quiz-answer").value.trim();
+  if (!answer) return;
+  if (LATIN.test(answer)) {
+    $("quiz-hint").textContent = SWITCH_HINT;
+    $("quiz-answer").select();
+    return;
+  }
+  const q = quiz.questions[quiz.answers.length];
+  const result = { letter: q, answer, ...grade(q, answer) };
+  quiz.answers.push(result);
+  quiz.checked = true;
+  $("quiz-answer").readOnly = true;
+  $("quiz-hint").textContent = "";
+  const parts = [result.ok
+    ? el("p", `✓ Correct: ${q.char}`, "correct")
+    : el("p", `✗ Not quite. It's ${q.char} (${q.roman}), typed with ${keysText(q.keys)}.`, "wrong")];
+  if (result.note) parts.push(el("p", result.note, "muted"));
+  $("quiz-feedback").replaceChildren(...parts);
+  if (!result.ok) light(q.keys);
+  $("quiz-next").textContent = quiz.answers.length < quiz.questions.length ? "Next" : "See results";
+  $("quiz-next").hidden = false;
+}
+
+function nextQuestion() {
+  if (quiz.answers.length < quiz.questions.length) showQuestion();
+  else showResults();
+}
+
+// One review list: each row is ✓ or ✗, and clicking it lights up the keys for that letter.
+function reviewList(title, answers) {
+  const table = el("table", "", "review");
+  const head = el("tr");
+  for (const h of ["", "Asked", "Your answer", "Answer", "Keys"]) head.append(el("th", h));
+  table.append(head);
+  for (const a of answers) {
+    const row = el("tr");
+    row.append(
+      el("td", a.ok ? "✓" : "✗", a.ok ? "correct" : "wrong"),
+      el("td", asked(a.letter)),
+      el("td", a.answer, a.ok ? "correct" : "wrong"),
+      el("td", a.letter.char),
+      el("td", keysText(a.letter.keys)),
+    );
+    row.title = "Show on the keyboard";
+    row.addEventListener("click", () => {
+      light(a.letter.keys);
+      $("key-help").textContent = `${a.letter.char} is typed with ${keysText(a.letter.keys)}.`;
+      $("keyboard").scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+    table.append(row);
+  }
+  return [el("h3", `${title} (${answers.length})`), table];
+}
+
+function showResults() {
+  $("quiz-play").hidden = true;
+  const right = quiz.answers.filter((a) => a.ok);
+  const wrong = quiz.answers.filter((a) => !a.ok);
+  const parts = [el("p", `${right.length} / ${quiz.answers.length} correct`, wrong.length ? "" : "correct")];
+  if (wrong.length) parts.push(...reviewList("✗ To review", wrong));
+  if (right.length) parts.push(...reviewList("✓ Correct", right));
+  parts.push(el("p", "Click a row to see its keys on the keyboard above.", "muted"));
+  const again = el("button", "Try again");
+  again.addEventListener("click", startQuiz);
+  parts.push(again);
+  $("quiz-results").replaceChildren(...parts);
+}
+
+$("practice").addEventListener("keydown", (e) => {
+  if (keyEls[e.code]) light([(e.shiftKey ? "Shift+" : "") + e.code]);
+});
+$("practice").addEventListener("input", () => {
+  $("practice-hint").textContent = LATIN.test($("practice").value.slice(-1)) ? SWITCH_HINT : "";
+});
+$("start").addEventListener("click", startQuiz);
+$("quiz-next").addEventListener("click", nextQuestion);
+onEnter($("quiz-answer"), submitAnswer);
+
+api("/static/hangul.json")
+  .then((data) => {
+    drawAlphabet(data.letters);
+    drawKeyboard(data.keyboard);
+    letters = data.letters.flatMap((g) => g.letters);
+  })
+  .catch((e) => showError(e.message));
+</script>
+</body>
+</html>

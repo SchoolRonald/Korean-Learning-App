@@ -29,3 +29,26 @@ td.num, th.num { text-align: right; }
 .hint.name { color: #0b6e99; text-decoration-style: solid; }
 .topic { margin: 0.5rem 0; }
 #topic { font-size: 1rem; padding: 0.3rem; width: 14rem; }
+/* Basics tab: alphabet cards and the drawn keyboard. */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 0.4rem; }
+.card { display: flex; flex-direction: column; align-items: center; margin: 0; padding: 0.4rem; font-size: 0.8rem;
+        background: #fff; border: 1px solid #ccc; border-radius: 6px; cursor: pointer; text-align: center; }
+.card:hover { border-color: #888; }
+.card.on { border-color: #1a7f37; background: #eaf6ec; }
+.card .char { font-size: 2rem; line-height: 1.2; }
+.card .roman { font-weight: bold; }
+.card .muted { font-size: 0.75rem; }
+#keyboard { margin: 1rem 0 0.5rem; }
+.keyrow { display: flex; gap: 0.25rem; margin-bottom: 0.25rem; }
+.keyrow.row1 { padding-left: 4%; }
+.key { position: relative; flex: 1; min-width: 0; height: 2.8rem; border: 1px solid #aaa; border-radius: 5px; background: #f6f6f6; }
+.key.shift { flex: 1.6; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+.key .kchar { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.key .kshift { position: absolute; top: 1px; right: 3px; font-size: 0.65rem; color: #666; }
+.key .klatin { position: absolute; bottom: 1px; left: 3px; font-size: 0.6rem; color: #999; }
+.key.lit { background: #ffe58f; border-color: #9a6700; }
+.key[data-step]::after { content: attr(data-step); position: absolute; top: -0.5rem; left: -0.3rem; background: #9a6700; color: #fff;
+                         border-radius: 50%; width: 1rem; height: 1rem; font-size: 0.65rem; text-align: center; line-height: 1rem; }
+.review tr:not(:first-child) { cursor: pointer; }
+.review tr:not(:first-child):hover { background: #f6f6f6; }
+#practice, #quiz-answer { font-size: 1.5rem; width: 100%; box-sizing: border-box; padding: 0.4rem; }

@@ -1,0 +1,98 @@
+{
+  "letters": [
+    {
+      "name": "Basic consonants",
+      "letters": [
+        {"char": "ㄱ", "name": "기역 (giyeok)", "roman": "g/k", "example": {"word": "가방", "english": "bag"}, "keys": ["KeyR"]},
+        {"char": "ㄴ", "name": "니은 (nieun)", "roman": "n", "example": {"word": "나무", "english": "tree"}, "keys": ["KeyS"]},
+        {"char": "ㄷ", "name": "디귿 (digeut)", "roman": "d/t", "example": {"word": "다리", "english": "leg; bridge"}, "keys": ["KeyE"]},
+        {"char": "ㄹ", "name": "리을 (rieul)", "roman": "r/l", "example": {"word": "라면", "english": "ramen"}, "keys": ["KeyF"]},
+        {"char": "ㅁ", "name": "미음 (mieum)", "roman": "m", "example": {"word": "물", "english": "water"}, "keys": ["KeyA"]},
+        {"char": "ㅂ", "name": "비읍 (bieup)", "roman": "b/p", "example": {"word": "바다", "english": "sea"}, "keys": ["KeyQ"]},
+        {"char": "ㅅ", "name": "시옷 (siot)", "roman": "s", "example": {"word": "사과", "english": "apple"}, "keys": ["KeyT"]},
+        {"char": "ㅇ", "name": "이응 (ieung)", "roman": "silent / ng", "example": {"word": "아이", "english": "child"}, "keys": ["KeyD"]},
+        {"char": "ㅈ", "name": "지읒 (jieut)", "roman": "j", "example": {"word": "자동차", "english": "car"}, "keys": ["KeyW"]},
+        {"char": "ㅊ", "name": "치읓 (chieut)", "roman": "ch", "example": {"word": "친구", "english": "friend"}, "keys": ["KeyC"]},
+        {"char": "ㅋ", "name": "키읔 (kieuk)", "roman": "k (strong)", "example": {"word": "커피", "english": "coffee"}, "keys": ["KeyZ"]},
+        {"char": "ㅌ", "name": "티읕 (tieut)", "roman": "t (strong)", "example": {"word": "토끼", "english": "rabbit"}, "keys": ["KeyX"]},
+        {"char": "ㅍ", "name": "피읖 (pieup)", "roman": "p (strong)", "example": {"word": "포도", "english": "grapes"}, "keys": ["KeyV"]},
+        {"char": "ㅎ", "name": "히읗 (hieut)", "roman": "h", "example": {"word": "하나", "english": "one"}, "keys": ["KeyG"]}
+      ]
+    },
+    {
+      "name": "Double consonants",
+      "letters": [
+        {"char": "ㄲ", "name": "쌍기역 (ssanggiyeok)", "roman": "kk", "example": {"word": "꽃", "english": "flower"}, "keys": ["Shift+KeyR"]},
+        {"char": "ㄸ", "name": "쌍디귿 (ssangdigeut)", "roman": "tt", "example": {"word": "딸기", "english": "strawberry"}, "keys": ["Shift+KeyE"]},
+        {"char": "ㅃ", "name": "쌍비읍 (ssangbieup)", "roman": "pp", "example": {"word": "빵", "english": "bread"}, "keys": ["Shift+KeyQ"]},
+        {"char": "ㅆ", "name": "쌍시옷 (ssangsiot)", "roman": "ss", "example": {"word": "쌀", "english": "rice (uncooked)"}, "keys": ["Shift+KeyT"]},
+        {"char": "ㅉ", "name": "쌍지읒 (ssangjieut)", "roman": "jj", "example": {"word": "짜다", "english": "to be salty"}, "keys": ["Shift+KeyW"]}
+      ]
+    },
+    {
+      "name": "Basic vowels",
+      "letters": [
+        {"char": "ㅏ", "name": "아 (a)", "roman": "a", "example": {"word": "아버지", "english": "father"}, "keys": ["KeyK"]},
+        {"char": "ㅑ", "name": "야 (ya)", "roman": "ya", "example": {"word": "야구", "english": "baseball"}, "keys": ["KeyI"]},
+        {"char": "ㅓ", "name": "어 (eo)", "roman": "eo", "example": {"word": "어머니", "english": "mother"}, "keys": ["KeyJ"]},
+        {"char": "ㅕ", "name": "여 (yeo)", "roman": "yeo", "example": {"word": "여자", "english": "woman"}, "keys": ["KeyU"]},
+        {"char": "ㅗ", "name": "오 (o)", "roman": "o", "example": {"word": "오이", "english": "cucumber"}, "keys": ["KeyH"]},
+        {"char": "ㅛ", "name": "요 (yo)", "roman": "yo", "example": {"word": "요리", "english": "cooking"}, "keys": ["KeyY"]},
+        {"char": "ㅜ", "name": "우 (u)", "roman": "u", "example": {"word": "우유", "english": "milk"}, "keys": ["KeyN"]},
+        {"char": "ㅠ", "name": "유 (yu)", "roman": "yu", "example": {"word": "유리", "english": "glass"}, "keys": ["KeyB"]},
+        {"char": "ㅡ", "name": "으 (eu)", "roman": "eu", "example": {"word": "그림", "english": "picture"}, "keys": ["KeyM"]},
+        {"char": "ㅣ", "name": "이 (i)", "roman": "i", "example": {"word": "이름", "english": "name"}, "keys": ["KeyL"]}
+      ]
+    },
+    {
+      "name": "Combined vowels",
+      "letters": [
+        {"char": "ㅐ", "name": "애 (ae)", "roman": "ae", "example": {"word": "개", "english": "dog"}, "keys": ["KeyO"]},
+        {"char": "ㅒ", "name": "얘 (yae)", "roman": "yae", "example": {"word": "얘기", "english": "talk; story"}, "keys": ["Shift+KeyO"]},
+        {"char": "ㅔ", "name": "에 (e)", "roman": "e", "example": {"word": "게", "english": "crab"}, "keys": ["KeyP"]},
+        {"char": "ㅖ", "name": "예 (ye)", "roman": "ye", "example": {"word": "예", "english": "yes"}, "keys": ["Shift+KeyP"]},
+        {"char": "ㅘ", "name": "와 (wa)", "roman": "wa", "example": {"word": "과자", "english": "snack"}, "keys": ["KeyH", "KeyK"]},
+        {"char": "ㅙ", "name": "왜 (wae)", "roman": "wae", "example": {"word": "왜", "english": "why"}, "keys": ["KeyH", "KeyO"]},
+        {"char": "ㅚ", "name": "외 (oe)", "roman": "oe", "example": {"word": "회사", "english": "company"}, "keys": ["KeyH", "KeyL"]},
+        {"char": "ㅝ", "name": "워 (wo)", "roman": "wo", "example": {"word": "뭐", "english": "what"}, "keys": ["KeyN", "KeyJ"]},
+        {"char": "ㅞ", "name": "웨 (we)", "roman": "we", "example": {"word": "웨이터", "english": "waiter"}, "keys": ["KeyN", "KeyP"]},
+        {"char": "ㅟ", "name": "위 (wi)", "roman": "wi", "example": {"word": "귀", "english": "ear"}, "keys": ["KeyN", "KeyL"]},
+        {"char": "ㅢ", "name": "의 (ui)", "roman": "ui", "example": {"word": "의사", "english": "doctor"}, "keys": ["KeyM", "KeyL"]}
+      ]
+    }
+  ],
+  "keyboard": [
+    [
+      {"code": "KeyQ", "latin": "Q", "char": "ㅂ", "shift": "ㅃ"},
+      {"code": "KeyW", "latin": "W", "char": "ㅈ", "shift": "ㅉ"},
+      {"code": "KeyE", "latin": "E", "char": "ㄷ", "shift": "ㄸ"},
+      {"code": "KeyR", "latin": "R", "char": "ㄱ", "shift": "ㄲ"},
+      {"code": "KeyT", "latin": "T", "char": "ㅅ", "shift": "ㅆ"},
+      {"code": "KeyY", "latin": "Y", "char": "ㅛ", "shift": null},
+      {"code": "KeyU", "latin": "U", "char": "ㅕ", "shift": null},
+      {"code": "KeyI", "latin": "I", "char": "ㅑ", "shift": null},
+      {"code": "KeyO", "latin": "O", "char": "ㅐ", "shift": "ㅒ"},
+      {"code": "KeyP", "latin": "P", "char": "ㅔ", "shift": "ㅖ"}
+    ],
+    [
+      {"code": "KeyA", "latin": "A", "char": "ㅁ", "shift": null},
+      {"code": "KeyS", "latin": "S", "char": "ㄴ", "shift": null},
+      {"code": "KeyD", "latin": "D", "char": "ㅇ", "shift": null},
+      {"code": "KeyF", "latin": "F", "char": "ㄹ", "shift": null},
+      {"code": "KeyG", "latin": "G", "char": "ㅎ", "shift": null},
+      {"code": "KeyH", "latin": "H", "char": "ㅗ", "shift": null},
+      {"code": "KeyJ", "latin": "J", "char": "ㅓ", "shift": null},
+      {"code": "KeyK", "latin": "K", "char": "ㅏ", "shift": null},
+      {"code": "KeyL", "latin": "L", "char": "ㅣ", "shift": null}
+    ],
+    [
+      {"code": "KeyZ", "latin": "Z", "char": "ㅋ", "shift": null},
+      {"code": "KeyX", "latin": "X", "char": "ㅌ", "shift": null},
+      {"code": "KeyC", "latin": "C", "char": "ㅊ", "shift": null},
+      {"code": "KeyV", "latin": "V", "char": "ㅍ", "shift": null},
+      {"code": "KeyB", "latin": "B", "char": "ㅠ", "shift": null},
+      {"code": "KeyN", "latin": "N", "char": "ㅜ", "shift": null},
+      {"code": "KeyM", "latin": "M", "char": "ㅡ", "shift": null}
+    ]
+  ]
+}

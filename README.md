@@ -50,6 +50,7 @@ The database path defaults to `gongbu.db` and can be changed with the `GONGBU_DB
 
 Tabs:
 
+- **Basics and Introduction** (/basics, for complete beginners): how to turn on Korean typing in Windows and Mac, the alphabet (40 letters with sound, name and an example word), a drawn Korean keyboard that lights up the keys for a clicked letter or as you type, and a 10-question letter quiz. Quiz results are not saved. See [spec.md](spec.md).
 - **Learn** (http://localhost:8000, start here): introduces new words 5 at a time. Each word: type it over 3 times, type its English meaning, then fill in a missing syllable. Finished words become available in the other tabs. The English check is lenient (case, "to"/"to be", a/the, bracketed notes, and small typos are ignored). If you already know a word, **I already know this word** skips its steps and makes it available right away.
 - **Words** (/words): spelling drill on learned words. Pick the highest lesson you have studied, type the Korean for the English prompt, and press Enter (Enter again or Next for the next word).
 Spacing does not count against you, and entries with notes accept each listed form: `아기 / 애기` accepts either, `1월 (일월)` accepts `1월` or `일월`, and `평생 (동안)` accepts `평생` or `평생 동안`.
