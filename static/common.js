@@ -24,6 +24,23 @@ function el(tag, text, className) {
   return node;
 }
 
+// A spinning indicator with a message and the seconds elapsed, for slow AI work.
+function spinner(message) {
+  const box = el("p", "", "working");
+  const text = el("span", message);
+  const seconds = el("span", "", "muted");
+  box.append(el("span", "", "spin"), text, seconds);
+  const started = Date.now();
+  const timer = setInterval(() => {
+    if (!box.isConnected && Date.now() - started > 1000) {
+      clearInterval(timer);
+      return;
+    }
+    seconds.textContent = ` ${Math.floor((Date.now() - started) / 1000)}s`;
+  }, 1000);
+  return box;
+}
+
 function showError(message) {
   $("feedback").replaceChildren(el("p", message, "wrong"));
 }

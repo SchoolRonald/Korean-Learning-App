@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 
 import app.main as main
 from app import grammar
-from app.llm import LLMError
+from app.llm import TEACHING_MODEL, LLMError
 
 FIRST = grammar.points()[0]
 
@@ -31,9 +31,11 @@ class FakeAI:
     def __init__(self, data=None):
         self.data = data or explanation_data()
         self.prompts = []
+        self.models = []
 
     def __call__(self, purpose, system, prompt, schema, **kwargs):
         self.prompts.append((purpose, prompt))
+        self.models.append(kwargs.get("model"))
         if purpose == "grammar-ask":
             return {"answer": "Because 를 marks the object.", "examples": [{"korean": "밥을 먹어요.", "english": "I eat rice."}]}
         return self.data
@@ -91,26 +93,29 @@ def test_point_shows_sources_with_license(client):
     assert data["sources"]["entries"][0]["url"].startswith("https://krdict.korean.go.kr/")
 
 
-def test_explanation_is_saved_after_first_use(client, ai):
-    first = client.get(f"/api/grammar/explain?point={FIRST['id']}&lesson=1&style=examples").json()
-    assert len(first["examples"]) == 8 and first["style_name"] == "Examples first"
-    again = client.get(f"/api/grammar/explain?point={FIRST['id']}&lesson=1&style=examples").json()
+def test_lesson_is_saved_after_first_use(client, ai):
+    first = client.get(f"/api/grammar/explain?point={FIRST['id']}&lesson=1").json()
+    assert len(first["examples"]) == 8 and first["style"] == "lesson"
+    again = client.get(f"/api/grammar/explain?point={FIRST['id']}&lesson=1").json()
     assert again["id"] == first["id"]
     assert len(ai.prompts) == 1
-    client.get(f"/api/grammar/explain?point={FIRST['id']}&lesson=1&style=rules")
-    assert len(ai.prompts) == 2
 
 
-def test_explanation_prompt_is_grounded(client, ai):
+def test_lesson_prompt_is_grounded_and_uses_sonnet(client, ai):
     point = next(p for p in grammar.points() if p["sources"])
-    client.get(f"/api/grammar/explain?point={point['id']}&lesson=25&style=english")
+    client.get(f"/api/grammar/explain?point={point['id']}&lesson=25")
     prompt = ai.prompts[0][1]
     assert point["summary"] in prompt and "krdict.korean.go.kr" in prompt
-    assert "Start from English" in prompt
+    assert "Write the main lesson" in prompt
+    assert ai.models == [TEACHING_MODEL]
 
 
-def test_unknown_style_is_404(client, ai):
-    assert client.get(f"/api/grammar/explain?point={FIRST['id']}&lesson=1&style=poem").status_code == 404
+def test_next_point_writes_the_following_lesson_ahead(client, ai):
+    second = grammar.points()[1]
+    client.get("/api/grammar/next?lesson=1")
+    assert len(ai.prompts) == 1 and second["title"] in ai.prompts[0][1]
+    client.get(f"/api/grammar/explain?point={second['id']}&lesson=1")
+    assert len(ai.prompts) == 1
 
 
 def test_too_few_examples_is_a_friendly_error(client, monkeypatch):
@@ -153,6 +158,7 @@ def test_long_request_is_rejected(client, ai):
 def test_questions_are_answered_and_kept(client, ai):
     r = client.post("/api/grammar/ask", json={"point": FIRST["id"], "lesson": 1, "question": "Why 를?"})
     assert r.json()["answer"].startswith("Because")
+    assert ai.models == [TEACHING_MODEL]
     data = client.get(f"/api/grammar/point?id={FIRST['id']}&lesson=1").json()["point"]
     assert data["questions"][0]["question"] == "Why 를?"
     assert client.post("/api/grammar/ask", json={"point": FIRST["id"], "lesson": 1, "question": " "}).status_code == 404

@@ -5,7 +5,7 @@
 Gongbu teaches Korean vocabulary and grammar, following the lesson order of howtostudykorean.com (HTSK). A learner first learns to read and type Hangul. Then the learner learns words and grammar points a few at a time, drills them, practices them in AI-generated sentences, and tracks progress. The app adapts in two ways:
 
 1. It scores how well each word and grammar point is remembered (its **confidence**) and drills the weakest first.
-2. It explains grammar in the style that works for the learner, and it learns that style from what the learner does.
+2. It explains grammar in the way that works for the learner, and it learns that way from what the learner asks for.
 
 The site has six tabs, in this order in every page's menu:
 
@@ -18,7 +18,7 @@ The site has six tabs, in this order in every page's menu:
 | Sentences | `/sentences` | Translate AI-generated sentences built from learned words and grammar |
 | Stats | `/stats` | Progress and confidence for learned words and grammar |
 
-Stack: Python, FastAPI, SQLite (no ORM), one static HTML/JS page per tab (no build step), Anthropic API (`claude-haiku-5-5`) for Sentences, topics and grammar, and the NIKL Basic Korean Dictionary API (krdict) as the grammar source.
+Stack: Python, FastAPI, SQLite (no ORM), one static HTML/JS page per tab (no build step), Anthropic API (`claude-haiku-5-5` for Sentences, topics and the curriculum build, `claude-sonnet-5-5` for grammar lessons and answers), and the NIKL Basic Korean Dictionary API (krdict) as the grammar source.
 
 ## Shared parts
 
@@ -58,7 +58,7 @@ The Words drill picks the next word at random from the 5 least confident learned
 
 ### AI usage
 
-- Model `claude-haiku-5-5`, low effort for sentences and grading, medium for topics (resolved once and saved). Every call asks for JSON with a fixed schema; malformed output, refusals and API errors become a friendly message, never a crash.
+- Model `claude-haiku-5-5`, low effort for sentences and grading, medium for topics (resolved once and saved). Grammar lessons, other explanations and answers to questions use `claude-sonnet-5-5` at medium effort, because they teach. Every call asks for JSON with a fixed schema; malformed output, refusals and API errors become a friendly message, never a crash.
 - At most 500 AI calls per server run (`GONGBU_LLM_CAP`). Restart the server to reset. Each call's duration and tokens are logged to the console and `llm_usage.log`.
 - The API key comes from `ANTHROPIC_API_KEY` (or `.env`).
 
@@ -209,47 +209,40 @@ The krdict API: `https://krdict.korean.go.kr/api/search` and `/api/view`, XML re
 - A point becomes **learned** when the learner finishes it in "Learn new" or presses "I already know this". Learned points are stored in the `grammar_learned` table.
 - New points come in curriculum order (lesson, then position in the lesson).
 
-### Explanation styles
+### The lesson
 
-Every explanation uses one of these styles:
+Each point has one main lesson. It is written once (Sonnet), saved, and free to show again. The page shows its parts in this order:
 
-| Style | What it does |
-|---|---|
-| Examples first (default) | Many examples (at least 8) from simple to harder, with the grammar part highlighted. The rule comes after the examples. |
-| Compare with English | Starts from how English says the same thing and shows where Korean is different. |
-| Rule and table | States the rule, then a table of forms (after a vowel, after a consonant, irregulars). |
-| Break it down | Splits example sentences into their parts (stem, ending, particle) and labels each part. |
-
-Every explanation, in every style, also has:
-
-- At least 8 examples. Each example has the Korean, the English, and the grammar part highlighted.
-- A "Nuance" part: when to use the point, when not to, and how it differs from related points.
-- A "Common mistakes" part.
-- The source line (see Grammar data).
-- "AI-written, not validated by a native speaker".
+1. **Intro**: one or two sentences on what the point is for.
+2. **The rule**: the rule in plain sentences.
+3. **Forms**: a table of every form (after a vowel, after a consonant, irregular cases), with an example each. Left out when the point has one form.
+4. **Examples**: at least 8, simple to harder, covering every form in the table. Each has the Korean with the grammar part highlighted (only the grammar part, such as 는 in 저는), the English, a breakdown into labeled parts (저 "I" + 는 "topic particle"), and a short note.
+5. **Nuance**: when to use the point, when not to, and how it differs from related points.
+6. **Common mistakes**: two or three, each with the wrong sentence, the right one, and why.
+7. The source line (see Grammar data) and "AI-written, not validated by a native speaker".
 
 Examples use learned words where possible. They may use at most 2 unlearned words. Unlearned words and names are underlined with a hover hint, the same as on the Sentences tab.
 
+**No waiting between points**: when a point opens, the server writes the next unlearned point's lesson in the background. Usually it is ready when the learner gets there. A lock makes sure the page and the background job never write the same lesson twice.
+
+**Working indicator**: while the AI writes anything (a lesson, another explanation, an answer), the page shows a spinner, what is being written, and the seconds so far.
+
 ### Adapting the explanation
 
-1. **Explain it differently**: a button under the explanation. It shows the point in the next style the learner has not seen for this point. When the learner has seen all four styles, one AI call writes a new explanation from a different angle.
-2. **Ask for a style**: a short text box, "Explain it like...". The learner types a request in their own words ("with food examples", "like I am 10", "compare it to Spanish"). One AI call writes an explanation that follows the request.
-3. **Free questions**: a text box, "Ask about this point". The learner asks anything ("why is it 를 here and not 가?"). One AI call answers it. The answer uses the point's summary, its sources and the explanation on screen. Questions and answers stay on the page for this point and are saved.
-4. **Learner profile**: the app infers which styles work for the learner (see below). The next new point opens in the best style so far.
+1. **Explain it differently**: a button under the lesson. One AI call writes a new explanation from an angle the earlier ones did not use (an analogy, a story, a contrast with English, taking sentences apart).
+2. **Explain it like...**: a short text box. The learner types a request in their own words ("with food examples", "like I am 10", "compare it to Spanish"). One AI call writes an explanation that follows the request.
+3. **Free questions**: a text box, "Ask about this point". The learner asks anything ("why is it 를 here and not 가?"). One AI call (Sonnet) answers it. The answer uses the point's summary, its sources and the explanation on screen. Questions and answers stay on the page for this point and are saved.
+4. **Learner profile**: the app learns how the learner likes things explained and shapes new lessons to fit (see below).
 
-The four built-in styles are saved per point after their first generation, so they are free to show again. Explanations from "Ask for a style" and from the fifth and later "Explain it differently" are saved too, so the learner can scroll back to them, but they are not reused for other points.
+Explanations from 1 and 2 are saved per point. When a point has any, small tabs ("Lesson", "New angle 1", "with food examples") switch between them and the main lesson.
 
 ### Learner profile
 
-The profile is a score for each built-in style. It is stored in the `style_stats` table.
+The profile is a short list of plain-English notes on how the learner likes grammar explained ("likes food examples", "wants a comparison with English first"). It is stored in the `learner_notes` table.
 
-- **Shown**: +1 each time a style is the last explanation the learner reads before the first practice item of a point.
-- **Worked**: +1 when that first practice item is answered correctly.
-- **Rejected**: +1 when the learner presses "Explain it differently" while that style is on screen.
-- Score = (worked + 1) / (shown + 2) − 0.1 × rejected / (shown + 1).
-- The style with the highest score opens the next new point. On a tie, Examples first wins.
-- A "Default style" menu on the page lets the learner set a fixed style instead of Auto. Auto is the default.
-- When the learner uses "Ask for a style", the app saves the request text. After 3 requests, the app adds them as a note to every new explanation prompt ("This learner likes: food examples, ...") and shows the note on the page with a Clear button.
+- **Inferred**: the app records each "Explain it differently" and "Explain it like..." request, and which explanation was on screen when the learner then answered the point's first practice item right or wrong. After every 3 new records, one AI call (Haiku) turns them into at most 5 notes.
+- **Set by the learner**: the page shows the notes under a "How you like things explained" heading. The learner can remove a note or type a new one ("Always compare with English").
+- Every new lesson prompt includes the notes. Lessons already saved do not change.
 
 ### Practice types
 
@@ -280,7 +273,7 @@ A deterministic engine conjugates verbs and adjectives. It does not need AI for 
 ### Learn new
 
 1. The page shows the next unlearned point in scope. Title, pattern and lesson are at the top.
-2. The explanation opens in the profile's best style (see Learner profile).
+2. The point's lesson opens (see The lesson).
 3. The learner reads it and may use "Explain it differently", "Explain it like..." and "Ask about this point" as often as they like.
 4. "Practice" starts 4 practice items of the types that fit the point. Fill the blank or Conjugation come first, and Translate comes last.
 5. A miss shows the answer and the reason, and puts the item type back at the end, as in Learn Words. The explanation stays one click away.
@@ -318,7 +311,7 @@ A deterministic engine conjugates verbs and adjectives. It does not need AI for 
 With Debug on, the page shows:
 
 - Every learned point in scope, least confident first, with the same columns as the word Debug panel.
-- The style scores (shown, worked, rejected, score) and the style that opens next.
+- The learner notes and the records they were made from.
 
 ### Rules
 
@@ -330,26 +323,28 @@ With Debug on, the page shows:
 
 - `GET /api/grammar/next?lesson` returns the next unlearned point (or null) and the outline of points in scope. The page then asks for the explanation separately, because a new explanation can take up to a minute.
 - `GET /api/grammar/point?id&lesson` returns one point, the outline, and its saved custom explanations.
-- `GET /api/grammar/explain?point&lesson&style` returns the saved explanation in that style, or makes it.
+- `GET /api/grammar/explain?point&lesson` returns the point's saved lesson, or writes it.
 - `POST /api/grammar/explain {point, lesson, request}` makes an explanation from a free style request. An empty request makes one from a new angle.
 - `POST /api/grammar/ask {point, lesson, question, explanation_id}` answers a free question about the explanation on screen.
 - `GET /api/grammar/item?point&type` returns a practice item. Without `point`, it returns a review item.
 - `POST /api/grammar/answer {item_id, answer}` checks an answer and records it.
 - `POST /api/grammar/done {point}` marks a point learned.
-- `GET /api/grammar/profile` and `POST /api/grammar/profile {default_style}` read and set the profile.
+- `GET /api/grammar/profile` returns the learner notes. `POST /api/grammar/profile {add, remove}` adds or removes a note.
 
 ### Acceptance criteria
 
 - `grammar/curriculum.json` has points for every lesson from 1 to 25. Every point has all fields, and every `related` id exists.
 - Every point with sources shows the source line and a working krdict link.
-- The first point opens in Examples first with at least 8 examples.
-- "Explain it differently" shows the 4 styles in turn, and showing a saved style again makes no AI call.
+- The first point's lesson shows the rule and forms before at least 8 examples, each with a breakdown.
+- Opening a point with a saved lesson makes no AI call. Opening a point writes the next point's lesson in the background.
+- "Explain it differently" and "Explain it like..." add a tab, and switching tabs makes no AI call.
+- A spinner with elapsed seconds shows while the AI writes.
 - "Ask about this point" answers and keeps the answer on the page after a reload.
 - The conjugation engine gives the right forms for a fixed test list that covers every class and every listed ending, including both contracted and full forms.
 - 저가 for "저___ 학생이에요" (expected 는) is marked wrong with a reason. A Compare item that accepts both forms marks both correct.
 - After an answer, the point's confidence changes by the same rules as a word: a wrong answer never raises it, and a right answer never lowers it.
 - With Focus on, no review item appears in Learn new.
-- With a style answered correctly more often, new points open in that style.
+- After 3 "Explain it like... with food examples" requests, a note about food examples appears and the next lesson prompt includes it.
 
 ## Tab 4: Words (`/words`)
 
@@ -436,7 +431,7 @@ Show progress for words and grammar in the current scope and explain how confide
 - **Not seen in a while**: the 10 practiced words seen longest ago.
 - **All learned words by confidence** (collapsible): lesson, attempts, streak, confidence bar.
 - **Grammar**: "Learned X of Y grammar points. Average confidence N%." Then the 5 weakest points, and all learned points by confidence (collapsible), each linking to its explanation.
-- **How you learn best**: the style scores in plain words ("Examples first works best for you: 8 of 10 first answers right").
+- **How you like things explained**: the learner notes (see Learn Grammar: Learner profile).
 - **About confidence**: the formula and rules in plain words (see Shared parts).
 
 ### API
@@ -458,17 +453,17 @@ Accounts and login, audio, deployment, an error taxonomy, a "this looks wrong" b
 The grammar feature is built in steps. Each step ends with passing tests and a working page, so the learner can test it before the next step starts.
 
 1. **Data**: krdict client, `python -m app.curriculum`, `grammar/curriculum.json` and `grammar/sources.json` for Lessons 1 to 25, tests on both files, and the AI cap of 500.
-2. **Learn Grammar, explain**: the tab, menu changes (Learn becomes Learn Words), Learn new with the four styles, "Explain it differently", "Explain it like...", "Ask about this point", "I already know this", and the Debug call counter.
+2. **Learn Grammar, explain**: the tab, menu changes (Learn becomes Learn Words), Learn new with one rule-first lesson per point written ahead in the background, a working spinner, "Explain it differently", "Explain it like...", "Ask about this point", "I already know this", and the Debug call counter.
 3. **Practice and confidence**: Fill the blank, Compare, Translate, and Spot the error, the item bank, grammar confidence, Review mode, mixed review, Focus, and the grammar Debug panel.
 4. **Conjugation engine**: verb classes from krdict, the engine with its test list, and the Conjugation and Transform types.
-5. **Learner profile**: style scores, Auto style choice, Default style menu, and saved style requests.
+5. **Learner profile**: request records, AI-made notes, notes the learner adds or removes, and notes in lesson prompts.
 6. **Sentences and Stats**: grammar in generation, the Lesson 1 minimum, per-word and per-point verdicts, confidence updates from Sentences, and the Stats grammar sections.
 
 ## Points to review
 
 These are choices the learner did not make. Each one has a default in this spec.
 
-1. Profile score: the formula and the 0.1 weight for "Rejected".
+1. Profile: notes are remade after every 3 new records, at most 5 notes.
 2. Practice length in Learn new: 4 items per point.
 3. Mixed review: 1 or 2 items, only when a learned point is below 50%.
 4. Review picks from the 3 least confident points. Words picks from 5.
@@ -476,5 +471,5 @@ These are choices the learner did not make. Each one has a default in this spec.
 6. Sentences minimum: 5 learned words and all Lesson 1 points.
 7. One Sentence answer counts as one answer for word answer decay.
 8. Saved sentences from before this change are not served.
-9. Style requests become a profile note after 3 requests.
+9. The lesson order: intro, rule, forms, examples, nuance, mistakes.
 

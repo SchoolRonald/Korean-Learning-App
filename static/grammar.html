@@ -54,19 +54,19 @@
 
 <script src="/static/common.js"></script>
 <script>
-const STYLE_ORDER = ["examples", "english", "rules", "breakdown"];
 let point = null;
-let styleNames = {};
-let views = [];  // explanations shown for this point: {key, label, data}
+let views = [];  // explanations for this point: {key, label, data}; "lesson" is the main one
 let current = null;  // key of the explanation on screen
 let busy = false;
 
 const lessonValue = () => Number($("lesson").value);
 
+// message: show a spinner with it while busy; "" clears the feedback area.
 function setBusy(on, message) {
   busy = on;
   for (const id of ["differently", "like-go", "ask-go", "got-it", "known"]) $(id).disabled = on;
-  if (message !== undefined) $("feedback").replaceChildren(message ? el("p", message, "muted") : el("span"));
+  if (message) $("feedback").replaceChildren(spinner(message));
+  else if (message === "") $("feedback").replaceChildren();
 }
 
 function pointFromUrl() {
@@ -95,7 +95,6 @@ async function openPoint(id) {
 
 async function showPoint(p, custom) {
   point = p;
-  styleNames = p.styles;
   views = custom.map((c, i) => ({ key: `custom-${c.id}`, label: customLabel(c, i), data: c }));
   current = null;
   $("point").hidden = false;
@@ -109,23 +108,27 @@ async function showPoint(p, custom) {
   renderQuestions(p.questions);
   $("got-it").hidden = $("known").hidden = p.learned;
   $("learned-note").hidden = !p.learned;
-  renderStyleTabs();
-  await showStyle("examples");
+  renderTabs();
+  await showLesson();
 }
 
 function customLabel(c, i) {
   return c.style === "request" ? `"${c.request}"` : `New angle ${i + 1}`;
 }
 
-function renderStyleTabs() {
-  const tabs = [];
-  for (const key of STYLE_ORDER) {
-    const b = el("button", styleNames[key], "tab");
-    b.classList.toggle("on", current === key);
-    b.addEventListener("click", () => showStyle(key));
-    tabs.push(b);
+// Tabs appear only once there is more than the main lesson to switch between.
+function renderTabs() {
+  const custom = views.filter((v) => v.key.startsWith("custom-"));
+  if (!custom.length) {
+    $("styles").replaceChildren();
+    return;
   }
-  for (const v of views.filter((v) => v.key.startsWith("custom-"))) {
+  const tabs = [];
+  const lessonTab = el("button", "Lesson", "tab");
+  lessonTab.classList.toggle("on", current === "lesson");
+  lessonTab.addEventListener("click", showLesson);
+  tabs.push(lessonTab);
+  for (const v of custom) {
     const b = el("button", v.label, "tab");
     b.classList.toggle("on", current === v.key);
     b.addEventListener("click", () => showView(v));
@@ -134,17 +137,17 @@ function renderStyleTabs() {
   $("styles").replaceChildren(...tabs);
 }
 
-async function showStyle(key) {
+async function showLesson() {
   if (busy) return;
-  const seen = views.find((v) => v.key === key);
+  const seen = views.find((v) => v.key === "lesson");
   if (seen) {
     showView(seen);
     return;
   }
-  setBusy(true, `Writing the "${styleNames[key]}" explanation... The first time can take up to a minute. After that it is saved.`);
+  setBusy(true, "Writing the lesson for this point. This can take up to a minute the first time. After that it is saved.");
   try {
-    const data = await api(`/api/grammar/explain?point=${encodeURIComponent(point.id)}&lesson=${lessonValue()}&style=${key}`);
-    const view = { key, label: styleNames[key], data };
+    const data = await api(`/api/grammar/explain?point=${encodeURIComponent(point.id)}&lesson=${lessonValue()}`);
+    const view = { key: "lesson", label: "Lesson", data };
     views.push(view);
     setBusy(false, "");
     showView(view);
@@ -156,7 +159,7 @@ async function showStyle(key) {
 
 async function customExplanation(request) {
   if (busy) return;
-  setBusy(true, request ? `Writing an explanation for "${request}"...` : "Finding a different way to explain it...");
+  setBusy(true, request ? `Writing an explanation for "${request}"` : "Finding a different way to explain it");
   try {
     const data = await api("/api/grammar/explain", {
       method: "POST",
@@ -174,19 +177,12 @@ async function customExplanation(request) {
   }
 }
 
-function explainDifferently() {
-  const next = STYLE_ORDER.find((key) => !views.some((v) => v.key === key));
-  if (next) showStyle(next);
-  else customExplanation("");
-}
-
 function showView(view) {
   current = view.key;
-  renderStyleTabs();
+  renderTabs();
   renderExplanation(view.data);
 }
 
-// Section order follows the style: the rule comes first only in "Rule and table".
 function renderExplanation(x) {
   const sections = {
     intro: () => x.intro ? paragraphs(x.intro) : [],
@@ -196,10 +192,8 @@ function renderExplanation(x) {
     nuance: () => x.nuance ? [el("h3", "Nuance"), ...paragraphs(x.nuance)] : [],
     mistakes: () => x.mistakes.length ? [el("h3", "Common mistakes"), renderMistakes(x.mistakes)] : [],
   };
-  const order = x.style === "rules"
-    ? ["intro", "rule", "table", "examples", "nuance", "mistakes"]
-    : ["intro", "examples", "rule", "table", "nuance", "mistakes"];
-  const nodes = [el("p", `Style: ${x.style_name}`, "muted")];
+  const order = ["intro", "rule", "table", "examples", "nuance", "mistakes"];
+  const nodes = x.style === "lesson" ? [] : [el("p", x.request ? `Explained like: "${x.request}"` : x.style_name, "muted")];
   for (const name of order) nodes.push(...sections[name]());
   $("explanation").replaceChildren(...nodes);
   const unlearned = x.examples.some((ex) => ex.tokens.some((t) => t.new));
@@ -337,7 +331,7 @@ async function ask() {
   const question = $("question").value.trim();
   if (!question || busy) return;
   setBusy(true);
-  $("ask-status").textContent = "Thinking...";
+  $("ask-status").replaceChildren(spinner("Thinking about your question"));
   const shown = views.find((v) => v.key === current);
   try {
     const answer = await api("/api/grammar/ask", {
@@ -387,7 +381,7 @@ function renderOutline(items) {
   $("outline").replaceChildren(...list);
 }
 
-$("differently").addEventListener("click", explainDifferently);
+$("differently").addEventListener("click", () => customExplanation(""));
 $("like-go").addEventListener("click", () => {
   const request = $("like").value.trim();
   if (request) customExplanation(request).then(() => { $("like").value = ""; });

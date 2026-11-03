@@ -42,6 +42,10 @@ def prefetch_in_background(lesson, topic_ids):
     prefetch(db(), lesson, topic_ids)
 
 
+def prefetch_grammar(point_id, lesson):
+    grammar.prefetch_after(db(), point_id, lesson)
+
+
 def scope_ids(topic):
     """The word ids of a topic (None for no topic). 404 for an unknown topic."""
     if topic is None:
@@ -252,22 +256,26 @@ def grammar_call(fn, *args):
 
 
 @app.get("/api/grammar/next")
-def api_grammar_next(lesson: int):
+def api_grammar_next(lesson: int, background: BackgroundTasks):
     point = grammar.next_point(db(), lesson)
+    if point:
+        # Writes the following point's lesson while the learner studies this one.
+        background.add_task(prefetch_grammar, point["id"], lesson)
     return {"point": grammar.present_point(db(), point) if point else None,
             "outline": grammar.outline(db(), lesson)}
 
 
 @app.get("/api/grammar/point")
-def api_grammar_point(id: str, lesson: int):
+def api_grammar_point(id: str, lesson: int, background: BackgroundTasks):
     point = grammar_call(grammar.get_point, id)
+    background.add_task(prefetch_grammar, id, lesson)
     return {"point": grammar.present_point(db(), point), "outline": grammar.outline(db(), lesson),
             "custom": grammar.custom_explanations(db(), id)}
 
 
 @app.get("/api/grammar/explain")
-def api_grammar_explain(point: str, lesson: int, style: str = grammar.DEFAULT_STYLE):
-    return {**grammar_call(grammar.explanation, db(), point, lesson, style), "llm": usage_summary()}
+def api_grammar_explain(point: str, lesson: int):
+    return {**grammar_call(grammar.lesson, db(), point, lesson), "llm": usage_summary()}
 
 
 @app.post("/api/grammar/explain")

@@ -94,3 +94,7 @@ td.num, th.num { text-align: right; }
 .qa .question { font-weight: bold; }
 .actions { margin: 1.5rem 0; }
 #outline li.here { font-weight: bold; }
+.working { display: flex; align-items: center; gap: 0.5rem; color: #0b6e99; }
+.spin { flex: none; width: 1rem; height: 1rem; border: 2px solid #c8dcef; border-top-color: #0b6e99; border-radius: 50%;
+        animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }

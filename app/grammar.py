@@ -4,39 +4,28 @@ from functools import cache
 from pathlib import Path
 
 from app.drill import now_iso
-from app.llm import LLMError, call_json
+from app.llm import TEACHING_MODEL, LLMError, call_json
 from app.sentences import form_index, learned_ids, parse_tokens
 
 GRAMMAR_DIR = Path(__file__).resolve().parent.parent / "grammar"
-STYLES = {
-    "examples": "Examples first",
-    "english": "Compare with English",
-    "rules": "Rule and table",
-    "breakdown": "Break it down",
-}
-DEFAULT_STYLE = "examples"
+LESSON = "lesson"
+KIND_NAMES = {LESSON: "Lesson", "angle": "New angle", "request": "Your request"}
 MIN_EXAMPLES = 8
 MAX_VOCAB = 600
 MAX_REQUEST = 200
 MAX_QUESTION = 500
 
-STYLE_GUIDE = {
-    "examples": "Lead with the examples. intro is one short sentence that invites the learner to spot the pattern. "
-                "Order the examples from simplest to hardest so the pattern becomes obvious. The rule comes after.",
-    "english": "Start from English. intro explains how English expresses the same idea and exactly where Korean differs. "
-               "Each example note names the English habit that would lead a learner astray.",
-    "rules": "Lead with the rule. intro states the rule plainly. table must list every form "
-             "(after a vowel, after a consonant, irregular cases, politeness levels when they matter).",
-    "breakdown": "Take sentences apart. intro explains the building blocks. Every example must have parts that split "
-                 "the Korean into labeled pieces (stem, ending, particle, noun) so the learner sees how it is assembled.",
-}
+LESSON_GUIDE = ("Write the main lesson. intro is one or two sentences on what the point is for. "
+                "The page shows the rule and the table of forms first, then the examples, so the examples must "
+                "show every form in the table. Every example must have parts that split the Korean into labeled "
+                "pieces (noun, stem, ending, particle), so the learner sees how it is built.")
 
 EXPLAIN_SYSTEM = """You teach one Korean grammar point to an English-speaking beginner.
 Ground every claim in the point's summary and dictionary entries (NIKL Basic Korean Dictionary). When an entry disagrees with what you believe, follow the entry. Never invent rules.
 Write natural, correct Korean in the polite -요 style unless the point is about another style.
 Fields:
-- intro: the opening, written as the style asks. Plain English, short paragraphs.
-- examples: at least 8. korean: one sentence. english: its translation. highlight: only the grammar part itself, copied exactly from korean, never the whole word (in 저는 highlight 는, in 먹었어요 highlight 었). note: one short sentence on what to notice. parts: the sentence split into pieces with labels (may be [] unless the style asks for it). tokens: every space-separated word of korean, in order (korean: as written without punctuation, base: dictionary form without particles or endings, english: meaning, english_text: "" , is_name: true only for names of people or places).
+- intro: the opening, as the instructions below ask. Plain English, short paragraphs.
+- examples: at least 8. korean: one sentence. english: its translation. highlight: only the grammar part itself, copied exactly from korean, never the whole word (in 저는 highlight 는, in 먹었어요 highlight 었). note: one short sentence on what to notice. parts: the sentence split into labeled pieces, such as 저 (I) + 는 (topic particle). tokens: every space-separated word of korean, in order (korean: as written without punctuation, base: dictionary form without particles or endings, english: meaning, english_text: "" , is_name: true only for names of people or places).
 - rule: the rule in two to four plain sentences.
 - table: forms of the point, each with when to use it, the form, and an example. [] when the point has only one form.
 - nuance: when to use the point, when not to, and how it differs from the related points listed.
@@ -199,7 +188,6 @@ def present_point(conn, point):
         "related": [{"id": r, "title": by_id[r]["title"]} for r in point["related"]],
         "sources": source_view(point),
         "questions": questions(conn, point["id"]),
-        "styles": STYLES,
     }
 
 
@@ -281,20 +269,22 @@ def flag_new(content, learned):
 
 def present_explanation(conn, row):
     content = flag_new(json.loads(row["content"]), learned_ids(conn))
-    return {"id": row["id"], "style": row["style"], "style_name": STYLES.get(row["style"], "Your request"),
+    return {"id": row["id"], "style": row["style"], "style_name": KIND_NAMES.get(row["style"], "Explanation"),
             "request": row["request"], **content}
 
 
 def generate(conn, point, max_lesson, style, request=None, previous=()):
-    if style in STYLES:
-        guide = STYLE_GUIDE[style]
+    if style == LESSON:
+        guide = LESSON_GUIDE
     elif request:
         guide = f"Follow the learner's request for how to explain it: {request!r}. Keep every field."
     else:
         guide = ("The learner has read these explanations and still wants another way: "
-                 + ", ".join(previous) + ". Find a genuinely different angle (an analogy, a story, a contrast).")
-    prompt = f"{point_context(conn, point, max_lesson)}\n\nStyle: {guide}"
-    data = call_json("grammar-explain", EXPLAIN_SYSTEM, prompt, EXPLAIN_SCHEMA, max_tokens=12000, effort="medium")
+                 + ", ".join(previous) + ". Find a genuinely different angle (an analogy, a story, a contrast "
+                 "with English, or taking sentences apart piece by piece) that none of them used.")
+    prompt = f"{point_context(conn, point, max_lesson)}\n\nInstructions: {guide}"
+    data = call_json("grammar-explain", EXPLAIN_SYSTEM, prompt, EXPLAIN_SCHEMA, max_tokens=12000, effort="medium",
+                     model=TEACHING_MODEL)
     content = clean_explanation(data, form_index(conn, learned_ids(conn)))
     cur = conn.execute(
         "INSERT INTO grammar_explanations (point_id, style, request, content, created_at) VALUES (?, ?, ?, ?, ?)",
@@ -304,17 +294,41 @@ def generate(conn, point, max_lesson, style, request=None, previous=()):
     return conn.execute("SELECT * FROM grammar_explanations WHERE id = ?", (cur.lastrowid,)).fetchone()
 
 
-def explanation(conn, point_id, max_lesson, style=DEFAULT_STYLE):
-    """The saved explanation in a built-in style, made on first use. Free to show again."""
-    if style not in STYLES:
-        raise GrammarError("Unknown style.")
+def lesson_row(conn, point_id, max_lesson):
+    """The point's saved lesson, written on first use. Locked so a prefetch and a page
+    asking at the same time make one AI call, not two."""
     point = get_point(point_id)
     query = "SELECT * FROM grammar_explanations WHERE point_id = ? AND style = ? ORDER BY id LIMIT 1"
-    with lock_for((point_id, style)):
-        row = conn.execute(query, (point_id, style)).fetchone()
+    with lock_for(point_id):
+        row = conn.execute(query, (point_id, LESSON)).fetchone()
         if row is None:
-            row = generate(conn, point, max_lesson, style)
-    return present_explanation(conn, row)
+            row = generate(conn, point, max_lesson, LESSON)
+    return row
+
+
+def lesson(conn, point_id, max_lesson):
+    return present_explanation(conn, lesson_row(conn, point_id, max_lesson))
+
+
+def point_after(conn, point_id, max_lesson):
+    """The unlearned point in scope that comes after point_id, to write ahead of time."""
+    learned = learned_points(conn)
+    later = False
+    for p in points():
+        if later and p["lesson"] <= max_lesson and p["id"] not in learned:
+            return p
+        later = later or p["id"] == point_id
+    return None
+
+
+def prefetch_after(conn, point_id, max_lesson):
+    following = point_after(conn, point_id, max_lesson)
+    if following is None:
+        return
+    try:
+        lesson_row(conn, following["id"], max_lesson)
+    except (LLMError, GrammarError):
+        pass
 
 
 def custom_explanation(conn, point_id, max_lesson, request=""):
@@ -323,7 +337,7 @@ def custom_explanation(conn, point_id, max_lesson, request=""):
     request = " ".join(request.split())
     if len(request) > MAX_REQUEST:
         raise GrammarError(f"Keep the request under {MAX_REQUEST} characters.")
-    previous = [STYLES.get(r[0], "a custom explanation") for r in conn.execute(
+    previous = [KIND_NAMES.get(r[0], "an explanation") for r in conn.execute(
         "SELECT style FROM grammar_explanations WHERE point_id = ? ORDER BY id", (point_id,))]
     row = generate(conn, point, max_lesson, "request" if request else "angle", request or None, previous)
     return present_explanation(conn, row)
@@ -360,7 +374,8 @@ def ask(conn, point_id, max_lesson, question, explanation_id=None):
     if earlier:
         prompt += "\n\nEarlier questions on this point:\n" + "\n".join(f"Q: {q['question']}\nA: {q['answer']}" for q in earlier)
     prompt += f"\n\nThe learner asks: {question}"
-    data = call_json("grammar-ask", ASK_SYSTEM, prompt, ASK_SCHEMA, max_tokens=3000, effort="medium")
+    data = call_json("grammar-ask", ASK_SYSTEM, prompt, ASK_SCHEMA, max_tokens=3000, effort="medium",
+                     model=TEACHING_MODEL)
     answer = str(data.get("answer", "")).strip()
     if not answer:
         raise LLMError("The model returned an empty answer. Try again.")
