@@ -186,11 +186,14 @@ The grammar data has three layers. Each layer is saved, so the app does not gene
 1. **Curriculum** (`grammar/curriculum.json`, committed):
    - The grammar point names and their lesson numbers come from the public HTSK lesson list (https://www.howtostudykorean.com/other-stuff/lesson-list/). Point names and order are facts. The app copies no HTSK lesson text.
    - The first curriculum covers only the lessons in the loaded word CSVs. Today that is Unit 1, Lessons 1 to 25.
-   - Some lessons hold several points (Lesson 12: 들, 만, 에서, 부터, 까지, (으)로). A build step makes one AI call per lesson to split it into points.
-   - Each point has: `id` (a slug, for example `particle-eseo`), `lesson`, `title`, `pattern` (for example `N + 에서`), `kind` (`particle`, `ending`, `conjugation`, `expression` or `usage`), `summary` (the core rule in one or two sentences), `related` (ids of similar points to compare), and `sources`.
+   - The lesson topics are typed into `grammar/htsk_lessons.json` (committed), one entry per lesson.
+   - Some lessons hold several points (Lesson 12: 들, 만, 에서, 부터, 까지, (으)로). For each lesson, the build makes two AI calls:
+     1. **Split**: the lesson becomes points. For each point the AI also names the exact krdict headwords to look up, with their part of speech (`은` particle, `-아요` ending, `-고 싶다` pattern).
+     2. **Summarize**: the AI gets each point's candidate krdict entries. It keeps only the entries that really are the point (the same spelling can be a different word: 이 is "this" and also "two"), and writes the summary from them.
+   - Each point has: `id` (a slug, for example `particle-eseo`), `lesson`, `title`, `pattern` (for example `N + 에서`), `kind` (`particle`, `ending`, `conjugation`, `expression` or `usage`), `summary` (the core rule in one or two sentences), `related` (ids of similar points to compare), `lookups` (the krdict headwords searched, so `--refresh` can redo sources and summaries without a new split), and `sources`.
    - Some lessons are about usage more than grammar (Lesson 10: numbers and counters, Lesson 21: question words). They become points of kind `usage`.
 2. **Sources** (`grammar/sources.json`, committed):
-   - For each point, the build step looks up the matching entries in the NIKL Basic Korean Dictionary (krdict). It saves the definition, the English translation, the example sentences, the entry URL and the license.
+   - For each point, the build saves the chosen entries from the NIKL Basic Korean Dictionary (krdict): definitions, English translations, usage notes, up to 3 Korean examples per sense, and the entry URL. The file also holds the attribution and license.
    - krdict content is CC BY-SA 2.0 KR. Every page that shows krdict content shows "Source: NIKL Basic Korean Dictionary (CC BY-SA 2.0 KR)" with a link to the entry.
    - A point with no krdict entry (for example "word order") is marked `sources: []`. Its AI content is then grounded only on the curriculum summary, and the page says so.
 3. **Generated content** (database, created on first use):
@@ -447,8 +450,8 @@ Accounts and login, audio, deployment, an error taxonomy, a "this looks wrong" b
 
 The grammar feature is built in steps. Each step ends with passing tests and a working page, so the learner can test it before the next step starts.
 
-1. **Data**: krdict client, `python -m app.curriculum`, `grammar/curriculum.json` and `grammar/sources.json` for Lessons 1 to 25, and tests on both files.
-2. **Learn Grammar, explain**: the tab, menu changes (Learn becomes Learn Words), Learn new with the four styles, "Explain it differently", "Explain it like...", "Ask about this point", "I already know this", and the AI cap of 500 with the Debug call counter.
+1. **Data**: krdict client, `python -m app.curriculum`, `grammar/curriculum.json` and `grammar/sources.json` for Lessons 1 to 25, tests on both files, and the AI cap of 500.
+2. **Learn Grammar, explain**: the tab, menu changes (Learn becomes Learn Words), Learn new with the four styles, "Explain it differently", "Explain it like...", "Ask about this point", "I already know this", and the Debug call counter.
 3. **Practice and confidence**: Fill the blank, Compare, Translate, and Spot the error, the item bank, grammar confidence, Review mode, mixed review, Focus, and the grammar Debug panel.
 4. **Conjugation engine**: verb classes from krdict, the engine with its test list, and the Conjugation and Transform types.
 5. **Learner profile**: style scores, Auto style choice, Default style menu, and saved style requests.

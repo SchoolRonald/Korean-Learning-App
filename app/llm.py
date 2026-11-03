@@ -7,7 +7,7 @@ import time
 import anthropic
 
 MODEL = "claude-haiku-5-5"
-CALL_CAP = int(os.environ.get("GONGBU_LLM_CAP", "50"))
+CALL_CAP = int(os.environ.get("GONGBU_LLM_CAP", "500"))
 
 log = logging.getLogger("gongbu.llm")
 if not log.handlers:
