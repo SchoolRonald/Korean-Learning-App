@@ -166,6 +166,11 @@ def test_ai_errors_become_503(client, monkeypatch):
     assert r.status_code == 503 and "limit" in r.json()["detail"]
 
 
+def test_pages_and_scripts_are_revalidated(client):
+    for path in ["/grammar", "/static/common.js", "/static/style.css"]:
+        assert client.get(path).headers["cache-control"] == "no-cache", path
+
+
 def test_usage_endpoint(client):
     data = client.get("/api/usage").json()
     assert set(data) == {"calls", "cap"}

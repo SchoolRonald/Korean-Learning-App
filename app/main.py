@@ -62,6 +62,16 @@ app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory=STATIC), name="static")
 
 
+@app.middleware("http")
+async def revalidate(request, call_next):
+    # Without this, browsers reuse old pages and scripts after an update (a new page
+    # calling a function an old cached common.js does not have). no-cache still lets
+    # the browser keep a copy; it only checks with the server before using it.
+    response = await call_next(request)
+    response.headers.setdefault("Cache-Control", "no-cache")
+    return response
+
+
 class WordAnswer(BaseModel):
     word_id: int
     answer: str
