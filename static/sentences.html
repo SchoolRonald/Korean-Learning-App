@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn</a> | <a href="/words">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
+<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn Words</a> | <a href="/grammar">Learn Grammar</a> | <a href="/words">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
 <h1>Sentence practice</h1>
 
 <label>Up to lesson <select id="lesson"></select></label>
@@ -32,23 +32,6 @@ let answered = false;
 
 function showUsage(llm) {
   if (llm) $("usage").textContent = `AI calls: ${llm.calls} / ${llm.cap}`;
-}
-
-// A word with its meaning on hover (title) or click (shown in #hint, for touch screens).
-function hintSpan(text, meaning, kind) {
-  const span = el("span", text, kind ? `hint ${kind}` : "hint");
-  span.title = meaning;
-  span.addEventListener("click", () => { $("hint").textContent = meaning; });
-  return span;
-}
-
-function tokenKind(t) {
-  return t.name ? "name" : t.new ? "new" : "";
-}
-
-function tokenMeaning(t) {
-  const label = t.name ? " (name)" : t.new ? " (new word)" : "";
-  return `${t.base} = ${t.english}${label}`;
 }
 
 // First case-insensitive occurrence of phrase in text as whole words ("is" must not match

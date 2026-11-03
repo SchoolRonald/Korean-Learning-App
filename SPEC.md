@@ -287,6 +287,12 @@ A deterministic engine conjugates verbs and adjectives. It does not need AI for 
 6. After the items, the point is learned. The page shows "Next point" and "Review".
 7. "I already know this" (at any step) marks the point learned at once and moves to the next point.
 
+### Point list
+
+- Under the page, a collapsible list shows every point in scope with ✓ for learned points.
+- Clicking a point opens it at `/grammar?point=<id>`, learned or not. Stats links to points the same way.
+- A learned point shows "✓ Learned" in place of the finish buttons.
+
 ### Review
 
 - A "Review" mode on the same page. It shows practice items for learned points in scope, weakest point first.
@@ -322,10 +328,11 @@ With Debug on, the page shows:
 
 ### API
 
-- `GET /api/grammar/next?lesson` returns the next unlearned point, with its explanation in the chosen style.
-- `GET /api/grammar/explain?point&style` returns the saved explanation in that style, or makes it.
-- `POST /api/grammar/explain {point, request}` makes an explanation from a free style request.
-- `POST /api/grammar/ask {point, question}` answers a free question.
+- `GET /api/grammar/next?lesson` returns the next unlearned point (or null) and the outline of points in scope. The page then asks for the explanation separately, because a new explanation can take up to a minute.
+- `GET /api/grammar/point?id&lesson` returns one point, the outline, and its saved custom explanations.
+- `GET /api/grammar/explain?point&lesson&style` returns the saved explanation in that style, or makes it.
+- `POST /api/grammar/explain {point, lesson, request}` makes an explanation from a free style request. An empty request makes one from a new angle.
+- `POST /api/grammar/ask {point, lesson, question, explanation_id}` answers a free question about the explanation on screen.
 - `GET /api/grammar/item?point&type` returns a practice item. Without `point`, it returns a review item.
 - `POST /api/grammar/answer {item_id, answer}` checks an answer and records it.
 - `POST /api/grammar/done {point}` marks a point learned.

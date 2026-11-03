@@ -68,3 +68,29 @@ td.num, th.num { text-align: right; }
 #debug .down { color: #c62828; }
 #debug tr.answered { font-weight: bold; }
 #debug .decay { color: #d99; }
+
+.usage-counter { position: fixed; left: 0.5rem; bottom: 0.5rem; font-size: 0.75rem; color: #888;
+                 background: rgba(255, 255, 255, 0.9); padding: 0.1rem 0.4rem; border-radius: 4px; }
+/* Learn Grammar tab. */
+.pattern { font-size: 1.2rem; font-family: ui-monospace, monospace; margin-top: 0; }
+.styles { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.tab { margin-top: 0; font-size: 0.85rem; padding: 0.25rem 0.6rem; border: 1px solid #aaa; border-radius: 4px; background: #f6f6f6; }
+.tab.on { background: #dbe7f5; border-color: #0b6e99; font-weight: bold; }
+.restyle, .ask { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin: 0.5rem 0; }
+.restyle button, .ask button { margin-top: 0; }
+.explain-like { display: flex; gap: 0.4rem; flex: 1 1 16rem; }
+#like, #question { flex: 1; font-size: 1rem; padding: 0.3rem; min-width: 0; }
+.examples li { margin-bottom: 0.75rem; }
+.korean { font-size: 1.25rem; }
+.korean mark { background: #ffe58f; padding: 0 0.1rem; border-radius: 2px; }
+.korean-cell { font-size: 1.05rem; }
+.english { color: #333; }
+.parts { font-size: 0.85rem; margin: 0.15rem 0; }
+.part { display: inline-flex; flex-direction: column; align-items: center; border: 1px solid #ccc; border-radius: 4px; padding: 0 0.3rem; }
+.part-text { font-size: 1rem; }
+.part-label { font-size: 0.7rem; color: #666; }
+.mistakes li { margin-bottom: 0.5rem; }
+.qa { border-left: 3px solid #0b6e99; padding-left: 0.6rem; margin: 0.75rem 0; }
+.qa .question { font-weight: bold; }
+.actions { margin: 1.5rem 0; }
+#outline li.here { font-weight: bold; }

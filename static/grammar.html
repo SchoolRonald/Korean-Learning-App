@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Learn Grammar</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn Words</a> | <b>Learn Grammar</b> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
+<h1>Learn grammar</h1>
+
+<label>Up to lesson <select id="lesson"></select></label>
+<div id="feedback"></div>
+
+<div id="point" hidden>
+  <p class="muted" id="point-meta"></p>
+  <h2 id="point-title"></h2>
+  <p class="pattern" id="point-pattern"></p>
+
+  <div class="styles" id="styles"></div>
+  <div class="restyle">
+    <button id="differently">Explain it differently</button>
+    <span class="explain-like">
+      <input id="like" placeholder="Explain it like... (e.g. with food examples)" autocomplete="off" maxlength="200">
+      <button id="like-go">Explain</button>
+    </span>
+  </div>
+
+  <div id="explanation"></div>
+  <p class="muted" id="hint"></p>
+  <p class="label">AI-written, not validated by a native speaker.</p>
+  <div id="sources"></div>
+
+  <h3>Ask about this point</h3>
+  <div id="questions"></div>
+  <div class="ask">
+    <input id="question" placeholder="e.g. Why is it 를 here and not 가?" autocomplete="off" maxlength="500">
+    <button id="ask-go">Ask</button>
+  </div>
+  <p class="muted" id="ask-status"></p>
+
+  <div class="actions">
+    <button id="got-it">Got it, next point</button>
+    <button id="known">I already know this</button>
+    <span id="learned-note" class="correct" hidden>✓ Learned</span>
+  </div>
+</div>
+
+<details id="outline-box">
+  <summary>All grammar points up to this lesson</summary>
+  <ol id="outline"></ol>
+</details>
+
+<script src="/static/common.js"></script>
+<script>
+const STYLE_ORDER = ["examples", "english", "rules", "breakdown"];
+let point = null;
+let styleNames = {};
+let views = [];  // explanations shown for this point: {key, label, data}
+let current = null;  // key of the explanation on screen
+let busy = false;
+
+const lessonValue = () => Number($("lesson").value);
+
+function setBusy(on, message) {
+  busy = on;
+  for (const id of ["differently", "like-go", "ask-go", "got-it", "known"]) $(id).disabled = on;
+  if (message !== undefined) $("feedback").replaceChildren(message ? el("p", message, "muted") : el("span"));
+}
+
+function pointFromUrl() {
+  return new URLSearchParams(location.search).get("point");
+}
+
+async function loadNext() {
+  history.replaceState(null, "", "/grammar");
+  const data = await api(`/api/grammar/next?lesson=${lessonValue()}`);
+  renderOutline(data.outline);
+  if (!data.point) {
+    $("point").hidden = true;
+    $("feedback").replaceChildren(el("p", `You have learned every grammar point up to lesson ${lessonValue()}. ` +
+      "Choose a higher lesson, or open any point from the list below.", "correct"));
+    return;
+  }
+  await showPoint(data.point, []);
+}
+
+async function openPoint(id) {
+  const data = await api(`/api/grammar/point?id=${encodeURIComponent(id)}&lesson=${lessonValue()}`);
+  history.replaceState(null, "", `/grammar?point=${encodeURIComponent(id)}`);
+  renderOutline(data.outline);
+  await showPoint(data.point, data.custom);
+}
+
+async function showPoint(p, custom) {
+  point = p;
+  styleNames = p.styles;
+  views = custom.map((c, i) => ({ key: `custom-${c.id}`, label: customLabel(c, i), data: c }));
+  current = null;
+  $("point").hidden = false;
+  $("feedback").replaceChildren();
+  $("point-meta").textContent = `Lesson ${p.lesson} · ${p.kind}`;
+  $("point-title").textContent = p.title;
+  $("point-pattern").textContent = p.pattern;
+  $("explanation").replaceChildren();
+  $("hint").textContent = "";
+  renderSources(p.sources);
+  renderQuestions(p.questions);
+  $("got-it").hidden = $("known").hidden = p.learned;
+  $("learned-note").hidden = !p.learned;
+  renderStyleTabs();
+  await showStyle("examples");
+}
+
+function customLabel(c, i) {
+  return c.style === "request" ? `"${c.request}"` : `New angle ${i + 1}`;
+}
+
+function renderStyleTabs() {
+  const tabs = [];
+  for (const key of STYLE_ORDER) {
+    const b = el("button", styleNames[key], "tab");
+    b.classList.toggle("on", current === key);
+    b.addEventListener("click", () => showStyle(key));
+    tabs.push(b);
+  }
+  for (const v of views.filter((v) => v.key.startsWith("custom-"))) {
+    const b = el("button", v.label, "tab");
+    b.classList.toggle("on", current === v.key);
+    b.addEventListener("click", () => showView(v));
+    tabs.push(b);
+  }
+  $("styles").replaceChildren(...tabs);
+}
+
+async function showStyle(key) {
+  if (busy) return;
+  const seen = views.find((v) => v.key === key);
+  if (seen) {
+    showView(seen);
+    return;
+  }
+  setBusy(true, `Writing the "${styleNames[key]}" explanation... The first time can take up to a minute. After that it is saved.`);
+  try {
+    const data = await api(`/api/grammar/explain?point=${encodeURIComponent(point.id)}&lesson=${lessonValue()}&style=${key}`);
+    const view = { key, label: styleNames[key], data };
+    views.push(view);
+    setBusy(false, "");
+    showView(view);
+  } catch (e) {
+    setBusy(false);
+    showError(e.message);
+  }
+}
+
+async function customExplanation(request) {
+  if (busy) return;
+  setBusy(true, request ? `Writing an explanation for "${request}"...` : "Finding a different way to explain it...");
+  try {
+    const data = await api("/api/grammar/explain", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ point: point.id, lesson: lessonValue(), request }),
+    });
+    const count = views.filter((v) => v.key.startsWith("custom-")).length;
+    const view = { key: `custom-${data.id}`, label: customLabel(data, count), data };
+    views.push(view);
+    setBusy(false, "");
+    showView(view);
+  } catch (e) {
+    setBusy(false);
+    showError(e.message);
+  }
+}
+
+function explainDifferently() {
+  const next = STYLE_ORDER.find((key) => !views.some((v) => v.key === key));
+  if (next) showStyle(next);
+  else customExplanation("");
+}
+
+function showView(view) {
+  current = view.key;
+  renderStyleTabs();
+  renderExplanation(view.data);
+}
+
+// Section order follows the style: the rule comes first only in "Rule and table".
+function renderExplanation(x) {
+  const sections = {
+    intro: () => x.intro ? paragraphs(x.intro) : [],
+    examples: () => [el("h3", "Examples"), renderExamples(x.examples)],
+    rule: () => [el("h3", "The rule"), ...paragraphs(x.rule)],
+    table: () => x.table.length ? [el("h3", "Forms"), renderTable(x.table)] : [],
+    nuance: () => x.nuance ? [el("h3", "Nuance"), ...paragraphs(x.nuance)] : [],
+    mistakes: () => x.mistakes.length ? [el("h3", "Common mistakes"), renderMistakes(x.mistakes)] : [],
+  };
+  const order = x.style === "rules"
+    ? ["intro", "rule", "table", "examples", "nuance", "mistakes"]
+    : ["intro", "examples", "rule", "table", "nuance", "mistakes"];
+  const nodes = [el("p", `Style: ${x.style_name}`, "muted")];
+  for (const name of order) nodes.push(...sections[name]());
+  $("explanation").replaceChildren(...nodes);
+  const unlearned = x.examples.some((ex) => ex.tokens.some((t) => t.new));
+  $("hint").textContent = unlearned ? "Underlined words are not learned yet. Hover or click to see them." : "";
+}
+
+function paragraphs(text) {
+  return text.split(/\n\s*\n/).map((t) => el("p", t.trim()));
+}
+
+function renderExamples(examples) {
+  const list = el("ol", "", "examples");
+  for (const ex of examples) {
+    const item = el("li");
+    item.append(koreanLine(ex), el("div", ex.english, "english"));
+    if (ex.parts.length) item.append(partsLine(ex.parts));
+    if (ex.note) item.append(el("div", ex.note, "muted"));
+    list.append(item);
+  }
+  return list;
+}
+
+// The Korean sentence with the grammar point highlighted and unlearned words underlined.
+function koreanLine(ex) {
+  const line = el("div", "", "korean");
+  const start = ex.highlight ? ex.korean.indexOf(ex.highlight) : -1;
+  const end = start < 0 ? -1 : start + ex.highlight.length;
+  const words = ex.korean.split(" ");
+  const useTokens = ex.tokens.length === words.length;
+  let pos = 0;
+  words.forEach((word, i) => {
+    if (i) line.append(" ");
+    const container = useTokens && (ex.tokens[i].new || ex.tokens[i].name)
+      ? hintSpan("", tokenMeaning(ex.tokens[i]), tokenKind(ex.tokens[i]))
+      : document.createDocumentFragment();
+    const wStart = pos;
+    const wEnd = pos + word.length;
+    const a = Math.max(wStart, start);
+    const b = Math.min(wEnd, end);
+    if (start >= 0 && a < b) {
+      container.append(word.slice(0, a - wStart), el("mark", word.slice(a - wStart, b - wStart)), word.slice(b - wStart));
+    } else {
+      container.append(word);
+    }
+    line.append(container);
+    pos = wEnd + 1;
+  });
+  return line;
+}
+
+function partsLine(parts) {
+  const line = el("div", "", "parts");
+  parts.forEach((p, i) => {
+    if (i) line.append(" + ");
+    const chip = el("span", "", "part");
+    chip.append(el("span", p.text, "part-text"), el("span", p.label, "part-label"));
+    line.append(chip);
+  });
+  return line;
+}
+
+function renderTable(rows) {
+  const table = el("table");
+  const head = el("tr");
+  for (const h of ["When", "Form", "Example"]) head.append(el("th", h));
+  table.append(head);
+  for (const r of rows) {
+    const tr = el("tr");
+    tr.append(el("td", r.when), el("td", r.form, "korean-cell"), el("td", r.example, "korean-cell"));
+    table.append(tr);
+  }
+  return table;
+}
+
+function renderMistakes(mistakes) {
+  const list = el("ul", "", "mistakes");
+  for (const m of mistakes) {
+    const item = el("li");
+    item.append(el("div", `✗ ${m.wrong}`, "wrong"), el("div", `✓ ${m.right}`, "correct"), el("div", m.why, "muted"));
+    list.append(item);
+  }
+  return list;
+}
+
+function renderSources(s) {
+  const box = $("sources");
+  if (!s.entries.length) {
+    box.replaceChildren(el("p", "No dictionary entry matches this point, so this explanation comes from AI alone.", "muted"));
+    return;
+  }
+  const details = el("details");
+  details.append(el("summary", `Source: ${s.attribution} (${s.license})`));
+  for (const entry of s.entries) {
+    const p = el("p");
+    const link = el("a", entry.word);
+    link.href = entry.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    p.append(link, ` ${entry.pos ? `(${entry.pos})` : ""}`);
+    const ul = el("ul");
+    for (const sense of entry.senses) ul.append(el("li", sense));
+    details.append(p, ul);
+  }
+  const license = el("a", s.license);
+  license.href = s.license_url;
+  license.target = "_blank";
+  license.rel = "noopener";
+  const note = el("p", "Dictionary content is licensed under ", "muted");
+  note.append(license, ".");
+  details.append(note);
+  box.replaceChildren(details);
+}
+
+function renderQuestions(questions) {
+  $("questions").replaceChildren(...questions.map(renderAnswer));
+  $("ask-status").textContent = "";
+}
+
+function renderAnswer(q) {
+  const box = el("div", "", "qa");
+  box.append(el("p", `Q: ${q.question}`, "question"), ...paragraphs(q.answer));
+  if (q.examples.length) {
+    const ul = el("ul");
+    for (const ex of q.examples) {
+      const li = el("li");
+      li.append(el("span", ex.korean, "korean"), " ", el("span", ex.english, "muted"));
+      ul.append(li);
+    }
+    box.append(ul);
+  }
+  return box;
+}
+
+async function ask() {
+  const question = $("question").value.trim();
+  if (!question || busy) return;
+  setBusy(true);
+  $("ask-status").textContent = "Thinking...";
+  const shown = views.find((v) => v.key === current);
+  try {
+    const answer = await api("/api/grammar/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ point: point.id, lesson: lessonValue(), question, explanation_id: shown ? shown.data.id : null }),
+    });
+    $("questions").append(renderAnswer(answer));
+    $("question").value = "";
+    $("ask-status").textContent = "";
+  } catch (e) {
+    $("ask-status").textContent = e.message;
+  }
+  setBusy(false);
+}
+
+async function finishPoint() {
+  if (busy) return;
+  setBusy(true);
+  try {
+    await api("/api/grammar/done", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ point: point.id }),
+    });
+    setBusy(false);
+    await loadNext();
+  } catch (e) {
+    setBusy(false);
+    showError(e.message);
+  }
+}
+
+function renderOutline(items) {
+  const list = items.map((p) => {
+    const li = el("li");
+    const link = el("a", p.title);
+    link.href = `/grammar?point=${encodeURIComponent(p.id)}`;
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!busy) openPoint(p.id).catch((err) => showError(err.message));
+    });
+    li.append(el("span", `L${p.lesson} `, "muted"), link, p.learned ? el("span", " ✓", "correct") : "");
+    if (point && p.id === point.id) li.classList.add("here");
+    return li;
+  });
+  $("outline").replaceChildren(...list);
+}
+
+$("differently").addEventListener("click", explainDifferently);
+$("like-go").addEventListener("click", () => {
+  const request = $("like").value.trim();
+  if (request) customExplanation(request).then(() => { $("like").value = ""; });
+});
+onEnter($("like"), () => $("like-go").click());
+$("ask-go").addEventListener("click", ask);
+onEnter($("question"), ask);
+$("got-it").addEventListener("click", finishPoint);
+$("known").addEventListener("click", finishPoint);
+
+(async () => {
+  addDebugToggle(() => {});
+  if (!(await loadLessons())) return;
+  $("lesson").addEventListener("change", () => {
+    saveLesson($("lesson").value);
+    loadNext().catch((e) => showError(e.message));
+  });
+  const requested = pointFromUrl();
+  try {
+    if (requested) await openPoint(requested);
+    else await loadNext();
+  } catch (e) {
+    showError(e.message);
+  }
+})();
+</script>
+</body>
+</html>

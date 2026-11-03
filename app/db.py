@@ -46,6 +46,26 @@ CREATE TABLE IF NOT EXISTS attempts (
     correct INTEGER NOT NULL,
     ts TEXT NOT NULL
 );
+CREATE TABLE IF NOT EXISTS grammar_learned (
+    point_id TEXT PRIMARY KEY,
+    learned_at TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS grammar_explanations (
+    id INTEGER PRIMARY KEY,
+    point_id TEXT NOT NULL,
+    style TEXT NOT NULL,
+    request TEXT,
+    content TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS grammar_explanations_point ON grammar_explanations (point_id, style);
+CREATE TABLE IF NOT EXISTS grammar_questions (
+    id INTEGER PRIMARY KEY,
+    point_id TEXT NOT NULL,
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
 """
 
 

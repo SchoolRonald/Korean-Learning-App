@@ -10,6 +10,7 @@ from pydantic import BaseModel
 
 from app.db import DB_PATH, connect, init_db
 from app.drill import grade_word, record_word_attempt
+from app import grammar
 from app.checker import answer_variants
 from app.learn import HANGUL, batch, cloze_check, english_ok, get_word, mark_learned
 from app.llm import LLMError, usage_summary
@@ -87,6 +88,23 @@ class SentenceAnswer(BaseModel):
     answer: str
 
 
+class GrammarPoint(BaseModel):
+    point: str
+
+
+class GrammarRequest(BaseModel):
+    point: str
+    lesson: int
+    request: str = ""
+
+
+class GrammarQuestion(BaseModel):
+    point: str
+    lesson: int
+    question: str
+    explanation_id: int | None = None
+
+
 @app.get("/")
 def learn_page():
     return FileResponse(STATIC / "learn.html")
@@ -95,6 +113,11 @@ def learn_page():
 @app.get("/basics")
 def basics_page():
     return FileResponse(STATIC / "basics.html")
+
+
+@app.get("/grammar")
+def grammar_page():
+    return FileResponse(STATIC / "grammar.html")
 
 
 @app.get("/words")
@@ -201,6 +224,58 @@ def api_topics(body: TopicRequest):
         raise HTTPException(404, str(e))
     except LLMError as e:
         raise HTTPException(503, str(e))
+
+
+@app.get("/api/usage")
+def api_usage():
+    return usage_summary()
+
+
+def grammar_call(fn, *args):
+    """Runs a grammar function, turning its errors into HTTP errors with safe messages."""
+    try:
+        return fn(*args)
+    except grammar.GrammarError as e:
+        raise HTTPException(404, str(e))
+    except LLMError as e:
+        raise HTTPException(503, str(e))
+
+
+@app.get("/api/grammar/next")
+def api_grammar_next(lesson: int):
+    point = grammar.next_point(db(), lesson)
+    return {"point": grammar.present_point(db(), point) if point else None,
+            "outline": grammar.outline(db(), lesson)}
+
+
+@app.get("/api/grammar/point")
+def api_grammar_point(id: str, lesson: int):
+    point = grammar_call(grammar.get_point, id)
+    return {"point": grammar.present_point(db(), point), "outline": grammar.outline(db(), lesson),
+            "custom": grammar.custom_explanations(db(), id)}
+
+
+@app.get("/api/grammar/explain")
+def api_grammar_explain(point: str, lesson: int, style: str = grammar.DEFAULT_STYLE):
+    return {**grammar_call(grammar.explanation, db(), point, lesson, style), "llm": usage_summary()}
+
+
+@app.post("/api/grammar/explain")
+def api_grammar_explain_custom(body: GrammarRequest):
+    result = grammar_call(grammar.custom_explanation, db(), body.point, body.lesson, body.request)
+    return {**result, "llm": usage_summary()}
+
+
+@app.post("/api/grammar/ask")
+def api_grammar_ask(body: GrammarQuestion):
+    result = grammar_call(grammar.ask, db(), body.point, body.lesson, body.question, body.explanation_id)
+    return {**result, "llm": usage_summary()}
+
+
+@app.post("/api/grammar/done")
+def api_grammar_done(body: GrammarPoint):
+    grammar_call(grammar.mark_learned, db(), body.point)
+    return {"ok": True}
 
 
 @app.get("/api/debug")
