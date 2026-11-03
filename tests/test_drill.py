@@ -122,3 +122,17 @@ def test_demonstrative_partner_accepted(conn, demonstratives, card, answer, corr
 def test_demonstrative_note(conn, demonstratives):
     r = grade_word(conn, demonstratives("그", "that"), "저")
     assert r["note"] == 'Also correct: both 그 and 저 mean "that". 그 is near the listener, 저 is far from both of you.'
+
+
+def test_api_debug(client, conn):
+    water, book = word_id(conn, "물"), word_id(conn, "책")
+    client.post("/api/answer", json={"word_id": water, "answer": "물"})
+    body = client.get("/api/debug", params={"lesson": 3, "exclude": water}).json()
+    rows = {w["hangul"]: w for w in body["words"]}
+    assert rows["물"]["attempts"] == 1 and rows["물"]["confidence"] > 0
+    assert {"accuracy", "time_decay", "answer_decay", "gap", "streak", "half_life"} <= rows["물"].keys()
+    assert water not in body["next_pool"] and book in body["next_pool"]
+    assert body["top_k"] == 5 and body["answers_per_day"] == 10
+    # least confident first
+    confs = [w["confidence"] for w in body["words"]]
+    assert confs == sorted(confs)

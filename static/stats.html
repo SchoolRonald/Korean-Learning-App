@@ -27,17 +27,17 @@
 
 <h2>About confidence</h2>
 <p class="muted">Confidence estimates how likely you are to spell the word correctly right now.
-It is accuracy times memory. Accuracy is (correct + 1) / (attempts + 2), so a single lucky answer
-does not count as certain. Memory halves every few days since you last saw the word, and that
-half-life doubles with each correct answer in a row (1 day after a miss, then 2, 4, 8, up to 64).
-Unpracticed words are 0%. Only spelling-drill answers count, not sentence grading.
+It is accuracy times two kinds of decay. Accuracy is (correct + 1) / (attempts + 2), so a single lucky answer
+does not count as certain. Both decays count from your last correct answer: time decay halves every few days
+since then, and answer decay every few drill answers since then. Both half-lives double with each correct answer
+in a row (1 day or 10 answers after a miss, then 2 days or 20 answers, and so on, up to 64 days or 640 answers).
+So a wrong answer can only lower confidence. Words never answered correctly are 0%. Only spelling-drill answers count, not sentence grading.
 The spelling drill picks randomly from the 5 least confident words.</p>
 
 <div id="feedback"></div>
 
 <script src="/static/common.js"></script>
 <script>
-const pct = (x) => `${Math.round(x * 100)}%`;
 
 function ago(days) {
   if (days === null) return "never";

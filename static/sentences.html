@@ -124,6 +124,7 @@ async function nextSentence() {
     $("feedback").replaceChildren();
     if (sentence.note) $("feedback").append(el("p", sentence.note, "muted"));
     showUsage(sentence.llm);
+    refreshDebug();
   } catch (e) {
     sentence = null;
     showError(e.message);
@@ -182,6 +183,7 @@ function showResult(result, reference) {
 onEnter($("answer"), checkAnswer);
 $("check").addEventListener("click", checkAnswer);
 $("next").addEventListener("click", nextSentence);
+initDebug("sentences");
 initScope(nextSentence)
   .then((ok) => ok && nextSentence())
   .catch((e) => showError(e.message));

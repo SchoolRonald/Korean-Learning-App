@@ -26,3 +26,14 @@ def next_word(conn, max_lesson, now=None, rng=random, exclude=None, topic_ids=No
     if not ranked:
         return None
     return rng.choice(ranked[:TOP_K])[1]
+
+
+def pick_pool(words, exclude=None):
+    """The ids next_word can pick from: the TOP_K least confident (not counting the word just
+    answered), plus any tied with the last of them, since ties are broken at random."""
+    candidates = [w for w in words if w["id"] != exclude] or words
+    ranked = sorted(candidates, key=lambda w: w["confidence"])
+    if not ranked:
+        return []
+    cutoff = ranked[min(TOP_K, len(ranked)) - 1]["confidence"]
+    return [w["id"] for w in ranked if w["confidence"] <= cutoff]

@@ -6,7 +6,7 @@ import pytest
 from app.db import connect, init_db
 from app.drill import record_word_attempt
 from app.learn import mark_learned
-from app.scheduler import next_word, ranked_words
+from app.scheduler import next_word, pick_pool, ranked_words
 
 NOW = datetime(2026, 10, 15, 12, 0, tzinfo=timezone.utc)
 
@@ -60,7 +60,7 @@ def test_priority_is_one_minus_confidence(conn):
 
 def test_ranking_order(conn):
     add_word(conn, "known", 1, [True] * 20, last_day=7)  # long streak, fades slowly
-    add_word(conn, "missed", 1, [False], last_day=0)  # 33% right after a miss
+    add_word(conn, "missed", 1, [True, False], last_day=0)  # right once, then just missed
     add_word(conn, "fading", 1, [True], last_day=7)  # one correct answer, a week ago
     add_word(conn, "new", 1)
     assert order(conn) == ["new", "fading", "missed", "known"]
@@ -122,3 +122,22 @@ def test_topic_ids_narrow_scope(conn):
     add_word(conn, "b", 1)
     for seed in range(30):
         assert next_word(conn, 1, NOW, random.Random(seed), topic_ids={keep})["id"] == keep
+
+
+def test_pick_pool_is_top_k_least_confident():
+    words = [{"id": i, "confidence": c} for i, c in enumerate([0.9, 0.1, 0.5, 0.3, 0.7, 0.2, 0.8])]
+    assert pick_pool(words) == [1, 5, 3, 2, 4]  # the 5 lowest
+
+
+def test_pick_pool_includes_ties_and_skips_excluded():
+    words = [{"id": i, "confidence": c} for i, c in enumerate([0, 0, 0, 0, 0, 0, 0.5])]
+    assert sorted(pick_pool(words)) == [0, 1, 2, 3, 4, 5]  # all six tied at 0 can be picked
+    assert sorted(pick_pool(words, exclude=0)) == [1, 2, 3, 4, 5]
+    assert pick_pool([{"id": 7, "confidence": 0.3}], exclude=7) == [7]  # only word left
+
+
+def test_pick_pool_matches_next_word(conn):
+    for i in range(8):
+        add_word(conn, f"w{i}", 1, [True] * i)
+    pool = set(pick_pool([w for _, w in ranked_words(conn, 1, NOW)]))
+    assert {next_word(conn, 1, NOW, random.Random(seed))["id"] for seed in range(100)} <= pool

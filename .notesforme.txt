@@ -5,3 +5,12 @@ practicing in words should only use words the user has seen in the "learn" tab b
 user should be able to study not just by lesson number, but also by category of their own choice (i.e. days of week, transportation, food, etc.)
 
 also a dictionary tab to see all the words they've learned. maybe part of the stats page
+
+sentences should only use unfamiliar words when absolutely necessary
+  - i.e. substituting a noun thats unfamiliar is generally okay because its a simple word swap. however, substituing a new grammar pattern (i.e. 'next to' when the user hasn't seen either word 앞 or 있다 when they wouldn't understand how to use either words in conjunction with each other) shouldn't occur.
+
+in the learning tab, show like (1/3) (2/3) when typing the word for the first time
+
+option for romanization toggle
+
+practice for verb conjugations

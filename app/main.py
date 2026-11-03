@@ -13,8 +13,9 @@ from app.drill import grade_word, record_word_attempt
 from app.checker import answer_variants
 from app.learn import HANGUL, batch, cloze_check, english_ok, get_word, mark_learned
 from app.llm import LLMError, usage_summary
-from app.scheduler import next_word
-from app.sentences import NotReady, get_sentence, grade_sentence, prefetch
+from app.memory import ANSWERS_PER_DAY, in_scope, word_stats
+from app.scheduler import TOP_K, next_word, pick_pool
+from app.sentences import FOCUS_COUNT, NotReady, focus_pool, get_sentence, grade_sentence, prefetch
 from app.stats import summary
 from app.topics import TopicError, resolve, topic_word_ids
 
@@ -200,3 +201,21 @@ def api_topics(body: TopicRequest):
         raise HTTPException(404, str(e))
     except LLMError as e:
         raise HTTPException(503, str(e))
+
+
+@app.get("/api/debug")
+def api_debug(lesson: int, topic: int | None = None, exclude: int | None = None):
+    """For the demo's debug panel: every learned word in scope with its confidence broken down,
+    least confident first, and which words the next pick (or sentence focus) can come from."""
+    conn = db()
+    topic_ids = scope_ids(topic)
+    words = sorted(in_scope(word_stats(conn, lesson), topic_ids, learned_only=True),
+                   key=lambda w: (w["confidence"], w["lesson"], w["id"]))
+    return {
+        "words": words,
+        "next_pool": pick_pool(words, exclude),
+        "focus_pool": [w[0] for w in focus_pool(conn, lesson, topic_ids)],
+        "top_k": TOP_K,
+        "focus_count": FOCUS_COUNT,
+        "answers_per_day": ANSWERS_PER_DAY,
+    }

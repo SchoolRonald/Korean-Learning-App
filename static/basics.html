@@ -57,6 +57,19 @@ const QUIZ_LENGTH = 10;
 const LATIN = /[a-z]/i;
 const SWITCH_HINT = "That's English. Switch to the Korean keyboard: Win + Space on Windows, Ctrl + Space on Mac.";
 const keyEls = {};  // key code -> key element
+const shiftKeys = [];  // keys with a Shift letter: {key, char, shift}
+let shiftShown = false;
+
+// While Shift is held, show each key's Shift letter (ㅒ, ㅖ, ㄲ...) large and its plain letter in the corner.
+function showShift(on) {
+  if (on === shiftShown || !keyEls.Shift) return;
+  shiftShown = on;
+  for (const { key, char, shift } of shiftKeys) {
+    key.querySelector(".kchar").textContent = on ? shift : char;
+    key.querySelector(".kshift").textContent = on ? char : shift;
+  }
+  keyEls.Shift.classList.toggle("held", on);
+}
 let letters = [];
 let quiz = null;  // {mode, questions, answers, checked}
 
@@ -123,6 +136,7 @@ function drawKeyboard(rows) {
       const key = el("div", "", "key");
       key.append(el("span", k.char, "kchar"), el("span", k.shift || "", "kshift"), el("span", k.latin, "klatin"));
       keyEls[k.code] = key;
+      if (k.shift) shiftKeys.push({ key, char: k.char, shift: k.shift });
       line.append(key);
     }
     $("keyboard").append(line);
@@ -250,11 +264,39 @@ function showResults() {
   $("quiz-results").replaceChildren(...parts);
 }
 
+// With the Korean keyboard on, the browser reports key presses as "Process" (key code 229)
+// instead of the real key, so the keys are worked out from the Hangul that was typed instead.
+const INITIALS = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+const VOWELS = "ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ";
+const FINALS = ["", ..."ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ"];
+// A double final is typed as two consonants; the second is the key just pressed.
+const CLUSTER_LAST = { ㄳ: "ㅅ", ㄵ: "ㅈ", ㄶ: "ㅎ", ㄺ: "ㄱ", ㄻ: "ㅁ", ㄼ: "ㅂ", ㄽ: "ㅅ", ㄾ: "ㅌ", ㄿ: "ㅍ", ㅀ: "ㅎ", ㅄ: "ㅅ" };
+
+// The letter typed most recently, from the last character: a lone letter (ㄱ) or the last
+// part of a syllable block (한 -> ㄴ, 하 -> ㅏ).
+function lastLetter(ch) {
+  const code = ch.codePointAt(0) - 0xac00;
+  if (code < 0 || code > 11171) return ch;
+  const final = FINALS[code % 28];
+  if (final) return CLUSTER_LAST[final] || final;
+  return VOWELS[Math.floor(code / 28) % 21];
+}
+
+// e.shiftKey stays accurate even when a Korean input method reports keys as "Process".
+for (const type of ["keydown", "keyup"]) {
+  document.addEventListener(type, (e) => showShift(e.key === "Shift" ? type === "keydown" : e.shiftKey));
+}
+window.addEventListener("blur", () => showShift(false));  // Shift released in another window
+
 $("practice").addEventListener("keydown", (e) => {
+  if (e.key === "Process" || e.keyCode === 229) return;  // Korean input: handled on "input"
   if (keyEls[e.code]) light([(e.shiftKey ? "Shift+" : "") + e.code]);
 });
 $("practice").addEventListener("input", () => {
-  $("practice-hint").textContent = LATIN.test($("practice").value.slice(-1)) ? SWITCH_HINT : "";
+  const last = $("practice").value.slice(-1);
+  $("practice-hint").textContent = LATIN.test(last) ? SWITCH_HINT : "";
+  const letter = last && letters.find((l) => l.char === lastLetter(last));
+  if (letter) light(letter.keys);
 });
 $("start").addEventListener("click", startQuiz);
 $("quiz-next").addEventListener("click", nextQuestion);

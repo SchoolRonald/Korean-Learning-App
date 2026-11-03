@@ -38,6 +38,7 @@ async function nextWord() {
   try {
     const exclude = word ? `&exclude=${word.id}` : "";
     word = await api(`/api/next?${scopeQuery()}${exclude}`);
+    refreshDebug(word.id);
     $("prompt").textContent = word.english;
   } catch (e) {
     word = null;
@@ -62,6 +63,7 @@ async function checkAnswer() {
     if (result.correct) right += 1;
     $("tally").textContent = `${right} / ${total} correct this session`;
     showResult(result);
+    refreshDebug();
   } catch (e) {
     answered = false;
     $("check").disabled = false;
@@ -98,6 +100,7 @@ function showResult(result) {
 onEnter($("answer"), checkAnswer);
 $("check").addEventListener("click", checkAnswer);
 $("next").addEventListener("click", nextWord);
+initDebug("words");
 initScope(nextWord)
   .then((ok) => ok && nextWord())
   .catch((e) => showError(e.message));

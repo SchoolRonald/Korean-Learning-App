@@ -50,7 +50,7 @@ The database path defaults to `gongbu.db` and can be changed with the `GONGBU_DB
 
 Tabs:
 
-- **Basics and Introduction** (/basics, for complete beginners): how to turn on Korean typing in Windows and Mac, the alphabet (40 letters with sound, name and an example word), a drawn Korean keyboard that lights up the keys for a clicked letter or as you type, and a 10-question letter quiz. Quiz results are not saved. See [spec.md](spec.md).
+- **Basics and Introduction** (/basics, for complete beginners): how to turn on Korean typing in Windows and Mac, the alphabet (40 letters with sound, name and an example word), a drawn Korean keyboard that lights up the keys for a clicked letter or as you type, and a 10-question letter quiz. Quiz results are not saved. See [SPEC.md](SPEC.md).
 - **Learn** (http://localhost:8000, start here): introduces new words 5 at a time. Each word: type it over 3 times, type its English meaning, then fill in a missing syllable. Finished words become available in the other tabs. The English check is lenient (case, "to"/"to be", a/the, bracketed notes, and small typos are ignored). If you already know a word, **I already know this word** skips its steps and makes it available right away.
 - **Words** (/words): spelling drill on learned words. Pick the highest lesson you have studied, type the Korean for the English prompt, and press Enter (Enter again or Next for the next word).
 Spacing does not count against you, and entries with notes accept each listed form: `아기 / 애기` accepts either, `1월 (일월)` accepts `1월` or `일월`, and `평생 (동안)` accepts `평생` or `평생 동안`.
@@ -61,7 +61,11 @@ Every tab has an optional **Topic** box next to the lesson selector. Type a topi
 
 ## Stats
 
-http://localhost:8000/stats shows your weakest words (highest fail rate), the words you haven't seen in the longest time, and every word sorted by **confidence**: an estimate of how likely you are to spell it right now. Confidence = accuracy x memory, where accuracy is (correct + 1) / (attempts + 2) and memory halves every *half-life* days since you last saw the word. The half-life starts at 1 day after a miss and doubles with each correct answer in a row, up to 64 days. Only spelling-drill answers count. The spelling drill uses the same score: it picks randomly from the 5 least confident words (never-practiced words first).
+http://localhost:8000/stats shows your weakest words (highest fail rate), the words you haven't seen in the longest time, and every word sorted by **confidence**: an estimate of how likely you are to spell it right now. Confidence = accuracy x time decay x answer decay. Accuracy is (correct + 1) / (attempts + 2). Both decays count from your last correct answer: time decay halves every *half-life* days since then, and answer decay every *half-life* x 10 drill answers since then, so forgetting also shows within one session. A wrong answer can only lower confidence, and a word never answered correctly is 0%. The half-life starts at 1 (1 day, 10 answers) after a miss and doubles with each correct answer in a row, up to 64. Only spelling-drill answers count. The spelling drill uses the same score: it picks randomly from the 5 least confident words (never-practiced words first).
+
+## Debug panel (for demos)
+
+Tick **Debug** in the nav bar on the Words or Sentences page to show every learned word in scope with its confidence broken down (accuracy, time decay, answers since last answered right and their decay, streak, half-life), least confident first. After each answer the word just answered is bold with its before and after confidence, and other words' small decay is shown in light red. Highlighted rows are where the next pick comes from: on Words, the 5 least confident words the next word is drawn from; on Sentences, the weak words the next sentence's focus words are drawn from. The setting is remembered per browser.
 
 ## Sentence mode (AI)
 

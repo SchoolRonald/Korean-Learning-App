@@ -332,3 +332,66 @@ Tests use the real list's entries (6 cases plus the note). 180 passing. Checked 
 **Cause (my bug):** `renderPrompt` found each token's English text with a plain `indexOf`, so "is" matched inside "This".
 
 **Fix:** new `findPhrase()` in `static/sentences.html` returns the first case-insensitive occurrence that is a whole word or phrase (no letter or digit right before or after, Unicode-aware) and does not overlap text already underlined. Checked with 7 cases run in node: "is" in "This tree is in Korea." (now position 10), an "is" already taken, a capitalized "Is", "his" vs "is", a name, a multi-word phrase, and "at" inside "cat sat" (no match).
+
+## Extra: debug panel and answer-count decay (for the presentation)
+
+**Prompt:** "one more thing for our presentation: can we get a 'debug' thing showing the confidence scores of words on the words/sentences page? ... showing decay over multiple days isn't possible. and actually, i think we should introduce some decay based on how many words you've done without seeing that specific word ... i want it to also show what words are going to be selected next ... make this debug thing like a toggleable thing too."
+
+**What was generated:**
+- Confidence model (`app/memory.py`): confidence = accuracy x time decay x **answer decay**. Answer decay halves every half-life x 10 drill answers to *other* words since the word was last answered (`gaps()` counts them from the `attempts` table). It uses the same streak-based half-life as time decay: 10 answers after a miss, doubling per correct answer in a row, capped at 640. `confidence_parts()` returns each factor for the panel. The scheduler (priority = 1 - confidence) picks this up automatically. Only Words-drill answers count; sentence answers do not change confidence.
+- `pick_pool()` in `app/scheduler.py`: the ids `next_word` can pick (the 5 least confident, not counting the word on screen, plus any tied with the 5th, since ties are broken at random). Tested to contain every word `next_word` actually picks.
+- `GET /api/debug`: learned words in scope with their factors, least confident first, plus the next-pick pool and the sentence focus pool.
+- Debug panel (`static/common.js`, used by Words and Sentences): a "Debug" checkbox in the nav, remembered in localStorage, off by default. The table shows word, confidence, accuracy, time decay, answers since (with its decay), streak, and half-life. Rows that can be picked next are highlighted; the word just answered is bold with its before and after confidence (green up, red down); other words' decay is shown in light red; a first answer says "(first answer)". The stats page and README explanations now include answer decay.
+- Tests: answer decay values, parts multiplying out, `gaps()`, other answers lowering confidence, `pick_pool` (top 5, ties, exclusion, consistency with `next_word`), and `/api/debug`. 188 passing.
+
+**Issues and fixes (all found while checking in Chrome on a throwaway server):**
+- A first answer, even a wrong one, showed as a gain ("0% -> 33%"), because a never-drilled word counts as 0% (no evidence) and one miss gives smoothed accuracy 1/3. That would look wrong to the class, so it now says "(first answer)".
+- Rows showed "15% -> 15%" for changes too small to see after rounding. A change is now shown only when the rounded percentage (or the answer count) differs.
+- With answer decay, every drilled word changes a little on every answer, which made the answered word hard to spot. Its row is now bold, and decay-only changes are a lighter color.
+- On the Sentences page only 5 of the 8 focus-pool words were highlighted, because the pool favors fail rate while the table sorts by confidence and shows 20 rows. Pool rows are now always shown.
+- `stats.html` declared its own `pct` helper, which would have clashed with the new one in `common.js` (both are top-level in the page). Removed the duplicate.
+- The Chrome extension blocked one result because the formula text contains "=", which it took for query-string data. Re-read the results without that text; no code change.
+
+## Bug: a wrong answer could raise confidence
+
+**Prompt:** "i've noticed that getting an answer wrong in words will actually increase the confidence score? this shouldn't be the case at all."
+
+**Cause (my model design):** both decays were measured from when the word was last *seen*. Any answer, right or wrong, reset them to "fresh", so a faded word (say 10%) jumped up after a miss: "just seen" counted as "just remembered". The "(first answer)" label I added the day before only hid one case of this (a never-drilled word going 0% -> 33% on a wrong answer).
+
+**Fix (`app/memory.py`):** both decays now count from the last *correct* answer. `since_correct()` returns its time and the number of drill answers after it (to any word, including misses of this one). A word never answered correctly is 0%. Now a wrong answer lowers accuracy, resets the streak (shorter half-life), and adds to the answer count, so it can never raise confidence; a right answer can never lower it.
+
+**Tests:** a property test runs 40 random histories (3 words, answers spread from minutes to days apart). For every word it checks that one more wrong answer never raises confidence and one more right answer never lowers it. Against the old model it failed 37 of 40; with the fix it passes 40 of 40. Three older tests assumed a missed word had positive confidence and were updated, plus tests for `since_correct()` and "never right is 0%". 229 passing. Checked on a copy of the real database: none of the 33 drilled words goes up after a wrong answer. Drops are steep when the last correct answer was long ago (것 65% -> 1%) and moderate right after one.
+
+**Mistake in my own test:** the first version of the property test used a SQLite savepoint to undo each probe answer, but `record_word_attempt` commits, which ends the savepoint, so many runs crashed with "no such savepoint" instead of testing anything. That also means the first "40 of 40 fail on the old code" result was not a real count. Rewritten to answer on an in-memory copy of the database, then re-measured against both models (37/40 fail before, 0/40 after).
+
+**Panel and docs:** the debug column is now "Answers since last right"; words never answered right show "(not answered right yet)" instead of the old "(first answer)" label, and a first correct answer shows its real gain (0% -> 67%). The stats page and README explanations say the decays count from the last correct answer.
+
+## Bug: Basics keyboard (Korean typing did not light keys; uneven key sizes)
+
+**Prompt:** "bug in "3. The keyboard": the keyboard lights up when typing in english, but not when your keyboard is set to hangul. furthermore, the keys visually on that keyboard are of different sizes (i.e. bottom row is wider, and all keys align to the right side nicely when they shouldn't and p (ㅔ) should extend further out)"
+
+(The Basics tab came from a teammate's commit pulled just before this.)
+
+**Causes:**
+- Typing: the practice box lit keys from `keydown`'s physical key code. With a Korean input method on, Chrome reports those presses as "Process" (key code 229), so on many setups nothing lit up.
+- Layout: every key had `flex: 1`, so each row stretched its keys to fill the full width. Rows with fewer keys got wider keys, and every row ended flush right.
+
+**Fix:**
+- `static/basics.html`: with Korean input, keys are now worked out from the text. On each `input` event, `lastLetter()` takes the last character's most recent letter: a lone letter (ㄱ), the final consonant if there is one (한 -> ㄴ, and for double finals the second consonant, 닭 -> ㄱ), otherwise the vowel (하 -> ㅏ, compound 와 -> ㅘ, which lights ㅗ then ㅏ numbered). That letter's keys come from `hangul.json`. `keydown` ignores "Process"/229 events and still handles English typing by physical key.
+- `static/style.css`: every key is one fixed unit wide (`--u`, so that 0.5u + 10 keys fill the width). Rows start where Tab, Caps Lock and Shift would end (0.5u, 0.75u, and a 1.25u Shift key), so A sits a quarter key right of Q, Z three quarters, and the top row (ending in ㅔ) reaches furthest.
+
+**Checked:** `lastLetter()` on 10 cases in node (한, 하, 닭, 값, 와, ㄱ, ㅏ, 빵, 의, a). In Chrome, measured: all keys 45px wide, Shift 57px (1.25u); the top row ends at the right edge (1181) and the A and Z rows end shorter (1143, 1072); row starts are staggered 0.25u and 0.75u from Q. Simulating Korean input (a "Process" keydown, then the composed text changing) through 하, 한, 한구, 한국 lit ㅎ, ㅏ, ㄴ, ㄱ, ㅜ, ㄱ in turn; English "r" still lights ㄱ. Screenshots timed out in this browser session, so the layout was checked by measurement, not by eye. 236 tests passing.
+
+## Extra: Basics keyboard shows Shift letters while Shift is held
+
+**Prompt:** "also holding down shift should show ㅒ and ㅖ respectively on that keyboard whenever shift is pressed."
+
+**What was generated:** in `static/basics.html`, `showShift(on)` swaps each key that has a Shift letter (ㅃ ㅉ ㄸ ㄲ ㅆ ㅒ ㅖ) to show it large, with the plain letter moved to the corner, and highlights the Shift key (`.key.shift.held` in `static/style.css`). Page-wide `keydown`/`keyup` listeners drive it: the Shift key's own events set it, and every other key event follows `e.shiftKey`, which stays accurate when a Korean input method reports keys as "Process". A window `blur` turns it off, so Shift released in another window does not leave it stuck.
+
+**Checked in Chrome** (simulated events): the top row went from ㅂ(ㅃ) ... ㅐ(ㅒ) ㅔ(ㅖ) to ㅃ(ㅂ) ... ㅒ(ㅐ) ㅖ(ㅔ) on Shift down, stayed shifted through a "Process" (229) key press with Shift held, and went back on Shift up and on window blur. 236 tests passing.
+
+## Docs: SPEC.md covers all five tabs
+
+**Prompt:** "also, go through and make sure SPEC.md is updated to reflect each of the 5 tabs we currently have on our website."
+
+**What was generated:** `SPEC.md` (renamed from `spec.md` in the working tree; the README link was updated to match, since GitHub and Linux are case-sensitive) was rewritten from a Basics-only spec into a spec for the whole site: an overview with the five tabs, the shared parts (word data and loader, the lesson/topic scope, learned words, the confidence model and word selection, AI usage and the call cap, the debug panel, Korean input handling), then one section per tab with goal, what the page shows, rules, API endpoints and acceptance criteria. The teammate's Basics section was kept and updated with this session's keyboard changes (fixed-width staggered keys, lighting keys from typed Hangul, Shift letters). Facts were checked against the code (routes, which pages use the scope selector and debug panel, and constants such as batch size 5, pick pool 5, at most 2 new words, at least 5 learned words, and the 50-call cap).

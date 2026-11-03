@@ -39,16 +39,32 @@ td.num, th.num { text-align: right; }
 .card .roman { font-weight: bold; }
 .card .muted { font-size: 0.75rem; }
 #keyboard { margin: 1rem 0 0.5rem; }
-.keyrow { display: flex; gap: 0.25rem; margin-bottom: 0.25rem; }
-.keyrow.row1 { padding-left: 4%; }
-.key { position: relative; flex: 1; min-width: 0; height: 2.8rem; border: 1px solid #aaa; border-radius: 5px; background: #f6f6f6; }
-.key.shift { flex: 1.6; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
+/* Every key is one unit (u) wide, like a real keyboard. The top row is 0.5u + 10 keys and fills the
+   width; the rows start where Tab, Caps Lock and Shift would end (0.5u, 0.75u, 1.25u), so each row
+   sits further right and the top row (ending in ㅔ) reaches furthest. */
+#keyboard { --gap: 0.25rem; --u: calc((100% - 9 * var(--gap)) / 10.5); }
+.keyrow { display: flex; gap: var(--gap); margin-bottom: var(--gap); }
+.keyrow.row0 > .key:first-child { margin-left: calc(var(--u) * 0.5); }
+.keyrow.row1 > .key:first-child { margin-left: calc(var(--u) * 0.75); }
+.key { position: relative; flex: 0 0 var(--u); min-width: 0; height: 2.8rem; border: 1px solid #aaa; border-radius: 5px;
+       background: #f6f6f6; box-sizing: border-box; }
+.key.shift { flex: 0 0 calc(var(--u) * 1.25); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; }
 .key .kchar { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
 .key .kshift { position: absolute; top: 1px; right: 3px; font-size: 0.65rem; color: #666; }
 .key .klatin { position: absolute; bottom: 1px; left: 3px; font-size: 0.6rem; color: #999; }
 .key.lit { background: #ffe58f; border-color: #9a6700; }
+.key.shift.held { background: #dbe7f5; border-color: #0b6e99; }
 .key[data-step]::after { content: attr(data-step); position: absolute; top: -0.5rem; left: -0.3rem; background: #9a6700; color: #fff;
                          border-radius: 50%; width: 1rem; height: 1rem; font-size: 0.65rem; text-align: center; line-height: 1rem; }
 .review tr:not(:first-child) { cursor: pointer; }
 .review tr:not(:first-child):hover { background: #f6f6f6; }
 #practice, #quiz-answer { font-size: 1.5rem; width: 100%; box-sizing: border-box; padding: 0.4rem; }
+
+/* Debug panel: wider than the page column so the table fits. */
+#debug { margin-top: 2rem; padding-top: 0.5rem; border-top: 2px dashed #999; font-size: 0.85rem;
+         width: min(56rem, 96vw); position: relative; left: 50%; transform: translateX(-50%); overflow-x: auto; }
+#debug tr.pool { background: #fff3cd; }
+#debug .up { color: #1a7f37; }
+#debug .down { color: #c62828; }
+#debug tr.answered { font-weight: bold; }
+#debug .decay { color: #d99; }
