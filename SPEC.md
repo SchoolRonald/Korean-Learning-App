@@ -18,7 +18,7 @@ The site has six tabs, in this order in every page's menu:
 | Sentences | `/sentences` | Translate AI-generated sentences built from learned words and grammar |
 | Stats | `/stats` | Progress and confidence for learned words and grammar |
 
-Stack: Python, FastAPI, SQLite (no ORM), one static HTML/JS page per tab (no build step), Anthropic API (`claude-haiku-5-5` for Sentences, topics and the curriculum build, `claude-sonnet-5-5` for grammar lessons and answers), and the NIKL Basic Korean Dictionary API (krdict) as the grammar source.
+Stack: Python, FastAPI, SQLite (no ORM), one static HTML/JS page per tab (no build step), the Anthropic API (Haiku and Sonnet, see Shared parts: AI usage), TypeSafe Jev for fast grading of free answers, and the NIKL Basic Korean Dictionary API (krdict) as the grammar source.
 
 ## Shared parts
 
@@ -46,7 +46,7 @@ Confidence estimates the chance (0 to 100%) that the learner can spell a word ri
 
 - confidence = accuracy × time decay × answer decay
 - **Accuracy** = (correct + 1) / (attempts + 2), so one lucky answer is not certainty (1/1 is 67%, 10/10 is 92%).
-- Both decays count from the **last correct answer**. Time decay halves every half-life in days; answer decay halves every half-life × 10 drill answers since then (to any word, including misses of this one), so forgetting also shows within one session.
+- Both decays count from the **last correct answer**. Time decay halves every half-life in days. Answer decay halves every half-life × 10 answers since then (Words-drill answers to any word, including misses of this one, and Sentence answers), so forgetting also shows within one session.
 - The half-life is 1 after a miss and doubles with each correct answer in a row, up to 64 (64 days, 640 answers).
 - A word never answered correctly is 0%. A wrong answer can never raise confidence and a right answer can never lower it.
 - Words-drill answers count. Sentence answers also count, with one verdict for each word (see Tab 5). Learn Words results do not count.
@@ -58,14 +58,21 @@ The Words drill picks the next word at random from the 5 least confident learned
 
 ### AI usage
 
-- Model `claude-haiku-5-5`, low effort for sentences and grading, medium for topics (resolved once and saved). Grammar lessons, other explanations and answers to questions use `claude-sonnet-5-5` at medium effort, because they teach. Every call asks for JSON with a fixed schema; malformed output, refusals and API errors become a friendly message, never a crash.
+- `claude-sonnet-5-5` (medium effort) does the work that teaches or decides what is correct: grammar lessons, other explanations, answers to free questions, writing practice items, and the second call that checks each item set.
+- `claude-haiku-5-5` does the rest: sentence generation (low effort), topics and the curriculum build (medium), learner notes, "Why is this wrong?" explanations, and grading when Jev cannot be reached.
+- Every call asks for JSON with a fixed schema. Malformed output, refusals and API errors become a friendly message, never a crash. An account out of credit says so ("The Anthropic account is out of credit").
 - At most 500 AI calls per server run (`GONGBU_LLM_CAP`). Restart the server to reset. Each call's duration and tokens are logged to the console and `llm_usage.log`.
 - **Jev** (TypeSafe, `jev-1.14.0`, key `JEV_API_KEY`) grades free answers that do not match exactly, in Sentences and grammar practice. It answers yes/no questions with probabilities in a fraction of a second: "same meaning as the English", "spelled and conjugated exactly right" and, in grammar practice, "uses the point". An answer is correct only when every probability is at least 0.7, so a typo is always wrong. Jev gives no reason, so a wrong answer has a **Why is this wrong?** button that asks Haiku to explain. The explanation never changes the recorded grade. If Haiku thinks the answer was right after all, the page says so. When Jev fails, Haiku grades as before. Jev calls are not counted in the 500 cap, and are logged the same way.
-- The API key comes from `ANTHROPIC_API_KEY` (or `.env`).
+- Keys come from `.env` (a real environment variable wins): `ANTHROPIC_API_KEY` (required for AI), `JEV_API_KEY` (optional: without it, Haiku grades), and `KRDICT_API_KEY` (for the curriculum build and verb classes).
+- Tests never reach a real API: `tests/conftest.py` gives the AI module a client with no key and hides `JEV_API_KEY` and `KRDICT_API_KEY`. Tests that need AI output use fakes.
 
 ### AI call counter
 
-With Debug on, every page shows a small, muted counter in the bottom-left corner: "AI calls: N / 500 · Jev: M". N is the number of AI calls in this server run. It updates after each action that can make an AI call. API: `GET /api/usage` returns `{calls, cap}`.
+With Debug on, every page shows a small, muted counter in the bottom-left corner: "AI calls: N / 500 · Jev: M". N is the number of AI calls in this server run. It updates after each action that can make an AI call. M is the number of Jev calls. API: `GET /api/usage` returns `{calls, cap, jev_calls}`.
+
+### Page updates
+
+Every response sends `Cache-Control: no-cache`, so the browser checks with the server before it reuses a saved page or script. Without it, a browser kept an old `common.js` after an update, and the new Learn Grammar page broke.
 
 ### Debug panel (Words and Sentences)
 
@@ -190,7 +197,7 @@ The grammar data has three layers. Each layer is saved, so the app does not gene
    - The lesson topics are typed into `grammar/htsk_lessons.json` (committed), one entry per lesson.
    - Some lessons hold several points (Lesson 12: 들, 만, 에서, 부터, 까지, (으)로). For each lesson, the build makes two AI calls:
      1. **Split**: the lesson becomes points. For each point the AI also names the exact krdict headwords to look up, with their part of speech (`은` particle, `-아요` ending, `-고 싶다` pattern).
-     2. **Summarize**: the AI gets each point's candidate krdict entries. It keeps only the entries that really are the point (the same spelling can be a different word: 이 is "this" and also "two"), and writes the summary from them.
+     2. **Summarize**: the AI gets each point's candidate krdict entries. It keeps only the entries that really are the point (the same spelling can be a different word: 이 is "this" and also "two"), and writes the summary from them. If the call leaves out a point, it is asked again once for the missing points.
    - Each point has: `id` (a slug, for example `particle-eseo`), `lesson`, `title`, `pattern` (for example `N + 에서`), `kind` (`particle`, `ending`, `conjugation`, `expression` or `usage`), `summary` (the core rule in one or two sentences), `related` (ids of similar points to compare), `lookups` (the krdict headwords searched, so `--refresh` can redo sources and summaries without a new split), and `sources`.
    - Some lessons are about usage more than grammar (Lesson 10: numbers and counters, Lesson 21: question words). They become points of kind `usage`.
 2. **Sources** (`grammar/sources.json`, committed):
@@ -202,7 +209,7 @@ The grammar data has three layers. Each layer is saved, so the app does not gene
 
 Build command: `python -m app.curriculum --lessons 1-25`. It needs `ANTHROPIC_API_KEY` and `KRDICT_API_KEY` (both in `.env`). It is run once by the developer, and the two JSON files are committed. Running it again keeps existing points and adds only missing lessons.
 
-The krdict API: `https://krdict.korean.go.kr/api/search` and `/api/view`, XML responses, 50,000 calls per day, key from https://krdict.korean.go.kr/eng/openApi/openApiRegister. The app calls krdict only from build steps and the verb-class lookup, never on each page load.
+The krdict API: `https://krdict.korean.go.kr/api/search` and `/api/view`, XML responses, 50,000 calls per day, key from https://krdict.korean.go.kr/eng/openApi/openApiRegister. The app calls krdict only from build steps and the verb-class lookup, never on each page load. Verb-class lookups time out after 5 seconds, and after a failure the app stops asking krdict for 10 minutes, so practice never waits on it.
 
 ### Learned and in-scope points
 
@@ -224,6 +231,8 @@ Each point has one main lesson. It is written once (Sonnet), saved, and free to 
 
 Examples use learned words where possible. They may use at most 2 unlearned words. Unlearned words and names are underlined with a hover hint, the same as on the Sentences tab.
 
+The server removes any example, or "right" sentence in Common mistakes, with a spelling mistake the model often makes (see Practice: fixed rules). A lesson left with fewer than 8 examples is refused, and the page shows an error.
+
 **No waiting between points**: when a point opens, the server writes the next unlearned point's lesson in the background. Usually it is ready when the learner gets there. A lock makes sure the page and the background job never write the same lesson twice.
 
 **Working indicator**: while the AI writes anything (a lesson, another explanation, an answer), the page shows a spinner, what is being written, and the seconds so far.
@@ -243,25 +252,35 @@ The profile is a short list of plain-English notes on how the learner likes gram
 
 - **Inferred**: the app records each "Explain it differently" and "Explain it like..." request, and which explanation was on screen when the learner then answered the point's first practice item right or wrong. After every 3 new records, one AI call (Haiku) turns them into at most 5 notes.
 - **Set by the learner**: the page shows the notes under a "How you like things explained" heading. The learner can remove a note or type a new one ("Always compare with English").
-- Every new lesson prompt includes the notes. Lessons already saved do not change.
+  - The AI never rewrites the learner's own notes, and never adds back a note the learner removed.
+  - The notes update runs in the background, so nothing on the page waits for it. If it fails, the records are kept for the next update.
+- Every new lesson, "Explain it differently" and "Explain it like..." prompt includes the notes. Lessons already saved do not change.
 
 ### Practice types
 
 | Type | Task | Checking |
 |---|---|---|
 | Conjugation | "가다 + past polite" → 갔어요 | Made and checked by the conjugation engine. No AI. |
-| Fill the blank | "저___ 학생이에요" → 는 | Deterministic, against the item's accepted answers. |
+| Fill the blank | "저___ 학생이에요" → 는 | Exact match first, then Jev (Haiku if Jev fails). |
 | Compare | Pick between related points: "저(는/가) 학생이에요" | Deterministic. An item may accept both, and then the feedback explains the difference in meaning. |
 | Transform | Change a sentence as told: to the past, to the negative, to the honorific | Exact match first, then Jev (Haiku if Jev fails). |
-| Translate | English to Korean, using the point | Exact match first, then AI, like Sentences. |
-| Spot the error | Find and fix the one grammar error in a sentence | Exact match with the corrected sentence first, then AI. |
+| Translate | English to Korean, using the point | Exact match first, then Jev (Haiku if Jev fails). |
+| Spot the error | Find and fix the one grammar error in a sentence | Exact match with the corrected sentence first, then Jev (Haiku if Jev fails). |
 
-- Each answer gets feedback right away: correct, almost, or incorrect, with the right answer and a short reason. The reason names the rule ("after a consonant, use 은").
+- Each answer gets feedback right away, with the accepted answers and a short reason that names the rule ("after a consonant, use 은").
+  - Exact matches and Jev give correct or incorrect. Only the Haiku fallback can say "almost".
+  - When Jev marks an answer wrong, the item's own reason shows as "About the answer", with a "Why is this wrong?" button.
+  - A wrong Conjugation answer shows the engine's rule for the ending and the verb class.
+- Spot the error and Transform start with the shown sentence already in the answer box, ready to edit.
 - One AI call (Sonnet) writes a set of 3 items of every type that fits the point, and saves them in the `grammar_items` table with their accepted answers and reasons. Sonnet writes them because the saved answers decide what is correct.
 - The set is written in the background when the lesson opens, but only when the point has no unseen items at all. When a request asks for a type with no unseen item left, that request writes a new set. So a type the check keeps dropping never costs a set on every visit. A lock makes sure two requests never write the same set.
 - The server drops broken items: a blank that is missing or appears twice, Compare answers that are not among the choices, or a Spot the error sentence that is already correct.
-- Free answers (Fill the blank, Translate, Spot the error) that match no accepted answer are graded by Jev: correct only with the same meaning, exact spelling, and the point used. A wrong answer shows the item's reason and a "Why is this wrong?" button (Haiku). If Jev fails, Haiku grades: any mistake in the point being practiced is "incorrect", and "almost" is only for one small slip outside it.
-- Every new item set is reviewed by a second Sonnet call, which keeps, fixes or drops each item. Only checked items are served. Fixed rules also reject a space before the copula, 에요 after a vowel (except 아니에요), 이예요, 것이에요, dictionary forms as answers, and Compare items whose wrong choice is only a dictionary form.
+- Free answers (Fill the blank, Translate, Spot the error, Transform) that match no accepted answer are graded by Jev: correct only with the same meaning, exact spelling, and the point used. So correct Korean that skips the point (에 where 으로 is practiced) is wrong, and "Why is this wrong?" explains that. If Jev fails, Haiku grades: any mistake in the point being practiced is "incorrect", and "almost" is only for one small slip outside it.
+- **Item check**: every new item set is reviewed by a second Sonnet call, as a strict native teacher. It keeps an item (and may add missing correct answers), fixes its answers and reason, or drops it.
+  - The verdict and the problem it found are saved on the item, as a record for native-speaker review.
+  - Only checked items are served. Items saved before the check existed are checked before they are served.
+  - Items that get no verdict are sent to the check once more. A fix that breaks the item rules drops the item.
+- **Fixed rules** for mistakes the model makes often: a space before the copula (학생 이에요), 에요 after a vowel (뭐에요, but 아니에요 is right), 이예요, 것이에요, a dictionary form as an answer at the end of a sentence (이다 where 예요 belongs), and a Compare item whose wrong choice is only the dictionary form of the answer (가요 or 가다). A misspelled accepted answer is removed from its item. An item left with no correct answer is dropped.
 - Items use learned words where possible, with at most 2 other words. Unlike explanations, items do not underline unlearned words yet.
 - A point uses only the types that fit it. Compare needs related points. Conjugation and Transform need a point the engine supports (tenses, honorific, negation, ~고 forms, the modifier, 아/어지다, and the irregular classes); `CONJ_POINTS` in `app/practice.py` lists them with their endings and verb classes.
 
@@ -270,13 +289,14 @@ The profile is a short list of plain-English notes on how the learner likes gram
 A deterministic engine conjugates verbs and adjectives. It does not need AI for most answers.
 
 - It covers the endings in Lessons 1 to 25: present polite (아요/어요), past (았/었어요), future (ㄹ/을 거예요), formal (ㅂ니다/습니다), honorific (으세요, 으셨어요), negation (안 + verb, 지 않아요), ~고, ~고 싶어요, ~고 있어요, adjective modifier (ㄴ/은), and 아/어지다.
-- It handles the classes: regular, 하다, 이다/아니다, ㄷ, ㅂ, ㅅ, ㅎ, 르, 으, and ㄹ.
-- It accepts every valid form, including contractions (되어요 and 돼요, 보아요 and 봐요).
+- It handles the classes: regular, 하다, 아니다, ㄷ, ㅂ, ㅅ, ㅎ, 르, 으, and ㄹ. The copula 이다 attaches to nouns, so it is practiced through Fill the blank and Transform, not the engine.
+- It accepts every valid form, including contractions (되어요 and 돼요, 보아요 and 봐요), and the special honorific verbs (드세요 for 먹다, 주무세요 for 자다, 계세요 for 있다).
+- 안 goes in front of the verb, except for noun + 하다 verbs (공부 안 해요). 좋아하다 and 하다-adjectives take 안 in front (안 좋아해요, 안 깨끗해요).
 - **Verb classes**: the spelling of a verb does not show its class (입다 is regular, but 돕다 is ㅂ-irregular). The app looks the word up in krdict, tries each class the spelling allows, and keeps the one whose forms match krdict's listed forms (도와, 도우니). The result is saved in the `verb_classes` table.
   - Some spellings are several words with different classes (묻다: "to ask" is ㄷ-irregular, "to bury" is regular). The English meaning in the word list picks the entry. When it stays unclear, the verb is not drilled.
-  - Lookups happen when a drill needs verbs, at most 6 new words per request. krdict is free.
+  - Lookups happen when a drill needs verbs, at most 6 new words per request. krdict is free. A lookup times out after 5 seconds, and a failure pauses lookups for 10 minutes. Until then, drills use the verbs already classified and the built-in list.
   - A built-in list of common verbs with known classes makes sure every irregular class can be drilled before the learner's vocabulary has one.
-- **Conjugation items** come from the engine, not the AI: a learned verb (or a listed one) with an ending the point teaches. They cost nothing and are checked exactly. A wrong answer shows the right forms and the rule for the ending and the class ("ㅂ-irregular: before a vowel the final ㅂ becomes 우").
+- **Conjugation items** come from the engine, not the AI: a learned verb (or a listed one) with an ending the point teaches. Endings for adjectives only (the modifier, 아/어지다) use adjectives, and endings for verbs only (~고 싶어요, ~고 있어요) use verbs. They cost nothing and are checked exactly. A wrong answer shows the right forms and the rule for the ending and the class ("ㅂ-irregular: before a vowel the final ㅂ becomes 우").
 
 ### Learn new
 
@@ -284,8 +304,8 @@ A deterministic engine conjugates verbs and adjectives. It does not need AI for 
 2. The point's lesson opens (see The lesson).
 3. The learner reads it and may use "Explain it differently", "Explain it like..." and "Ask about this point" as often as they like.
 4. "Practice this point" starts 4 practice items. For a point the engine supports: Conjugation, Fill the blank, Transform, Translate. For other points: Fill the blank, Compare (or another type when the point has no related points), Spot the error, Translate.
-5. A miss shows the answer and the reason, and puts the item type back at the end, as in Learn Words. The explanation stays one click away.
-6. After the items, the point is learned. The page shows "Next point" and "Review".
+5. A miss shows the answer and the reason, and puts the item type back at the end, at most twice per type. The lesson stays one click away ("Show the lesson").
+6. After the items, the point is learned. Mixed review follows if it is needed (see below), and then the next point opens.
 7. "I already know this" (at any step) marks the point learned at once and moves to the next point.
 
 ### Point list
@@ -299,7 +319,7 @@ A deterministic engine conjugates verbs and adjectives. It does not need AI for 
 - A "Review" mode on the same page. It shows practice items for learned points in scope, weakest point first.
 - It picks the next point at random from the 3 least confident learned points, never the point just answered unless it is the only one.
 - Each item comes from a random type that fits the point.
-- After an answer, "Show explanation" opens the saved explanation for that point.
+- Every practice item, in Review and in Learn new, has a collapsible "Show the lesson" that shows the point's saved lesson.
 
 ### Mixed review in Learn new
 
@@ -331,15 +351,17 @@ With Debug on, the page shows:
 
 - `GET /api/grammar/next?lesson` returns the next unlearned point (or null) and the outline of points in scope. The page then asks for the explanation separately, because a new explanation can take up to a minute.
 - `GET /api/grammar/point?id&lesson` returns one point, the outline, and its saved custom explanations.
+- Both return the point's `practice_plan`, the 4 item types of Learn new practice in order.
 - `GET /api/grammar/explain?point&lesson` returns the point's saved lesson, or writes it.
 - `POST /api/grammar/explain {point, lesson, request}` makes an explanation from a free style request. An empty request makes one from a new angle.
 - `POST /api/grammar/ask {point, lesson, question, explanation_id}` answers a free question about the explanation on screen.
 - `GET /api/grammar/item?point&type&lesson` returns an unseen practice item of that type for the point.
 - `GET /api/grammar/review?lesson&exclude&below` returns an item for one of the 3 least confident learned points. With `below`, only points under that confidence count (mixed review uses 0.5). 404 when there is none.
-- `GET /api/grammar/debug?lesson&exclude` returns every learned point in scope with its confidence parts and the review pool.
-- `POST /api/grammar/answer {item_id, answer, source}` checks an answer, records it in `grammar_attempts`, and returns the verdict, reason, accepted answers, and the point's confidence before and after.
+- `GET /api/grammar/debug?lesson&exclude` returns every learned point in scope with its confidence parts, the review pool, and the profile.
+- `POST /api/grammar/answer {item_id, answer, source, shown}` checks an answer, records it in `grammar_attempts`, and returns the verdict, reason, accepted answers, who graded it (`exact`, `jev` or `llm`), and the point's confidence before and after. `shown` is sent with a new point's first practice answer and names the explanation on screen, for the learner profile.
+- `POST /api/grammar/why {item_id, answer}` returns Haiku's verdict and reason for an answer. It records nothing.
 - `POST /api/grammar/done {point}` marks a point learned.
-- `GET /api/grammar/profile` returns the learner notes. `POST /api/grammar/profile {add, remove}` adds or removes a note.
+- `GET /api/grammar/profile` returns the learner notes, how many records remain until the next update, and the latest records. `POST /api/grammar/profile {add, remove}` adds or removes a note.
 
 ### Acceptance criteria
 
@@ -355,6 +377,9 @@ With Debug on, the page shows:
 - After an answer, the point's confidence changes by the same rules as a word: a wrong answer never raises it, and a right answer never lowers it.
 - With Focus on, no review item appears in Learn new.
 - After 3 "Explain it like... with food examples" requests, a note about food examples appears and the next lesson prompt includes it.
+- A free answer with a one-letter typo (학상 for 학생) is graded wrong. "Why is this wrong?" explains it and does not change the recorded grade.
+- No item is served whose accepted answer is misspelled (뭐에요) or a dictionary form (이다 in "저것은 나무___.").
+- Conjugation items make no AI call.
 
 ## Tab 4: Words (`/words`)
 
@@ -394,9 +419,10 @@ Practice learned words and learned grammar in context: translate a short English
 ### What the page shows
 
 - An English sentence built from the learner's learned words and learned grammar points. Words that need a Korean word the learner has not learned, and names, are underlined; hover or click shows the Korean ("호텔 = hotel (new word)", "민호 = Minho (name)"). A line says how many words are not learned yet.
-- The learner types the Korean and presses Enter. The reference translation appears at once; the AI explanation follows about a second later. Every word in the reference shows its meaning on hover or click.
-- Grading is labeled: "Graded by exact match with the reference" or "Graded by AI (unvalidated). Compare with the reference yourself."
-- After grading, the grammar points the sentence uses, each with ✓ or ✗ and a link to its explanation.
+- The learner types the Korean and presses Enter. The reference translation appears at once, and the verdict follows (in a fraction of a second with Jev). Every word in the reference shows its meaning on hover or click.
+- Grading is labeled: "Graded by exact match with the reference", "Checked by Jev (AI, unvalidated)", or "Graded by AI (unvalidated)", each with "Compare with the reference yourself" for AI grading.
+- After grading, the grammar points the sentence uses, each with ✓ or ✗ and a link to its lesson, and the learned words, each with ✓ or ✗ and its meaning on hover.
+- An answer Jev marks wrong has a "Why is this wrong?" button (see Shared parts: AI usage).
 - The AI call count ("AI calls: N / 500") and the Debug panel.
 
 ### Rules
@@ -408,7 +434,7 @@ Practice learned words and learned grammar in context: translate a short English
 - The server checks the tokens against the list: the list's meaning replaces the AI's; an attached copula is stripped (뭐예요 → 뭐); for a spelling with several entries (저: "I" or "that"), the AI's meaning picks the entry; a list word can never be called a name. A sentence is rejected if it uses no learned word, more than 2 unlearned words (names do not count), no topic word (with a topic), or repeats a saved sentence.
 - **Caching**: sentences are saved. A saved sentence not yet attempted is served first; while the learner answers, the next one is generated in the background, so "New sentence" is usually instant. If generation fails, the least recently practiced saved sentence is reused. "New word" flags are recomputed each time, so hints disappear as words are learned.
 - **Grading**: an exact match with the reference (spacing and punctuation ignored), or with the reference with 그/저-type words swapped when they mean "that/there", is correct with no AI call. Otherwise Jev decides correct or incorrect (see Shared parts: AI usage); either 그- or 저- forms are accepted unless the English says which. "Why is this wrong?" asks Haiku for the reason. If Jev fails, one Haiku call returns correct, almost or incorrect with a reason. If grading fails, the answer is "ungraded" and not recorded.
-- **Verdicts per word and point**: grading also returns a verdict for each learned word in the reference and each grammar point the sentence uses: correct or wrong.
+- **Verdicts per word and point**: grading also returns a verdict for each learned word in the reference and each grammar point the sentence uses: correct or wrong. Word verdicts are stored in `sentence_word_verdicts`, linked to the sentence answer, and grammar verdicts in `grammar_attempts` with source `sentence`.
   - An exact match makes every verdict correct with no AI call.
   - With Jev, the same call asks one yes/no question per learned word ("a correct word for this meaning, used correctly") and per grammar point. An answer Jev marks correct makes every verdict correct. With the Haiku fallback, the grader names the wrong words and points. A different correct word with the same meaning counts as right, which is why verdicts are per word: one English word can have several right Korean words.
   - Unlearned words and names get no verdict.
@@ -416,7 +442,9 @@ Practice learned words and learned grammar in context: translate a short English
 
 ### API
 
-`GET /api/sentence?lesson&topic&exclude`, `POST /api/sentence/answer {sentence_id, answer}`.
+- `GET /api/sentence?lesson&topic&exclude`
+- `POST /api/sentence/answer {sentence_id, answer}` returns the verdict, reason, reference, who graded it, and the verdicts per learned word (`words`) and per grammar point (`grammar`).
+- `POST /api/sentence/why {sentence_id, answer}` returns Haiku's verdict and reason. It records nothing.
 
 ### Acceptance criteria
 
@@ -437,7 +465,7 @@ Show progress for words and grammar in the current scope and explain how confide
 ### What the page shows
 
 - Summary: "Learned X of Y words, practiced Z. Average confidence of learned words N%."
-- **Weakest words**: the 10 learned words with the highest fail rate (words with at least one miss), with fails/attempts and confidence.
+- **Weakest words**: the 10 learned words with the highest fail rate (words with at least one miss), counting Words-drill answers and Sentence verdicts, with fails/attempts and confidence.
 - **Not seen in a while**: the 10 practiced words seen longest ago.
 - **All learned words by confidence** (collapsible): lesson, attempts, streak, confidence bar.
 - **Grammar**: "Learned X of Y grammar points. Average confidence N%." Then the 5 weakest points, and all learned points by confidence (collapsible), each linking to its explanation.
@@ -446,7 +474,7 @@ Show progress for words and grammar in the current scope and explain how confide
 
 ### API
 
-`GET /api/stats?lesson&topic`.
+`GET /api/stats?lesson&topic` returns the word numbers, `grammar` (total, learned, average confidence, weakest, all learned points) and `notes`.
 
 ### Acceptance criteria
 
@@ -460,7 +488,12 @@ Accounts and login, audio, deployment, an error taxonomy, a "this looks wrong" b
 
 ## Build order
 
-The grammar feature is built in steps. Each step ends with passing tests and a working page, so the learner can test it before the next step starts.
+The grammar feature was built in these steps, in this order. All six are done. Each step ended with passing tests and a working page, so the learner could test it before the next step started. Changes made along the way are in the sections above, and the main ones are:
+
+- After step 2, the four explanation style tabs became one rule-first lesson per point, written by Sonnet and written ahead in the background, because waiting for each tab was slow.
+- After step 3, the item check and the fixed spelling rules were added, after a wrong item (이다 where 예요 belongs) reached the learner.
+- After step 3, Jev replaced Haiku as the first grader of free answers, because Haiku took 2 to 3 seconds.
+- In step 4, verb classes that krdict leaves unclear are skipped instead of tagged by AI, to save API calls.
 
 1. **Data**: krdict client, `python -m app.curriculum`, `grammar/curriculum.json` and `grammar/sources.json` for Lessons 1 to 25, tests on both files, and the AI cap of 500.
 2. **Learn Grammar, explain**: the tab, menu changes (Learn becomes Learn Words), Learn new with one rule-first lesson per point written ahead in the background, a working spinner, "Explain it differently", "Explain it like...", "Ask about this point", "I already know this", and the Debug call counter.
@@ -482,4 +515,8 @@ These are choices the learner did not make. Each one has a default in this spec.
 7. One Sentence answer counts as one answer for word answer decay.
 8. Saved sentences from before this change are not served.
 9. The lesson order: intro, rule, forms, examples, nuance, mistakes.
+10. Jev threshold: every yes/no probability must be at least 0.7.
+11. In grammar practice, correct Korean that skips the practiced point is wrong (Jev). The Haiku fallback calls it "almost".
+12. Item sets: 3 items per type, and the background writes a set only when a point has no unseen items.
+13. krdict: at most 6 new verb lookups per request, a 5-second timeout, and a 10-minute pause after a failure.
 
