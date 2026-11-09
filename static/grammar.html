@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gongbu Learn Grammar</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn Words</a> | <b>Learn Grammar</b> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <a href="/stats">Stats</a></p>
+<h1>Learn grammar</h1>
+
+<label>Up to lesson <select id="lesson"></select></label>
+<div class="modes">
+  <button id="mode-learn" class="tab on">Learn new</button>
+  <button id="mode-review" class="tab">Review</button>
+  <label id="focus-label" class="muted"><input type="checkbox" id="focus"> Focus (no review between points)</label>
+</div>
+<div id="feedback"></div>
+
+<div id="point" hidden>
+  <p class="muted" id="point-meta"></p>
+  <h2 id="point-title"></h2>
+  <p class="pattern" id="point-pattern"></p>
+
+  <div class="styles" id="styles"></div>
+  <div class="restyle">
+    <button id="differently">Explain it differently</button>
+    <span class="explain-like">
+      <input id="like" placeholder="Explain it like... (e.g. with food examples)" autocomplete="off" maxlength="200">
+      <button id="like-go">Explain</button>
+    </span>
+  </div>
+
+  <div id="explanation"></div>
+  <p class="muted" id="hint"></p>
+  <p class="label">AI-written, not validated by a native speaker.</p>
+  <div id="sources"></div>
+
+  <h3>Ask about this point</h3>
+  <div id="questions"></div>
+  <div class="ask">
+    <input id="question" placeholder="e.g. Why is it 를 here and not 가?" autocomplete="off" maxlength="500">
+    <button id="ask-go">Ask</button>
+  </div>
+  <p class="muted" id="ask-status"></p>
+
+  <div class="actions">
+    <button id="practice-go">Practice this point</button>
+    <button id="known">I already know this</button>
+    <span id="learned-note" class="correct" hidden>✓ Learned</span>
+  </div>
+</div>
+
+<div id="practice" hidden>
+  <p class="muted" id="practice-meta"></p>
+  <h2 id="practice-title"></h2>
+  <p class="type-name" id="practice-type"></p>
+  <div id="practice-prompt"></div>
+  <div class="answer-row" id="answer-row">
+    <input id="practice-answer" autocomplete="off" autocorrect="off" spellcheck="false" maxlength="300">
+    <button id="practice-check">Check</button>
+  </div>
+  <div class="choices" id="choices"></div>
+  <div id="practice-feedback"></div>
+  <button id="practice-next" hidden>Next</button>
+  <details id="practice-lesson">
+    <summary>Show the lesson</summary>
+    <div id="practice-lesson-body"></div>
+  </details>
+</div>
+
+<details id="profile-box">
+  <summary>How you like things explained</summary>
+  <p class="muted">New lessons follow these notes. The app writes some from what you ask for (Explain it differently, Explain it like...),
+  and you can remove them or add your own. Lessons already written do not change.</p>
+  <ul id="profile-notes"></ul>
+  <div class="ask">
+    <input id="profile-add" placeholder="e.g. Always compare with English" autocomplete="off" maxlength="120">
+    <button id="profile-add-go">Add note</button>
+  </div>
+  <p class="muted" id="profile-status"></p>
+</details>
+
+<details id="outline-box">
+  <summary>All grammar points up to this lesson</summary>
+  <ol id="outline"></ol>
+</details>
+
+<script src="/static/common.js"></script>
+<script>
+let point = null;
+let views = [];  // explanations for this point: {key, label, data}; "lesson" is the main one
+let current = null;  // key of the explanation on screen
+let busy = false;
+
+const lessonValue = () => Number($("lesson").value);
+
+// message: show a spinner with it while busy; "" clears the feedback area.
+function setBusy(on, message) {
+  busy = on;
+  for (const id of ["differently", "like-go", "ask-go", "practice-go", "known", "practice-check"]) $(id).disabled = on;
+  if (message) $("feedback").replaceChildren(spinner(message));
+  else if (message === "") $("feedback").replaceChildren();
+}
+
+function pointFromUrl() {
+  return new URLSearchParams(location.search).get("point");
+}
+
+async function loadNext() {
+  history.replaceState(null, "", "/grammar");
+  const data = await api(`/api/grammar/next?lesson=${lessonValue()}`);
+  renderOutline(data.outline);
+  if (!data.point) {
+    showSection("none");
+    $("feedback").replaceChildren(el("p", `You have learned every grammar point up to lesson ${lessonValue()}. ` +
+      "Choose a higher lesson, or open any point from the list below.", "correct"));
+    return;
+  }
+  await showPoint(data.point, []);
+}
+
+async function openPoint(id) {
+  const data = await api(`/api/grammar/point?id=${encodeURIComponent(id)}&lesson=${lessonValue()}`);
+  history.replaceState(null, "", `/grammar?point=${encodeURIComponent(id)}`);
+  renderOutline(data.outline);
+  await showPoint(data.point, data.custom);
+}
+
+async function showPoint(p, custom) {
+  point = p;
+  mode = "learn";
+  session = null;
+  $("mode-learn").classList.add("on");
+  $("mode-review").classList.remove("on");
+  showSection("point");
+  views = custom.map((c, i) => ({ key: `custom-${c.id}`, label: customLabel(c, i), data: c }));
+  current = null;
+  $("point").hidden = false;
+  $("feedback").replaceChildren();
+  $("point-meta").textContent = `Lesson ${p.lesson} · ${p.kind}`;
+  $("point-title").textContent = p.title;
+  $("point-pattern").textContent = p.pattern;
+  $("explanation").replaceChildren();
+  $("hint").textContent = "";
+  renderSources(p.sources);
+  renderQuestions(p.questions);
+  $("practice-go").textContent = p.learned ? "Practice this point again" : "Practice this point";
+  $("known").hidden = p.learned;
+  $("learned-note").hidden = !p.learned;
+  renderTabs();
+  await showLesson();
+}
+
+function customLabel(c, i) {
+  return c.style === "request" ? `"${c.request}"` : `New angle ${i + 1}`;
+}
+
+// Tabs appear only once there is more than the main lesson to switch between.
+function renderTabs() {
+  const custom = views.filter((v) => v.key.startsWith("custom-"));
+  if (!custom.length) {
+    $("styles").replaceChildren();
+    return;
+  }
+  const tabs = [];
+  const lessonTab = el("button", "Lesson", "tab");
+  lessonTab.classList.toggle("on", current === "lesson");
+  lessonTab.addEventListener("click", showLesson);
+  tabs.push(lessonTab);
+  for (const v of custom) {
+    const b = el("button", v.label, "tab");
+    b.classList.toggle("on", current === v.key);
+    b.addEventListener("click", () => showView(v));
+    tabs.push(b);
+  }
+  $("styles").replaceChildren(...tabs);
+}
+
+async function showLesson() {
+  if (busy) return;
+  const seen = views.find((v) => v.key === "lesson");
+  if (seen) {
+    showView(seen);
+    return;
+  }
+  setBusy(true, "Writing the lesson for this point. This can take up to a minute the first time. After that it is saved.");
+  try {
+    const data = await api(`/api/grammar/explain?point=${encodeURIComponent(point.id)}&lesson=${lessonValue()}`);
+    const view = { key: "lesson", label: "Lesson", data };
+    views.push(view);
+    setBusy(false, "");
+    showView(view);
+  } catch (e) {
+    setBusy(false);
+    showError(e.message);
+  }
+}
+
+async function customExplanation(request) {
+  if (busy) return;
+  setBusy(true, request ? `Writing an explanation for "${request}"` : "Finding a different way to explain it");
+  try {
+    const data = await api("/api/grammar/explain", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ point: point.id, lesson: lessonValue(), request }),
+    });
+    const count = views.filter((v) => v.key.startsWith("custom-")).length;
+    const view = { key: `custom-${data.id}`, label: customLabel(data, count), data };
+    views.push(view);
+    setBusy(false, "");
+    showView(view);
+  } catch (e) {
+    setBusy(false);
+    showError(e.message);
+  }
+}
+
+function showView(view) {
+  current = view.key;
+  renderTabs();
+  renderExplanation(view.data);
+}
+
+function renderExplanation(x, target = $("explanation"), hint = $("hint")) {
+  const sections = {
+    intro: () => x.intro ? paragraphs(x.intro) : [],
+    examples: () => [el("h3", "Examples"), renderExamples(x.examples)],
+    rule: () => [el("h3", "The rule"), ...paragraphs(x.rule)],
+    table: () => x.table.length ? [el("h3", "Forms"), renderTable(x.table)] : [],
+    nuance: () => x.nuance ? [el("h3", "Nuance"), ...paragraphs(x.nuance)] : [],
+    mistakes: () => x.mistakes.length ? [el("h3", "Common mistakes"), renderMistakes(x.mistakes)] : [],
+  };
+  const order = ["intro", "rule", "table", "examples", "nuance", "mistakes"];
+  const nodes = x.style === "lesson" ? [] : [el("p", x.request ? `Explained like: "${x.request}"` : x.style_name, "muted")];
+  for (const name of order) nodes.push(...sections[name]());
+  target.replaceChildren(...nodes);
+  const unlearned = x.examples.some((ex) => ex.tokens.some((t) => t.new));
+  const note = unlearned ? "Underlined words are not learned yet. Hover or click to see them." : "";
+  if (hint) hint.textContent = note;
+  else if (note) target.append(el("p", note, "muted"));
+}
+
+function paragraphs(text) {
+  return text.split(/\n\s*\n/).map((t) => el("p", t.trim()));
+}
+
+function renderExamples(examples) {
+  const list = el("ol", "", "examples");
+  for (const ex of examples) {
+    const item = el("li");
+    item.append(koreanLine(ex), el("div", ex.english, "english"));
+    if (ex.parts.length) item.append(partsLine(ex.parts));
+    if (ex.note) item.append(el("div", ex.note, "muted"));
+    list.append(item);
+  }
+  return list;
+}
+
+// The Korean sentence with the grammar point highlighted and unlearned words underlined.
+function koreanLine(ex) {
+  const line = el("div", "", "korean");
+  const start = ex.highlight ? ex.korean.indexOf(ex.highlight) : -1;
+  const end = start < 0 ? -1 : start + ex.highlight.length;
+  const words = ex.korean.split(" ");
+  const useTokens = ex.tokens.length === words.length;
+  let pos = 0;
+  words.forEach((word, i) => {
+    if (i) line.append(" ");
+    const container = useTokens && (ex.tokens[i].new || ex.tokens[i].name)
+      ? hintSpan("", tokenMeaning(ex.tokens[i]), tokenKind(ex.tokens[i]))
+      : document.createDocumentFragment();
+    const wStart = pos;
+    const wEnd = pos + word.length;
+    const a = Math.max(wStart, start);
+    const b = Math.min(wEnd, end);
+    if (start >= 0 && a < b) {
+      container.append(word.slice(0, a - wStart), el("mark", word.slice(a - wStart, b - wStart)), word.slice(b - wStart));
+    } else {
+      container.append(word);
+    }
+    line.append(container);
+    pos = wEnd + 1;
+  });
+  return line;
+}
+
+function partsLine(parts) {
+  const line = el("div", "", "parts");
+  parts.forEach((p, i) => {
+    if (i) line.append(" + ");
+    const chip = el("span", "", "part");
+    chip.append(el("span", p.text, "part-text"), el("span", p.label, "part-label"));
+    line.append(chip);
+  });
+  return line;
+}
+
+function renderTable(rows) {
+  const table = el("table");
+  const head = el("tr");
+  for (const h of ["When", "Form", "Example"]) head.append(el("th", h));
+  table.append(head);
+  for (const r of rows) {
+    const tr = el("tr");
+    tr.append(el("td", r.when), el("td", r.form, "korean-cell"), el("td", r.example, "korean-cell"));
+    table.append(tr);
+  }
+  return table;
+}
+
+function renderMistakes(mistakes) {
+  const list = el("ul", "", "mistakes");
+  for (const m of mistakes) {
+    const item = el("li");
+    item.append(el("div", `✗ ${m.wrong}`, "wrong"), el("div", `✓ ${m.right}`, "correct"), el("div", m.why, "muted"));
+    list.append(item);
+  }
+  return list;
+}
+
+function renderSources(s) {
+  const box = $("sources");
+  if (!s.entries.length) {
+    box.replaceChildren(el("p", "No dictionary entry matches this point, so this explanation comes from AI alone.", "muted"));
+    return;
+  }
+  const details = el("details");
+  details.append(el("summary", `Source: ${s.attribution} (${s.license})`));
+  for (const entry of s.entries) {
+    const p = el("p");
+    const link = el("a", entry.word);
+    link.href = entry.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    p.append(link, ` ${entry.pos ? `(${entry.pos})` : ""}`);
+    const ul = el("ul");
+    for (const sense of entry.senses) ul.append(el("li", sense));
+    details.append(p, ul);
+  }
+  const license = el("a", s.license);
+  license.href = s.license_url;
+  license.target = "_blank";
+  license.rel = "noopener";
+  const note = el("p", "Dictionary content is licensed under ", "muted");
+  note.append(license, ".");
+  details.append(note);
+  box.replaceChildren(details);
+}
+
+function renderQuestions(questions) {
+  $("questions").replaceChildren(...questions.map(renderAnswer));
+  $("ask-status").textContent = "";
+}
+
+function renderAnswer(q) {
+  const box = el("div", "", "qa");
+  box.append(el("p", `Q: ${q.question}`, "question"), ...paragraphs(q.answer));
+  if (q.examples.length) {
+    const ul = el("ul");
+    for (const ex of q.examples) {
+      const li = el("li");
+      li.append(el("span", ex.korean, "korean"), " ", el("span", ex.english, "muted"));
+      ul.append(li);
+    }
+    box.append(ul);
+  }
+  return box;
+}
+
+async function ask() {
+  const question = $("question").value.trim();
+  if (!question || busy) return;
+  setBusy(true);
+  $("ask-status").replaceChildren(spinner("Thinking about your question"));
+  const shown = views.find((v) => v.key === current);
+  try {
+    const answer = await api("/api/grammar/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ point: point.id, lesson: lessonValue(), question, explanation_id: shown ? shown.data.id : null }),
+    });
+    $("questions").append(renderAnswer(answer));
+    $("question").value = "";
+    $("ask-status").textContent = "";
+  } catch (e) {
+    $("ask-status").textContent = e.message;
+  }
+  setBusy(false);
+}
+
+// Practice. A session is one of:
+//   learn:  the 4 items that finish a new point; a miss puts its type back (at most twice per type)
+//   mixed:  1 or 2 review items between points, for learned points below 50% confidence
+//   review: endless items for the weakest learned points
+const LEARN_TYPES = ["fill", "compare", "spot", "translate"];
+const MAX_RETRIES = 2;
+let session = null;
+let lastPoint = null;  // the point of the last answered item, which review skips next
+let focusOn = false;
+
+function showSection(name) {
+  $("point").hidden = name !== "point";
+  $("practice").hidden = name !== "practice";
+  $("focus-label").hidden = mode !== "learn";
+}
+
+async function startPractice() {
+  if (busy) return;
+  const plan = point.practice_plan || LEARN_TYPES;
+  session = { kind: "learn", point, queue: [...plan], done: 0, total: plan.length, misses: {} };
+  showSection("practice");
+  await nextItem();
+}
+
+async function afterLearned() {
+  if (focusOn) {
+    session = null;
+    await loadNext();
+    return;
+  }
+  session = { kind: "mixed", remaining: 2 };
+  await nextItem();
+}
+
+async function nextItem() {
+  if (session.kind === "learn" && !session.queue.length) {
+    await markDone(session.point.id);
+    await afterLearned();
+    return;
+  }
+  if (session.kind === "mixed" && session.remaining <= 0) {
+    session = null;
+    await loadNext();
+    return;
+  }
+  session.item = null;
+  session.answered = false;
+  setBusy(true, "Getting a practice item. The first set for a point can take up to a minute.");
+  const exclude = lastPoint ? `&exclude=${encodeURIComponent(lastPoint)}` : "";
+  const url = session.kind === "learn"
+    ? `/api/grammar/item?point=${encodeURIComponent(session.point.id)}&type=${session.queue[0]}&lesson=${lessonValue()}`
+    : `/api/grammar/review?lesson=${lessonValue()}${exclude}${session.kind === "mixed" ? "&below=0.5" : ""}`;
+  let item;
+  try {
+    item = await api(url);
+  } catch (e) {
+    setBusy(false, "");
+    if (session.kind === "mixed") {
+      session = null;
+      await loadNext();
+    } else {
+      showSection(session.kind === "review" ? "none" : "practice");
+      showError(e.message);
+    }
+    return;
+  }
+  setBusy(false, "");
+  showSection("practice");
+  renderItem(item);
+}
+
+function renderItem(item) {
+  session.item = item;
+  const label = { learn: "Practice", mixed: "Quick review", review: "Review" }[session.kind];
+  $("practice-meta").textContent = session.kind === "learn"
+    ? `${label} · item ${session.done + 1} of ${session.total}`
+    : `${label} · ${item.point.pattern}`;
+  $("practice-title").textContent = item.point.title;
+  $("practice-type").textContent = item.type_name;
+  $("practice-feedback").replaceChildren();
+  $("practice-next").hidden = true;
+  $("practice-lesson").open = false;
+  $("practice-lesson-body").replaceChildren();
+
+  const prompt = [];
+  const input = $("practice-answer");
+  input.value = "";
+  $("answer-row").hidden = item.type === "compare";
+  $("choices").replaceChildren();
+  if (item.type === "fill" || item.type === "compare") {
+    prompt.push(blankLine(item.sentence), el("div", item.english, "english"));
+    input.placeholder = "Type what goes in the blank";
+  } else if (item.type === "conjugate") {
+    const line = el("div", "", "korean");
+    line.append(el("b", item.verb), ` (${item.meaning})`);
+    prompt.push(el("p", "Conjugate this word.", "muted"), line, el("div", `→ ${item.ending_name}`, "english"));
+    input.placeholder = "Type the conjugated form";
+  } else if (item.type === "transform") {
+    prompt.push(el("p", `${item.instruction}. Type the whole sentence.`, "muted"),
+      el("div", item.sentence, "korean"), el("div", `Meaning after the change: ${item.english}`, "english"));
+    input.value = item.sentence;
+    input.placeholder = "The changed sentence";
+  } else if (item.type === "spot") {
+    prompt.push(el("p", "This sentence has one grammar mistake. Fix it and type the whole sentence.", "muted"),
+      el("div", item.wrong, "korean"), el("div", `Meaning: ${item.english}`, "english"));
+    input.value = item.wrong;
+    input.placeholder = "The corrected sentence";
+  } else {
+    prompt.push(el("p", "Translate into Korean, using this point.", "muted"), el("div", item.english, "prompt-english"));
+    input.placeholder = "Type the Korean";
+  }
+  if (item.type === "compare") {
+    for (const choice of item.choices) {
+      const b = el("button", choice, "choice");
+      b.addEventListener("click", () => check(choice));
+      $("choices").append(b);
+    }
+  }
+  $("practice-prompt").replaceChildren(...prompt);
+  if (item.type !== "compare") input.focus();
+}
+
+function blankLine(sentence) {
+  const [before, after] = sentence.split("___");
+  const line = el("div", "", "korean");
+  line.append(before, el("span", "____", "blank"), after);
+  return line;
+}
+
+async function check(answer) {
+  if (!session || !session.item || session.answered || busy || !answer.trim()) return;
+  const item = session.item;
+  setBusy(true);
+  $("practice-feedback").replaceChildren(spinner("Checking"));
+  let result;
+  try {
+    result = await api("/api/grammar/answer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        item_id: item.id, answer, source: session.kind === "learn" ? "practice" : "review",
+        shown: session.kind === "learn" && session.done === 0 ? shownExplanation() : null,
+      }),
+    });
+  } catch (e) {
+    setBusy(false);
+    $("practice-feedback").replaceChildren(el("p", e.message, "wrong"));
+    return;
+  }
+  setBusy(false);
+  showVerdict(result, item, answer);
+  if (result.verdict === "ungraded") return;
+  session.answered = true;
+  lastPoint = item.point.id;
+  for (const b of $("choices").children) {
+    b.disabled = true;
+    if (result.answers.includes(b.textContent)) b.classList.add("right");
+    else if (b.textContent === answer) b.classList.add("picked-wrong");
+  }
+  if (session.kind === "learn") {
+    const type = session.queue.shift();
+    session.done += 1;
+    if (!result.correct) {
+      session.misses[type] = (session.misses[type] || 0) + 1;
+      if (session.misses[type] <= MAX_RETRIES) {
+        session.queue.push(type);
+        session.total += 1;
+      }
+    }
+  } else if (session.kind === "mixed") {
+    session.remaining -= 1;
+  }
+  $("practice-next").hidden = false;
+  $("practice-next").focus();
+  refreshGrammarDebug();
+}
+
+// What the learner read last before practicing, for the profile.
+function shownExplanation() {
+  const view = views.find((v) => v.key === current);
+  if (!view || view.key === "lesson") return "the main lesson";
+  return view.data.request ? `an explanation like "${view.data.request}"` : "a new-angle explanation";
+}
+
+async function loadProfile() {
+  try {
+    renderProfile(await api("/api/grammar/profile"));
+  } catch (e) {
+    $("profile-status").textContent = e.message;
+  }
+}
+
+function renderProfile(p) {
+  const items = p.notes.map((n) => {
+    const li = el("li", n.text);
+    if (n.source === "learner") li.append(el("span", " (yours)", "muted"));
+    const remove = el("button", "Remove", "tab");
+    remove.addEventListener("click", () => changeProfile({ remove: n.id }));
+    li.append(" ", remove);
+    return li;
+  });
+  $("profile-notes").replaceChildren(...(items.length ? items : [el("li", "No notes yet.", "muted")]));
+  $("profile-status").textContent = "";
+  $("profile-box").querySelector("summary").textContent =
+    `How you like things explained${p.notes.length ? ` (${p.notes.length})` : ""}`;
+}
+
+async function changeProfile(change) {
+  try {
+    renderProfile(await api("/api/grammar/profile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(change),
+    }));
+    $("profile-add").value = "";
+  } catch (e) {
+    $("profile-status").textContent = e.message;
+  }
+}
+
+function showVerdict(r, item, answer) {
+  const box = $("practice-feedback");
+  if (r.verdict === "ungraded") {
+    box.replaceChildren(el("p", `Could not grade this answer: ${r.reason} Try again.`, "wrong"));
+    return;
+  }
+  const head = { correct: "✓ Correct", almost: "≈ Almost", incorrect: "✗ Not quite" }[r.verdict];
+  const cls = { correct: "correct", almost: "verdict-almost", incorrect: "wrong" }[r.verdict];
+  const nodes = [el("p", head, cls), el("p", r.reason)];
+  if (!r.correct || r.answers.length > 1) {
+    nodes.push(el("p", `${r.answers.length > 1 ? "Accepted answers" : "Answer"}: ${r.answers.join("  /  ")}`, "korean"));
+  }
+  if (r.graded_by === "llm") nodes.push(el("p", "Graded by AI (unvalidated). Compare with the answers yourself.", "label"));
+  nodes.push(el("p", `Confidence for this point: ${pct(r.confidence_before)} → ${pct(r.confidence)}`, "muted"));
+  box.replaceChildren(...nodes);
+}
+
+async function markDone(pointId) {
+  await api("/api/grammar/done", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ point: pointId }),
+  });
+}
+
+async function skipKnown() {
+  if (busy) return;
+  try {
+    await markDone(point.id);
+    await afterLearned();
+  } catch (e) {
+    showError(e.message);
+  }
+}
+
+async function showPracticeLesson() {
+  const body = $("practice-lesson-body");
+  if (!$("practice-lesson").open || body.childElementCount || !session || !session.item) return;
+  body.replaceChildren(spinner("Loading the lesson"));
+  try {
+    const x = await api(`/api/grammar/explain?point=${encodeURIComponent(session.item.point.id)}&lesson=${lessonValue()}`);
+    renderExplanation(x, body, null);
+  } catch (e) {
+    body.replaceChildren(el("p", e.message, "wrong"));
+  }
+}
+
+// Modes: Learn new (lessons, then practice) or Review (weakest learned points first).
+let mode = "learn";
+
+async function setMode(name) {
+  if (busy) return;
+  mode = name;
+  $("mode-learn").classList.toggle("on", name === "learn");
+  $("mode-review").classList.toggle("on", name === "review");
+  $("feedback").replaceChildren();
+  if (name === "review") {
+    session = { kind: "review" };
+    showSection("practice");
+    await nextItem();
+  } else {
+    session = null;
+    showSection("point");
+    await loadNext();
+  }
+}
+
+async function refreshGrammarDebug() {
+  if (!debugOn || !$("lesson").value) return;
+  let d;
+  try {
+    d = await api(`/api/grammar/debug?lesson=${lessonValue()}${lastPoint ? `&exclude=${encodeURIComponent(lastPoint)}` : ""}`);
+  } catch (e) {
+    $("debug").replaceChildren(el("h2", "Debug"), el("p", e.message, "wrong"));
+    return;
+  }
+  const pool = new Set(d.review_pool);
+  const table = el("table");
+  const head = el("tr");
+  for (const h of ["Point", "Lesson", "Confidence", "Accuracy", "Time decay", "Answers since last right", "Streak", "Half-life"]) {
+    head.append(el("th", h));
+  }
+  table.append(head);
+  for (const p of d.points) {
+    const tr = el("tr", "", [pool.has(p.id) ? "pool" : "", p.id === lastPoint ? "answered" : ""].join(" ").trim());
+    const right = Boolean(p.last_correct);
+    tr.append(
+      el("td", p.title), el("td", `${p.lesson}`), el("td", pct(p.confidence)),
+      el("td", p.attempts ? pct(p.accuracy) : "-"), el("td", right ? `×${p.time_decay.toFixed(2)}` : "-"),
+      el("td", right ? `${p.gap} (×${p.answer_decay.toFixed(2)})` : p.attempts ? "never right" : "never practiced"),
+      el("td", `${p.streak}`), el("td", right ? `${p.half_life}d / ${p.half_life * d.answers_per_day} answers` : "-"),
+    );
+    table.append(tr);
+  }
+  $("debug").replaceChildren(
+    el("h2", "Debug: grammar"),
+    el("p", "Grammar confidence uses the word formula, counting grammar answers only (practice, review, and later " +
+      `Sentences). Highlighted: the next review item comes from these (the ${d.pool_size} least confident, not counting ` +
+      `the point just answered). Mixed review in Learn new uses points below ${pct(d.weak)}. Bold: the point just answered.`, "muted"),
+    d.points.length ? table : el("p", "No learned grammar points in this scope yet.", "muted"),
+    el("h3", "Profile"),
+    el("p", `Notes in lesson prompts: ${d.profile.notes.map((n) => `${n.text} (${n.source})`).join("; ") || "none"}. ` +
+      `Notes are rewritten after ${d.profile.records_until_update} more record(s).`, "muted"),
+    el("p", `Recent records: ${d.profile.records.join(" | ") || "none"}`, "muted"),
+  );
+}
+
+function renderOutline(items) {
+  const list = items.map((p) => {
+    const li = el("li");
+    const link = el("a", p.title);
+    link.href = `/grammar?point=${encodeURIComponent(p.id)}`;
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!busy) openPoint(p.id).catch((err) => showError(err.message));
+    });
+    li.append(el("span", `L${p.lesson} `, "muted"), link, p.learned ? el("span", " ✓", "correct") : "");
+    if (point && p.id === point.id) li.classList.add("here");
+    return li;
+  });
+  $("outline").replaceChildren(...list);
+}
+
+$("differently").addEventListener("click", () => customExplanation(""));
+$("like-go").addEventListener("click", () => {
+  const request = $("like").value.trim();
+  if (request) customExplanation(request).then(() => { $("like").value = ""; });
+});
+onEnter($("like"), () => $("like-go").click());
+$("ask-go").addEventListener("click", ask);
+onEnter($("question"), ask);
+$("profile-add-go").addEventListener("click", () => {
+  const text = $("profile-add").value.trim();
+  if (text) changeProfile({ add: text });
+});
+onEnter($("profile-add"), () => $("profile-add-go").click());
+$("profile-box").addEventListener("toggle", () => { if ($("profile-box").open) loadProfile(); });
+$("practice-go").addEventListener("click", startPractice);
+$("known").addEventListener("click", skipKnown);
+$("practice-check").addEventListener("click", () => check($("practice-answer").value));
+onEnter($("practice-answer"), () => {
+  if (session && session.answered) $("practice-next").click();
+  else check($("practice-answer").value);
+});
+$("practice-next").addEventListener("click", () => nextItem().catch((e) => showError(e.message)));
+$("practice-next").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    $("practice-next").click();
+  }
+});
+$("practice-lesson").addEventListener("toggle", showPracticeLesson);
+$("mode-learn").addEventListener("click", () => setMode("learn").catch((e) => showError(e.message)));
+$("mode-review").addEventListener("click", () => setMode("review").catch((e) => showError(e.message)));
+try { focusOn = localStorage.getItem("grammarFocus") === "1"; } catch {}
+$("focus").checked = focusOn;
+$("focus").addEventListener("change", () => {
+  focusOn = $("focus").checked;
+  try { localStorage.setItem("grammarFocus", focusOn ? "1" : "0"); } catch {}
+});
+
+(async () => {
+  const panel = el("div");
+  panel.id = "debug";
+  document.body.append(panel);
+  addDebugToggle((on) => {
+    panel.hidden = !on;
+    refreshGrammarDebug();
+  });
+  panel.hidden = !debugOn;
+  if (!(await loadLessons())) return;
+  refreshGrammarDebug();
+  $("lesson").addEventListener("change", () => {
+    saveLesson($("lesson").value);
+    setMode(mode).catch((e) => showError(e.message));
+  });
+  const requested = pointFromUrl();
+  try {
+    if (requested) await openPoint(requested);
+    else await loadNext();
+  } catch (e) {
+    showError(e.message);
+  }
+})();
+</script>
+</body>
+</html>

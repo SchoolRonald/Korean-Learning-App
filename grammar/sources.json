@@ -1,0 +1,4607 @@
+{
+  "attribution": "NIKL Basic Korean Dictionary (한국어기초사전)",
+  "license": "CC BY-SA 2.0 KR",
+  "license_url": "https://creativecommons.org/licenses/by-sa/2.0/kr/",
+  "entries": {
+    "17170": {
+      "target_code": "17170",
+      "word": "처음",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17170",
+      "senses": [
+        {
+          "definition": "차례나 시간상으로 맨 앞.",
+          "english": "first; forefront",
+          "english_definition": "The first in order or chronology.",
+          "note": "",
+          "examples": [
+            "승규는 시간이 지나도 늘 처음처럼 성실한 자세로 열심히 일한다.",
+            "내가 맨 처음으로 결승선에 도착했고 유민이가 이 등으로 도착했다.",
+            "형이 가진 전화기는 내가 여태껏 보지 못한 처음 보는 신기한 것이었다."
+          ]
+        }
+      ]
+    },
+    "17199": {
+      "target_code": "17199",
+      "word": "무엇",
+      "pos": "대명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17199",
+      "senses": [
+        {
+          "definition": "모르는 사실이나 사물을 가리키는 말.",
+          "english": "what",
+          "english_definition": "A word indicating an unknown fact or thing.",
+          "note": "",
+          "examples": [
+            "저 사람 이름은 무엇입니까?",
+            "저것은 무엇에 쓰는 물건입니까?",
+            "우리가 무엇을 위해 사는지 생각해 보라."
+          ]
+        },
+        {
+          "definition": "정해지지 않은 대상이나 굳이 이름을 밝힐 필요가 없는 대상을 가리키는 말.",
+          "english": "anything; something",
+          "english_definition": "Anything; something",
+          "note": "",
+          "examples": [
+            "무엇을 보았는지 벽에 대고 계속 짖어 댔다.",
+            "승규는 방학 때 무엇이라도 보람된 일 하나 정도는 하고 싶었다.",
+            "삼일 동안 굶은 우리는 무엇이라도 좋으니 당장 먹을 음식을 찾아야 했다."
+          ]
+        }
+      ]
+    },
+    "17203": {
+      "target_code": "17203",
+      "word": "돕다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17203",
+      "senses": [
+        {
+          "definition": "남이 하는 일을 거들거나 보탬이 되는 일을 하다.",
+          "english": "help; assist",
+          "english_definition": "To help someone with his/her work or do something that supports him/her.",
+          "note": "",
+          "examples": [
+            "어머니는 나와 형에게 집에서 쉬는 날이면 집안일도 좀 도우라고 하셨다.",
+            "우리 과 학생들은 일손이 부족한 농촌의 농민을 도우려고 시골로 내려갔다.",
+            "농사를 돕다."
+          ]
+        },
+        {
+          "definition": "어려운 처지나 위험한 상황에서 벗어날 수 있게 힘을 보태다.",
+          "english": "help",
+          "english_definition": "To support someone in getting out of a difficult or dangerous situation.",
+          "note": "",
+          "examples": [
+            "우리는 돈을 조금씩 모아 요즘 형편이 어려운 승규를 돕고 있다.",
+            "사회적 약자인 장애인을 돕는 것은 우리들이 해야 하는 의무이다.",
+            "불우한 이웃을 돕다."
+          ]
+        },
+        {
+          "definition": "어떠한 상태를 더욱 좋게 하거나 작용을 더 활발하게 하다.",
+          "english": "assist; stimulate",
+          "english_definition": "To improve a state or stimulate a function.",
+          "note": "",
+          "examples": [
+            "발 마사지는 피로 회복을 돕는다.",
+            "마늘은 장의 활동을 돕는 작용을 해 식욕을 돋우어 준다.",
+            "성장을 돕다."
+          ]
+        },
+        {
+          "definition": "서로가 의지해 거들거나 힘을 보태 함께하다.",
+          "english": "help; assist",
+          "english_definition": "To do something together by helping and supporting one another while depending on each other.",
+          "note": "",
+          "examples": [
+            "나와 친구 둘이서 도와 내일까지 내야 할 과제를 모두 마쳤다.",
+            "아무리 힘든 일이라도 서로 돕는다면 해결하지 못할 일이 없다.",
+            "내가 그와 서로 도우며 한집에서 살아온 지도 벌써 십 년이 넘었다."
+          ]
+        }
+      ]
+    },
+    "17254": {
+      "target_code": "17254",
+      "word": "못",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17254",
+      "senses": [
+        {
+          "definition": "동사가 나타내는 동작을 할 수 없게.",
+          "english": "not",
+          "english_definition": "The word that negates the action represented by the verb.",
+          "note": "주로 동사 앞에 쓴다.",
+          "examples": [
+            "김 대리는 아예 술을 못 마셔서 회식 때에 콜라만 마신다.",
+            "나는 어제 아랫집에서 너무 시끄럽게 해서 잠을 통 못 잤다.",
+            "나는 며칠 동안 혀가 너무 아파서 음식을 제대로 못 먹었다."
+          ]
+        },
+        {
+          "definition": "일정한 수준이나 상태에 이르지 않거나 기준에 알맞지 않게, 모자라게.",
+          "english": "not",
+          "english_definition": "In a manner of not reaching a certain level or state or complying with a standard, or insufficiently.",
+          "note": "주로 동사 앞에 쓴다.",
+          "examples": [
+            "어제 모임에 사람들이 스무 명이 채 못 되게 모였다.",
+            "내 남동생은 키가 일 미터 칠십 센티가 조금 못 된다.",
+            "나는 작년까지는 몸무게가 오십 킬로그램이 못 되었는데 지금은 넘는다."
+          ]
+        }
+      ]
+    },
+    "17301": {
+      "target_code": "17301",
+      "word": "전",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17301",
+      "senses": [
+        {
+          "definition": "과거의 어느 때.",
+          "english": "past",
+          "english_definition": "A point in time in the past.",
+          "note": "",
+          "examples": [
+            "민준이는 회사에 들어가더니 전보다 더 부지런해졌다.",
+            "저 사람을 전에 한 번 만난 적이 있는데 이름이 기억이 안 난다.",
+            "전과 다름없다."
+          ]
+        },
+        {
+          "definition": "일정한 때보다 앞.",
+          "english": "earlier time",
+          "english_definition": "A time before a specific point in time.",
+          "note": "주로 '~ 전', '-기 전'으로 쓴다.",
+          "examples": [
+            "내 동생은 밥을 먹기 전에 항상 손을 씻는다.",
+            "나는 십 년 전부터 이곳에서 살아서 이 동네에 대해 잘 알고 있다.",
+            "결혼 전."
+          ]
+        }
+      ]
+    },
+    "17749": {
+      "target_code": "17749",
+      "word": "계시다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17749",
+      "senses": [
+        {
+          "definition": "(높임말로) 높은 분이나 어른이 어느 곳에 살다.",
+          "english": "live",
+          "english_definition": "(honorific) For one's senior or superior to live somewhere.",
+          "note": "",
+          "examples": [
+            "시골에 계시는 부모님.",
+            "고국에 계시다.",
+            "미국에 계시다."
+          ]
+        },
+        {
+          "definition": "(높임말로) 높은 분이나 어른이 어느 곳에 있다.",
+          "english": "be",
+          "english_definition": "(honorific) For one's senior or superior to be somewhere.",
+          "note": "",
+          "examples": [
+            "자리에 계시다.",
+            "집에 계시다.",
+            "사무실에 계시다."
+          ]
+        },
+        {
+          "definition": "(높임말로) 높은 분이나 어른이 어느 위치나 직위에 있다.",
+          "english": "be",
+          "english_definition": "(honorific) For one's senior or superior to have position or status.",
+          "note": "",
+          "examples": [
+            "대기업 회장으로 계시다.",
+            "대학교 총장으로 계시다.",
+            "교수로 계시다."
+          ]
+        }
+      ]
+    },
+    "17860": {
+      "target_code": "17860",
+      "word": "언제",
+      "pos": "대명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=17860",
+      "senses": [
+        {
+          "definition": "알지 못하는 어느 때.",
+          "english": "when; what time",
+          "english_definition": "Some time that one does not know.",
+          "note": "주로 의문문에 쓴다.",
+          "examples": [
+            "다음 회의는 언제로 할까요?",
+            "우리가 마지막으로 만난 게 언제였지?",
+            "신청서를 언제까지 제출해야 하는지 알려 주시기 바랍니다."
+          ]
+        },
+        {
+          "definition": "과거의 어느 때.",
+          "english": "once",
+          "english_definition": "The time of the past.",
+          "note": "주로 '언제는'으로 쓴다.",
+          "examples": [
+            "언제는 안 하겠다더니 돈을 준다니 하겠다고 한다.",
+            "언제는 꿈이 선생님이라더니 이제는 아나운서라고 하네.",
+            "언제는 내가 한 요리는 맛이 없다더니 배가 고프니까 맛있으니 해 달라고 한다."
+          ]
+        },
+        {
+          "definition": "특별히 정해지지 않은 어느 때.",
+          "english": "any time; always",
+          "english_definition": "Some indefinite time.",
+          "note": "주로 '언제든', '언제든지', '언제라도'로 쓴다.",
+          "examples": [
+            "오고 싶으실 때 언제든 오세요.",
+            "승규 씨는 언제든지 환영입니다.",
+            "내 도움이 필요하면 언제든지 말해."
+          ]
+        }
+      ]
+    },
+    "20231": {
+      "target_code": "20231",
+      "word": "색",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=20231",
+      "senses": [
+        {
+          "definition": "빛을 받아 물체가 나타내는 밝고 어두움이나 빨강, 노랑, 파랑 등의 빛깔.",
+          "english": "color; tint; hue",
+          "english_definition": "An object's color such as red, yellow, blue, etc., or brightness or darkness, which are decided by light.",
+          "note": "",
+          "examples": [
+            "그는 그의 분위기만큼이나 어두운 색의 옷을 입고 다녀 늘 칙칙해 보였다.",
+            "나는 장롱 속에서 오랜 세월 탓에 색이 바랜 옛날 사진 몇 장을 발견했다.",
+            "붉은 색."
+          ]
+        },
+        {
+          "definition": "보통의 사람이나 사물과는 다른 특성.",
+          "english": "color",
+          "english_definition": "A characteristic that differs from that of an ordinary person or object.",
+          "note": "",
+          "examples": [
+            "그들은 보통 사람과는 색이 달라 우리와 어울리기 힘들었다.",
+            "그녀는 뭐라 말로 설명하기 힘들지만 남들과 다른 독특한 색을 지녔다.",
+            "우리는 우리 나름의 색을 그대로 유지하면서 이번 작품을 완성해 나갈 계획이다."
+          ]
+        },
+        {
+          "definition": "여자와의 성적인 관계.",
+          "english": "sex; sexual relation",
+          "english_definition": "A sexual relationship with a woman.",
+          "note": "",
+          "examples": [
+            "그는 바람둥이 아버지를 닮아서 그런지 유난히도 색을 밝혔다.",
+            "아버지는 술, 도박, 색은 남자에게 멀면 멀수록 좋다고 내게 늘 강조하셨다.",
+            "민준은 그녀의 유혹에 넘어가 모든 일을 그만두고 오로지 색에 빠져 살고 있다."
+          ]
+        },
+        {
+          "definition": "‘색깔’의 뜻을 나타내는 말.",
+          "english": "color",
+          "english_definition": "A word that means \"color.\"",
+          "note": "일부 명사 뒤에 붙여 쓴다.",
+          "examples": [
+            "고동색.",
+            "국방색.",
+            "보호색."
+          ]
+        }
+      ]
+    },
+    "20279": {
+      "target_code": "20279",
+      "word": "하나",
+      "pos": "수사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=20279",
+      "senses": [
+        {
+          "definition": "숫자를 셀 때 맨 처음의 수.",
+          "english": "one",
+          "english_definition": "The very first number when counting numbers.",
+          "note": "",
+          "examples": [
+            "열에서 하나를 빼면 구이다.",
+            "요즘 젊은 부부는 아이를 하나만 낳아 기르려고 한다.",
+            "저녁이 되자 아이들은 집으로 돌아가고 아이 하나만 쓸쓸하게 운동장에 남겨졌다."
+          ]
+        }
+      ]
+    },
+    "22784": {
+      "target_code": "22784",
+      "word": "개",
+      "pos": "의존 명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=22784",
+      "senses": [
+        {
+          "definition": "낱으로 떨어진 물건을 세는 단위.",
+          "english": "gae",
+          "english_definition": "A bound noun that serves as a unit for counting the number of objects that are available as a single piece.",
+          "note": "",
+          "examples": [
+            "유민이는 여러 개의 모자 중에서 무엇을 쓸까 고민했다.",
+            "승규는 귤을 좋아해서 자기 혼자 귤 열 개를 다 먹었다.",
+            "귤 다섯 개."
+          ]
+        }
+      ]
+    },
+    "24109": {
+      "target_code": "24109",
+      "word": "이내",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=24109",
+      "senses": [
+        {
+          "definition": "일정한 범위의 안.",
+          "english": "within; less than; not more than",
+          "english_definition": "Within a certain range.",
+          "note": "주로 '~ 이내'로 쓰며, 시간, 거리, 수량 등을 나타낼 때 두루 쓴다.",
+          "examples": [
+            "우리 동네 피자 가게는 항상 삼십 분 이내로 피자를 배달해 준다.",
+            "어느 나라에서는 어떤 건물의 출입구라 하더라도 오 미터 이내에서의 흡연은 무조건 불법이다.",
+            "십 분 이내."
+          ]
+        }
+      ]
+    },
+    "26795": {
+      "target_code": "26795",
+      "word": "가장",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=26795",
+      "senses": [
+        {
+          "definition": "여럿 가운데에서 제일로.",
+          "english": "best",
+          "english_definition": "In a way that is better than any other.",
+          "note": "",
+          "examples": [
+            "적도 지방은 지구에서 가장 더운 곳이다.",
+            "민준이는 반에서 키가 가장 커서 맨 뒤에 앉았다.",
+            "올림픽에서 가장 성적이 좋은 선수가 금메달을 차지했다."
+          ]
+        }
+      ]
+    },
+    "26824": {
+      "target_code": "26824",
+      "word": "다르다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=26824",
+      "senses": [
+        {
+          "definition": "두 개의 대상이 서로 같지 아니하다.",
+          "english": "different; other",
+          "english_definition": "Not the same as each other.",
+          "note": "",
+          "examples": [
+            "말을 한다는 것이 인간과 다른 동물의 가장 큰 다른 점이다.",
+            "그는 예전과 다르게 잘 웃지도 않고 말도 줄어서 퉁명해 보이기도 했다.",
+            "우리 식구들은 제각각 식성이 달라서 어머니는 다른 메뉴로 식사 준비를 하셨다."
+          ]
+        },
+        {
+          "definition": "보통의 사물이나 사람과 같지 않고 특별한 면이 있다.",
+          "english": "different; extraordinary",
+          "english_definition": "Not the same as ordinary things or people; of special qualities.",
+          "note": "",
+          "examples": [
+            "승규는 공부는 잘 못했지만 운동에 있어서는 남들과는 다른 재능을 가졌다.",
+            "민준은 국가대표 선수라서 그런지 준비 운동부터 달라 보였다.",
+            "역시 작가가 쓴 글이라서 그런지 그 글은 보통 사람이 쓴 글과는 확실히 달랐다."
+          ]
+        }
+      ]
+    },
+    "26829": {
+      "target_code": "26829",
+      "word": "더",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=26829",
+      "senses": [
+        {
+          "definition": "보태어 계속해서.",
+          "english": "more",
+          "english_definition": "In a continuous addition.",
+          "note": "",
+          "examples": [
+            "나는 학교에서 조금 더 공부를 하다 평소보다 늦게 귀가했다.",
+            "어머니는 내 말을 더 듣기 싫으셨는지 조용히 방을 나가셨다.",
+            "그는 친구들이 떠난 뒤에도 혼자 술집에 남아 술을 더 마시다 집에 갔다."
+          ]
+        },
+        {
+          "definition": "비교의 대상이나 어떤 기준보다 정도가 크게, 그 이상으로.",
+          "english": "more",
+          "english_definition": "More or higher than something being compared or a certain threshold.",
+          "note": "",
+          "examples": [
+            "오늘 날씨는 어제보다 훨씬 더 추웠다.",
+            "승규는 이제 다 커서 아버지보다 키가 더 크다.",
+            "그는 밤이 되자 속력을 높여 더 빨리 차를 몰았다."
+          ]
+        }
+      ]
+    },
+    "27500": {
+      "target_code": "27500",
+      "word": "가다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=27500",
+      "senses": [
+        {
+          "definition": "한 곳에서 다른 곳으로 장소를 이동하다.",
+          "english": "go; travel",
+          "english_definition": "To move from one place to another place.",
+          "note": "",
+          "examples": [
+            "나는 친구에게 갈 때마다 책을 빌려 왔다.",
+            "승규는 오늘 아침 일찍 친구 집에 가서 아직까지 돌아오지 않았다.",
+            "아버지는 서울로 가실 때 멀미 때문에 항상 버스 대신 기차를 타신다."
+          ]
+        },
+        {
+          "definition": "배, 비행기, 자동차 등이 일정한 곳을 다니다.",
+          "english": "go; head for; be bound for",
+          "english_definition": "For ships, planes, cars, etc., to travel to or from a specific place.",
+          "note": "",
+          "examples": [
+            "서울에 바로 가는 버스가 있습니까?",
+            "이 차는 바로 너의 어머니에게 가게 되어 있으니 아무 걱정하지 마라.",
+            "항공사 사정으로 동남아시아로 가는 비행기가 모두 취소되었다."
+          ]
+        },
+        {
+          "definition": "어떤 목적을 가진 모임에 참석하기 위해 이동하다.",
+          "english": "go",
+          "english_definition": "To move to attend a certain meeting that has a specific purpose.",
+          "note": "",
+          "examples": [
+            "민준은 음악회를 가기 위해 집을 나섰다.",
+            "김 사장은 회사 인사 회의에 가느라 딸의 졸업식에 참석하지 못했다.",
+            "동창회를 가다."
+          ]
+        },
+        {
+          "definition": "어떤 목적을 가지고 일정한 곳으로 움직이다.",
+          "english": "go",
+          "english_definition": "To move to a certain place with a specific purpose.",
+          "note": "",
+          "examples": [
+            "민준이는 책을 빌리러 친구에게 갔다.",
+            "만나러 가다.",
+            "먹으러 가다."
+          ]
+        }
+      ]
+    },
+    "27929": {
+      "target_code": "27929",
+      "word": "좋아하다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=27929",
+      "senses": [
+        {
+          "definition": "무엇에 대하여 좋은 느낌을 가지다.",
+          "english": "like",
+          "english_definition": "To have good feelings toward something.",
+          "note": "",
+          "examples": [
+            "나는 흰색을 좋아해서 흰 옷을 즐겨 입는다.",
+            "동생은 역사 소설보다는 연애 소설을 좋아한다.",
+            "좋아하는 색."
+          ]
+        },
+        {
+          "definition": "특정한 음식 등을 특별히 잘 먹거나 마시다.",
+          "english": "like; love",
+          "english_definition": "To have a special liking for a certain food, etc.",
+          "note": "",
+          "examples": [
+            "아내는 임신을 한 후로 신 음식을 무척 좋아한다.",
+            "요즘 어린이들은 달고 자극적인 음식을 좋아해서 비만이 많다.",
+            "고기를 좋아하다."
+          ]
+        },
+        {
+          "definition": "즐겨서 하고 싶어 하다.",
+          "english": "like",
+          "english_definition": "To enjoy doing something.",
+          "note": "",
+          "examples": [
+            "엄마는 요리하는 것을 좋아하지만 잘하지는 못하신다.",
+            "내 동생은 노는 것보다 공부하는 것을 더 좋아해서 성적이 잘 나온다.",
+            "게임을 좋아하다."
+          ]
+        },
+        {
+          "definition": "어떤 사람을 아껴 친밀하게 여기거나 서로 마음에 들다.",
+          "english": "love",
+          "english_definition": "To have an affection for and feel intimate toward someone or to like each other.",
+          "note": "",
+          "examples": [
+            "민준이는 수줍음이 많아서 좋아하는 여자에게 말도 걸지 못했다.",
+            "나와 지수 씨가 서로 좋아하는 사이라는 소문이 회사에 쫙 퍼졌다.",
+            "좋아하는 남자."
+          ]
+        }
+      ]
+    },
+    "28635": {
+      "target_code": "28635",
+      "word": "감기",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=28635",
+      "senses": [
+        {
+          "definition": "보통 기침, 콧물, 두통, 오한의 증상이 있는, 전염성이 있는 병.",
+          "english": "cold",
+          "english_definition": "A contagious disease that generally comes with symptoms such as coughing, runny nose, headache and chills.",
+          "note": "",
+          "examples": [
+            "나는 감기에 걸려 몸에서 열이 나고 자꾸 기침을 했다.",
+            "요즘 낮과 밤의 온도 차이가 커서 감기로 고생하는 사람들이 많다.",
+            "바이러스성 감기."
+          ]
+        }
+      ]
+    },
+    "28843": {
+      "target_code": "28843",
+      "word": "마지막",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=28843",
+      "senses": [
+        {
+          "definition": "시간이나 순서의 맨 끝.",
+          "english": "last",
+          "english_definition": "The very end of a time or order.",
+          "note": "",
+          "examples": [
+            "다시 볼 수 없다는 아쉬움을 남기며 우리의 마지막 만남은 끝이 났다.",
+            "지수는 마지막 순간까지 최선을 다해 훌륭한 성적으로 대회를 마쳤다.",
+            "마지막 경기."
+          ]
+        }
+      ]
+    },
+    "29667": {
+      "target_code": "29667",
+      "word": "걷다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=29667",
+      "senses": [
+        {
+          "definition": "바닥에서 발을 번갈아 떼어 옮기면서 움직여 위치를 옮기다.",
+          "english": "walk",
+          "english_definition": "To lift one's feet, one foot at a time, from the ground and change their positions.",
+          "note": "",
+          "examples": [
+            "오빠는 교통사고로 다리를 다쳐 절뚝거리며 걷는다.",
+            "동생이 처음으로 걸었을 때 우리 가족은 박수를 치며 기뻐했다.",
+            "걸어서 가다."
+          ]
+        },
+        {
+          "definition": "어떤 방향으로 나아가다.",
+          "english": "move toward; go toward",
+          "english_definition": "To move toward a certain direction.",
+          "note": "",
+          "examples": [
+            "패션업계에서 디자이너로 살아남으려면 유행의 첨단을 걸어야 한다.",
+            "아버지는 자식들이 바른 길을 걷기를 바라는 마음으로 엄하게 교육하셨다.",
+            "몰락의 길을 걷다."
+          ]
+        },
+        {
+          "definition": "어떤 직업에 종사하다.",
+          "english": "hold; work",
+          "english_definition": "To engage in a certain profession.",
+          "note": "",
+          "examples": [
+            "승규는 평생 의사의 길을 걸은 것을 후회한 적이 없다.",
+            "어머니는 내가 법대에 진학해서 법관의 길을 걷기를 바라신다.",
+            "교사의 길을 걷다."
+          ]
+        }
+      ]
+    },
+    "29712": {
+      "target_code": "29712",
+      "word": "모르다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=29712",
+      "senses": [
+        {
+          "definition": "사람이나 사물, 사실 등을 알지 못하거나 이해하지 못하다.",
+          "english": "not know",
+          "english_definition": "To have no knowledge or understanding of a person, object or fact.",
+          "note": "",
+          "examples": [
+            "어머니는 집안일을 하느라 밖에 비가 오는 것도 모르고 계셨다.",
+            "남편은 아내가 화내는 이유를 몰라서 사과도 반박도 할 수 없었다.",
+            "모르는 사람."
+          ]
+        },
+        {
+          "definition": "어떤 지식이나 기능, 기술을 가지고 있지 못하다.",
+          "english": "be unable to; cannot",
+          "english_definition": "To not have certain knowledge, function or skill.",
+          "note": "",
+          "examples": [
+            "요즘은 영어를 모르면 취직하기가 어렵다.",
+            "어머니는 컴퓨터를 몰라서 인터넷으로 정보 찾는 일을 늘 언니에게 부탁하신다.",
+            "언어를 모르다."
+          ]
+        },
+        {
+          "definition": "경험을 하지 못하다.",
+          "english": "have no experience of; have never experienced",
+          "english_definition": "To have no experience of doing something.",
+          "note": "",
+          "examples": [
+            "승규는 부잣집에서 태어나고 자라 배고픔을 몰랐다.",
+            "지수는 고생을 모르고 자라서 친구들의 어려운 사정을 잘 이해하지 못한다.",
+            "가난을 모르다."
+          ]
+        },
+        {
+          "definition": "어떤 것 외에 다른 것을 중요하게 생각하지 않다.",
+          "english": "only care about",
+          "english_definition": "To disregard everything except for a certain thing.",
+          "note": "",
+          "examples": [
+            "지수는 일밖에 모르는 남편과 결혼한 것을 후회했다.",
+            "엄마는 자식들이 자기밖에 모르는 이기적인 사람이 될까봐 우리를 엄하게 교육하셨다.",
+            "돈밖에 모르다."
+          ]
+        }
+      ]
+    },
+    "29736": {
+      "target_code": "29736",
+      "word": "위하다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=29736",
+      "senses": [
+        {
+          "definition": "무엇을 이롭게 하거나 도우려 하다.",
+          "english": "do in favor of; do for the benefit of",
+          "english_definition": "To try to benefit or help someone or something.",
+          "note": "주로 ‘위하여', '위한'으로 쓴다.",
+          "examples": [
+            "오늘 생일을 맞은 지수를 위해서 친구들은 깜짝 파티를 준비하고 있었다.",
+            "오늘 저녁에는 해수욕장을 찾은 관광객을 위한 특별 공연이 열릴 예정이다.",
+            "이 공원은 장애인을 위한 시설이 잘 갖추어져서 장애인들도 이용하기 편리하다."
+          ]
+        },
+        {
+          "definition": "물건이나 사람을 소중하게 여기다.",
+          "english": "value; take good care of; esteem",
+          "english_definition": "To consider something or someone valuable.",
+          "note": "",
+          "examples": [
+            "김 선생님은 반 학생들을 자기 자식처럼 위했다.",
+            "어머니가 자식을 위하듯이 그녀는 애완동물을 끔찍이도 사랑한다.",
+            "우리는 부모님을 위하는 마음으로 양로원의 할아버지, 할머니를 보살폈다."
+          ]
+        },
+        {
+          "definition": "어떠한 생각이나 목적을 이루려고 하다.",
+          "english": "do for the sake of",
+          "english_definition": "To try to realize a certain idea or goal.",
+          "note": "주로 ‘위하여', '위한'으로 쓴다.",
+          "examples": [
+            "어머니는 김치를 담그기 위해 시장에서 배추와 무를 샀다.",
+            "그는 성공과 명예를 위해 하루도 쉬지 않고 도서관에서 열심히 공부했다.",
+            "우리는 좀 더 많은 사람들을 만나기 위하여 사람들이 많이 모인 곳으로 갔다."
+          ]
+        }
+      ]
+    },
+    "31523": {
+      "target_code": "31523",
+      "word": "일",
+      "pos": "수사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=31523",
+      "senses": [
+        {
+          "definition": "수를 셀 때 제일 처음 수.",
+          "english": "one",
+          "english_definition": "The first number when counting numbers from one.",
+          "note": "숫자로는 '1'로 쓴다.",
+          "examples": [
+            "일에 일을 더하면 이가 된다.",
+            "아이는 손가락을 펴며 일부터 십까지 수를 세었다.",
+            "우리 팀이 경기에서 이길 확률은 이분의 일, 즉 오십 퍼센트이다."
+          ]
+        }
+      ]
+    },
+    "38524": {
+      "target_code": "38524",
+      "word": "낫다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=38524",
+      "senses": [
+        {
+          "definition": "어떤 것이 다른 것보다 더 좋다.",
+          "english": "better",
+          "english_definition": "Something being better than another thing.",
+          "note": "",
+          "examples": [
+            "이 작품이 이 중에서 가장 낫네요.",
+            "몸이 아플 때에는 다른 것보다 잘 먹고 쉬는 것이 제일 낫다.",
+            "백화점의 물건이 시장의 물건보다 언제나 더 나은 건 아니다."
+          ]
+        }
+      ]
+    },
+    "43883": {
+      "target_code": "43883",
+      "word": "그",
+      "pos": "관형사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=43883",
+      "senses": [
+        {
+          "definition": "듣는 사람에게 가까이 있거나 듣는 사람이 생각하고 있는 대상을 가리킬 때 쓰는 말.",
+          "english": "that",
+          "english_definition": "A term referring to something near the listener or what the listener is thinking.",
+          "note": "",
+          "examples": [
+            "같이 있는 그 사람은 누구입니까?",
+            "승규야, 너 옆에 있는 그 가방 좀 줘 봐.",
+            "당신이 들고 있는 그 책은 한국어 교과서입니다."
+          ]
+        },
+        {
+          "definition": "앞에서 이미 이야기한 대상을 가리킬 때 쓰는 말.",
+          "english": "that; the",
+          "english_definition": "A term referring to something mentioned earlier.",
+          "note": "",
+          "examples": [
+            "이 책이 수업 때 얘기한 그 책이야.",
+            "김 선생 그 사람이 학교를 그만두다니.",
+            "문제를 풀고, 그 답을 답안지에 적으세요."
+          ]
+        },
+        {
+          "definition": "확실하지 않거나 밝히고 싶지 않은 일을 가리킬 때 쓰는 말.",
+          "english": "that",
+          "english_definition": "A term referring to something uncertain or what the speaker does not want to specify.",
+          "note": "",
+          "examples": [
+            "그 언제인가 눈이 많이 내리던 날에 우리는 처음 만났다.",
+            "승규가 그렇게 행동한 것은 그 무슨 까닭인지 알 수가 없었다.",
+            "돌아가신 어머니를 떠올릴 때마다 나는 가슴 속에 뜨거운 그 무엇으로 가득함을 느꼈다."
+          ]
+        }
+      ]
+    },
+    "58939": {
+      "target_code": "58939",
+      "word": "잘",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=58939",
+      "senses": [
+        {
+          "definition": "바르고 선하게.",
+          "english": "well",
+          "english_definition": "Rightly and virtuously.",
+          "note": "",
+          "examples": [
+            "잘 성장하다.",
+            "선생님은 마음을 잘 써야 복을 받는다고 강조해 말씀하셨다.",
+            "아버지는 자식들이 모두 성공한 것은 부모가 마음을 잘 쓴 덕이라고 생각하신다."
+          ]
+        },
+        {
+          "definition": "칭찬할 만큼 아주 훌륭하고 좋게.",
+          "english": "well",
+          "english_definition": "In a splendid and excellent manner that is worthy of praise.",
+          "note": "",
+          "examples": [
+            "김 씨는 어려운 생활에도 불구하고 자식을 모두 바르게 잘 키웠다.",
+            "아버지는 결혼식 날 아침에 유민에게 해 준 것도 없는데 잘 자라 주어서 고맙다고 말씀하셨다.",
+            "잘 기르다."
+          ]
+        },
+        {
+          "definition": "익숙하고 솜씨 있게.",
+          "english": "well",
+          "english_definition": "In a familiar and skillful manner.",
+          "note": "",
+          "examples": [
+            "민준이는 피아노를 정말 잘 친다.",
+            "지수는 영어를 잘 아는 친구에게 간단한 번역을 부탁했다.",
+            "잘 가르치다."
+          ]
+        },
+        {
+          "definition": "분명하고 정확하게.",
+          "english": "well",
+          "english_definition": "Clearly and precisely.",
+          "note": "",
+          "examples": [
+            "중국어를 처음 배우는 김 과장은 중국어 단어를 잘 발음할 수가 없었다.",
+            "아버지는 신문의 글자가 잘 보이지 않는다며 안경을 가져오라고 하셨다.",
+            "잘 모르다."
+          ]
+        }
+      ]
+    },
+    "60317": {
+      "target_code": "60317",
+      "word": "만들다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=60317",
+      "senses": [
+        {
+          "definition": "힘과 기술을 써서 없던 것을 생기게 하다.",
+          "english": "make; create; produce; manufacture",
+          "english_definition": "To create something that did not exist, using one's power or skill.",
+          "note": "",
+          "examples": [
+            "사람들은 포도로 술을 만들어 마신다.",
+            "옛날에는 흙으로 만든 그릇을 사용했다.",
+            "로봇을 만들면 인간 생활이 더 편리해질 것이다."
+          ]
+        },
+        {
+          "definition": "글을 쓰거나 정리하여 한 권으로 묶다.",
+          "english": "write",
+          "english_definition": "To write or edit pieces of writing and publish them in a book.",
+          "note": "",
+          "examples": [
+            "잡지사는 여자들이 즐겨 보는 패션 잡지를 만들어 팔았다.",
+            "출판사에는 디자인을 하고 편집을 하면서 책을 만드는 사람들이 모여 있다.",
+            "회사는 제품을 홍보하기 위해 물건의 사진과 설명이 들어 있는 책자를 만들었다."
+          ]
+        },
+        {
+          "definition": "새로운 상태를 이루다.",
+          "english": "form",
+          "english_definition": "To form a new state.",
+          "note": "",
+          "examples": [
+            "사람에 대한 믿음이 있어야 좋은 사회를 만들 수 있다.",
+            "그 수영 선수는 열심히 노력한 끝에 새로운 기록을 만들었다.",
+            "너무 밝지도 어둡지도 않은 불빛이 부드럽고 편안한 분위기를 만든다."
+          ]
+        },
+        {
+          "definition": "글이나 노래를 새로 짓다.",
+          "english": "write; compose; produce",
+          "english_definition": "To compose a piece of writing or song.",
+          "note": "",
+          "examples": [
+            "요즘에는 스스로 만든 노래를 부르는 가수가 많다.",
+            "김 대리는 회의 시간에 쓸 서류를 만드느라 바빴다.",
+            "시인은 여러 나라를 여행하면서 새로운 시들을 만들어 냈다."
+          ]
+        }
+      ]
+    },
+    "60319": {
+      "target_code": "60319",
+      "word": "어디",
+      "pos": "대명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=60319",
+      "senses": [
+        {
+          "definition": "모르는 곳을 가리키는 말.",
+          "english": "where",
+          "english_definition": "The word that means a place which one does not know.",
+          "note": "의문문에 쓴다.",
+          "examples": []
+        },
+        {
+          "definition": "듣는 사람에게 밝혀 말하지 않는 어느 곳을 가리키는 말.",
+          "english": "somewhere",
+          "english_definition": "The word that means a place which one does not specify to the listener.",
+          "note": "",
+          "examples": [
+            "나는 어디 가 볼 데가 있다.",
+            "남편은 어디 가야 하는 곳이 있다면서 서둘러 집을 나섰다."
+          ]
+        },
+        {
+          "definition": "정해져 있지 않거나 정확하게 말할 수 없는 어느 곳을 가리키는 말.",
+          "english": "anywhere",
+          "english_definition": "The word that means a place which is not definite or impossible to specify.",
+          "note": "",
+          "examples": [
+            "요즘은 어디를 가도 집값이 비싸다.",
+            "집에만 있으니 답답해서 어디로든 떠나고 싶다.",
+            "저 사람을 어디에선가 본 것 같은데 생각이 안 난다."
+          ]
+        },
+        {
+          "definition": "무엇이라고 말하기 어려운 점을 가리키는 말.",
+          "english": "something",
+          "english_definition": "The word that means something which is hard to pinpoint.",
+          "note": "주로 '어딘가', '어딘지'로 쓴다.",
+          "examples": [
+            "두 사람은 어딘가 어울리지 않았다.",
+            "동생이 정장을 입고 있으니 어딘지 어색해 보였다.",
+            "승규가 한 말은 다 맞는 말이었지만 어딘가 이상했다."
+          ]
+        }
+      ]
+    },
+    "61178": {
+      "target_code": "61178",
+      "word": "그렇다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=61178",
+      "senses": [
+        {
+          "definition": "상태, 모양, 성질 등이 그와 같다.",
+          "english": "so; as such; like that",
+          "english_definition": "A state, appearance, characteristic, etc. being as such.",
+          "note": "",
+          "examples": [
+            "사람이라면 모두 그럴 것이다.",
+            "지수는 가만히 있어도 그렇고 숨 쉴 때도 그렇고 가슴이 아프다고 했다.",
+            "그런 경우."
+          ]
+        },
+        {
+          "definition": "특별한 변화가 없다.",
+          "english": "same",
+          "english_definition": "Not changed much.",
+          "note": "",
+          "examples": [
+            "생활이 그냥 그렇다.",
+            "민준은 똑같은 일상이 반복되는 시골에서의 그냥 그런 생활이 지겨워졌다.",
+            "그냥 그렇다."
+          ]
+        },
+        {
+          "definition": "좋지 않거나 만족스럽지 못하다.",
+          "english": "so so",
+          "english_definition": "Not good, nor satisfactory.",
+          "note": "",
+          "examples": [
+            "시험 결과가 좀 그렇다.",
+            "민준이는 체육 성적은 좋은데 다른 과목은 성적이 좀 그래.",
+            "다소 그렇다."
+          ]
+        }
+      ]
+    },
+    "62076": {
+      "target_code": "62076",
+      "word": "같다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62076",
+      "senses": [
+        {
+          "definition": "서로 다르지 않다.",
+          "english": "same; identical; equal",
+          "english_definition": "Not different from each other.",
+          "note": "",
+          "examples": [
+            "나는 여동생과 키가 같다.",
+            "내 취미는 그의 취미와 같다.",
+            "나는 올해에도 승규와 같은 반이 되었다."
+          ]
+        },
+        {
+          "definition": "서로 비슷하다.",
+          "english": "similar; like",
+          "english_definition": "Similar to each other.",
+          "note": "",
+          "examples": [
+            "이 일은 기적과도 같습니다.",
+            "아름다운 그녀는 마치 천사와 같다.",
+            "갈대와 같다."
+          ]
+        },
+        {
+          "definition": "무엇과 비슷한 종류로 분류되어 있음을 나타내는 말.",
+          "english": "such as; like",
+          "english_definition": "A term used to indicate that one is classified into a similar group with something.",
+          "note": "'같은'으로 쓴다.",
+          "examples": [
+            "소화가 안 될 때에는 죽 같은 음식을 먹는다.",
+            "그는 지금까지 자격증 같은 것도 준비하지 않고 놀았다.",
+            "그와 같은."
+          ]
+        },
+        {
+          "definition": "'어떤 상황이나 조건이라면'의 뜻을 나타내는 말.",
+          "english": "if; in case",
+          "english_definition": "A term used to indicate 'under a certain situation or condition'.",
+          "note": "'같으면'으로 쓴다.",
+          "examples": [
+            "경제 상황이 언제나 요즘만 같으면 좋겠다.",
+            "평소 같으면 시끄러웠을 시장이 오늘은 조용했다.",
+            "작년 여름 같으면 장마가 벌써 시작됐어야 하는데 올해는 이상하게 비가 안 온다."
+          ]
+        }
+      ]
+    },
+    "62078": {
+      "target_code": "62078",
+      "word": "누구",
+      "pos": "대명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62078",
+      "senses": [
+        {
+          "definition": "모르는 사람을 가리키는 말.",
+          "english": "",
+          "english_definition": "A pronoun used to indicate a person that one does not know.",
+          "note": "의문문에 쓴다.",
+          "examples": [
+            "당신은 누구이기에 우리 누나를 찾아요?",
+            "민준은 자기 집에 들어온 낯선 사람에게 누구냐고 물었다.",
+            "선생님은 학생들에게 이 잃어버린 연필은 누구의 것이냐고 말했다."
+          ]
+        },
+        {
+          "definition": "정해지지 않은 어떤 사람을 가리키는 말.",
+          "english": "",
+          "english_definition": "A pronoun used to indicate a random person.",
+          "note": "",
+          "examples": [
+            "이 일은 매우 쉬워서 누구든지 금방 할 수 있다.",
+            "그 선수의 축구에 대한 열정은 누구 못지않게 대단했다.",
+            "승규는 누구보다도 자기 일을 아끼고 사랑하는 사람이다."
+          ]
+        },
+        {
+          "definition": "굳이 이름을 밝힐 필요가 없는 사람을 가리키는 말.",
+          "english": "",
+          "english_definition": "A pronoun used to indicate a person whose name does not have to be necessarily disclosed.",
+          "note": "",
+          "examples": [
+            "지수는 개그맨 누구 같다며 놀려 대는 소리에 화를 냈다.",
+            "이 대학은 올해 저명한 학자 누구를 신임 교수로 임명하였다.",
+            "수상자는 누구 덕에 큰 상을 받게 되었다고 수상 소감을 말하였다."
+          ]
+        }
+      ]
+    },
+    "62239": {
+      "target_code": "62239",
+      "word": "아프다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62239",
+      "senses": [
+        {
+          "definition": "다치거나 병이 생겨 통증이나 괴로움을 느끼다.",
+          "english": "hurting; aching",
+          "english_definition": "Feeling pain or suffering due to an injury or illness.",
+          "note": "",
+          "examples": [
+            "나는 어제부터 감기로 목이 아팠다.",
+            "의사는 내가 앉자마자 아픈 곳이 어디냐고 물었다.",
+            "아픈 곳."
+          ]
+        },
+        {
+          "definition": "몸의 어떤 부분을 많이 사용해서 피로나 괴로움을 느끼다.",
+          "english": "hurting; aching",
+          "english_definition": "Feeling fatigue or suffering from overuse of a body part.",
+          "note": "",
+          "examples": [
+            "나는 장시간의 운전 때문에 눈이 아팠다.",
+            "지수는 다리가 아파서 더 이상 걸을 수가 없었다.",
+            "눈이 아프다."
+          ]
+        },
+        {
+          "definition": "해결하기 어려운 일이나 복잡한 문제로 괴롭다.",
+          "english": "distressed",
+          "english_definition": "Troubled by something difficult or complicated.",
+          "note": "",
+          "examples": [
+            "조카 때문에 골치가 아팠다.",
+            "지수는 말썽꾸러기 조카를 돌볼 생각을 하니 골머리가 아파 왔다.",
+            "골머리가 아프다."
+          ]
+        },
+        {
+          "definition": "슬픔이나 연민으로 마음에 괴로운 느낌이 있다.",
+          "english": "hurting; aching",
+          "english_definition": "Feeling pain in the heart due to sadness or a lingering attachment.",
+          "note": "",
+          "examples": [
+            "지수는 남자 친구와의 이별로 가슴 아픈 추억만 남았다.",
+            "이 음악을 들으면 헤어진 여자 친구와의 아픈 추억이 떠오른다.",
+            "아픈 기억."
+          ]
+        }
+      ]
+    },
+    "62259": {
+      "target_code": "62259",
+      "word": "검다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62259",
+      "senses": [
+        {
+          "definition": "색이 불빛이 없는 밤하늘과 같이 어둡고 짙다.",
+          "english": "black; dark",
+          "english_definition": "Dark black like a night sky with no light.",
+          "note": "",
+          "examples": [
+            "학생들은 같은 반 친구의 죽음을 애도하기 위해 검은 리본을 달고 다녔다.",
+            "바닷가로 놀러 간 승규는 피부가 검게 타서 돌아왔다.",
+            "검은 구름."
+          ]
+        },
+        {
+          "definition": "법에 어긋나거나 바람직하지 않다.",
+          "english": "illegal; wrong; evil",
+          "english_definition": "Illegal or not right.",
+          "note": "",
+          "examples": [
+            "그 사람은 검은 속셈을 가지고 동업자에게 수익 분배를 재조정할 것을 요구했다.",
+            "검은 돈.",
+            "검은 마음."
+          ]
+        },
+        {
+          "definition": "희망이 없고 우울하다.",
+          "english": "hopeless; gloomy",
+          "english_definition": "Without hope; depressing.",
+          "note": "",
+          "examples": [
+            "범죄자들이 설치는 도시에는 검은 어둠이 깔려 있었다.",
+            "청소년들에게도 마약의 검은 그림자가 드리워지기 시작했다.",
+            "등록금 인상과 취업난으로 대학생들의 얼굴에 검은 그늘이 드리웠다."
+          ]
+        }
+      ]
+    },
+    "62477": {
+      "target_code": "62477",
+      "word": "잘못",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62477",
+      "senses": [
+        {
+          "definition": "잘하지 못하거나 옳지 못하게 한 일.",
+          "english": "fault; mistake; misstep",
+          "english_definition": "Something that one did not well or that one did unrighteously.",
+          "note": "",
+          "examples": [
+            "승규는 자신이 아까 낮에 저지른 잘못을 이미 뉘우치고 있었다.",
+            "김 교수는 학생들이 낸 과제를 읽어 보고는 몇 가지 잘못을 지적해 주었다.",
+            "아무리 화가 나도 어른에게 함부로 말하고 예의 없이 행동하는 것은 큰 잘못이다."
+          ]
+        }
+      ]
+    },
+    "62478": {
+      "target_code": "62478",
+      "word": "잘못",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62478",
+      "senses": [
+        {
+          "definition": "바르지 않게 또는 틀리게.",
+          "english": "wrongly; incorrectly",
+          "english_definition": "In a way that is wrong or not right.",
+          "note": "",
+          "examples": [
+            "나는 버스를 잘못 타는 바람에 평소보다 학교에 늦게 도착했다.",
+            "그는 아버지에게 전화를 한다는 것이 전화번호를 잘못 눌러 나에게 전화를 했다.",
+            "잘못 가르치다."
+          ]
+        },
+        {
+          "definition": "적당하지 않게.",
+          "english": "improperly; inappropriately",
+          "english_definition": "In a way that is not proper.",
+          "note": "",
+          "examples": [
+            "설탕을 잘못 넣어서 그런지 커피가 아주 썼다.",
+            "과일을 잘못 보관해서 창고에 있는 과일이 모두 썩어 버렸다.",
+            "그는 음식을 잘못 먹었는지 아까부터 계속 배가 아프다고 했다."
+          ]
+        },
+        {
+          "definition": "깊이 생각하지 아니하고 함부로.",
+          "english": "thoughtlessly; recklessly",
+          "english_definition": "Carelessly without thinking deeply.",
+          "note": "",
+          "examples": [
+            "이 기계는 잘못 건들었다가는 크게 다칠 수 있으니 조심해야 한다.",
+            "그는 선생님 앞에서도 조심할 줄 모르고 잘못 행동할 때가 많았다.",
+            "그가 컴퓨터를 잘못 만지는 바람에 중요한 프로그램 몇 개가 지워졌다."
+          ]
+        },
+        {
+          "definition": "재수 없게.",
+          "english": "unfortunately; by bad luck",
+          "english_definition": "Unluckily.",
+          "note": "",
+          "examples": [
+            "그는 깡패에게 잘못 걸려서 가진 돈을 모두 빼앗겼다.",
+            "일이 잘못 꼬여 하루 만에 끝날 일이 일주일이나 걸려 끝이 났다.",
+            "사기꾼의 속임수에 잘못 걸려들어 그는 모든 재산을 다 날려 버렸다."
+          ]
+        }
+      ]
+    },
+    "62597": {
+      "target_code": "62597",
+      "word": "주무시다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62597",
+      "senses": [
+        {
+          "definition": "(높임말로) 자다.",
+          "english": "sleep",
+          "english_definition": "(honorific) To sleep.",
+          "note": "",
+          "examples": [
+            "할아버지, 안녕히 주무셨어요?",
+            "삼촌, 여기서 이러지 마시고 방에 가서 주무세요.",
+            "주무시고 계시다."
+          ]
+        }
+      ]
+    },
+    "62822": {
+      "target_code": "62822",
+      "word": "어느",
+      "pos": "관형사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62822",
+      "senses": [
+        {
+          "definition": "여럿 중에서 어떤.",
+          "english": "which",
+          "english_definition": "Asking for particular something or someone within a number of things.",
+          "note": "주로 의문문에 쓴다.",
+          "examples": [
+            "어느 계절을 좋아하세요?",
+            "어느 쪽이 학교로 가는 길입니까?",
+            "어느 나라에서 왔니?"
+          ]
+        },
+        {
+          "definition": "확실하지 않거나 분명하게 말할 필요가 없는 사물, 사람, 때, 곳 등을 가리키는 말.",
+          "english": "certain",
+          "english_definition": "Meaning a thing, person, time, place, etc., that is not certain or does not need to be specified.",
+          "note": "",
+          "examples": [
+            "옛날 어느 마을에 한 가족이 살았습니다.",
+            "그러던 어느 날의 일이었다.",
+            "어느 학생이 선생님에게 편지를 썼다고 한다."
+          ]
+        },
+        {
+          "definition": "어떤 것이든지.",
+          "english": "any",
+          "english_definition": "Whatever",
+          "note": "주로 '어느 ~나/든(지)/라도'로 쓴다.",
+          "examples": [
+            "추석에는 어느 집이나 송편을 먹는다.",
+            "공부를 열심히 하는 지수는 어느 과목이든 성적이 좋았다.",
+            "사랑하는 그 사람이 있는 곳이라면 어느 곳이든지 함께 하겠습니다."
+          ]
+        },
+        {
+          "definition": "얼마쯤, 조금. 또는 정도나 수, 양이 얼만큼 되는지 물을 때 하는 말.",
+          "english": "certain; some",
+          "english_definition": "Certain or a little, or the word that is used to ask about a degree, number or amount.",
+          "note": "주로 ‘정도’나 ‘만큼’ 등의 명사 앞에 쓴다.",
+          "examples": [
+            "어느 만큼.",
+            "어느 정도.",
+            "어느 만큼 높다."
+          ]
+        }
+      ]
+    },
+    "62835": {
+      "target_code": "62835",
+      "word": "것",
+      "pos": "의존 명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62835",
+      "senses": [
+        {
+          "definition": "정확히 가리키는 대상이 정해지지 않은 사물이나 사실.",
+          "english": "something",
+          "english_definition": "A bound noun used to refer to a thing or fact that is not specified or determind by someone.",
+          "note": "",
+          "examples": [
+            "이번 일로 지수는 많은 것을 깨달았다.",
+            "아이들은 엄마에게 먹을 것을 달라고 했다.",
+            "아버지는 낡은 가방을 버리고 새로운 것을 사셨다."
+          ]
+        },
+        {
+          "definition": "(낮잡아 이르는 말로) 사람 또는 동물.",
+          "english": "",
+          "english_definition": "(disparaging) A bound noun used to refer to a person or animal.",
+          "note": "",
+          "examples": [
+            "알지도 못하는 것들이 무슨 말을 하는 거야?",
+            "노인은 젊은 것들이 버릇이 없다면서 혀를 끌끌 찼다.",
+            "다 큰 것."
+          ]
+        },
+        {
+          "definition": "그 사람의 소유물임을 나타내는 말.",
+          "english": "",
+          "english_definition": "A bound noun used to indicate that something belongs to a certain person.",
+          "note": "주로 '~ 것'으로 쓴다.",
+          "examples": [
+            "노란 구두는 내 것이고 빨간 구두는 동생 것이다.",
+            "나는 음식을 하면 언제나 할머니 것부터 담아 드린다.",
+            "나와 지수는 내 것 네 것을 따지지 않을 만큼 친한 친구이다."
+          ]
+        },
+        {
+          "definition": "어떤 행위나 상태, 일을 나타내는 말.",
+          "english": "",
+          "english_definition": "A bound noun used to indicate a certain act, situation, or accomplishment.",
+          "note": "",
+          "examples": [
+            "우리는 사람이 만나면 헤어진다는 것을 안다.",
+            "어른들은 아이들이 말하는 것을 들으면서 웃기만 했다.",
+            "지수는 자신이 그다지 똑똑하지 못하다는 것을 잘 알고 있다."
+          ]
+        }
+      ]
+    },
+    "62841": {
+      "target_code": "62841",
+      "word": "시간",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62841",
+      "senses": [
+        {
+          "definition": "어떤 때에서 다른 때까지의 동안.",
+          "english": "time",
+          "english_definition": "The amount of time from one point to another.",
+          "note": "",
+          "examples": [
+            "외국어를 잘하려면 시간이 많이 걸린다.",
+            "아버지는 은퇴 후 정원을 가꾸면서 시간을 보냈다.",
+            "하루하루는 우리 모두에게 너무도 소중한 시간이다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 하도록 정해진 때. 또는 하루 중의 어느 한 때.",
+          "english": "time",
+          "english_definition": "A time when one is supposed to do something, or a particular time of day.",
+          "note": "",
+          "examples": [
+            "지수는 무슨 일을 하든 정해진 시간을 정확하게 지킨다.",
+            "비행기가 도착한 것은 오후 4시를 조금 넘긴 시간이었다.",
+            "내 방의 시계는 깨졌지만 언제나 정확한 시간을 가리킨다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 할 여유.",
+          "english": "time",
+          "english_definition": "Spare time that one can use to do something.",
+          "note": "",
+          "examples": [
+            "승규는 며칠 시간을 내서 고향에 다녀올 생각이다.",
+            "바쁘신 가운데 회의에 참석하기 위해 시간을 내 주셔서 감사합니다.",
+            "나는 이번 주말에 오랜만에 시간이 나서 백화점에 쇼핑을 하러 갔다."
+          ]
+        },
+        {
+          "definition": "어떤 일이 시작되어 끝날 때까지의 동안.",
+          "english": "time; hours",
+          "english_definition": "An interval from the time something starts to the time it ends.",
+          "note": "",
+          "examples": [
+            "학생들은 쉬는 시간마다 매점에 가서 군것질을 했다.",
+            "선생님은 수업 시간에 조는 학생들을 호되게 야단치셨다.",
+            "우리 회사의 근무 시간은 아침 9시부터 오후 5시까지이다."
+          ]
+        }
+      ]
+    },
+    "62885": {
+      "target_code": "62885",
+      "word": "후",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=62885",
+      "senses": [
+        {
+          "definition": "얼마만큼 시간이 지나간 다음.",
+          "english": "later time",
+          "english_definition": "A point of time following a certain passage of time.",
+          "note": "",
+          "examples": [
+            "며칠 후, 우연히 우리는 선생님을 만났다.",
+            "비가 그친 후에야 우리는 학교로 출발하였다.",
+            "넘어지고 나서 한참 후에 나는 아픔을 느꼈다."
+          ]
+        },
+        {
+          "definition": "일이 지나간 얼마 뒤.",
+          "english": "future; later time",
+          "english_definition": "A point in time in the future.",
+          "note": "",
+          "examples": [
+            "후에 갖다주다.",
+            "후에 논의하다.",
+            "후에 만나다."
+          ]
+        }
+      ]
+    },
+    "64531": {
+      "target_code": "64531",
+      "word": "다음",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=64531",
+      "senses": [
+        {
+          "definition": "어떤 차례에서 바로 뒤.",
+          "english": "next; following",
+          "english_definition": "Something that comes right after another in a sequence of time, place, turn, etc.",
+          "note": "",
+          "examples": [
+            "진료 대기 환자 중에서 나는 할머니 다음으로 세 번째였다.",
+            "지수는 친구를 만나기로 한 날에 바빠서 다음 날로 약속을 미루었다.",
+            "다음 날."
+          ]
+        },
+        {
+          "definition": "이번 차례의 바로 뒤.",
+          "english": "next; following",
+          "english_definition": "The thing that comes right after this time or turn in sequence.",
+          "note": "",
+          "examples": [
+            "사회자는 다음에 노래할 사람을 소개했다.",
+            "학생들은 모두 선생님의 다음 말을 기다렸다.",
+            "다음 말."
+          ]
+        },
+        {
+          "definition": "나란히 있는 것들 중에서 바로 닿아 있는 것.",
+          "english": "next",
+          "english_definition": "Something nearest to another in a series of things queued up.",
+          "note": "",
+          "examples": [
+            "저 집 다음 건물에 주차장이 있습니다.",
+            "다음 가게.",
+            "다음 건물."
+          ]
+        },
+        {
+          "definition": "어떤 일이 끝난 뒤.",
+          "english": "being after",
+          "english_definition": "The time after a thing is finished.",
+          "note": "주로 '-은 다음(에)'로 쓴다.",
+          "examples": [
+            "엄마는 숙제를 한 다음에 게임을 하라고 하셨다.",
+            "아버지는 식사를 하신 다음 늘 담배를 한 대 피우셨다.",
+            "먹은 다음."
+          ]
+        }
+      ]
+    },
+    "64963": {
+      "target_code": "64963",
+      "word": "싫어하다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=64963",
+      "senses": [
+        {
+          "definition": "어떤 것을 마음에 들어 하지 않거나 원하지 않다.",
+          "english": "hate; dislike",
+          "english_definition": "To not like or want something.",
+          "note": "",
+          "examples": [
+            "아내는 콩을 싫어하는 아이에게 콩을 먹이기 위해서 애를 썼다.",
+            "나는 사람이 많은 곳에 가기를 싫어해서 한적하고 조용한 곳을 약속 장소로 정한다.",
+            "가기 싫어하다."
+          ]
+        }
+      ]
+    },
+    "65172": {
+      "target_code": "65172",
+      "word": "쓰다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=65172",
+      "senses": [
+        {
+          "definition": "연필이나 펜 등의 필기도구로 종이 등에 획을 그어서 일정한 글자를 적다.",
+          "english": "write",
+          "english_definition": "To write some letters by drawing strokes on paper with a writing instrument such as a pencil, pen, etc.",
+          "note": "",
+          "examples": [
+            "아이는 새로 산 공책의 앞에 자기 이름을 썼다.",
+            "나는 회사 동료의 결혼식에 참석하여, 봉투에 이름을 쓰고 축의금을 냈다.",
+            "글씨를 쓰다."
+          ]
+        },
+        {
+          "definition": "머릿속의 생각이나 느낌 등을 종이 등에 글로 적어 나타내다.",
+          "english": "write; compose; put down",
+          "english_definition": "To express one's thoughts, feelings, etc., by writing them on paper, etc.",
+          "note": "",
+          "examples": [
+            "군대에 간 아들은 매달 편지를 써 나에게 보냈다.",
+            "나는 초등학교 시절부터 서른 살이 된 지금까지 꾸준히 일기를 써 왔다.",
+            "감상문을 쓰다."
+          ]
+        },
+        {
+          "definition": "원서나 계약서 등의 일정한 양식을 갖춘 문서를 작성하다.",
+          "english": "write; make",
+          "english_definition": "To draw up a document of a certain form such as an application, contract, etc.",
+          "note": "",
+          "examples": [
+            "승규는 취직을 하기 위해 입사 지원서를 썼다.",
+            "나는 계약서를 쓰기 전에 계약 내용을 다시 한번 꼼꼼히 검토해 보았다.",
+            "계약서를 쓰다."
+          ]
+        },
+        {
+          "definition": "머릿속에 떠오른 노래를 악보에 음표로 나타내다.",
+          "english": "write; compose",
+          "english_definition": "To write notes of a song that has come across one's mind on a musical note.",
+          "note": "",
+          "examples": [
+            "곡을 쓰다.",
+            "나는 곡을 쓸 때에는 며칠이고 밖에 나가지 않았다.",
+            "그 가수는 이번 앨범에서 모든 곡을 자신이 직접 썼다."
+          ]
+        }
+      ]
+    },
+    "65173": {
+      "target_code": "65173",
+      "word": "쓰다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=65173",
+      "senses": [
+        {
+          "definition": "모자나 가발 등을 머리에 얹어 덮다.",
+          "english": "wear; put on",
+          "english_definition": "To cover one's head with a hat, wig, etc.",
+          "note": "",
+          "examples": [
+            "이 지역은 자외선이 강하므로 외출할 때 모자를 쓰고 나가는 것이 좋다.",
+            "머리에 면사포를 쓴 아름다운 신부가 아버지의 손을 잡고 식장에 입장했다.",
+            "가발을 쓰다."
+          ]
+        },
+        {
+          "definition": "얼굴에 어떤 물건을 걸거나 덮어쓰다.",
+          "english": "wear; put on",
+          "english_definition": "To hang something on one's face or cover one's face with it.",
+          "note": "",
+          "examples": [
+            "요즘 같은 황사가 심한 날에 외출할 때는 마스크를 쓰는 것이 좋다.",
+            "우리는 화재에 대비해 방독면을 쓰는 방법에 대해서 훈련을 받았다.",
+            "가면을 쓰다."
+          ]
+        },
+        {
+          "definition": "먼지나 가루 등을 온몸에 덮은 상태가 되다.",
+          "english": "be covered with",
+          "english_definition": "To be in a state of all of one's body being coated with dust, powder, etc.",
+          "note": "",
+          "examples": [
+            "장난감을 찾겠다며 창고에 들어갔던 동생은 온몸에 먼지를 쓰고 나왔다.",
+            "나에게 빵을 만들어 주겠다고, 온통 밀가루를 쓴 여자 친구의 모습은 아주 사랑스러웠다.",
+            "그을음을 쓰다."
+          ]
+        },
+        {
+          "definition": "우산이나 양산 등을 머리 위에 펴 들다.",
+          "english": "put up; hold; raise",
+          "english_definition": "To hold an umbrella, parasol, etc., over one's head.",
+          "note": "",
+          "examples": [
+            "어머니는 여름에 밖에 나가실 때면, 햇빛을 가리기 위해 항상 양산을 쓰신다.",
+            "우산을 썼는데도 제멋대로 몰아치는 바람 때문에 삽시간에 비에 흠뻑 젖고 말았다.",
+            "양산을 쓰다."
+          ]
+        }
+      ]
+    },
+    "65864": {
+      "target_code": "65864",
+      "word": "비슷하다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=65864",
+      "senses": [
+        {
+          "definition": "둘 이상의 크기, 모양, 상태, 성질 등이 똑같지는 않지만 많은 부분이 닮아 있다.",
+          "english": "similar",
+          "english_definition": "Two or more sizes, shapes, states, qualities, etc., being not the same, but being alike in many ways.",
+          "note": "",
+          "examples": [
+            "자매는 생긴 것도 비슷하고 입은 옷도 비슷했다.",
+            "아버지와 나는 닮은 점이 별로 없는데 급한 성격은 비슷하다.",
+            "비슷한 느낌."
+          ]
+        },
+        {
+          "definition": "확실하지는 않지만 무엇으로 짐작되는 상태에 있다.",
+          "english": "be like",
+          "english_definition": "Being guessed as something although it is not certain.",
+          "note": "",
+          "examples": [
+            "바다에 보트 비슷한 것이 떠 있었다.",
+            "동생은 멀리서 지갑 비슷한 물건이 떨어져 있는 것을 보고 주우러 갔다.",
+            "개 비슷한 동물."
+          ]
+        },
+        {
+          "definition": "부족하지만 비교 대상과 어느 정도 닮아 있다.",
+          "english": "similar",
+          "english_definition": "Resembling something, though not precisely.",
+          "note": "",
+          "examples": [
+            "아이는 자기 이름을 쓴다며 글자 비슷한 것을 그려 놓았다.",
+            "민준이는 여자 친구에게 장난 비슷하게 사랑을 고백했다.",
+            "농담 비슷한 얘기."
+          ]
+        }
+      ]
+    },
+    "66030": {
+      "target_code": "66030",
+      "word": "많이",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66030",
+      "senses": [
+        {
+          "definition": "수나 양, 정도 등이 일정한 기준보다 넘게.",
+          "english": "much; in large numbers; in large amounts",
+          "english_definition": "In a state in which a number, amount, degree, etc., are larger than a certain standard.",
+          "note": "",
+          "examples": [
+            "지난 밤에 술을 많이 마셨더니 속이 거북했다.",
+            "그는 평생을 쓰고도 남을 만큼 돈을 많이 벌었다고 했다.",
+            "그 상자는 생각보다 많이 무거워서 남자 둘이서도 들기 힘들었다."
+          ]
+        }
+      ]
+    },
+    "66236": {
+      "target_code": "66236",
+      "word": "몇",
+      "pos": "관형사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66236",
+      "senses": [
+        {
+          "definition": "그다지 많지 않은 얼마만큼의 막연한 수의.",
+          "english": "some; several",
+          "english_definition": "An indefinite, small number of.",
+          "note": "",
+          "examples": [
+            "나는 지수와 함께 몇 차례 수업을 같이 들은 적이 있다.",
+            "그와 마지막으로 만났던 것이 몇 달 전인지 기억조차 나지 않았다.",
+            "우리는 시간이 가는 줄도 모르고 몇 시간 동안이나 이야기를 나누었다."
+          ]
+        },
+        {
+          "definition": "잘 모르는 수를 물을 때 쓰는 말.",
+          "english": "how many",
+          "english_definition": "A phrase used when the speaker asks about the number of things or people.",
+          "note": "주로 의문문에 쓴다.",
+          "examples": [
+            "달걀은 몇 개나 사 왔니?",
+            "일주일에 몇 번 정도 외식을 하세요?",
+            "어제 회의에는 몇 명이 참석했습니까?"
+          ]
+        }
+      ]
+    },
+    "66248": {
+      "target_code": "66248",
+      "word": "바쁘다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66248",
+      "senses": [
+        {
+          "definition": "할 일이 많거나 시간이 없어서 다른 것을 할 여유가 없다.",
+          "english": "busy; hectic",
+          "english_definition": "Having no time to do other things because one has many things to do or has little time.",
+          "note": "",
+          "examples": [
+            "유민이는 오늘 매우 바빴다.",
+            "바쁜 생활이 계속되다 보니 시간이 어떻게 흘러가는지도 모르겠다.",
+            "그는 새로 직장에 들어간 이후 매우 바쁜 것 같았다."
+          ]
+        },
+        {
+          "definition": "몹시 급하다.",
+          "english": "urgent; pressing",
+          "english_definition": "Being in a hurry.",
+          "note": "",
+          "examples": [
+            "민준이는 오전부터 바쁘게 움직였다.",
+            "기차를 놓칠세라 사람들이 바쁘게 뛰었다.",
+            "약속 시간에 늦지 않도록 나는 바쁘게 움직였다."
+          ]
+        },
+        {
+          "definition": "한 가지 일에 매달려 다른 것을 할 여유가 없다.",
+          "english": "be occupied",
+          "english_definition": "Having no time to do other things because one is occupied with one thing.",
+          "note": "",
+          "examples": [
+            "지수는 이번 주 내내 공부하기에 바빴다.",
+            "다른 사람들은 아랑곳하지 않고 그는 혼자 먹기에 바빴다.",
+            "먹고살기에 바빠 아이들을 제대로 돌보지 못한 게 그녀는 마음에 걸렸다."
+          ]
+        },
+        {
+          "definition": "어떤 행동이 끝나고 다른 행동을 하기까지의 시간이 매우 짧다.",
+          "english": "having no time in between",
+          "english_definition": "Having little time between a certain act and another act.",
+          "note": "주로 '-기(가) 바쁘게'로 쓴다.",
+          "examples": [
+            "지칠 대로 지친 승규는 집으로 돌아오기가 바쁘게 그대로 잠이 들었다.",
+            "내 인사가 끝나기 바쁘게 그 사내는 나에게 다짜고짜 소리를 지르는 것이었다.",
+            "용왕의 말이 떨어지기가 바쁘게 하늘을 덮고 있던 구름이 걷히고 안개도 사라졌다."
+          ]
+        }
+      ]
+    },
+    "66314": {
+      "target_code": "66314",
+      "word": "쉽다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66314",
+      "senses": [
+        {
+          "definition": "하기에 힘들거나 어렵지 않다.",
+          "english": "easy",
+          "english_definition": "Not hard or difficult to do.",
+          "note": "",
+          "examples": [
+            "동생은 항상 간단하게 할 수 있는 쉬운 일만 하려고 한다.",
+            "이번 문제는 중학교를 졸업한 사람이면 쉽게 풀 수 있다.",
+            "선생님의 설명은 친절하고 자세해서 이해하기 쉽다."
+          ]
+        },
+        {
+          "definition": "힘들이지 않고 대할 수 있거나 자주 있다.",
+          "english": "easy; common",
+          "english_definition": "Not hard to encounter or witness.",
+          "note": "주로 '않다', '없다' 등과 같은 부정을 나타내는 말과 함께 쓴다.",
+          "examples": [
+            "바쁜 삼촌을 만나는 일은 좀처럼 쉽지 않다.",
+            "이제 집에서 옷을 만들어 입는 사람은 쉽게 찾아볼 수 없다.",
+            "이곳 아이들은 평소에 피자를 먹기가 쉽지 않아 외부 사람이 피자를 사 오면 무척 좋아한다."
+          ]
+        },
+        {
+          "definition": "가능성이 많다.",
+          "english": "easy; prone",
+          "english_definition": "Having a lot of possibility.",
+          "note": "",
+          "examples": [
+            "우유는 상하기가 쉽다.",
+            "일을 빨리빨리 하면 실수하기가 쉽다.",
+            "먹기만 하고 운동을 안 하면 살이 찌기가 쉽다."
+          ]
+        }
+      ]
+    },
+    "66341": {
+      "target_code": "66341",
+      "word": "가",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66341",
+      "senses": [
+        {
+          "definition": "어떤 상태나 상황에 놓인 대상이나 동작의 주체를 나타내는 조사.",
+          "english": "ga",
+          "english_definition": "A postpositional particle referring to a subject under a certain state or situation, or the subject of an act.",
+          "note": "받침 없는 명사 뒤에 붙여 쓴다.",
+          "examples": [
+            "민준이가 용돈을 다 써서 학교에서 집까지 걸어갔다.",
+            "선글라스를 낀 남자가 아까부터 아이를 쳐다본다.",
+            "물가가 점점 오르고 있다."
+          ]
+        },
+        {
+          "definition": "바뀌게 되는 대상이나 부정하는 대상임을 나타내는 조사.",
+          "english": "ga",
+          "english_definition": "A postpositional particle referring to the subject that is to be changed, or the subject that one denies.",
+          "note": "받침 없는 명사 뒤에 붙여 쓴다. 주로 '되다', '아니다'와 함께 쓴다.",
+          "examples": [
+            "동생은 졸업 후에 변호사가 되었다.",
+            "이것은 내가 어제 들었던 이야기가 아니다.",
+            "부끄러움을 많이 타던 옆집 아이가 가수가 될 줄은 아무도 몰랐다."
+          ]
+        },
+        {
+          "definition": "앞말을 강조하는 뜻을 나타내는 조사.",
+          "english": "ga",
+          "english_definition": "A postpositional particle used to emphasize the preceding statement.",
+          "note": "받침 없는 명사나 부사어 뒤에 붙여 쓴다.",
+          "examples": [
+            "날씨가 더워서 도대체가 입맛이 없다.",
+            "지수는 입사한 지 한 달이 지났는데도 업무가 손에 익지가 않는다.",
+            "김 대리는 시키는 일은 잘 해내지만 어쩐지 믿음직스럽지가 못하다."
+          ]
+        }
+      ]
+    },
+    "66585": {
+      "target_code": "66585",
+      "word": "짓다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66585",
+      "senses": [
+        {
+          "definition": "재료를 가지고 밥, 옷, 집 등을 만들다.",
+          "english": "make",
+          "english_definition": "To make food, clothes, buildings, etc., with necessary ingredients or components.",
+          "note": "",
+          "examples": [
+            "그녀는 남편의 옷은 모두 손수 지어서 해 입혔다.",
+            "어머니는 가족들의 건강을 위해 항상 잡곡밥을 지어 주셨다.",
+            "지은 건물."
+          ]
+        },
+        {
+          "definition": "여러 가지 재료를 섞어 약을 만들다.",
+          "english": "make",
+          "english_definition": "To make medicine by mixing several ingredients.",
+          "note": "",
+          "examples": [
+            "어머니께서는 날씨가 무더울 때는 기력을 보충해야 한다며 보약을 지어 오셨다.",
+            "약사는 일주일 치의 약을 지어 주면서 일주일 후에도 낫지 않으면 병원에 가보라고 했다.",
+            "짓는 탕약."
+          ]
+        },
+        {
+          "definition": "시, 소설, 편지, 노래 가사 등의 글을 쓰다.",
+          "english": "write",
+          "english_definition": "To write a poem, novel, letter, song, etc.",
+          "note": "",
+          "examples": [
+            "그 소설가는 서울 생활을 정리하고 고향에 내려와 글을 지으며 조용히 지냈다.",
+            "할아버지께서는 어릴 때부터 한문 공부를 많이 하셔서 한시도 지을 줄 아셨다.",
+            "지은 가사."
+          ]
+        },
+        {
+          "definition": "노래의 곡조를 만들다.",
+          "english": "compose",
+          "english_definition": "To write the melody of a song.",
+          "note": "",
+          "examples": [
+            "그는 당시 신라에서 가장 아름답다는 여인을 아내로 삼기 위하여 동요를 지어 퍼뜨렸다.",
+            "작곡가인 그는 평생 이백 곡이 넘는 노래들을 지어 왔다.",
+            "지은 가요."
+          ]
+        }
+      ]
+    },
+    "66954": {
+      "target_code": "66954",
+      "word": "-았-",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=66954",
+      "senses": [
+        {
+          "definition": "사건이 과거에 일어났음을 나타내는 어미.",
+          "english": "-at-",
+          "english_definition": "An ending of a word used to indicate that an event happened in the past.",
+          "note": "",
+          "examples": [
+            "나는 동생의 거짓말에 또 속았다.",
+            "지수는 방학을 하자마자 고향에 갔다.",
+            "어제는 일요일이라 백화점에 사람이 많았다."
+          ]
+        },
+        {
+          "definition": "어떤 사건이 과거에 완료되었거나 그 사건의 결과가 현재까지 지속되는 상황을 나타내는 어미.",
+          "english": "-at-",
+          "english_definition": "An ending of a word used to indicate that an event was completed in the past or its result continues in the present.",
+          "note": "",
+          "examples": [
+            "나는 잠자리에 누워 눈을 감았다.",
+            "엄마는 아들을 위해 냉장고에 반찬을 만들어 놓았다.",
+            "승규는 꼭 사고 싶은 장난감이 있어 용돈을 열심히 모았다."
+          ]
+        },
+        {
+          "definition": "미래의 일을 그럴 것이라고 단정하여 말할 때 쓰는 어미.",
+          "english": "-at-",
+          "english_definition": "An ending of a word used to state assertively that a future event will be so.",
+          "note": "",
+          "examples": [
+            "그렇게 부지런하지 못해서야 넌 대학은 다 갔다.",
+            "오늘은 낮잠을 너무 많이 자서 이제 밤에 잠은 다 잤다.",
+            "이렇게 다 어질러 놓고. 엄마 오면 너 이제 진짜 큰일 났다."
+          ]
+        }
+      ]
+    },
+    "67848": {
+      "target_code": "67848",
+      "word": "왜",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=67848",
+      "senses": [
+        {
+          "definition": "무슨 이유로. 또는 어째서.",
+          "english": "why",
+          "english_definition": "For what reason; how come.",
+          "note": "",
+          "examples": [
+            "그가 왜 약속을 어겼는지 너무 궁금했다.",
+            "하늘은 왜 파란색이냐고 딸이 내게 물었다."
+          ]
+        }
+      ]
+    },
+    "68719": {
+      "target_code": "68719",
+      "word": "-었-",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=68719",
+      "senses": [
+        {
+          "definition": "사건이 과거에 일어났음을 나타내는 어미.",
+          "english": "-eot-",
+          "english_definition": "An ending of a word used to indicate that an event happened in the past.",
+          "note": "‘이다’, 끝음절의 모음이 ‘ㅏ, ㅗ’가 아닌 동사와 형용사 뒤에, 다른 어미 앞에 붙여 쓴다.",
+          "examples": [
+            "지수는 어렸을 때부터 참 예뻤다.",
+            "하루 종일 걸었더니 무척 피곤하다.",
+            "어제 술을 너무 많이 마셨는지 머리가 아프다."
+          ]
+        },
+        {
+          "definition": "어떤 사건이 과거에 완료되었거나 그 사건의 결과가 현재까지 지속되는 상황을 나타내는 어미.",
+          "english": "-eot-",
+          "english_definition": "An ending of a word used to indicate that an event was completed in the past or its result continues in the present.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’가 아닌 동사와 형용사 뒤에, 다른 어미 앞에 붙여 쓴다.",
+          "examples": [
+            "작년 봄에 벚꽃이 활짝 피었다.",
+            "나는 뜨거운 햇살을 피하기 위해 모자를 썼다.",
+            "지수는 방을 너무 어질렀다고 아버지께 꾸중을 들었다."
+          ]
+        },
+        {
+          "definition": "미래의 일을 그럴 것이라고 단정하여 말할 때 쓰는 어미.",
+          "english": "-eot-",
+          "english_definition": "A ending of a word used to assertively state that the future event will be like that.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’가 아닌 동사와 형용사 뒤에, 다른 어미 앞에 붙여 쓴다.",
+          "examples": [
+            "벌써 두 번째 홍수야. 올해 농사는 다 지었군.",
+            "이렇게 열심히 공부하는 걸 보니 이번엔 시험에 붙었네, 붙었어.",
+            "그렇게 매일 놀기만 하니 너는 틀림없이 시험에 떨어졌어."
+          ]
+        }
+      ]
+    },
+    "68755": {
+      "target_code": "68755",
+      "word": "빠르다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=68755",
+      "senses": [
+        {
+          "definition": "어떤 동작을 하는 데 걸리는 시간이 짧다.",
+          "english": "fast; quick",
+          "english_definition": "Taking a short time to accomplish certain actions.",
+          "note": "",
+          "examples": [
+            "그가 빠르게 음식을 먹어치웠다.",
+            "해가 저물자 일꾼들의 손놀림이 빨랐다.",
+            "지수는 일 처리가 빠르고 확실해서 같이 일하는 사람들로부터 좋은 평을 듣는다."
+          ]
+        },
+        {
+          "definition": "한곳에서 다른 곳으로 움직이는 데 걸리는 시간이 짧다.",
+          "english": "speedy; fast",
+          "english_definition": "The time taken to move from one place to another place being short.",
+          "note": "",
+          "examples": [
+            "기차가 빠르다.",
+            "그 자동차는 무척 빨라서 순식간에 내 앞을 지나갔다.",
+            "그가 달리는 속도는 너무 빨라 내가 도저히 따라잡을 수 없었다."
+          ]
+        },
+        {
+          "definition": "어떤 일이 이루어지는 데 걸리는 시간이 짧다.",
+          "english": "rapid",
+          "english_definition": "The time taken for something to be achieved being short.",
+          "note": "",
+          "examples": [
+            "그는 맡은 일을 열심히 해냈고, 성실한 만큼 승진도 빠른 편이었다.",
+            "1700년 이후부터는 인구 증가율이 매우 빨랐다.",
+            "성장이 빠르다."
+          ]
+        },
+        {
+          "definition": "어떤 것이 다른 것보다 시간 순서상으로 앞서 있다.",
+          "english": "early",
+          "english_definition": "Something being ahead of another thing in time.",
+          "note": "",
+          "examples": [
+            "둘은 쌍둥이로 태어났지만 지수가 승규보다 조금 빠르게 태어나 승규는 지수보고 누나라 불렀다.",
+            "나는 다른 사람들보다 출근 시간이 빨랐다.",
+            "빠르게 들어오다."
+          ]
+        }
+      ]
+    },
+    "68796": {
+      "target_code": "68796",
+      "word": "있다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=68796",
+      "senses": [
+        {
+          "definition": "사람이나 동물이 어느 곳에서 떠나거나 벗어나지 않고 머물다.",
+          "english": "be; stay",
+          "english_definition": "For a person or animal to remain in a certain place without leaving or getting out of it.",
+          "note": "",
+          "examples": [
+            "나는 서울에 일 년 동안 있었다.",
+            "그는 방학 내내 계속 집에만 있는다고 했다.",
+            "엄마는 \"엄마 시장 다녀올 테니 잠깐만 혼자 있어\"하고 밖에 나가셨다."
+          ]
+        },
+        {
+          "definition": "직장에 계속 다니다.",
+          "english": "work for; serve",
+          "english_definition": "To keep working for a company.",
+          "note": "",
+          "examples": [
+            "나는 이 사무실에 있은 지 벌써 십 년이 되었다.",
+            "승규는 회사에 계속 있어 봤자 장래에 도움이 될 것 같지 않다는 생각이 들었다."
+          ]
+        },
+        {
+          "definition": "사람이나 동물이 어떤 상태를 계속 유지하다.",
+          "english": "keep",
+          "english_definition": "For a person or animal to maintain a certain state.",
+          "note": "",
+          "examples": [
+            "떠들지 말고 얌전하게 있어.",
+            "얌전하게 있다.",
+            "가만히 있다."
+          ]
+        },
+        {
+          "definition": "얼마의 시간이 지나가다.",
+          "english": "",
+          "english_definition": "For some time to pass.",
+          "note": "",
+          "examples": [
+            "이제 사흘만 있으면 방학이 시작된다.",
+            "아버지는 밖에서 한참 있다가 집으로 들어오셨다.",
+            "머리가 갑자기 아팠는데 조금 있으니 괜찮아졌다."
+          ]
+        }
+      ]
+    },
+    "68853": {
+      "target_code": "68853",
+      "word": "에서",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=68853",
+      "senses": [
+        {
+          "definition": "앞말이 행동이 이루어지고 있는 장소임을 나타내는 조사.",
+          "english": "eseo",
+          "english_definition": "A postpositional particle used to indicate that the preceding word refers to a place where a certain action is being done.",
+          "note": "",
+          "examples": [
+            "그 가수는 무대에서 열창을 한다.",
+            "너는 방학이라고 집에서 텔레비전만 보니?",
+            "우리는 주말에 놀이공원에서 만나기로 했다."
+          ]
+        },
+        {
+          "definition": "앞말이 출발점의 뜻을 나타내는 조사.",
+          "english": "eseo",
+          "english_definition": "A postpositional particle used to indicate that the preceding word refers to the starting point of something.",
+          "note": "",
+          "examples": [
+            "지금 학교에서 집으로 가는 길이야.",
+            "한 시에서 두 시까지는 점심시간입니다.",
+            "여기에서 얼마나 더 올라가야 산 정상에 도착해요?"
+          ]
+        },
+        {
+          "definition": "앞말이 어떤 일의 출처임을 나타내는 조사.",
+          "english": "eseo",
+          "english_definition": "A postpositional particle used to indicate that the preceding word refers to the source of something.",
+          "note": "",
+          "examples": [
+            "승규는 시에서 장학금을 받는다.",
+            "수영 선수가 금메달을 따는 것을 스포츠 뉴스에서 봤다.",
+            "사업 확장과 관련된 내용은 최근 보고서에서 찾아볼 수 있다."
+          ]
+        },
+        {
+          "definition": "앞말이 근거의 뜻을 나타내는 조사.",
+          "english": "eseo",
+          "english_definition": "A postpositional particle used to indicate that the preceding word refers to a reason for an action.",
+          "note": "",
+          "examples": [
+            "고마운 뜻에서 선물을 보냈다.",
+            "감사하는 마음에서 편지를 썼다.",
+            "형제 같은 마음에서 도움의 온정을 베풀었다."
+          ]
+        }
+      ]
+    },
+    "69295": {
+      "target_code": "69295",
+      "word": "많다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=69295",
+      "senses": [
+        {
+          "definition": "수나 양, 정도 등이 일정한 기준을 넘다.",
+          "english": "plentiful; many; a lot of",
+          "english_definition": "A number, amount, etc., exceeding a certain standard.",
+          "note": "",
+          "examples": [
+            "승규는 장난기가 많은 개구쟁이이다.",
+            "계속되는 폭우로 전국 곳곳에서 피해가 많다.",
+            "그녀는 사회 경험이 많아서 사람을 대하는 기술이 좋다."
+          ]
+        }
+      ]
+    },
+    "69579": {
+      "target_code": "69579",
+      "word": "살다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=69579",
+      "senses": [
+        {
+          "definition": "생명을 지니고 있다.",
+          "english": "live; be alive",
+          "english_definition": "To be alive.",
+          "note": "",
+          "examples": [
+            "그들은 건강하게 오래오래 살았다.",
+            "죽은 줄로만 알았던 아들이 살아서 돌아왔다.",
+            "산 짐승."
+          ]
+        },
+        {
+          "definition": "사람이 생활을 하다.",
+          "english": "live",
+          "english_definition": "For a person to lead a life.",
+          "note": "",
+          "examples": [
+            "깔끔하게 살다.",
+            "두 살 때 부모를 잃은 그는 소년 시절 아주 가난하게 살았다.",
+            "그들은 검소하고 알뜰하게 살며 저축을 많이 한 덕분에 큰돈을 모을 수 있었다."
+          ]
+        },
+        {
+          "definition": "불이 꺼지지 않고 계속 타고 있다.",
+          "english": "live; burn",
+          "english_definition": "For fire to keep burning without going out.",
+          "note": "",
+          "examples": [
+            "꺼져 있는 줄로 알았던 불이 아직도 살아 있었다.",
+            "불씨가 살다.",
+            "연탄불이 살다."
+          ]
+        },
+        {
+          "definition": "본래의 색깔이나 특징 등이 뚜렷이 나타나다.",
+          "english": "be reflected; be displayed",
+          "english_definition": "For the original color or feature to show clearly.",
+          "note": "주로 '살아 있다'로 쓴다.",
+          "examples": [
+            "이 초밥 요리는 생선 본연의 맛이 잘 살아 있어 모두들 만족스러워했다.",
+            "이곳은 이국적인 느낌이 들면서도 지방 특유의 느낌이 살아 있는 곳이다.",
+            "개성이 살아 있다."
+          ]
+        }
+      ]
+    },
+    "69698": {
+      "target_code": "69698",
+      "word": "까지",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=69698",
+      "senses": [
+        {
+          "definition": "어떤 범위의 끝임을 나타내는 조사.",
+          "english": "kkaji",
+          "english_definition": "A postpositional particle referring to the end of a certain range.",
+          "note": "",
+          "examples": [
+            "내일까지 글쓰기 숙제를 제출하세요.",
+            "나는 오늘 일본어로 일부터 십까지 세는 법을 배웠다.",
+            "서울에서 부산까지 차로 가면 다섯 시간 정도가 걸린다."
+          ]
+        },
+        {
+          "definition": "현재의 상태나 정도에서 그 위에 더함을 나타내는 조사.",
+          "english": "kkaji",
+          "english_definition": "A postpositional particle referring to an addition to the present state or degree.",
+          "note": "",
+          "examples": [
+            "최근 노트북 컴퓨터는 가볍고 얇아진 데다 성능까지 좋아졌다.",
+            "지수는 예쁘고 착하기까지 해서 남자들에게 인기가 많았다.",
+            "이 영화는 노인이나 청년들은 물론, 어린 아이까지 모두 재미있게 볼 수 있는 명작이다."
+          ]
+        },
+        {
+          "definition": "정상적인 정도를 지나침을 나타내는 조사.",
+          "english": "kkaji",
+          "english_definition": "A postpositional particle used to go beyond the normal degree.",
+          "note": "",
+          "examples": [
+            "그를 그렇게까지 사랑했다.",
+            "유민이는 이렇게 자세하게까지 말하고 싶지는 않았다.",
+            "아무리 책이 좋아도 밥을 먹으면서까지 읽어야 되겠냐?"
+          ]
+        }
+      ]
+    },
+    "69701": {
+      "target_code": "69701",
+      "word": "께",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=69701",
+      "senses": [
+        {
+          "definition": "(높임말로) 에게. 어떤 물건의 소속이나 위치를 나타내는 조사.",
+          "english": "kke",
+          "english_definition": "(honorific) '에게'; a postpositional particle referring to the ownership or location of an object.",
+          "note": "",
+          "examples": [
+            "바쁘신 선생님께 우리를 만나 주실 시간이 있을까?",
+            "부모님께 내 학비를 감당할 충분한 돈이 있을지 모르겠다.",
+            "회사의 중요한 결정을 내릴 수 있는 권한은 사장님께 있습니다."
+          ]
+        },
+        {
+          "definition": "(높임말로) 에게. 어떤 행동이 미치는 대상을 나타내는 조사.",
+          "english": "kke",
+          "english_definition": "(honorific) '에게'; a postpositional particle referring to the subject that an act has an influence on.",
+          "note": "",
+          "examples": [
+            "나는 첫 월급을 받은 기념으로 부모님께 선물을 드렸다.",
+            "나는 공부를 하다 어려운 부분이 있으면 교수님께 여쭈어 본다.",
+            "나는 오랜만에 찾아뵌 할아버지께 절을 올렸다."
+          ]
+        },
+        {
+          "definition": "(높임말로) 에게. 어떤 행동의 주체이거나 비롯되는 대상임을 나타내는 조사.",
+          "english": "kke",
+          "english_definition": "(honorific) '에게'; a postpositional particle referring to the subject of an act.",
+          "note": "",
+          "examples": [
+            "아이는 동생과 싸워 어머니께 야단을 맞았다.",
+            "선생님께 가르침을 받고 싶습니다.",
+            "승규는 어려운 일이 생길 때마다 부모님께 도움을 받았다."
+          ]
+        }
+      ]
+    },
+    "69713": {
+      "target_code": "69713",
+      "word": "에게",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=69713",
+      "senses": [
+        {
+          "definition": "어떤 물건의 소속이나 위치를 나타내는 조사.",
+          "english": "ege",
+          "english_definition": "A postpositional particle that indicates whom a certain object belongs to.",
+          "note": "",
+          "examples": [
+            "비만인 사람에게 성인병이 더 잘 생긴다.",
+            "나에게 공부할 시간만 더 있었다면 시험을 더 잘 봤을 텐데.",
+            "자신이 가진 것보다 자신에게 없는 것이 더 크게 느껴지는 경우가 많다."
+          ]
+        },
+        {
+          "definition": "어떤 행동이 미치는 대상임을 나타내는 조사.",
+          "english": "ege",
+          "english_definition": "A postpositional particle referring to the subject that is influenced by a certain action.",
+          "note": "",
+          "examples": [
+            "승규는 버스에서 임산부에게 자리를 양보했다.",
+            "나는 오랜만에 만난 친구에게 반갑게 인사를 했다.",
+            "민준이는 후배에게 많은 조언을 해 주는 좋은 선배였다."
+          ]
+        },
+        {
+          "definition": "어떤 행동의 주체이거나 비롯되는 대상임을 나타내는 조사.",
+          "english": "ege",
+          "english_definition": "A postpositional particle indicating the agent of a certain action or one from which an action comes from.",
+          "note": "",
+          "examples": [
+            "때로는 부모도 자식에게 배울 것이 있다.",
+            "지수는 선생님에게 칭찬을 받고 싶어 숙제를 열심히 했다.",
+            "민준이는 강아지를 괴롭히다 결국 강아지에게 손을 물렸다."
+          ]
+        }
+      ]
+    },
+    "69714": {
+      "target_code": "69714",
+      "word": "한테",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=69714",
+      "senses": [
+        {
+          "definition": "어떤 물건의 소속이나 위치를 나타내는 조사.",
+          "english": "hante",
+          "english_definition": "A postpositional particle referring to the ownership or location of an object.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "잘못이 누구한테 있는지 선생님께 물어보자.",
+            "나한테 어려운 사람들을 도울 수 있는 힘이 있었으면 좋겠다.",
+            "나한테 돈만 많다면 하고 싶은 일이 많다."
+          ]
+        },
+        {
+          "definition": "어떤 행동이 미치는 대상임을 나타내는 조사.",
+          "english": "hante",
+          "english_definition": "A postpositional particle referring to the subject that an act has an influence on.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "너한테 할 말이 있는데 시간 있니?",
+            "민준이는 여자 친구한테 줄 선물을 골랐다.",
+            "지수는 아이가 너무 귀여워 아이한테 뽀뽀를 했다."
+          ]
+        },
+        {
+          "definition": "어떤 행동의 주체이거나 비롯되는 대상임을 나타내는 조사.",
+          "english": "hante",
+          "english_definition": "A postpositional particle used to refer to the entity is the subject of an act, or source or cause of such an act.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "나는 오빠한테 갖고 싶었던 가방을 생일 선물로 받았다.",
+            "너는 덩치도 커서 왜 친구들한테 맞고 다니니?",
+            "지수는 창문을 열어 놓고 자서 모기한테 많이 물렸다."
+          ]
+        }
+      ]
+    },
+    "70055": {
+      "target_code": "70055",
+      "word": "부터",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70055",
+      "senses": [
+        {
+          "definition": "어떤 일의 시작이나 처음을 나타내는 조사.",
+          "english": "buteo",
+          "english_definition": "A postpositional particle that indicates the start or beginning of something.",
+          "note": "주로 ‘~부터 ~까지’로 쓴다.",
+          "examples": [
+            "이 지루한 책을 처음부터 끝까지 다 읽으려니 힘들다.",
+            "서울부터 부산까지 기차로는 여섯 시간이 걸린다.",
+            "젊어서부터 건강을 관리하던 승규는 노년이 된 지금도 건강하다."
+          ]
+        }
+      ]
+    },
+    "70060": {
+      "target_code": "70060",
+      "word": "보다",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70060",
+      "senses": [
+        {
+          "definition": "서로 차이가 있는 것을 비교할 때, 비교의 대상이 되는 것을 나타내는 조사.",
+          "english": "boda",
+          "english_definition": "A postpositional particle that indicates the subject of a comparison when comparing different things.",
+          "note": "",
+          "examples": [
+            "지수가 너보다 두 살이 많으니 언니라고 불러라.",
+            "지금보다 더 나은 내가 되려면 더 노력해야 한다.",
+            "기차보다 비행기가 빠르지만 요금이 비싸다."
+          ]
+        }
+      ]
+    },
+    "70073": {
+      "target_code": "70073",
+      "word": "잘하다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70073",
+      "senses": [
+        {
+          "definition": "옳고 바르게 하다.",
+          "english": "do a right thing; do right",
+          "english_definition": "To do in a right and honest way.",
+          "note": "",
+          "examples": [
+            "김 사장은 매사에 처신을 잘해서 인간관계가 좋다.",
+            "이런 위급한 상황에서 누가 잘하고 잘못했는지를 따지는 것은 의미가 없다.",
+            "잘한 결정."
+          ]
+        },
+        {
+          "definition": "좋고 훌륭하게 하다.",
+          "english": "do well",
+          "english_definition": "To do something in an excellent and successful way.",
+          "note": "",
+          "examples": [
+            "언니는 공부를 잘해서 계속 장학금을 받았다.",
+            "새 며느리는 성품도 좋고 살림도 잘해서 내 마음에 쏙 든다.",
+            "김 의원이 이번 법안을 제안한 것은 참 훌륭하고 잘한 일이다."
+          ]
+        },
+        {
+          "definition": "익숙하고 솜씨가 있게 하다.",
+          "english": "be skillful; be expert; be good",
+          "english_definition": "To do something in a skilled and experienced manner.",
+          "note": "",
+          "examples": [
+            "언니는 요리를 잘하고 싶어서 요리 학원에 다닌다.",
+            "형부는 일을 잘해서 동기들 중 가장 먼저 승진을 했다.",
+            "과일 가게 아저씨가 어찌나 말을 잘하는지 살 생각이 없던 사과를 두 봉지나 샀다."
+          ]
+        },
+        {
+          "definition": "버릇으로 자주 하다.",
+          "english": "do often",
+          "english_definition": "To do something frequently as a habit.",
+          "note": "",
+          "examples": [
+            "박 씨는 매사에 거짓말을 잘한다.",
+            "승규는 울기를 잘해서 별명이 울보이다.",
+            "지각 잘하는 김 대리는 늘 차가 밀렸다는 핑계를 댄다."
+          ]
+        }
+      ]
+    },
+    "70321": {
+      "target_code": "70321",
+      "word": "에게서",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70321",
+      "senses": [
+        {
+          "definition": "어떤 행동이 시작되는 대상임을 나타내는 조사.",
+          "english": "egeseo",
+          "english_definition": "A postpositional particle referring to the entity from which a certain act originates.",
+          "note": "",
+          "examples": [
+            "지수는 중국인에게서 직접 중국어를 배웠다.",
+            "향수를 뿌렸는지 유민이에게서 좋은 냄새가 난다.",
+            "나는 오랜만에 친구에게서 편지를 받고 매우 기뻤다."
+          ]
+        }
+      ]
+    },
+    "70482": {
+      "target_code": "70482",
+      "word": "어떻다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70482",
+      "senses": [
+        {
+          "definition": "생각, 느낌, 상태, 형편 등이 어찌 되어 있다.",
+          "english": "such",
+          "english_definition": "Being such in one's thoughts, feelings, state, situation, etc.",
+          "note": "",
+          "examples": [
+            "선생님께서 많이 아프셨다고 들었는데 요즘은 건강이 어떻습니까?",
+            "직원이 나에게 함부로 반말을 하는 걸 보니 내가 어떻게 보였는지 짐작이 갔다.",
+            "근황이 어떻다."
+          ]
+        }
+      ]
+    },
+    "70749": {
+      "target_code": "70749",
+      "word": "동안",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70749",
+      "senses": [
+        {
+          "definition": "한때에서 다른 때까지의 시간의 길이.",
+          "english": "while",
+          "english_definition": "The period from one time to another.",
+          "note": "",
+          "examples": [
+            "나는 낮잠을 자는 동안 악몽을 꿨다.",
+            "지수는 팀원들과 일 년 동안 함께 일하면서 많이 친해졌다.",
+            "며칠 동안."
+          ]
+        }
+      ]
+    },
+    "70812": {
+      "target_code": "70812",
+      "word": "명",
+      "pos": "의존 명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=70812",
+      "senses": [
+        {
+          "definition": "사람의 수를 세는 단위.",
+          "english": "person",
+          "english_definition": "A bound noun that serves as a unit for counting the number of persons.",
+          "note": "",
+          "examples": [
+            "스무 명 중에서 시험에 합격한 사람은 다섯 명도 채 되지 않았다.",
+            "사람들이 만나기로 한 장소에 가 보니 단 한 명의 사람도 보이지 않았다.",
+            "한 명."
+          ]
+        }
+      ]
+    },
+    "71070": {
+      "target_code": "71070",
+      "word": "빨갛다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71070",
+      "senses": [
+        {
+          "definition": "피나 잘 익은 고추처럼 밝고 짙게 붉다.",
+          "english": "crimson",
+          "english_definition": "Brightly deep red like the color of blood or a ripe chili pepper.",
+          "note": "",
+          "examples": [
+            "지수는 입술에 피를 묻힌 것처럼 빨간 립스틱을 바르고 나왔다.",
+            "붉은 장미는 마치 깜깜한 밤에 빨갛게 타오르는 작은 촛불처럼 아름다웠다.",
+            "빨간 장미."
+          ]
+        }
+      ]
+    },
+    "71157": {
+      "target_code": "71157",
+      "word": "이렇다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71157",
+      "senses": [
+        {
+          "definition": "상태, 모양, 성질 등이 이와 같다.",
+          "english": "so; like this",
+          "english_definition": "(for a state, appearance, nature to be) Like this.",
+          "note": "",
+          "examples": [
+            "사과 모양은 이렇습니다.",
+            "음식이 보기엔 이렇지만 맛은 정말 괜찮아요.",
+            "결과가 이렇다."
+          ]
+        }
+      ]
+    },
+    "71215": {
+      "target_code": "71215",
+      "word": "저",
+      "pos": "관형사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71215",
+      "senses": [
+        {
+          "definition": "말하는 사람과 듣는 사람에게서 멀리 떨어져 있는 대상을 가리킬 때 쓰는 말.",
+          "english": "that",
+          "english_definition": "A word used to indicate a person who is far away from the speaker and the listener.",
+          "note": "",
+          "examples": [
+            "그늘 아래에서 아이스크림을 먹고 있는 저 아이가 내 딸이다.",
+            "희미하게 보이는 하얀색의 저 건물이 우리 가족이 사는 아파트이다.",
+            "저 건물."
+          ]
+        }
+      ]
+    },
+    "71226": {
+      "target_code": "71226",
+      "word": "저렇다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71226",
+      "senses": [
+        {
+          "definition": "성질, 모양, 상태 등이 저와 같다.",
+          "english": "that; like that",
+          "english_definition": "Being that way in terms of state, shape, nature, etc.",
+          "note": "",
+          "examples": [
+            "지수는 항상 태도가 저렇다.",
+            "나의 남자 친구는 외모는 저러나 마음은 여리고 순진하다.",
+            "저럴 수가."
+          ]
+        }
+      ]
+    },
+    "71244": {
+      "target_code": "71244",
+      "word": "-스럽다",
+      "pos": "접사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71244",
+      "senses": [
+        {
+          "definition": "'그러한 성질이 있음'의 뜻을 더하고 형용사로 만드는 접미사.",
+          "english": "-seureopda",
+          "english_definition": "A suffix used to mean \"having that quality\" and makes the word an adjective.",
+          "note": "",
+          "examples": [
+            "가증스럽다",
+            "간사스럽다",
+            "감격스럽다"
+          ]
+        }
+      ]
+    },
+    "71285": {
+      "target_code": "71285",
+      "word": "쓰다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71285",
+      "senses": [
+        {
+          "definition": "어떤 일을 하는 데에 재료나 도구, 수단 등을 이용하다.",
+          "english": "use; work with; make use of",
+          "english_definition": "To take a certain material, tool, method, etc., to do something.",
+          "note": "",
+          "examples": [
+            "나는 요리를 할 때 신선한 재료만을 쓴다.",
+            "그들은 지렛대를 써서 무거운 돌을 들어 올렸다.",
+            "기계를 쓰다."
+          ]
+        },
+        {
+          "definition": "사람에게 일정한 돈을 주고 어떤 일을 하도록 시키다.",
+          "english": "employ; hire; engage",
+          "english_definition": "To give someone a certain amount of money and have him/her work.",
+          "note": "",
+          "examples": [
+            "우리는 이삿짐을 나르는 데에 짐꾼을 쓰기로 했다.",
+            "할아버지는 모내기를 할 때에 젊은 인부들을 쓰곤 하셨다.",
+            "기술자를 쓰다."
+          ]
+        },
+        {
+          "definition": "사람에게 어떤 일정한 직위나 자리를 주고 일을 하게 하다.",
+          "english": "employ; put",
+          "english_definition": "To give someone a certain position or task and have him/her work.",
+          "note": "",
+          "examples": [
+            "회사의 중요한 업무를 맡는 자리에 신입 사원을 쓸 수는 없다.",
+            "사장님은 직원들 중에서 가장 부지런하고 성실한 사람을 자신의 비서로 썼다.",
+            "경력 사원을 쓰다."
+          ]
+        },
+        {
+          "definition": "다른 사람에게 음식 등을 베풀거나 음식 값을 내다.",
+          "english": "give a treat; treat someone",
+          "english_definition": "To give someone a party or pay the bill for him/her.",
+          "note": "주로 '한 턱(을) 쓰다', '~ 턱을 쓰다'로 쓴다.",
+          "examples": [
+            "김 씨가 사람들에게 인심을 쓰며 식사를 대접했다.",
+            "지수가 시험에 합격한 기념으로 나에게 한턱을 썼다.",
+            "인심을 쓰다."
+          ]
+        }
+      ]
+    },
+    "71306": {
+      "target_code": "71306",
+      "word": "파랗다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71306",
+      "senses": [
+        {
+          "definition": "맑은 가을 하늘이나 깊은 바다와 같이 밝고 선명하게 푸르다.",
+          "english": "blue",
+          "english_definition": "A color being brightly and vividly blue like that of a clear fall sky or deep sea.",
+          "note": "",
+          "examples": [
+            "파란 가을 하늘을 가르며 비행기 한 대가 지나갔다.",
+            "어머니께서 물감을 들여 놓으신 천이 파랗게 물들었다.",
+            "눈앞에 펼쳐진 바다는 온통 파랬다."
+          ]
+        },
+        {
+          "definition": "춥거나 겁에 질려 얼굴이나 입술 등이 푸르스름하다.",
+          "english": "pale",
+          "english_definition": "One's face, lips, etc., being blue because one is cold or scared.",
+          "note": "",
+          "examples": [
+            "눈앞에 귀신이 나타나자 승규는 두려움에 파랗게 질렸다.",
+            "여름이라 해도 산속에서 밤을 새우자니 추위에 얼굴이 파랗게 변했다.",
+            "파란 얼굴빛."
+          ]
+        }
+      ]
+    },
+    "71326": {
+      "target_code": "71326",
+      "word": "아무",
+      "pos": "대명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71326",
+      "senses": [
+        {
+          "definition": "정해지지 않은 어떤 사람을 가리키는 말.",
+          "english": "anybody; anyone",
+          "english_definition": "A pronoun referring to an unspecified person.",
+          "note": "주로 부정을 나타내는 말과 함께 쓰지만 '아무나', '아무라도'는 긍정을 나타내는 말과 함께 쓴다.",
+          "examples": [
+            "청소를 하겠다는 사람이 아무도 없었다.",
+            "선생님의 질문에 아무도 대답하지 않았다.",
+            "승규는 예의가 바르고 겸손해서 아무하고나 스스럼없이 잘 지냈다."
+          ]
+        },
+        {
+          "definition": "구체적인 이름 대신 어떤 사람을 가리키는 말.",
+          "english": "Mr. So-and-so; Mrs. So-and-so; somebody; such and such a person",
+          "english_definition": "A pronoun referring to a certain person instead of mentioning his/her name.",
+          "note": "사람 이름의 성 뒤에 쓴다.",
+          "examples": [
+            "범인이 피해자와 평소에 알고 지내던 최 아무라고 했다.",
+            "나는 그 소문의 주인공이 이웃 마을의 박 아무라고 들었다.",
+            "김 아무와 이 아무는 꽤 오랫동안 알고 지내온 사이라고 했다."
+          ]
+        }
+      ]
+    },
+    "71372": {
+      "target_code": "71372",
+      "word": "안",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71372",
+      "senses": [
+        {
+          "definition": "부정이나 반대의 뜻을 나타내는 말.",
+          "english": "not",
+          "english_definition": "An adverb that has the meaning of negation or opposite.",
+          "note": "동사나 형용사 앞에 쓴다.",
+          "examples": [
+            "비가 안 와서 펼쳤던 우산을 다시 접었다.",
+            "내 동생은 안 먹는 음식이 없이 무엇이든 다 잘 먹는다.",
+            "승규는 난방이 들어와서 지금은 안 춥다고 말했다."
+          ]
+        }
+      ]
+    },
+    "71687": {
+      "target_code": "71687",
+      "word": "이",
+      "pos": "관형사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=71687",
+      "senses": [
+        {
+          "definition": "말하는 사람에게 가까이 있거나 말하는 사람이 생각하고 있는 대상을 가리킬 때 쓰는 말.",
+          "english": "this",
+          "english_definition": "The word that is used to refer to a person who is close to the speaker or something that the speaker is thinking of.",
+          "note": "",
+          "examples": [
+            "여기 이 녀석이 바로 벽에다 낙서를 한 녀석이에요.",
+            "나는 이 렌즈를 사용해서 찍은 사진들의 느낌이 참 좋아.",
+            "이 작품들은 당시로는 파격적이었던 소재들로 가득 차 있다."
+          ]
+        },
+        {
+          "definition": "바로 앞에서 이야기한 대상을 가리킬 때 쓰는 말.",
+          "english": "this",
+          "english_definition": "A word that is used to refer to something which was just mentioned.",
+          "note": "",
+          "examples": [
+            "지수는 아이스크림을 좋아하는데 이 점도 유민이와 잘 맞는다.",
+            "방금 들었던 이 비유는 이 작가가 즐겨 사용했던 유명한 비유이다.",
+            "열정과 도전 정신, 민준이를 표현하자면 이 두 가지로 나타낼 수 있다."
+          ]
+        }
+      ]
+    },
+    "72124": {
+      "target_code": "72124",
+      "word": "초",
+      "pos": "의존 명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=72124",
+      "senses": [
+        {
+          "definition": "일 분의 60분의 1을 나타내는 시간의 단위.",
+          "english": "second",
+          "english_definition": "A bound noun used to indicate a unit of time, which is one-sixtieth of a minute.",
+          "note": "",
+          "examples": [
+            "민준이는 달리기 시합에서 삼 초 차이로 아깝게 이 등을 했다.",
+            "나는 잠수한 지 삼십 초 만에 숨을 참지 못하고 고개를 물 밖으로 내밀었다.",
+            "일 초."
+          ]
+        }
+      ]
+    },
+    "72146": {
+      "target_code": "72146",
+      "word": "춥다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=72146",
+      "senses": [
+        {
+          "definition": "대기의 온도가 낮다.",
+          "english": "cold",
+          "english_definition": "(temperature) Low.",
+          "note": "",
+          "examples": [
+            "추운 기후.",
+            "추운 겨울밤.",
+            "지금 바깥 날씨는 몹시 춥다."
+          ]
+        },
+        {
+          "definition": "몸으로 느끼기에 기온이 낮다.",
+          "english": "cold; chilly",
+          "english_definition": "For one's body to feel that the air is cold and the temperature low.",
+          "note": "",
+          "examples": [
+            "아, 추워. 담요 좀 가져다줘.",
+            "몸이 춥다.",
+            "몸살 때문에 지금 몸이 너무 추워."
+          ]
+        }
+      ]
+    },
+    "72238": {
+      "target_code": "72238",
+      "word": "-고 있다",
+      "pos": "",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=72238",
+      "senses": [
+        {
+          "definition": "앞말이 나타내는 행동이 계속 진행됨을 나타내는 표현.",
+          "english": "-go itda",
+          "english_definition": "An expression used to state that the act mentioned in the preceding statement is continued.",
+          "note": "",
+          "examples": [
+            "사진 속에서 우리 가족은 환하게 웃고 있었다.",
+            "벌써 아침 아홉 시가 넘었는데 승규는 아직도 자고 있다.",
+            "네가 먹고 있는 빵이 참 맛있어 보이는데."
+          ]
+        },
+        {
+          "definition": "앞말이 나타내는 행동의 결과가 계속됨을 나타내는 표현.",
+          "english": "-go itda",
+          "english_definition": "An expression used to state that the result of the act mentioned in the preceding statement is continued.",
+          "note": "",
+          "examples": [
+            "나는 눈은 감고 있었지만 아직 잠든 것은 아니었다.",
+            "지수는 양쪽 손에 모두 짐을 들고 있어서 버스 손잡이를 잡기가 어려웠다.",
+            "이 도시는 우리나라 중부에 자리 잡고 있다."
+          ]
+        }
+      ]
+    },
+    "72465": {
+      "target_code": "72465",
+      "word": "함께",
+      "pos": "부사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=72465",
+      "senses": [
+        {
+          "definition": "여럿이서 한꺼번에 같이.",
+          "english": "together; along with",
+          "english_definition": "In the state of several people being all together.",
+          "note": "주로 '~과 함께'로 쓴다.",
+          "examples": [
+            "어려서부터 형과 나는 늘 함께 놀았다.",
+            "아내와 나는 직장이 멀어서 함께 살지 않는다.",
+            "함께 걷다."
+          ]
+        },
+        {
+          "definition": "무엇과 더불어 동시에.",
+          "english": "along with; coupled with",
+          "english_definition": "Together with something at the same time.",
+          "note": "주로 '~과 함께'로 쓴다.",
+          "examples": [
+            "천둥 소리와 함께 번갯불이 번쩍했다.",
+            "절벽에서 떨어지는 순간 나는 비명과 함께 정신을 잃었다."
+          ]
+        }
+      ]
+    },
+    "72587": {
+      "target_code": "72587",
+      "word": "-지 않다",
+      "pos": "",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=72587",
+      "senses": [
+        {
+          "definition": "앞말이 나타내는 행위나 상태를 부정하는 뜻을 나타내는 표현.",
+          "english": "-ji anta",
+          "english_definition": "An expression used to deny the act or state indicated in the preceding statement.",
+          "note": "동사와 형용사 뒤에 붙여 쓴다. ‘-지 아니하다’가 줄어든 말이다.",
+          "examples": [
+            "지수가 아무 말도 하지 않았기 때문에 나는 지수의 사정을 전혀 몰랐다.",
+            "쿠키 만들기는 어렵지 않아서 초보자도 금방 배울 수 있다.",
+            "다른 사람들은 모두 도착했는데 아직 승규만 오지 않았다."
+          ]
+        }
+      ]
+    },
+    "73012": {
+      "target_code": "73012",
+      "word": "께서",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=73012",
+      "senses": [
+        {
+          "definition": "(높임말로) 가. 이. 어떤 동작의 주체가 높여야 할 대상임을 나타내는 조사.",
+          "english": "kkeseo",
+          "english_definition": "(honorific) '가,' '이'; a postpositional particle used to indicate that the subject of an act is elevated.",
+          "note": "",
+          "examples": [
+            "세종 대왕께서 한글을 만드셨다.",
+            "할머니께서 낮잠을 주무시니까 조용히 해라.",
+            "이것은 솜씨가 좋으신 어머니께서 직접 만드신 손수건이다."
+          ]
+        }
+      ]
+    },
+    "73331": {
+      "target_code": "73331",
+      "word": "-기-",
+      "pos": "접사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=73331",
+      "senses": [
+        {
+          "definition": "‘피동’의 뜻을 더하는 접미사.",
+          "english": "-gi-",
+          "english_definition": "A suffix used to mean passivity.",
+          "note": "",
+          "examples": [
+            "감기다",
+            "끊기다",
+            "내쫓기다"
+          ]
+        },
+        {
+          "definition": "‘사동’의 뜻을 더하는 접미사.",
+          "english": "-gi-",
+          "english_definition": "A suffix used to mean causation.",
+          "note": "",
+          "examples": [
+            "감기다",
+            "굶기다",
+            "남기다"
+          ]
+        }
+      ]
+    },
+    "74104": {
+      "target_code": "74104",
+      "word": "듣다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=74104",
+      "senses": [
+        {
+          "definition": "귀로 소리를 알아차리다.",
+          "english": "hear",
+          "english_definition": "To sense a sound with ears.",
+          "note": "",
+          "examples": [
+            "지수는 귀가 예민해서 작은 소리도 잘 듣는다.",
+            "그의 피아노 연주는 듣는 사람을 편안하게 해준다.",
+            "우리는 한밤중에 이상한 소리를 듣고 밖으로 나가 보았다."
+          ]
+        },
+        {
+          "definition": "다른 사람의 말이나 소리 등에 귀를 기울이다.",
+          "english": "listen to",
+          "english_definition": "To listen carefully with strained ears to others' words or sounds.",
+          "note": "",
+          "examples": [
+            "학생들은 선생님의 설명을 집중해서 들었다.",
+            "일을 제시간에 끝내지 못한 사원의 변명을 듣던 김 과장이 화를 냈다.",
+            "우리는 이 문제에 대해 여러 사람의 의견을 들은 후에 해결책을 고민하기로 했다."
+          ]
+        },
+        {
+          "definition": "수업이나 강의 등에 참여하여 어떤 내용을 배우다.",
+          "english": "attend",
+          "english_definition": "To learn something by participating in a class or lecture.",
+          "note": "",
+          "examples": [
+            "외국어 수업을 듣다.",
+            "인문학 강의를 듣다.",
+            "그 사람의 강연은 들을 내용이 많아서 인기가 많다."
+          ]
+        },
+        {
+          "definition": "다른 사람이 말하는 대로 따르다.",
+          "english": "follow; obey; heed",
+          "english_definition": "To follow what others say.",
+          "note": "주로 '말을 듣다', '말씀을 듣다'로 쓴다.",
+          "examples": [
+            "유민이는 어렸을 때부터 부모님의 말을 잘 듣는 아이였다.",
+            "선생님의 말을 안 듣고 자주 말썽을 부리던 친구가 어느 날부터 변하기 시작했다.",
+            "말을 듣다."
+          ]
+        }
+      ]
+    },
+    "74890": {
+      "target_code": "74890",
+      "word": "안",
+      "pos": "명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=74890",
+      "senses": [
+        {
+          "definition": "어떤 물체나 공간의 둘레에서 가운데로 향한 쪽. 또는 그러한 부분.",
+          "english": "inside",
+          "english_definition": "The side that faces the center from the circumference of an object or space; such a part.",
+          "note": "",
+          "examples": [
+            "지수는 외투를 벗어서 옷장 안에 넣었다.",
+            "날씨가 추우니 건물 안에 들어가 있어라.",
+            "도서관 안에서 시끄럽게 떠들면 안 된다."
+          ]
+        },
+        {
+          "definition": "일정한 기준이나 한계를 넘지 않은 정도.",
+          "english": "within; inside",
+          "english_definition": "A degree that does not exceed a certain standard or limit.",
+          "note": "",
+          "examples": [
+            "형은 동생에게 오천 원 안에서 간식거리를 사 오라고 했다.",
+            "빠른 시일 안에 빚을 갚지 못하면 당신의 재산을 압류하겠습니다.",
+            "그 유망한 체조 선수는 이번 선수권 대회에서 순위권 안에 들 것으로 보인다."
+          ]
+        },
+        {
+          "definition": "안주인이 머물러 사는 방.",
+          "english": "main room",
+          "english_definition": "The room used by the lady of the house.",
+          "note": "",
+          "examples": [
+            "할아버지는 사랑에 계시고 할머니는 안에 계신다.",
+            "집의 구조상 이 마루는 안과 사랑을 연결하고 있다.",
+            "안에 딸린 욕실."
+          ]
+        },
+        {
+          "definition": "옷 안에 대는 천.",
+          "english": "lining",
+          "english_definition": "A fabric used for lining clothes.",
+          "note": "",
+          "examples": [
+            "이 원단은 고급 옷의 안을 대는 데 주로 쓰인다.",
+            "이 옷은 보온성이 높은 안이 들어가 있어서 입으면 매우 따뜻하다.",
+            "안을 넣다."
+          ]
+        }
+      ]
+    },
+    "74921": {
+      "target_code": "74921",
+      "word": "-리-",
+      "pos": "접사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=74921",
+      "senses": [
+        {
+          "definition": "‘사동’의 뜻을 더하는 접미사.",
+          "english": "-ri-",
+          "english_definition": "A suffix used to mean causation.",
+          "note": "",
+          "examples": [
+            "걸리다",
+            "굴리다",
+            "그슬리다"
+          ]
+        },
+        {
+          "definition": "‘피동’의 뜻을 더하는 접미사.",
+          "english": "-ri-",
+          "english_definition": "A suffix used to mean passivity.",
+          "note": "",
+          "examples": [
+            "갈리다",
+            "걸리다",
+            "그슬리다"
+          ]
+        }
+      ]
+    },
+    "75269": {
+      "target_code": "75269",
+      "word": "-고 싶다",
+      "pos": "",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=75269",
+      "senses": [
+        {
+          "definition": "앞말이 나타내는 행동을 하기를 원함을 나타내는 표현.",
+          "english": "-go sipda",
+          "english_definition": "An expression used to state that the speaker wants to do the act mentioned in the preceding statement.",
+          "note": "동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "어릴 때 선생님이 되고 싶었다.",
+            "이번 생일에 받고 싶은 선물이 있으면 말해 봐.",
+            "나는 너무 피곤해서 집에 일찍 들어가고 싶었다."
+          ]
+        }
+      ]
+    },
+    "77252": {
+      "target_code": "77252",
+      "word": "-아지다",
+      "pos": "",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=77252",
+      "senses": [
+        {
+          "definition": "앞에 오는 말이 나타내는 행동을 남이나 다른 힘에 의해 당함을 나타내는 표현.",
+          "english": "-ajida",
+          "english_definition": "An expression used to indicate that the act mentioned in the preceding statement is done by someone or another force.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’인 동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "밥을 할 때 감자도 함께 넣었더니 맛있게 잘 삶아졌다.",
+            "승규의 봉사 정신이 높이 사져 이번 수상자로 결정되었다.",
+            "나는 내 이니셜이 수놓아진 손수건을 지수에게 선물로 받았다."
+          ]
+        },
+        {
+          "definition": "앞에 오는 말이 나타내는 대로 행동하게 되거나 그 상태로 됨을 나타내는 표현.",
+          "english": "-ajida",
+          "english_definition": "An expression used to indicate that one must do the act or become the state mentioned in the preceding statement.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’인 동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "꽂아져 있는 책들은 모두 승규가 정리한 것이다.",
+            "요새 사람들의 관심은 오로지 올림픽에 모아져 있다.",
+            "고난이 닥쳐도 버티고 살아가다 보면 어떻게든 살아진다."
+          ]
+        },
+        {
+          "definition": "앞에 오는 말이 나타내는 상태로 점점 되어 감을 나타내는 표현.",
+          "english": "-ajida",
+          "english_definition": "An expression used to indicate that someone or something gradually becomes the state mentioned in the preceding statement.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’인 형용사 뒤에 붙여 쓴다.",
+          "examples": [
+            "산 위로 올라갈수록 길은 점점 좁아졌다.",
+            "벌써 아침이 되는지 창밖이 점차 밝아지고 있었다.",
+            "아침에는 날씨가 궂더니 오후가 되자 날씨가 좋아졌다."
+          ]
+        }
+      ]
+    },
+    "77253": {
+      "target_code": "77253",
+      "word": "-어지다",
+      "pos": "품사 없음",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=77253",
+      "senses": [
+        {
+          "definition": "앞에 오는 말이 나타내는 행동을 남이나 다른 힘에 의해 당함을 나타내는 표현.",
+          "english": "-eojida",
+          "english_definition": "An expression used to indicate that the act mentioned in the preceding statement is done by someone or another force.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’가 아닌 동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "이 절은 삼국 시대에 지어졌다고 한다.",
+            "미스터리에 대한 비밀이 드디어 밝혀졌다.",
+            "방금 오븐에서 구워져 나온 빵 냄새가 무척 구수하다."
+          ]
+        },
+        {
+          "definition": "앞에 오는 말이 나타내는 대로 행동하게 되거나 그 상태로 됨을 나타내는 표현.",
+          "english": "-eojida",
+          "english_definition": "An expression used to indicate that one does the act or becomes the state mentioned in the preceding statement.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’가 아닌 동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "나는 승규의 말이 믿어지지 않았다.",
+            "나의 오랜 소원이 마침내 이루어졌다.",
+            "공원 곳곳에 널려 있는 쓰레기들을 보자마자 눈살이 찌푸려졌다."
+          ]
+        },
+        {
+          "definition": "앞에 오는 말이 나타내는 상태로 점점 되어 감을 나타내는 표현.",
+          "english": "-eojida",
+          "english_definition": "An expression used to indicate that someone or something gradually becomes the state mentioned in the preceding statement.",
+          "note": "끝음절의 모음이 ‘ㅏ, ㅗ’가 아닌 형용사 뒤에 붙여 쓴다.",
+          "examples": [
+            "남자 친구가 생기더니 지수가 점점 예뻐지는 것 같다.",
+            "놀이터에서 모래 장난을 했더니 금세 옷이 더러워졌다.",
+            "지수는 처음에는 물이 무서웠지만 지금은 수영이 점점 재미있어진다."
+          ]
+        }
+      ]
+    },
+    "78583": {
+      "target_code": "78583",
+      "word": "-고",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=78583",
+      "senses": [
+        {
+          "definition": "두 가지 이상의 대등한 사실을 나열할 때 쓰는 연결 어미.",
+          "english": "-go",
+          "english_definition": "A connective ending used when listing more than two equal facts.",
+          "note": "‘이다’, 동사와 형용사 또는 ‘-으리-’, ‘-더-’를 제외한 다른 어미 뒤에 붙여 쓴다.",
+          "examples": [
+            "나는 아내에게 항상 고맙고 미안하다.",
+            "지수는 키도 크고 예뻐서 인기가 많다.",
+            "비가 몹시 내리고 바람도 심하게 분다."
+          ]
+        },
+        {
+          "definition": "앞말과 뒤의 말이 차례대로 일어남을 나타내는 연결 어미.",
+          "english": "-go",
+          "english_definition": "A connective ending used when the preceding statement and the following statement happen in order.",
+          "note": "동사 또는 ‘-으시-’ 뒤에 붙여 쓴다.",
+          "examples": [
+            "밥 먹을 거니까 손을 씻고 오너라.",
+            "나는 사고가 났다는 소식을 듣고 무척 놀랐다."
+          ]
+        },
+        {
+          "definition": "앞말이 나타내는 행동이나 그 결과가 뒤에 오는 행동이 일어나는 동안에 그대로 지속됨을 나타내는 연결 어미.",
+          "english": "-go",
+          "english_definition": "A connective ending used when an action or result of the preceding statement remains the same while the following action happens.",
+          "note": "동사 또는 ‘-으시-’ 뒤에 붙여 쓴다.",
+          "examples": [
+            "날이 추우니까 장갑을 끼고 나가렴.",
+            "지수는 새로 산 구두를 신고 학교에 갔다.",
+            "할아버지께서는 눈이 나쁘셔서 늘 안경을 쓰고 책을 보신다."
+          ]
+        },
+        {
+          "definition": "서로 뜻이 반대되는 말을 나열할 때 쓰는 연결 어미.",
+          "english": "-go",
+          "english_definition": "A connective ending used when listing words that have opposite meanings.",
+          "note": "‘이다’, 동사와 형용사 또는 ‘-으리-’, ‘-더-’를 제외한 다른 어미 뒤에 붙여 쓴다.",
+          "examples": [
+            "음식점의 손님이 많고 적고는 음식의 맛이 좌우한다.",
+            "누가 잘했고 못했고를 구별하는 게 쉬운 일은 아니다.",
+            "지수는 좋고 싫고가 확실해서 싫은 일은 절대 안 하려고 한다."
+          ]
+        }
+      ]
+    },
+    "78624": {
+      "target_code": "78624",
+      "word": "과",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=78624",
+      "senses": [
+        {
+          "definition": "비교의 대상이거나 기준으로 삼는 대상임을 나타내는 조사.",
+          "english": "gwa",
+          "english_definition": "A postpositional word used to indicate the subject of comparison or the object that serves as a basis.",
+          "note": "",
+          "examples": [
+            "젊은이들의 생각은 어른 세대의 생각과 많이 다르다.",
+            "네 말은 앞과 뒤가 맞지 않아 무슨 말인지 잘 모르겠다.",
+            "지구본은 실제의 지구 모습과 비슷하게 만들어진다."
+          ]
+        },
+        {
+          "definition": "누군가를 상대로 하여 어떤 일을 할 때 그 상대임을 나타내는 조사.",
+          "english": "gwa",
+          "english_definition": "A postpositional word referring to the person when doing something with him/her.",
+          "note": "",
+          "examples": [
+            "나는 친구들과 극장 앞에서 만나기로 하였다.",
+            "승규는 지난달 애인과 헤어진 뒤 힘들어한다.",
+            "한 국회 의원이 자신을 격려하기 위해 나온 시민과 악수를 나누었다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 함께 하는 대상임을 나타내는 조사.",
+          "english": "gwa",
+          "english_definition": "A postpositional word referring to the person who the subject does something with.",
+          "note": "",
+          "examples": [
+            "지수는 연인과 뮤지컬 공연을 보러 왔다.",
+            "아이는 동생과 놀이터에서 시소를 타고 있었다.",
+            "나는 조부모님과 함께 살고 있다."
+          ]
+        },
+        {
+          "definition": "앞과 뒤의 명사를 같은 자격으로 이어 줄 때 쓰는 조사.",
+          "english": "gwa",
+          "english_definition": "A postpositional particle used to list the preceding and following nouns.",
+          "note": "",
+          "examples": [
+            "아내는 수박과 참외를 손님에게 대접했다.",
+            "유민과 민준은 오랜 친구이다.",
+            "승규는 가방에 책과 노트를 정리해 넣었다."
+          ]
+        }
+      ]
+    },
+    "78628": {
+      "target_code": "78628",
+      "word": "와",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=78628",
+      "senses": [
+        {
+          "definition": "비교의 대상이거나 기준으로 삼는 대상임을 나타내는 조사.",
+          "english": "wa",
+          "english_definition": "A postpositional particle used to indicate that something is the subject of a comparison or subject of a standard.",
+          "note": "",
+          "examples": [
+            "사람들은 대부분 자기와 비슷한 사람들과 어울린다.",
+            "미국은 우리나라와 달리 6월에 졸업식을 한다.",
+            "지하철역은 학교와 가까운 곳에 있었다."
+          ]
+        },
+        {
+          "definition": "무엇인가를 상대로 하여 어떤 일을 할 때 그 상대임을 나타내는 조사.",
+          "english": "wa",
+          "english_definition": "A postpositional particle that indicates the person who one is doing something with.",
+          "note": "",
+          "examples": [
+            "난류가 한류와 만나는 곳에는 물고기가 많다.",
+            "승규는 지난해 3년 열애 끝에 지금의 아내와 결혼했다.",
+            "나는 별것도 아닌 일로 친구와 싸운 것이 후회되었다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 함께 하는 대상임을 나타내는 조사.",
+          "english": "wa",
+          "english_definition": "A postpositional particle used to indicate the person one is doing something with.",
+          "note": "",
+          "examples": [
+            "나는 친구와 수영을 배우기로 했다.",
+            "아픈 아이는 어머니와 함께 병원에 찾아갔다.",
+            "승규는 지수와 영화를 보러 시내에 갔다."
+          ]
+        },
+        {
+          "definition": "앞과 뒤의 명사를 같은 자격으로 이어주는 조사.",
+          "english": "wa",
+          "english_definition": "A postpositional particle used to list the preceding and following nouns on an equal footing.",
+          "note": "",
+          "examples": [
+            "너와 내가 함께라면 두려울 것이 없다.",
+            "나는 백화점에 가 바지와 양말을 샀다.",
+            "나는 시금치와 당근을 싫어해서 부모님께 자주 혼이 났다."
+          ]
+        }
+      ]
+    },
+    "78634": {
+      "target_code": "78634",
+      "word": "-ㄴ",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=78634",
+      "senses": [
+        {
+          "definition": "앞말이 관형어의 기능을 하게 만들고 사건이나 동작이 과거에 일어났음을 나타내는 어미.",
+          "english": "-n",
+          "english_definition": "An ending of a word that makes the preceding statement function as an adnominal phrase and indicates an event or action having occurred in the past.",
+          "note": "받침이 없거나 ‘ㄹ’ 받침인 동사 또는 ‘-으시-’ 뒤에 붙여 쓴다.",
+          "examples": [
+            "어제 본 영화는 정말 감동적이었다.",
+            "어릴 적 선생님께서 해 주신 말씀이 내 인생을 바꾸어 놓았다.",
+            "이 스웨터는 내가 털실로 직접 짠 것이다."
+          ]
+        },
+        {
+          "definition": "앞말이 관형어의 기능을 하게 만들고 사건이나 동작이 완료되어 그 상태가 유지되고 있음을 나타내는 어미.",
+          "english": "-n",
+          "english_definition": "An ending of a word that makes the preceding statement function as an adnominal phrase and indicates that an event or action has been completed and its state continues.",
+          "note": "받침이 없거나 ‘ㄹ’ 받침인 동사 또는 ‘-으시-’ 뒤에 붙여 쓴다.",
+          "examples": [
+            "밤새 쌓인 눈 때문에 길이 막혔다.",
+            "안경을 쓴 아이가 손을 들고 질문을 했다.",
+            "전화벨이 울리자 어머니는 고무장갑을 낀 손으로 전화를 받으셨다."
+          ]
+        },
+        {
+          "definition": "앞말이 관형어의 기능을 하게 만들고 현재의 상태를 나타내는 어미.",
+          "english": "-n",
+          "english_definition": "An ending of a word that makes the preceding statement function as an adnominal phrase and refers to the present state.",
+          "note": "‘이다’, 받침이 없거나 ‘ㄹ’ 받침인 형용사 또는 ‘-으시-’ 뒤에 붙여 쓴다.",
+          "examples": [
+            "지수는 미소가 예쁜 소녀였다.",
+            "나는 선생님이신 부모님 밑에서 자랐다.",
+            "승규는 큰 키에 출중한 외모를 가졌다."
+          ]
+        }
+      ]
+    },
+    "78635": {
+      "target_code": "78635",
+      "word": "하고",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=78635",
+      "senses": [
+        {
+          "definition": "비교의 대상이거나 기준으로 삼는 대상임을 나타내는 조사.",
+          "english": "hago",
+          "english_definition": "A postpositional particle used to indicate that something is the subject of, or a basis for, comparison.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "나는 민준이하고 항상 생각이 달라.",
+            "준하는 어느덧 아버지하고 키가 비슷해졌다.",
+            "그 개그맨은 연예인들 목소리하고 똑같이 흉내를 잘 낸다."
+          ]
+        },
+        {
+          "definition": "누군가를 상대로 하여 어떤 일을 할 때 그 상대임을 나타내는 조사.",
+          "english": "hago",
+          "english_definition": "A postpositional particle used to indicate the person who one is doing something with.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "승규는 게임을 하다 동생하고 크게 다투었다.",
+            "나는 일행하고 일찍 헤어져 집으로 왔다.",
+            "어머니는 선생님하고 오래 이야기를 나누었다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 함께 하는 대상임을 나타내는 조사.",
+          "english": "hago",
+          "english_definition": "A postpositional particle used to indicate that a person is the subject one is doing something with.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "아버지하고 형은 목욕을 갔다.",
+            "오랜만에 만난 친구들하고 저녁을 먹으니 무척 기분이 좋았다.",
+            "승규는 항상 주변 사람들하고 사이좋게 지낸다."
+          ]
+        },
+        {
+          "definition": "앞과 뒤의 명사를 같은 자격으로 이어주는 조사.",
+          "english": "hago",
+          "english_definition": "A postpositional particle used to connect preceding and following nouns that have the same grammatical functions.",
+          "note": "주로 구어에서 쓴다.",
+          "examples": [
+            "나는 애완동물로 개하고 고양이를 기르고 있다.",
+            "이제 지수하고 유민이하고 오기만 하면 다 온 거지?",
+            "승규하고 민준이는 어렸을 때부터 잘 알고 지낸 사이다."
+          ]
+        }
+      ]
+    },
+    "79033": {
+      "target_code": "79033",
+      "word": "좋다",
+      "pos": "형용사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=79033",
+      "senses": [
+        {
+          "definition": "어떤 것의 성질이나 내용 등이 훌륭하여 만족할 만하다.",
+          "english": "good; great; excellent",
+          "english_definition": "Excellent and satisfactory in features and content.",
+          "note": "",
+          "examples": [
+            "음악이 아주 좋아요.",
+            "지수는 옷을 만드는 솜씨가 좋다.",
+            "유민이는 어릴 때부터 좋은 글을 많이 접했다."
+          ]
+        },
+        {
+          "definition": "성격 등이 원만하고 착하다.",
+          "english": "good; nice",
+          "english_definition": "Well-rounded and kind in personality.",
+          "note": "",
+          "examples": [
+            "그 사람은 성격이 참 좋아요.",
+            "성격이 좋은 지수는 늘 주위에 친구들이 많다.",
+            "좋게 대하다."
+          ]
+        },
+        {
+          "definition": "말투나 태도 등이 부드럽다.",
+          "english": "good; kind",
+          "english_definition": "Kind and gentle in the way one speaks and acts.",
+          "note": "",
+          "examples": [
+            "그 아이는 사람들에게 항상 태도가 좋습니다.",
+            "승규는 항상 좋게 말해서인지 부드러운 인상을 준다.",
+            "좋은 말."
+          ]
+        },
+        {
+          "definition": "신체적 조건이나 건강 상태 등이 보통보다 낫다.",
+          "english": "good",
+          "english_definition": "Above average in physical condition or health.",
+          "note": "",
+          "examples": [
+            "우리 할머니께서는 건강이 아주 좋으세요.",
+            "승규는 체력이 좋아서 좀처럼 지치는 법이 없다.",
+            "좋은 체격."
+          ]
+        }
+      ]
+    },
+    "80330": {
+      "target_code": "80330",
+      "word": "-시-",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=80330",
+      "senses": [
+        {
+          "definition": "어떤 동작이나 상태의 주체를 높이는 뜻을 나타내는 어미.",
+          "english": "-si-",
+          "english_definition": "An ending of a word used for the subject honorifics of an action or state.",
+          "note": "",
+          "examples": [
+            "이분은 승규의 선생님이십니다.",
+            "과장님께서는 어디 가셨습니까?",
+            "할아버지께서는 언제 돌아오시니?"
+          ]
+        },
+        {
+          "definition": "높이고자 하는 인물과 관계된 소유물이나 신체의 일부가 문장의 주어일 때 그 인물을 높이는 뜻을 나타내는 어미.",
+          "english": "-si-",
+          "english_definition": "An ending of a word used to show respect to a person when that person's possession or body part is the subject of the sentence.",
+          "note": "",
+          "examples": [
+            "손님, 손이 정말 하얗고 예쁘세요.",
+            "할머니께서는 허리가 자주 아프시다.",
+            "아버지는 키가 크신데 나는 키가 작다."
+          ]
+        }
+      ]
+    },
+    "80332": {
+      "target_code": "80332",
+      "word": "로부터",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=80332",
+      "senses": [
+        {
+          "definition": "어떤 행동이나 사건의 출발점이 되거나 그것이 비롯되는 대상임을 나타내는 조사.",
+          "english": "robuteo",
+          "english_definition": "A postpositional particle that indicates something is the starting point of an action or event or it is the subject that causes it.",
+          "note": "",
+          "examples": [
+            "연극이 끝나자 객석으로부터 큰 박수 갈채를 받았다.",
+            "자녀들은 자라면 부모로부터 독립해야 한다.",
+            "유학을 간 친구로부터 편지가 오니 무척이나 반가웠다."
+          ]
+        }
+      ]
+    },
+    "80333": {
+      "target_code": "80333",
+      "word": "랑",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=80333",
+      "senses": [
+        {
+          "definition": "비교의 대상이거나 기준으로 삼는 대상임을 나타내는 조사.",
+          "english": "rang",
+          "english_definition": "A postpositional particle used to indicate that something is the subject of a comparison or subject of a standard.",
+          "note": "",
+          "examples": [
+            "내 모자는 네 모자랑 사이즈가 같다.",
+            "엄마는 나를 누나랑 항상 비교해서 기분이 상한다.",
+            "지수는 승규랑 성격이 잘 맞아 거의 싸우지 않는다."
+          ]
+        },
+        {
+          "definition": "누군가를 상대로 하여 어떤 일을 할 때 그 상대임을 나타내는 조사.",
+          "english": "rang",
+          "english_definition": "A postpositional particle that indicates the person who one is doing something with.",
+          "note": "",
+          "examples": [
+            "나는 친구랑 영화를 봤다.",
+            "승규는 지수랑 다투고서 인사도 하지 않는다.",
+            "나는 이제 약속 시간에 늦지 않겠다고 승규랑 약속했다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 함께 하는 대상임을 나타내는 조사.",
+          "english": "rang",
+          "english_definition": "A postpositional particle used to indicate the subject one is doing something with.",
+          "note": "",
+          "examples": [
+            "아버지랑 형은 함께 등산을 갔다.",
+            "아이는 놀이터에서 친구랑 신 나게 놀고 있다."
+          ]
+        },
+        {
+          "definition": "앞과 뒤의 명사를 같은 자격으로 이어 주는 조사.",
+          "english": "rang",
+          "english_definition": "A postpositional particle used to connect the preceding and following nouns.",
+          "note": "",
+          "examples": [
+            "지수랑 승규는 아직 학생이다.",
+            "유민이는 장기 자랑 시간에 노래랑 춤을 선보였다.",
+            "아이들은 색종이랑 풀, 가위를 가지고 동물원을 만들었다."
+          ]
+        }
+      ]
+    },
+    "80344": {
+      "target_code": "80344",
+      "word": "-은",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=80344",
+      "senses": [
+        {
+          "definition": "앞말이 관형어의 기능을 하게 만들고 사건이나 동작이 과거에 일어났음을 나타내는 어미.",
+          "english": "-eun",
+          "english_definition": "An ending of a word that makes the preceding word function as an adnominal phrase and indicates an event or action having occurred in the past.",
+          "note": "‘ㄹ’을 제외한 받침 있는 동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "지수는 밥을 먹은 뒤에 양치를 했다.",
+            "나는 채소들을 씻은 후 다듬어 두었다.",
+            "승규는 잡은 물고기들을 도로 놓아주었다."
+          ]
+        },
+        {
+          "definition": "앞말이 관형어의 기능을 하게 만들고 사건이나 동작이 완료되어 그 상태가 유지되고 있음을 나타내는 어미.",
+          "english": "-eun",
+          "english_definition": "An ending of word that makes the preceding word function as an adnominal phrase and implies that an action has been completed and its state continues.",
+          "note": "‘ㄹ’을 제외한 받침 있는 동사 뒤에 붙여 쓴다.",
+          "examples": [
+            "승규는 피곤했는지 앉은 채로 졸고 있다.",
+            "나는 먹다 남은 반찬들을 넣고 비빔밥을 해 먹었다.",
+            "구두를 신은 여자가 또각또각 소리를 내며 걸어간다."
+          ]
+        },
+        {
+          "definition": "앞말이 관형어의 기능을 하게 만들고 현재의 상태를 나타내는 어미.",
+          "english": "-eun",
+          "english_definition": "An ending of a word that makes the preceding word function as an adnominal phrase and refers to the present state.",
+          "note": "‘ㄹ’을 제외한 받침 있는 형용사 뒤에 붙여 쓴다.",
+          "examples": [
+            "산 정상에는 키가 작은 나무들이 자라고 있었다.",
+            "넓은 바다를 보니 가슴까지 확 트이는 것 같았다.",
+            "주말이라 공원에는 많은 사람들이 산책을 즐기고 있었다."
+          ]
+        }
+      ]
+    },
+    "84991": {
+      "target_code": "84991",
+      "word": "뭐",
+      "pos": "대명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=84991",
+      "senses": [
+        {
+          "definition": "모르는 사실이나 사물을 가리키는 말.",
+          "english": "what",
+          "english_definition": "A pronoun used to refer to a fact or object that one does not know of.",
+          "note": "",
+          "examples": [
+            "방금 뭐라고 했어?",
+            "지금 옷 안에 감추고 있는 게 뭐죠?",
+            "뭐 때문에 나한테 삐쳐서 말도 안 하는 거야?"
+          ]
+        },
+        {
+          "definition": "정해지지 않은 대상이나 굳이 이름을 밝힐 필요가 없는 대상을 가리키는 말.",
+          "english": "what",
+          "english_definition": "A pronoun used to refer to a subject that does not need to be specified or named.",
+          "note": "",
+          "examples": [
+            "나는 뭐라고 해야 할지 몰라서 머뭇거렸다.",
+            "이렇게 시간만 보내지 말고 나가서 뭐라도 하자!",
+            "이번 한 번만 넘어가 주면 당신이 시키는 건 뭐든지 하겠네."
+          ]
+        },
+        {
+          "definition": "이미 일어난 뜻밖의 일이나 상황에 놀라거나 후회하거나 아쉬워하면서 그것을 강조함을 나타내는 말.",
+          "english": "really",
+          "english_definition": "A word used when the speaker is surprised at, laments, or regrets an unexpected thing or situation that happened, and emphasizes it.",
+          "note": "주로 ‘-지 뭐야’, ‘-지 뭐예요’, ‘-지 뭐니’, ‘-지 뭡니까’로 쓴다.",
+          "examples": [
+            "제가 글쎄 오늘 지각했지 뭐예요.",
+            "그 여자, 얼마나 예쁜지 내가 한눈에 반했지 뭐야.",
+            "오늘 준비물을 깜빡 잊었지 뭐니."
+          ]
+        }
+      ]
+    },
+    "85761": {
+      "target_code": "85761",
+      "word": "로",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=85761",
+      "senses": [
+        {
+          "definition": "움직임의 방향을 나타내는 조사.",
+          "english": "ro",
+          "english_definition": "A postpositional particle that indicates the direction of a movement.",
+          "note": "",
+          "examples": [
+            "우리는 신혼여행을 제주도로 갔다 왔다.",
+            "지수는 창가로 다가가 밖을 내다보았다.",
+            "선생님은 교과서를 챙겨 교실로 들어갔다."
+          ]
+        },
+        {
+          "definition": "움직임의 경로를 나타내는 조사.",
+          "english": "ro",
+          "english_definition": "A postpositional particle that indicates the route of movement.",
+          "note": "",
+          "examples": [
+            "지수는 문틈 사이로 방안을 엿보았다.",
+            "화재가 났을 때는 비상구로 탈출하십시오.",
+            "이 길은 횡단보도가 없으니 육교로 건너야 한다."
+          ]
+        },
+        {
+          "definition": "변화의 결과를 나타내는 조사.",
+          "english": "ro",
+          "english_definition": "A postpositional particle that indicates the result of a change.",
+          "note": "",
+          "examples": [
+            "그 소설가는 자신의 일을 소설로 썼다.",
+            "큰 지진이 일어난 뒤 도시는 폐허로 변했다.",
+            "어릴 적 내가 심은 은행나무는 40여 년이 지나면서 아름드리 나무로 자랐다."
+          ]
+        },
+        {
+          "definition": "어떤 물건의 재료나 원료를 나타내는 조사.",
+          "english": "ro",
+          "english_definition": "A postpositional particle that indicates the material or ingredient of an object.",
+          "note": "",
+          "examples": [
+            "종이는 나무로 만들어진다.",
+            "이 주스는 다른 것은 섞지 않고 딸기로만 만든 것이다."
+          ]
+        }
+      ]
+    },
+    "85764": {
+      "target_code": "85764",
+      "word": "를",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=85764",
+      "senses": [
+        {
+          "definition": "동작이 직접적으로 영향을 미치는 대상을 나타내는 조사.",
+          "english": "reul",
+          "english_definition": "A postpositional particle used to indicate the subject that an act has a direct influence on.",
+          "note": "",
+          "examples": [
+            "지수는 알겠다며 고개를 끄덕였다.",
+            "승규는 영화를 보는 것이 취미이다.",
+            "에스컬레이터에서는 손잡이를 꼭 잡으세요."
+          ]
+        },
+        {
+          "definition": "동작이 간접적인 영향을 미치는 대상이나 목적임을 나타내는 조사.",
+          "english": "reul",
+          "english_definition": "A postpositional particle used to indicate the subject or target that an action has an indirect influence on.",
+          "note": "",
+          "examples": [
+            "그 책은 나를 줘.",
+            "지수는 아버지를 도와 집안 청소를 했다.",
+            "부모님께서는 저를 먹이고 키우시느라 고생이 많으셨지요."
+          ]
+        },
+        {
+          "definition": "어떤 재료나 수단이 되는 사물임을 나타내는 조사.",
+          "english": "reul",
+          "english_definition": "A postpositional particle used to indicate something that becomes a material or means.",
+          "note": "",
+          "examples": [
+            "나는 집에 있는 재료를 사용해서 간단한 요리를 했다.",
+            "글쎄 엄마가 내가 아끼던 셔츠를 걸레로 만들었지 뭐야?",
+            "이 선생님은 학생들의 흥미를 끌기 위해 컴퓨터를 이용한 수업을 했다."
+          ]
+        },
+        {
+          "definition": "동작의 도착지나 동작이 이루어지는 장소를 나타내는 조사.",
+          "english": "reul",
+          "english_definition": "A postpositional particle used to indicate a place where an action finishes or occurs.",
+          "note": "주로 '가다', '걷다', '뛰다'와 함께 쓴다.",
+          "examples": [
+            "나는 해안가를 걸으며 바닷바람을 만끽했다.",
+            "눈이 와서 신난 아이들이 눈 위를 뛰어다녔다.",
+            "지수는 거리를 돌아다니면서 쇼핑도 하고 구경도 했다."
+          ]
+        }
+      ]
+    },
+    "85784": {
+      "target_code": "85784",
+      "word": "으로",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=85784",
+      "senses": [
+        {
+          "definition": "움직임의 방향을 나타내는 조사.",
+          "english": "euro",
+          "english_definition": "A postpositional particle that indicates the direction of movement.",
+          "note": "",
+          "examples": [
+            "승규는 일본으로 유학을 가기로 했다.",
+            "우리는 배를 타기 위해 부산으로 출발했다.",
+            "기다리던 편지가 도착했다는 소식에 나는 집으로 달려갔다."
+          ]
+        },
+        {
+          "definition": "움직임의 경로를 나타내는 조사.",
+          "english": "euro",
+          "english_definition": "A postpositional particle that indicates the route of movement.",
+          "note": "",
+          "examples": [
+            "우리 일행은 중국으로 해서 백두산에 올랐다.",
+            "도둑은 뒷문으로 몰래 들어와서 물건을 훔쳐 간 것 같다."
+          ]
+        },
+        {
+          "definition": "변화의 결과를 나타내는 조사.",
+          "english": "euro",
+          "english_definition": "A postpositional particle that indicates the result of a change.",
+          "note": "",
+          "examples": [
+            "김 대리는 다음 달 과장으로 승진한다.",
+            "바람의 방향이 동풍에서 남풍으로 바뀌었다.",
+            "밤새 내리던 비가 기온이 떨어지면서 눈으로 변했다."
+          ]
+        },
+        {
+          "definition": "어떤 물건의 재료나 원료를 나타내는 조사.",
+          "english": "euro",
+          "english_definition": "A postpositional particle that indicates the material or ingredient of an object.",
+          "note": "",
+          "examples": [
+            "지수는 먹다 남은 음식으로 비빔밥을 해 먹었다.",
+            "난 이제 네 말이라면 콩으로 메주를 쑨대도 안 믿어."
+          ]
+        }
+      ]
+    },
+    "85851": {
+      "target_code": "85851",
+      "word": "는",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=85851",
+      "senses": [
+        {
+          "definition": "어떤 대상이 다른 것과 대조됨을 나타내는 조사.",
+          "english": "neun",
+          "english_definition": "A postpositional particle used to indicate that a certain subject contrasts with something else.",
+          "note": "받침 없는 명사나 부사어, ‘-아’, ‘-게’, ‘-지’, ‘-고’ 등의 뒤에 붙여 쓴다.",
+          "examples": [
+            "어머니는 선생님이고, 아버지는 회사원이다.",
+            "편지는 자주 쓴다."
+          ]
+        },
+        {
+          "definition": "문장 속에서 어떤 대상이 화제임을 나타내는 조사.",
+          "english": "neun",
+          "english_definition": "A postpositional particle used to indicate that a certain subject is the topic of a sentence.",
+          "note": "받침 없는 명사 뒤에 붙여 쓴다.",
+          "examples": [
+            "저는 학생입니다.",
+            "사과는 몸에 좋다고 해요.",
+            "민준이는 우산 가지고 갔어요?"
+          ]
+        },
+        {
+          "definition": "강조의 뜻을 나타내는 조사.",
+          "english": "neun",
+          "english_definition": "A postpositional particle used to indicate an emphasis.",
+          "note": "받침 없는 명사나 부사어, 연결 어미 등의 뒤에 붙여 쓴다.",
+          "examples": [
+            "노는 게 좋아도 숙제는 해야지.",
+            "바쁘더라도 부모님께 전화는 자주 하세요.",
+            "그렇게 천천히 해서는 일을 언제 다 끝내겠어?"
+          ]
+        }
+      ]
+    },
+    "86111": {
+      "target_code": "86111",
+      "word": "은",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86111",
+      "senses": [
+        {
+          "definition": "어떤 대상이 다른 것과 대조됨을 나타내는 조사.",
+          "english": "eun",
+          "english_definition": "A postpositional particle used to indicate that a certain subject contrasts with something else.",
+          "note": "받침 있는 명사나 부사어 등의 뒤에 붙여 쓴다.",
+          "examples": [
+            "동생은 부산에 살고 나는 서울에 살고 있다.",
+            "나는 찌개는 못 끓이는데 볶음밥은 잘 만들어.",
+            "오늘은 더웠지만 내일은 비가 온다고 한다."
+          ]
+        },
+        {
+          "definition": "문장 속에서 어떤 대상이 화제임을 나타내는 조사.",
+          "english": "eun",
+          "english_definition": "A postpositional particle used to indicate that a certain subject is the topic of a sentence.",
+          "note": "받침 있는 명사 뒤에 붙여 쓴다.",
+          "examples": [
+            "어제 먹은 저녁상은 나 혼자서 다 차린 거야.",
+            "이번 어머니 생신은 동생과 내가 준비하기로 했다.",
+            "도서관은 지수와 내가 처음 만난 장소이다."
+          ]
+        },
+        {
+          "definition": "강조의 뜻을 나타내는 조사.",
+          "english": "eun",
+          "english_definition": "A postpositional particle used to indicate an emphasis.",
+          "note": "받침 있는 명사나 부사어, 연결 어미 등의 뒤에 붙여 쓴다.",
+          "examples": [
+            "바쁘더라도 아침은 꼭 챙겨 먹어.",
+            "내일은 꼭 담배를 피우지 않을 거야.",
+            "배탈이 났으니 차가운 음식은 드시지 마세요."
+          ]
+        }
+      ]
+    },
+    "86141": {
+      "target_code": "86141",
+      "word": "이랑",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86141",
+      "senses": [
+        {
+          "definition": "비교의 대상이거나 기준으로 삼는 대상임을 나타내는 조사.",
+          "english": "irang",
+          "english_definition": "A postpositional particle used to indicate that something is being compared or used as a criterion for comparison.",
+          "note": "",
+          "examples": [
+            "유민이랑 나랑은 동급생이다.",
+            "사진 속에 아들이랑 아빠가 정말 닮았네.",
+            "너는 결혼한 동생이랑 멀리 떨어져 살아?"
+          ]
+        },
+        {
+          "definition": "누군가를 상대로 하여 어떤 일을 할 때 그 상대임을 나타내는 조사.",
+          "english": "irang",
+          "english_definition": "A postpositional particle that indicates the person whom one is doing something with.",
+          "note": "",
+          "examples": [
+            "유민이가 민준이랑 농구 시합을 한대요.",
+            "지수가 유민이랑 싸운 후로 울기만 해요.",
+            "아빠가 가게 점원이랑 말다툼이 좀 있었어요."
+          ]
+        },
+        {
+          "definition": "어떤 일을 함께 하는 대상임을 나타내는 조사.",
+          "english": "irang",
+          "english_definition": "A postpositional particle used to indicate the subject one is doing something with.",
+          "note": "",
+          "examples": [
+            "지수는 항상 여동생이랑 같이 쇼핑을 한다.",
+            "내일 떠날 여행은 남편이랑 단둘이 갈 겁니다.",
+            "승규는 다음 달에 오랫동안 사귄 연인이랑 약혼할 계획이다."
+          ]
+        },
+        {
+          "definition": "앞과 뒤의 명사를 같은 자격으로 이어주는 조사.",
+          "english": "irang",
+          "english_definition": "A postpositional particle used to connect the preceding and following nouns.",
+          "note": "",
+          "examples": [
+            "저는 라면이랑 볶음밥을 좋아해요.",
+            "과일 가게에서 수박이랑 포도를 샀다.",
+            "어제 쇼핑을 갔었는데 가방이랑 신발을 샀어."
+          ]
+        }
+      ]
+    },
+    "86232": {
+      "target_code": "86232",
+      "word": "이다",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86232",
+      "senses": [
+        {
+          "definition": "주어가 지시하는 대상의 속성이나 부류를 지정하는 뜻을 나타내는 서술격 조사.",
+          "english": "ida",
+          "english_definition": "A predicate particle indicating the meaning of the attribute or category of the thing that the subject of the sentence refers to.",
+          "note": "동사나 형용사처럼 활용을 한다.",
+          "examples": [
+            "제 이름은 한승규입니다.",
+            "지수는 아직 학생이야.",
+            "서울은 대한민국의 수도이다."
+          ]
+        }
+      ]
+    },
+    "86258": {
+      "target_code": "86258",
+      "word": "도",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86258",
+      "senses": [
+        {
+          "definition": "이미 있는 어떤 것에 다른 것을 더하거나 포함함을 나타내는 조사.",
+          "english": "do",
+          "english_definition": "A postpositional particle used to indicate an addition or inclusion of another thing to something that already exists.",
+          "note": "",
+          "examples": [
+            "냉장고에 사과 말고 딸기도 있다.",
+            "그거랑 같이 여기 있는 이것도 먹어 봐.",
+            "나는 이 책뿐만 아니라 저 책도 좋아한다."
+          ]
+        },
+        {
+          "definition": "둘 이상의 것을 나열함을 나타내는 조사.",
+          "english": "do",
+          "english_definition": "A postpositional particle used to list two or more things.",
+          "note": "주로 '~도 ~도'로 쓴다.",
+          "examples": [
+            "그곳에는 학생도 있고 회사원도 있었어요.",
+            "교정에는 진달래도 피고 개나리도 폈다.",
+            "이것도 맛있고 저것도 맛있다."
+          ]
+        },
+        {
+          "definition": "어떤 기준이나 기대에 모자라지만 받아들일 수 있음을 나타내는 조사.",
+          "english": "do",
+          "english_definition": "A postpositional particle used to indicate the ability to accept something although it does not reach a standard or expectation.",
+          "note": "",
+          "examples": [
+            "아이스크림이 없으면 얼음물도 괜찮아요.",
+            "오늘 접수를 못 하신 분들께 내일까지도 기회를 드릴게요.",
+            "이것도 괜찮으시다면 좀 드세요."
+          ]
+        },
+        {
+          "definition": "극단적인 경우를 들어 다른 경우는 말할 것도 없음을 나타내는 조사.",
+          "english": "do",
+          "english_definition": "A postpositional particle used when giving an extreme case in order to show that it is obvious in another case.",
+          "note": "",
+          "examples": [
+            "이런 기본적인 계산도 못 한단 말인가?",
+            "그 사람이 범인이라는 것은 상상도 할 수 없었다.",
+            "지수는 작은 먼지 하나도 안 보일 만큼 깨끗하게 청소를 해 놓았다."
+          ]
+        }
+      ]
+    },
+    "86264": {
+      "target_code": "86264",
+      "word": "들",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86264",
+      "senses": [
+        {
+          "definition": "그 문장의 주어가 여럿임을 나타내는 조사.",
+          "english": "deul",
+          "english_definition": "A postpositional particle used when there are several subjects in the sentence.",
+          "note": "",
+          "examples": [
+            "다들 도착했어?",
+            "조심히들 가세요.",
+            "이것 좀 먹어들 보세요."
+          ]
+        }
+      ]
+    },
+    "86289": {
+      "target_code": "86289",
+      "word": "이",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86289",
+      "senses": [
+        {
+          "definition": "어떤 상태나 상황의 대상이나 동작의 주체를 나타내는 조사.",
+          "english": "i",
+          "english_definition": "A postpositional particle referring to a subject under a certain state or situation, or the agent of an action.",
+          "note": "받침 있는 명사 뒤에 붙여 쓴다.",
+          "examples": [
+            "오늘 밤은 달이 참 밝다.",
+            "나는 신이 있다고 믿는다.",
+            "학교 앞에 벚꽃이 예쁘게 피었더라."
+          ]
+        },
+        {
+          "definition": "바뀌게 되는 대상이나 부정하는 대상임을 나타내는 조사.",
+          "english": "i",
+          "english_definition": "A postpositional particle referring to the subject that is to be changed, or the subject that one denies.",
+          "note": "받침 있는 명사 뒤에 붙여 쓴다. 주로 '되다', '아니다'와 함께 쓴다.",
+          "examples": [
+            "저에 대한 소문은 사실이 아닙니다.",
+            "민준이는 내 아들이 아니고 조카다.",
+            "우리 팀이 우승을 하다니 꿈이 현실이 됐다."
+          ]
+        },
+        {
+          "definition": "앞말을 강조하는 뜻을 나타내는 조사.",
+          "english": "i",
+          "english_definition": "A postpositional particle used to emphasize the preceding statement.",
+          "note": "받침 있는 명사나 부사어 뒤에 붙여 쓴다.",
+          "examples": [
+            "승규는 온다고 한 지가 한 시간이 지났는데 왜 안 와?"
+          ]
+        }
+      ]
+    },
+    "86290": {
+      "target_code": "86290",
+      "word": "의",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86290",
+      "senses": [
+        {
+          "definition": "앞말이 뒤의 말에 대하여 소유, 소속, 소재, 관계, 기원, 주체의 관계를 가짐을 나타내는 조사.",
+          "english": "ui",
+          "english_definition": "A postpositional particle used to indicate that the referent of the following word is owned by, belongs to, is related to, originates from, or is the object of what the preceding word indicates.",
+          "note": "",
+          "examples": [
+            "이 분이 승규의 담임 선생님이세요.",
+            "나는 선생님을 도와 서재의 책들을 정리했다.",
+            "지수는 아픈 친구의 가방을 대신 들어 주었다."
+          ]
+        },
+        {
+          "definition": "앞말이 뒤의 말에 대하여 행위의 대상이나 목표가 됨을 나타내는 조사.",
+          "english": "ui",
+          "english_definition": "A postpositional particle used to indicate that the referent of the preceding word is the object of the act that the following word means.",
+          "note": "",
+          "examples": [
+            "비둘기는 평화의 상징이다.",
+            "최근 컴퓨터의 발전은 눈부실 정도다.",
+            "신라 시대에 기상의 관측을 위해 천문대가 설치되었다."
+          ]
+        },
+        {
+          "definition": "앞말이 뒤의 말에 대하여 속성이나 수량을 한정하거나 같은 자격임을 나타내는 조사.",
+          "english": "ui",
+          "english_definition": "A postpositional particle used to indicate that the referent of the preceding word limits the properties or amount of the referent of the following word or that two words are on an equal footing.",
+          "note": "",
+          "examples": [
+            "커피의 향기가 입안에 감돈다.",
+            "지수가 결혼한 지도 십 년의 시간이 흘렀다.",
+            "우리 딸은 신이 나에게 주신 최고의 선물이다."
+          ]
+        },
+        {
+          "definition": "앞말과 뒤의 말이 전체와 부분의 관계임을 나타내는 조사.",
+          "english": "ui",
+          "english_definition": "A postpositional particle used to indicate that the referents of the preceding word and the following one are in relation to the whole and a part.",
+          "note": "",
+          "examples": [
+            "형이 부모님의 여행을 위해 월급의 일부를 내놓았다.",
+            "고등학생인 승규는 하루의 대부분을 학교에서 보낸다.",
+            "지수는 운동도 치료 방법의 하나라고 생각하고 열심히 운동하고 있다."
+          ]
+        }
+      ]
+    },
+    "86300": {
+      "target_code": "86300",
+      "word": "대하다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86300",
+      "senses": [
+        {
+          "definition": "마주 향해 있다.",
+          "english": "face; confront",
+          "english_definition": "To be face to face.",
+          "note": "",
+          "examples": [
+            "스님은 벽을 대하고 앉아서 명상을 시작했다.",
+            "카페에는 커플들이 얼굴을 가까이 대하고 앉아 데이트를 즐기고 있었다.",
+            "면상을 대하다."
+          ]
+        },
+        {
+          "definition": "어떤 태도로 상대하다.",
+          "english": "handle; deal with",
+          "english_definition": "To handle with a certain attitude.",
+          "note": "",
+          "examples": [
+            "김 대리는 부하 직원을 친절하게 대해서 인기가 많다.",
+            "나는 동생의 약혼자를 벌써부터 가족으로 대하고 따뜻하게 맞이하였다.",
+            "가족으로 대하다."
+          ]
+        },
+        {
+          "definition": "대상이나 상대로 삼다.",
+          "english": "",
+          "english_definition": "To consider as a counterpart or opponent.",
+          "note": "주로 '대한', '대하여'로 쓴다.",
+          "examples": [
+            "그 문제에 대한 사람들의 생각이 다양했다.",
+            "우리는 남녀평등 방안에 대하여 토론했다.",
+            "사건에 대한."
+          ]
+        },
+        {
+          "definition": "작품 등을 직접 읽거나 감상하다.",
+          "english": "enjoy; appreciate",
+          "english_definition": "To read or appreciate a piece of art, etc.",
+          "note": "",
+          "examples": [
+            "전시회에서 그림을 대하는 그의 자세가 참 진지했다.",
+            "작가는 작품을 대하는 관람객을 위해 작품 설명을 붙여 놓았다.",
+            "그림을 대하다."
+          ]
+        }
+      ]
+    },
+    "86355": {
+      "target_code": "86355",
+      "word": "을",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86355",
+      "senses": [
+        {
+          "definition": "동작이 직접적으로 영향을 미치는 대상을 나타내는 조사.",
+          "english": "eul",
+          "english_definition": "A postpositional particle used to indicate the subject that an action has a direct influence on.",
+          "note": "",
+          "examples": [
+            "아침에는 빵을 먹는다.",
+            "시장에 가서 과일을 샀다.",
+            "지수는 소설책을 읽는다."
+          ]
+        },
+        {
+          "definition": "동작이 간접적인 영향을 미치는 대상이나 목적임을 나타내는 조사.",
+          "english": "eul",
+          "english_definition": "A postpositional particle used to indicate the subject or target that an action has an indirect influence on.",
+          "note": "",
+          "examples": [
+            "고기는 동생을 먹여라.",
+            "이 사진 친구들을 보였어요?",
+            "쓰다 남은 물은 화분을 줘요."
+          ]
+        },
+        {
+          "definition": "어떤 재료나 수단이 되는 사물임을 나타내는 조사.",
+          "english": "eul",
+          "english_definition": "A postpositional particle used to indicate something that becomes a material or means.",
+          "note": "",
+          "examples": [
+            "운동화 끈을 묶어서 긴 줄을 만들자.",
+            "나팔을 불어서 출발 신호로 알리자.",
+            "마당에 불을 피워서 모기를 쫓아야겠어요."
+          ]
+        },
+        {
+          "definition": "동작의 도착지나 동작이 이루어지는 장소를 나타내는 조사.",
+          "english": "eul",
+          "english_definition": "A postpositional particle used to indicate a place where an action finishes or occurs.",
+          "note": "주로 '가다', '걷다', '뛰다'와 함께 쓴다.",
+          "examples": [
+            "그는 고등학교를 졸업하고 고향을 떠났다.",
+            "나는 지리산을 거쳐 설악산으로 갔다.",
+            "우리가 탄 기차는 부산을 향해 달리고 있다."
+          ]
+        }
+      ]
+    },
+    "86554": {
+      "target_code": "86554",
+      "word": "만",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86554",
+      "senses": [
+        {
+          "definition": "다른 것은 제외하고 어느 것을 한정함을 나타내는 조사.",
+          "english": "man",
+          "english_definition": "A postpositional particle used when limiting the field to one thing, excluding all the others.",
+          "note": "",
+          "examples": [
+            "지수는 과일 중에 딸기만 좋아한다.",
+            "그는 중요한 서류에 사인을 할 때는 이 만년필만 쓴다.",
+            "나는 요즘 상영하는 영화 중에 이 영화만 보고 싶어."
+          ]
+        },
+        {
+          "definition": "무엇을 강조하는 뜻을 나타내는 조사.",
+          "english": "man",
+          "english_definition": "A postpositional particle that indicates an emphasis on something.",
+          "note": "",
+          "examples": [
+            "이 문제가 반드시 해결되어야만 한다.",
+            "진실을 알기 위해서는 그를 찾아야만 한다.",
+            "눈앞의 일이 해결되었다고 좋아만 하고 있을 때가 아니다."
+          ]
+        },
+        {
+          "definition": "말하는 사람이 기대하는 최소의 선을 나타내는 조사.",
+          "english": "man",
+          "english_definition": "A postpositional particle that indicates the speaker's least expectation.",
+          "note": "주로 수량 표현과 함께 쓴다.",
+          "examples": [
+            "우리 가위바위보 딱 한 번만 더 해 보자.",
+            "드라마 한 편만 더 보고 나가면 안 될까?",
+            "마지막으로 남은 술을 한 잔씩만 마시고 나갑시다."
+          ]
+        },
+        {
+          "definition": "앞말이 비교의 대상임을 나타내는 조사.",
+          "english": "man",
+          "english_definition": "A postpositional particle used when the preceding statement is the subject of a comparison.",
+          "note": "주로 ‘하다’, ‘못하다’와 함께 쓴다.",
+          "examples": [
+            "동생이 언니만 못하네.",
+            "일을 그런 식으로 할 거면 안 하느니만 못하지.",
+            "유민이는 얼굴이 주먹만 하다."
+          ]
+        }
+      ]
+    },
+    "86568": {
+      "target_code": "86568",
+      "word": "-아요",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86568",
+      "senses": [
+        {
+          "definition": "(두루높임으로) 어떤 사실을 서술하거나 질문, 명령, 권유함을 나타내는 종결 어미.",
+          "english": "-ayo",
+          "english_definition": "(informal addressee-raising) A sentence-final ending used to describe a certain fact, ask a question, give an order, or advise.",
+          "note": "",
+          "examples": [
+            "전화 좀 받아요.",
+            "날씨가 정말 좋아요.",
+            "이쪽으로 와서 앉아요."
+          ]
+        }
+      ]
+    },
+    "86571": {
+      "target_code": "86571",
+      "word": "-어요",
+      "pos": "어미",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=86571",
+      "senses": [
+        {
+          "definition": "(두루높임으로) 어떤 사실을 서술하거나 질문, 명령, 권유함을 나타내는 종결 어미.",
+          "english": "-eoyo",
+          "english_definition": "(informal addressee-raising) A sentence-final ending used to describe a certain fact, ask a question, give an order, or advise.",
+          "note": "",
+          "examples": [
+            "내 말을 좀 믿어 줘요.",
+            "그걸 정말 혼자 다 먹어요?",
+            "우리는 그날 처음 만났어요."
+          ]
+        }
+      ]
+    },
+    "88505": {
+      "target_code": "88505",
+      "word": "-히-",
+      "pos": "접사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=88505",
+      "senses": [
+        {
+          "definition": "‘사동’의 뜻을 더하는 접미사.",
+          "english": "-hi-",
+          "english_definition": "A suffix used to mean causation.",
+          "note": "일부 동사 어간 뒤에 붙는다.",
+          "examples": [
+            "가라앉히다",
+            "갈아입히다",
+            "굳히다"
+          ]
+        },
+        {
+          "definition": "‘피동’의 뜻을 더하는 접미사.",
+          "english": "-hi-",
+          "english_definition": "A suffix used to mean passivity.",
+          "note": "일부 동사 어간 뒤에 붙는다.",
+          "examples": [
+            "가로막히다",
+            "갇히다",
+            "걷히다"
+          ]
+        },
+        {
+          "definition": "‘사동’의 뜻을 더하고 동사로 만드는 접미사.",
+          "english": "-hi-",
+          "english_definition": "A suffix that means causation and makes the word a verb.",
+          "note": "일부 형용사 어간 뒤에 붙는다.",
+          "examples": [
+            "괴롭히다",
+            "넓히다",
+            "더럽히다"
+          ]
+        }
+      ]
+    },
+    "88926": {
+      "target_code": "88926",
+      "word": "-이-",
+      "pos": "접사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=88926",
+      "senses": [
+        {
+          "definition": "‘사동’의 뜻을 더하는 접미사.",
+          "english": "-i-",
+          "english_definition": "A suffix used to mean causation.",
+          "note": "일부 동사의 어간 뒤에 붙는다.",
+          "examples": [
+            "곁들이다",
+            "기울이다",
+            "기죽이다"
+          ]
+        },
+        {
+          "definition": "‘피동’의 뜻을 더하는 접미사.",
+          "english": "-i-",
+          "english_definition": "A suffix used to mean passivity.",
+          "note": "일부 동사의 어간 뒤에 붙는다.",
+          "examples": [
+            "가로놓이다",
+            "감싸이다",
+            "건너다보이다"
+          ]
+        },
+        {
+          "definition": "‘사동’의 뜻을 더하고 동사로 만드는 접미사.",
+          "english": "-i-",
+          "english_definition": "A suffix that means causation and makes the word a verb.",
+          "note": "일부 형용사의 어간 뒤에 붙는다.",
+          "examples": [
+            "높이다",
+            "드높이다",
+            "싸이다"
+          ]
+        }
+      ]
+    },
+    "88966": {
+      "target_code": "88966",
+      "word": "-적",
+      "pos": "접사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=88966",
+      "senses": [
+        {
+          "definition": "'그 성격을 띠는', '그에 관계된', '그 상태로 된'의 뜻을 더하는 접미사.",
+          "english": "-jeok",
+          "english_definition": "A suffix used to mean \"having that character,\" \"being related to something,\" \"being such a state.\"",
+          "note": "",
+          "examples": [
+            "심리적",
+            "대중적",
+            "독창적"
+          ]
+        }
+      ]
+    },
+    "89218": {
+      "target_code": "89218",
+      "word": "나",
+      "pos": "조사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=89218",
+      "senses": [
+        {
+          "definition": "만족스럽지는 않지만 선택함을 나타내는 조사.",
+          "english": "na",
+          "english_definition": "A postpositional particle used to choose something, though it is not satisfactory.",
+          "note": "받침 없는 명사, 대명사, 수사, 또는 부사어, 연결 어미 ‘-아’, ‘-게’, ‘-지’, ‘-고’ 등의 뒤에 붙여 쓴다.",
+          "examples": [
+            "심심한데 영화나 보러 갈래?",
+            "어디 가서 차나 한잔하시죠.",
+            "야단칠 때 치더라도 아이 이야기나 들어 보죠."
+          ]
+        },
+        {
+          "definition": "사실은 그렇지 않지만 그런 것처럼 행동함을 나타내는 조사.",
+          "english": "na",
+          "english_definition": "A postpositional particle used to indicate that one acts in a certain manner, though it is untrue.",
+          "note": "주로 빈정거리는 의미를 나타낼 때, 받침 없는 명사, 대명사, 수사, 또는 부사어 뒤에 붙여 쓴다.",
+          "examples": [
+            "그들은 마치 서로 원수나 되는 듯이 만나기만 하면 싸운다.",
+            "민준이는 자기가 마치 전문가나 되는 것처럼 아는 체를 한다.",
+            "지수는 마치 내가 벌레나 되는 듯이 경멸의 눈빛으로 쳐다보았다."
+          ]
+        },
+        {
+          "definition": "수량이 예상되는 정도를 넘거나 꽤 크거나 많음을 강조하는 조사.",
+          "english": "na",
+          "english_definition": "A postpositional particle used to indicate that the amount of something is larger than expected, or to emphasize a large amount.",
+          "note": "주로 놀람의 의미를 나타낼 때, 수량이나 정도를 나타내는 받침 없는 명사, 대명사, 수사, 또는 부사어 뒤에 붙여 쓴다.",
+          "examples": [
+            "우리 팀은 창단 후 십 회나 우승을 차지하였다.",
+            "너는 계란을 그렇게나 많이 사서 언제 다 먹을래?",
+            "그 배우의 사인을 받으려는 팬들의 행렬이 삼십 미터나 이어졌다."
+          ]
+        },
+        {
+          "definition": "수량이나 정도를 대강 짐작할 때 쓰는 조사.",
+          "english": "na",
+          "english_definition": "A postpositional particle used to make a rough guess at the amount or extent.",
+          "note": "수량이나 정도를 나타내는, 받침 없는 명사, 대명사, 수사, 또는 부사어 뒤에 붙여 쓴다.",
+          "examples": [
+            "이 등산로는 몇 미터나 되나요?",
+            "우리나라의 산은 몇 개나 될까?",
+            "잠수를 하면 몇 초나 견딜 수 있을까?"
+          ]
+        }
+      ]
+    },
+    "89445": {
+      "target_code": "89445",
+      "word": "알다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=89445",
+      "senses": [
+        {
+          "definition": "교육이나 경험, 생각 등을 통해 사물이나 상황에 대한 정보 또는 지식을 갖추다.",
+          "english": "know; understand",
+          "english_definition": "To have information or knowledge about an object or situation through education, experience, thoughts, etc.",
+          "note": "",
+          "examples": [
+            "선생님은 학생들에게 어려운 내용을 알기 쉽게 설명해 주셨다.",
+            "민준이는 그 수학 문제의 답을 아는 듯이 막힘없이 척척 풀었다.",
+            "직장 동료는 자기가 요즘 얼마나 바쁜지 알지 못하고 일을 시킨다며 투덜대었다."
+          ]
+        },
+        {
+          "definition": "어떤 사실이나 상황에 대해 의식이나 감각으로 깨닫거나 느끼다.",
+          "english": "know; realize",
+          "english_definition": "To realize or feel a fact or situation through awareness or senses.",
+          "note": "",
+          "examples": [
+            "밖에 나와 보니 날씨가 추운 것을 알겠다.",
+            "범죄자가 자신의 죄를 알고서 깊이 뉘우치고 있다.",
+            "땅에 고인 빗물을 보니 어젯밤에 비가 많이 내렸음을 알겠다."
+          ]
+        },
+        {
+          "definition": "어떤 심리적인 상태를 마음속으로 깨닫거나 느끼다.",
+          "english": "know; understand; appreciate",
+          "english_definition": "To realize or feel a psychological state in one's mind.",
+          "note": "",
+          "examples": [
+            "잘못을 한 아이들이 창피함을 알고서 고개를 푹 숙였다.",
+            "은혜를 아는 학생들이 선생님께 정성이 담긴 감사 편지를 썼다.",
+            "아저씨는 돈 없이 자라서 가난의 아픔을 누구보다 잘 알고 있다."
+          ]
+        },
+        {
+          "definition": "어떤 일을 어떻게 할지 스스로 정하거나 판단하다.",
+          "english": "be on one's own; be independent",
+          "english_definition": "To decide or judge on one's own what to do and how.",
+          "note": "주로 '알아서'로 쓴다.",
+          "examples": [
+            "이 식당은 손님들이 각자 알아서 물과 반찬을 떠다 먹는다.",
+            "어리기만 하던 동생이 자기 준비물을 알아서 챙길 만큼 많이 자랐다.",
+            "이 프로그램은 숫자를 입력하기만 하면 알아서 계산을 해 준다."
+          ]
+        }
+      ]
+    },
+    "90912": {
+      "target_code": "90912",
+      "word": "들",
+      "pos": "의존 명사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=90912",
+      "senses": [
+        {
+          "definition": "둘 이상의 대상을 나열하면서 그와 같은 것이 있음을 가리키는 말.",
+          "english": "et cetera",
+          "english_definition": "A bound noun used for listing two or more things, indicating that there are such things.",
+          "note": "",
+          "examples": [
+            "나는 가방 안에 지갑, 전화기, 수첩, 필통 들을 집어넣었다.",
+            "감자, 고구마 들.",
+            "명사, 대명사, 수사 들."
+          ]
+        }
+      ]
+    },
+    "91168": {
+      "target_code": "91168",
+      "word": "못하다",
+      "pos": "동사",
+      "url": "https://krdict.korean.go.kr/kor/dicSearch/SearchView?ParaWordNo=91168",
+      "senses": [
+        {
+          "definition": "어떤 일을 일정한 수준에 이르지 못하게 하거나 그 일을 할 능력이 없다.",
+          "english": "be incapable; fail to",
+          "english_definition": "To fail to make a certain work reach a certain level or to not own the ability to do so.",
+          "note": "",
+          "examples": [
+            "새댁은 살림을 못해서 집이 매우 어수선했다.",
+            "영어를 못하는 민준이에게 외국인과 대화하는 것은 매우 힘든 일이었다.",
+            "공부를 못하다."
+          ]
+        }
+      ]
+    }
+  }
+}

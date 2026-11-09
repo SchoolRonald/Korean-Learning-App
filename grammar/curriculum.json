@@ -1,0 +1,2161 @@
+{
+  "note": "Point names and lesson numbers follow the public HowToStudyKorean lesson list. Splits and summaries are AI-written and not validated by a native speaker.",
+  "points": [
+    {
+      "id": "word-order",
+      "lesson": 1,
+      "order": 1,
+      "title": "Basic Korean word order (subject, object, verb)",
+      "pattern": "N(subject) + N(object) + V",
+      "kind": "usage",
+      "summary": "Korean normally places the subject first, the object next, and the verb last at the end of the sentence. Particles attached to nouns mark their roles, so the order is flexible but the verb always comes last.",
+      "related": [
+        "verb-adjective-basics"
+      ],
+      "lookups": [],
+      "sources": []
+    },
+    {
+      "id": "topic-particle-eun-neun",
+      "lesson": 1,
+      "order": 2,
+      "title": "Topic particle 은/는",
+      "pattern": "N + 은/는",
+      "kind": "particle",
+      "summary": "Attach 은 after a noun ending in a consonant and 는 after a noun ending in a vowel to mark it as the topic or contrast of the sentence. It is often used for what the sentence is about or to contrast one item with another.",
+      "related": [
+        "object-particle-eul-reul",
+        "subject-particle-i-ga",
+        "possessive-particle-ui",
+        "particle-do",
+        "copula-conjugation-ieyo-yeyo",
+        "particle-man",
+        "particle-gwa-wa-rang-hago"
+      ],
+      "lookups": [
+        {
+          "headword": "은",
+          "pos": "조사"
+        },
+        {
+          "headword": "는",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86111",
+        "85851"
+      ]
+    },
+    {
+      "id": "object-particle-eul-reul",
+      "lesson": 1,
+      "order": 3,
+      "title": "Object particle 을/를",
+      "pattern": "N + 을/를",
+      "kind": "particle",
+      "summary": "Attach 을 after a noun ending in a consonant and 를 after a noun ending in a vowel to mark the direct object that the verb acts on. It can also mark a place passed through with verbs like go, walk, or run.",
+      "related": [
+        "topic-particle-eun-neun",
+        "subject-particle-i-ga",
+        "good-vs-like",
+        "particle-euro",
+        "particle-ege-hante-kke",
+        "like-dislike-a-eo-hada"
+      ],
+      "lookups": [
+        {
+          "headword": "을",
+          "pos": "조사"
+        },
+        {
+          "headword": "를",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86355",
+        "85764"
+      ]
+    },
+    {
+      "id": "copula-i-da",
+      "lesson": 1,
+      "order": 4,
+      "title": "이다 (to be)",
+      "pattern": "N + 이다",
+      "kind": "conjugation",
+      "summary": "이다 means 'to be' and attaches to a noun to say what something is, such as its identity or category. It conjugates like a verb or adjective, and it is not used with the object or verb-of-action pattern.",
+      "related": [
+        "subject-particle-i-ga",
+        "existence-verb-itda",
+        "copula-conjugation-ieyo-yeyo"
+      ],
+      "lookups": [
+        {
+          "headword": "이다",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86232"
+      ]
+    },
+    {
+      "id": "demonstratives-i-geu-jeo",
+      "lesson": 1,
+      "order": 5,
+      "title": "이/그/저 (this/that)",
+      "pattern": "이/그/저 + N",
+      "kind": "usage",
+      "summary": "이, 그, and 저 are demonstrative words placed directly before a noun: 이 for something near the speaker, 그 for something near the listener or already mentioned, and 저 for something far from both. They do not take particles themselves and simply precede the noun they modify.",
+      "related": [
+        "what-mwo",
+        "which-eoneu",
+        "demonstrative-adjectives-ireoda-geureoda-jeoreoda"
+      ],
+      "lookups": [
+        {
+          "headword": "이",
+          "pos": "관형사"
+        },
+        {
+          "headword": "그",
+          "pos": "관형사"
+        },
+        {
+          "headword": "저",
+          "pos": "관형사"
+        }
+      ],
+      "sources": [
+        "71687",
+        "43883",
+        "71215"
+      ]
+    },
+    {
+      "id": "subject-particle-i-ga",
+      "lesson": 2,
+      "order": 1,
+      "title": "Subject particle 이/가",
+      "pattern": "N + 이/가",
+      "kind": "particle",
+      "summary": "The particle 이/가 marks the noun before it as the subject, the one in a certain state or doing an action, or the thing being changed or denied, and it can also add emphasis. Attach 이 after a noun ending in a consonant (받침) and 가 after a noun ending in a vowel.",
+      "related": [
+        "topic-particle-eun-neun",
+        "object-particle-eul-reul",
+        "copula-i-da",
+        "existence-verb-itda",
+        "possessive-particle-ui",
+        "particle-do",
+        "particle-kkeseo",
+        "copula-conjugation-ieyo-yeyo",
+        "particle-gwa-wa-rang-hago",
+        "deulda-take-cost",
+        "compare-dareuda-biseutada-gatda"
+      ],
+      "lookups": [
+        {
+          "headword": "이",
+          "pos": "조사"
+        },
+        {
+          "headword": "가",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86289",
+        "66341"
+      ]
+    },
+    {
+      "id": "existence-verb-itda",
+      "lesson": 2,
+      "order": 2,
+      "title": "Existence verb 있다 (to be somewhere, to have)",
+      "pattern": "N + 에 있다 / N + 이/가 있다",
+      "kind": "usage",
+      "summary": "The verb 있다 means to be located or remain in a place, or to exist or have something, and it is used as N + 에 있다 for location and N + 이/가 있다 for existence or possession, with the subject marked by 이/가. Its other senses, such as continuing to work for a company or time passing, are not part of this basic existence pattern.",
+      "related": [
+        "copula-i-da",
+        "subject-particle-i-ga",
+        "honorific-verbs-gyesida-deusida",
+        "progressive-go-itda"
+      ],
+      "lookups": [
+        {
+          "headword": "있다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "68796"
+      ]
+    },
+    {
+      "id": "verb-adjective-basics",
+      "lesson": 3,
+      "order": 1,
+      "title": "Verbs and adjectives: dictionary form and polite ending",
+      "pattern": "V/A stem + -아요/-어요",
+      "kind": "conjugation",
+      "summary": "Verb and adjective dictionary forms end in -다, and the polite form is made by dropping 다 to get the stem and adding -아요 after a stem whose last vowel is ㅏ or ㅗ, or -어요 otherwise. The ending -아요 is an informal sentence-final ending used for statements, questions, orders, and advice.",
+      "related": [
+        "word-order",
+        "many-adjective-manda",
+        "attributive-adjective-n-eun",
+        "present-tense",
+        "past-tense",
+        "future-tense",
+        "passive-verbs-i-hi-ri-gi",
+        "compound-verbs",
+        "being-sick",
+        "suffix-seureopda",
+        "become-adjective-a-eo-jida"
+      ],
+      "lookups": [
+        {
+          "headword": "가다",
+          "pos": "동사"
+        },
+        {
+          "headword": "좋다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "-아요",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "27500",
+        "79033",
+        "86568"
+      ]
+    },
+    {
+      "id": "possessive-particle-ui",
+      "lesson": 3,
+      "order": 2,
+      "title": "Possessive particle 의",
+      "pattern": "N + 의",
+      "kind": "particle",
+      "summary": "The particle 의 attaches to a noun and shows that the following noun belongs to, is related to, or comes from the preceding noun, similar to English 's or of. It can also mark the preceding noun as the object of the action named by the following word.",
+      "related": [
+        "topic-particle-eun-neun",
+        "subject-particle-i-ga"
+      ],
+      "lookups": [
+        {
+          "headword": "의",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86290"
+      ]
+    },
+    {
+      "id": "good-vs-like",
+      "lesson": 3,
+      "order": 3,
+      "title": "좋다 vs 좋아하다",
+      "pattern": "A 좋다 / N + 을/를 좋아하다",
+      "kind": "usage",
+      "summary": "좋다 is an adjective meaning good or nice, used to describe a noun directly. 좋아하다 is a verb meaning to like, and the thing liked is marked with 을/를 before it.",
+      "related": [
+        "object-particle-eul-reul",
+        "like-dislike-a-eo-hada"
+      ],
+      "lookups": [
+        {
+          "headword": "좋다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "좋아하다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "79033",
+        "27929"
+      ]
+    },
+    {
+      "id": "many-adjective-manda",
+      "lesson": 4,
+      "order": 1,
+      "title": "Adjective 많다 (many, much)",
+      "pattern": "많다",
+      "kind": "usage",
+      "summary": "많다 is an adjective meaning \"many\" or \"much\" that describes a number or amount exceeding a certain standard. Use the stem 많- with the ending -다 for the dictionary form, and conjugate it like other adjectives.",
+      "related": [
+        "verb-adjective-basics",
+        "attributive-adjective-n-eun"
+      ],
+      "lookups": [
+        {
+          "headword": "많다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "69295"
+      ]
+    },
+    {
+      "id": "attributive-adjective-n-eun",
+      "lesson": 4,
+      "order": 2,
+      "title": "Describing nouns with adjectives: ㄴ/은",
+      "pattern": "A stem + ㄴ/은 + N",
+      "kind": "conjugation",
+      "summary": "To describe a noun with an adjective, attach -ㄴ to an adjective stem ending in a vowel or ㄹ, and -은 to one ending in a consonant, placing the adjective before the noun (A stem + ㄴ/은 + N). With adjectives, this form refers to the present state.",
+      "related": [
+        "verb-adjective-basics",
+        "many-adjective-manda"
+      ],
+      "lookups": [
+        {
+          "headword": "-은",
+          "pos": "어미"
+        },
+        {
+          "headword": "-ㄴ",
+          "pos": "어미"
+        }
+      ],
+      "sources": [
+        "80344",
+        "78634"
+      ]
+    },
+    {
+      "id": "particle-do",
+      "lesson": 4,
+      "order": 3,
+      "title": "Particle 도 (also)",
+      "pattern": "N + 도",
+      "kind": "particle",
+      "summary": "The particle 도 attaches to a noun and means \"also\" or \"too\" when adding something to what already exists. It is also used to list two or more things, usually as ~도 ~도, and to show that something is acceptable even though it falls short of an expectation, or to give an extreme case that makes another case obvious.",
+      "related": [
+        "topic-particle-eun-neun",
+        "subject-particle-i-ga",
+        "particle-deul",
+        "particle-man",
+        "anyone-everyone-nuguna-amuna",
+        "nobody-amudo"
+      ],
+      "lookups": [
+        {
+          "headword": "도",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86258"
+      ]
+    },
+    {
+      "id": "present-tense",
+      "lesson": 5,
+      "order": 1,
+      "title": "Present tense polite ending 아요/어요/해요",
+      "pattern": "V/A stem + 아요/어요/해요",
+      "kind": "conjugation",
+      "summary": "The -아요/-어요 ending attaches to verb and adjective stems to form the polite informal present tense, using 아요 after stems with ㅏ or ㅗ and 어요 otherwise. It is used to state facts, ask questions, give orders, or advise, and 하다 stems take 해요.",
+      "related": [
+        "verb-adjective-basics",
+        "past-tense",
+        "future-tense",
+        "honorific-si-infix",
+        "future-tense-geot-ida",
+        "progressive-go-itda"
+      ],
+      "lookups": [
+        {
+          "headword": "-아요",
+          "pos": ""
+        },
+        {
+          "headword": "-어요",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "86568",
+        "86571"
+      ]
+    },
+    {
+      "id": "past-tense",
+      "lesson": 5,
+      "order": 2,
+      "title": "Past tense 았/었어요",
+      "pattern": "V/A stem + 았/었어요",
+      "kind": "conjugation",
+      "summary": "The 았/었 ending is inserted between a verb or adjective stem and 어요 to mark a past event, a completed action whose result continues, or an assertive statement about a future event. Use 았 after stems with ㅏ or ㅗ and 었 otherwise.",
+      "related": [
+        "verb-adjective-basics",
+        "present-tense",
+        "future-tense",
+        "honorific-si-infix"
+      ],
+      "lookups": [
+        {
+          "headword": "-았-",
+          "pos": ""
+        },
+        {
+          "headword": "-었-",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "66954",
+        "68719"
+      ]
+    },
+    {
+      "id": "future-tense",
+      "lesson": 5,
+      "order": 3,
+      "title": "Future tense 을/ㄹ 거예요",
+      "pattern": "V stem + 을/ㄹ 거예요",
+      "kind": "expression",
+      "summary": "The 을/ㄹ 거예요 pattern attaches to verb stems to express future action or intention, with 을 after consonant-final stems and ㄹ after vowel-final stems. It is followed by 거예요 to make the polite informal form.",
+      "related": [
+        "verb-adjective-basics",
+        "present-tense",
+        "past-tense",
+        "future-tense-geot-ida"
+      ],
+      "lookups": [
+        {
+          "headword": "-을 것이다",
+          "pos": ""
+        },
+        {
+          "headword": "-ㄹ 것이다",
+          "pos": ""
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "honorific-si-infix",
+      "lesson": 6,
+      "order": 1,
+      "title": "Honorific infix -(으)시-",
+      "pattern": "V/A stem + -(으)시- (e.g., 가시다, 많으시다)",
+      "kind": "conjugation",
+      "summary": "The infix -(으)시- is attached to the stem of a verb or adjective, with -으시- after a consonant-final stem and -시- after a vowel-final stem, to show respect toward the subject of the action or state. It can also be used when the possession or body part of a respected person is the subject of the sentence.",
+      "related": [
+        "present-tense",
+        "past-tense",
+        "particle-kkeseo",
+        "honorific-verbs-gyesida-deusida"
+      ],
+      "lookups": [
+        {
+          "headword": "-시-",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "80330"
+      ]
+    },
+    {
+      "id": "particle-kkeseo",
+      "lesson": 6,
+      "order": 2,
+      "title": "Honorific subject particle 께서",
+      "pattern": "N + 께서",
+      "kind": "particle",
+      "summary": "The particle 께서 attaches to a honorific noun to mark it as the subject of an action, serving as a respectful form of 가 or 이. It is used when the person doing the action deserves elevated respect.",
+      "related": [
+        "subject-particle-i-ga",
+        "honorific-si-infix",
+        "particle-kke",
+        "particle-eseo"
+      ],
+      "lookups": [
+        {
+          "headword": "께서",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "73012"
+      ]
+    },
+    {
+      "id": "particle-kke",
+      "lesson": 6,
+      "order": 3,
+      "title": "Honorific dative particle 께",
+      "pattern": "N + 께",
+      "kind": "particle",
+      "summary": "The particle 께 attaches to a honorific noun and means 'to' or 'for' in the sense of 에게, marking the recipient, the person affected by an act, or the subject of an act in respectful speech. It is the polite counterpart of 에게.",
+      "related": [
+        "particle-kkeseo"
+      ],
+      "lookups": [
+        {
+          "headword": "께",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "69701"
+      ]
+    },
+    {
+      "id": "honorific-verbs-gyesida-deusida",
+      "lesson": 6,
+      "order": 4,
+      "title": "Honorific verbs 계시다, 드시다, 주무시다",
+      "pattern": "계시다 / 드시다 / 주무시다 (replace 있다, 먹다, 자다)",
+      "kind": "usage",
+      "summary": "The verbs 계시다, 드시다, and 주무시다 are honorific replacements for 있다, 먹다, and 자다 respectively. 계시다 means for a senior to be, live, or have a status somewhere, 드시다 means to eat politely, and 주무시다 means to sleep politely.",
+      "related": [
+        "existence-verb-itda",
+        "honorific-si-infix"
+      ],
+      "lookups": [
+        {
+          "headword": "계시다",
+          "pos": "동사"
+        },
+        {
+          "headword": "드시다",
+          "pos": "동사"
+        },
+        {
+          "headword": "주무시다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "17749",
+        "62597"
+      ]
+    },
+    {
+      "id": "irregular-eu",
+      "lesson": 7,
+      "order": 1,
+      "title": "Irregular 으 stem verbs and adjectives",
+      "pattern": "V/A stem ending in 으 + 아/어요: drop 으, then add 아 or 어 by the vowel before it (바쁘다 → 바빠요, 쓰다 → 써요)",
+      "kind": "conjugation",
+      "summary": "These verbs and adjectives have a stem ending in 으. Before 아/어요, drop the 으, then add 아 if the vowel before it is ㅏ or ㅗ, otherwise add 어. The 쓰다 and 바쁘다 entries and the 아프다 entry all follow this pattern.",
+      "related": [
+        "irregular-reu"
+      ],
+      "lookups": [
+        {
+          "headword": "바쁘다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "쓰다",
+          "pos": "동사"
+        },
+        {
+          "headword": "아프다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "66248",
+        "65172",
+        "65173",
+        "71285",
+        "62239"
+      ]
+    },
+    {
+      "id": "irregular-reu",
+      "lesson": 7,
+      "order": 2,
+      "title": "Irregular 르 stem verbs and adjectives",
+      "pattern": "V/A stem ending in 르 + 아/어요: add ㄹ to the first syllable and insert 라 or 러 (모르다 → 몰라요, 다르다 → 달라요)",
+      "kind": "conjugation",
+      "summary": "These verbs and adjectives have a stem ending in 르. Before 아/어요, add ㄹ to the first syllable and insert 라 or 러 in place of 르, so the 르 is not kept. The 모르다, 다르다, and 빠르다 entries follow this pattern.",
+      "related": [
+        "irregular-eu"
+      ],
+      "lookups": [
+        {
+          "headword": "모르다",
+          "pos": "동사"
+        },
+        {
+          "headword": "다르다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "빠르다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "29712",
+        "26824",
+        "68755"
+      ]
+    },
+    {
+      "id": "irregular-b",
+      "lesson": 7,
+      "order": 3,
+      "title": "Irregular ㅂ stem verbs and adjectives",
+      "pattern": "V/A stem ending in ㅂ + 아/어요: ㅂ becomes 우, then add 어요 (춥다 → 추워요, 돕다 → 도와요)",
+      "kind": "conjugation",
+      "summary": "These verbs and adjectives have a stem ending in ㅂ. Before a vowel ending like 아/어요, the ㅂ changes to 우 and then 어요 is added, so the ㅂ is not kept. The 춥다, 쉽다, and 돕다 entries follow this pattern.",
+      "related": [],
+      "lookups": [
+        {
+          "headword": "춥다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "쉽다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "돕다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "72146",
+        "66314",
+        "17203"
+      ]
+    },
+    {
+      "id": "irregular-d",
+      "lesson": 7,
+      "order": 4,
+      "title": "Irregular ㄷ stem verbs",
+      "pattern": "V stem ending in ㄷ + 아/어요: ㄷ becomes ㄹ (듣다 → 들어요, 걷다 → 걸어요)",
+      "kind": "conjugation",
+      "summary": "These verbs have a stem ending in ㄷ. Before a vowel ending like 아/어요, the ㄷ changes to ㄹ. The 듣다 entry for hearing and the 걷다 entry for walking follow this pattern. Other 걷다 homographs with different meanings are regular and are excluded.",
+      "related": [
+        "irregular-s"
+      ],
+      "lookups": [
+        {
+          "headword": "듣다",
+          "pos": "동사"
+        },
+        {
+          "headword": "걷다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "74104",
+        "29667"
+      ]
+    },
+    {
+      "id": "irregular-s",
+      "lesson": 7,
+      "order": 5,
+      "title": "Irregular ㅅ stem verbs and adjectives",
+      "pattern": "V/A stem ending in ㅅ + 아/어요: drop ㅅ, then add 아 or 어요 (낫다 → 나아요, 짓다 → 지어요)",
+      "kind": "conjugation",
+      "summary": "These verbs and adjectives have a stem ending in ㅅ. Before 아/어요, the ㅅ is dropped and the ending is added to the vowel before it. The 낫다 and 짓다 entries follow this pattern.",
+      "related": [
+        "irregular-d"
+      ],
+      "lookups": [
+        {
+          "headword": "낫다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "짓다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "38524",
+        "66585"
+      ]
+    },
+    {
+      "id": "irregular-l",
+      "lesson": 7,
+      "order": 6,
+      "title": "Irregular ㄹ stem verbs",
+      "pattern": "V stem ending in ㄹ + ㅂ/ㅅ/ㄴ endings: drop ㄹ (알다 → 알아요 stays, 만들다 → 만들어요, 살다 → 사니까)",
+      "kind": "conjugation",
+      "summary": "These verbs have a stem ending in ㄹ. Before endings that begin with ㅂ, ㅅ, or ㄴ, the ㄹ is dropped. The 알다, 살다, and 만들다 entries are all ㄹ-stem verbs that follow this pattern.",
+      "related": [],
+      "lookups": [
+        {
+          "headword": "알다",
+          "pos": "동사"
+        },
+        {
+          "headword": "살다",
+          "pos": "동사"
+        },
+        {
+          "headword": "만들다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "89445",
+        "69579",
+        "60317"
+      ]
+    },
+    {
+      "id": "irregular-h",
+      "lesson": 7,
+      "order": 7,
+      "title": "Irregular ㅎ stem adjectives",
+      "pattern": "A stem ending in ㅎ + 아/어요: ㅎ drops and the vowel changes (그렇다 → 그래요, 어떻다 → 어때요)",
+      "kind": "conjugation",
+      "summary": "These adjectives have a stem ending in ㅎ. Before 아/어요, the ㅎ drops and the vowel changes, so the ending is not added in the regular way. The 그렇다, 어떻다, and 빨갛다 entries follow this pattern.",
+      "related": [
+        "irregular-h-adjectives"
+      ],
+      "lookups": [
+        {
+          "headword": "그렇다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "어떻다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "빨갛다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "61178",
+        "70482",
+        "71070"
+      ]
+    },
+    {
+      "id": "adverbs-basic",
+      "lesson": 8,
+      "order": 1,
+      "title": "Adverbs before verbs and adjectives",
+      "pattern": "Adv + V/A",
+      "kind": "usage",
+      "summary": "Adverbs like 많이 and 잘 modify the verb or adjective that follows them, describing how much or how well an action or state happens. They stand directly before the verb or adjective and do not take endings themselves.",
+      "related": [
+        "negation-an",
+        "comparative-boda-deo",
+        "adverb-jal-mot",
+        "how-eotteoke",
+        "colors"
+      ],
+      "lookups": [
+        {
+          "headword": "많이",
+          "pos": "부사"
+        },
+        {
+          "headword": "잘",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "66030",
+        "58939"
+      ]
+    },
+    {
+      "id": "negation-an",
+      "lesson": 8,
+      "order": 2,
+      "title": "Negation with 안",
+      "pattern": "안 + V/A",
+      "kind": "usage",
+      "summary": "The adverb 안 placed directly before a verb or adjective negates it, meaning 'not'. It is written as a separate word before the stem.",
+      "related": [
+        "adverbs-basic",
+        "negation-ji-anda",
+        "adverb-jal-mot",
+        "nobody-amudo"
+      ],
+      "lookups": [
+        {
+          "headword": "안",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "71372"
+      ]
+    },
+    {
+      "id": "negation-ji-anda",
+      "lesson": 8,
+      "order": 3,
+      "title": "Negation with ~지 않다",
+      "pattern": "V/A stem + 지 않아요",
+      "kind": "expression",
+      "summary": "The pattern -지 않다 is attached to the verb or adjective stem to deny the action or state, meaning 'not'. It is a shortened form of -지 아니하다 and is written as the stem plus 지 않아요 in polite speech.",
+      "related": [
+        "negation-an",
+        "adverb-jal-mot"
+      ],
+      "lookups": [
+        {
+          "headword": "-지 않다",
+          "pos": "보조 동사"
+        }
+      ],
+      "sources": [
+        "72587"
+      ]
+    },
+    {
+      "id": "copula-conjugation-ieyo-yeyo",
+      "lesson": 9,
+      "order": 1,
+      "title": "Conjugated copula 이에요/예요",
+      "pattern": "N + 이에요/예요",
+      "kind": "conjugation",
+      "summary": "The copula 이다 is conjugated in its polite form as 이에요 after a noun ending in a consonant and 예요 after a noun ending in a vowel, giving N + 이에요/예요 to state what something is or its category. The entry 86118 is a listing particle (-이다 -이다) and is unrelated, so it is excluded.",
+      "related": [
+        "topic-particle-eun-neun",
+        "copula-i-da",
+        "subject-particle-i-ga",
+        "future-tense-geot-ida"
+      ],
+      "lookups": [
+        {
+          "headword": "이다",
+          "pos": "조사"
+        },
+        {
+          "headword": "-이에요",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "86232"
+      ]
+    },
+    {
+      "id": "future-tense-geot-ida",
+      "lesson": 9,
+      "order": 2,
+      "title": "Future tense with 것이다",
+      "pattern": "V stem + -을 것이다 / -ㄹ 것이다",
+      "kind": "expression",
+      "summary": "The future tense is formed with 것이다, where the bound noun 것 (a matter, event, or situation) takes the copula 이다: use V stem + -을 것이다 after a consonant-final stem and -ㄹ 것이다 after a vowel-final stem. It expresses that an action or situation is expected or will happen.",
+      "related": [
+        "present-tense",
+        "future-tense",
+        "copula-conjugation-ieyo-yeyo"
+      ],
+      "lookups": [
+        {
+          "headword": "것",
+          "pos": "의존 명사"
+        },
+        {
+          "headword": "-을 것이다",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "62835"
+      ]
+    },
+    {
+      "id": "numbers-two-systems",
+      "lesson": 10,
+      "order": 1,
+      "title": "Two number systems: native Korean and Sino-Korean",
+      "pattern": "Native: 하나, 둘, 셋... / Sino-Korean: 일, 이, 삼...",
+      "kind": "usage",
+      "summary": "Korean has two number systems, native Korean (하나, 둘, 셋) and Sino-Korean (일, 이, 삼). Both entries here are the number one, showing the native form 하나 and the Sino-Korean form 일.",
+      "related": [
+        "counters",
+        "how-many-myeot"
+      ],
+      "lookups": [
+        {
+          "headword": "하나",
+          "pos": "수사"
+        },
+        {
+          "headword": "일",
+          "pos": "수사"
+        }
+      ],
+      "sources": [
+        "20279",
+        "31523"
+      ]
+    },
+    {
+      "id": "counters",
+      "lesson": 10,
+      "order": 2,
+      "title": "Counters (개, 명, etc.)",
+      "pattern": "Number + counter (N-counter)",
+      "kind": "usage",
+      "summary": "Counters such as 개 for objects and 명 for persons are bound nouns that follow a number to count things. They attach after the number, usually with a space before them.",
+      "related": [
+        "numbers-two-systems",
+        "time-units-sigan-cho",
+        "particle-deul",
+        "how-many-myeot"
+      ],
+      "lookups": [
+        {
+          "headword": "개",
+          "pos": "의존 명사"
+        },
+        {
+          "headword": "명",
+          "pos": "의존 명사"
+        }
+      ],
+      "sources": [
+        "22784",
+        "70812"
+      ]
+    },
+    {
+      "id": "first-and-last",
+      "lesson": 10,
+      "order": 3,
+      "title": "처음 (first) and 마지막 (last)",
+      "pattern": "처음 / 마지막 + N",
+      "kind": "usage",
+      "summary": "처음 means first and 마지막 means last, and both are nouns used before another noun as 처음 + N or 마지막 + N. They mark the beginning or end of a time or order.",
+      "related": [
+        "last-and-next-jinan-daeum"
+      ],
+      "lookups": [
+        {
+          "headword": "처음",
+          "pos": "명사"
+        },
+        {
+          "headword": "마지막",
+          "pos": "명사"
+        }
+      ],
+      "sources": [
+        "17170",
+        "28843"
+      ]
+    },
+    {
+      "id": "time-units-sigan-cho",
+      "lesson": 11,
+      "order": 1,
+      "title": "Time units 시간 and 초",
+      "pattern": "N(시간/초) + number + counter",
+      "kind": "usage",
+      "summary": "The nouns 시간 (hour, an amount of time) and 초 (second, one-sixtieth of a minute) are used as time units. They follow a number with its counter to state how long something lasts.",
+      "related": [
+        "counters",
+        "time-duration-dongan",
+        "before-and-after-jeon-hu"
+      ],
+      "lookups": [
+        {
+          "headword": "시간",
+          "pos": "명사"
+        },
+        {
+          "headword": "초",
+          "pos": "의존 명사"
+        }
+      ],
+      "sources": [
+        "62841",
+        "72124"
+      ]
+    },
+    {
+      "id": "time-duration-dongan",
+      "lesson": 11,
+      "order": 2,
+      "title": "Duration 동안 (for / during)",
+      "pattern": "N + 동안",
+      "kind": "usage",
+      "summary": "The noun 동안 means the period between two times, so it is used as N + 동안 to say 'for' or 'during' a span of time. It attaches directly after a noun that names the time period.",
+      "related": [
+        "time-units-sigan-cho",
+        "last-and-next-jinan-daeum",
+        "particle-buteo-kkaji",
+        "deulda-take-cost",
+        "since-irae-ro",
+        "within-i-nae-an"
+      ],
+      "lookups": [
+        {
+          "headword": "동안",
+          "pos": "명사"
+        }
+      ],
+      "sources": [
+        "70749"
+      ]
+    },
+    {
+      "id": "last-and-next-jinan-daeum",
+      "lesson": 11,
+      "order": 3,
+      "title": "Last and next: 지난 and 다음",
+      "pattern": "지난 + N / 다음 + N",
+      "kind": "usage",
+      "summary": "지난 (last, past) and 다음 (next) are placed directly before a noun, as 지난 + N and 다음 + N, to describe the previous or following item in a sequence of time. 다음 refers to the thing that comes right after another in order, and it is often used as -은 다음(에) to mean 'after' an action.",
+      "related": [
+        "first-and-last",
+        "time-duration-dongan"
+      ],
+      "lookups": [
+        {
+          "headword": "지난",
+          "pos": "관형사"
+        },
+        {
+          "headword": "다음",
+          "pos": "명사"
+        },
+        {
+          "headword": "다음",
+          "pos": "관형사"
+        }
+      ],
+      "sources": [
+        "64531"
+      ]
+    },
+    {
+      "id": "particle-deul",
+      "lesson": 12,
+      "order": 1,
+      "title": "Plural particle 들",
+      "pattern": "N + 들",
+      "kind": "particle",
+      "summary": "The suffix 들 is added after a noun to mark plurality, as in 사람들 for people, and it can also mark several subjects in a sentence. It attaches directly to the noun, and the meaning is that there are two or more of such things.",
+      "related": [
+        "particle-do",
+        "counters"
+      ],
+      "lookups": [
+        {
+          "headword": "들",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "90912",
+        "86264"
+      ]
+    },
+    {
+      "id": "particle-man",
+      "lesson": 12,
+      "order": 2,
+      "title": "Particle 만 (only)",
+      "pattern": "N + 만",
+      "kind": "particle",
+      "summary": "The particle 만 attaches directly to a noun to mean 'only', limiting the field to that one thing and excluding the rest. It also expresses emphasis, the speaker's lowest expectation with quantities, or a comparison with 하다 or 못하다.",
+      "related": [
+        "topic-particle-eun-neun",
+        "particle-do",
+        "anyone-everyone-nuguna-amuna"
+      ],
+      "lookups": [
+        {
+          "headword": "만",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "86554"
+      ]
+    },
+    {
+      "id": "particle-eseo",
+      "lesson": 12,
+      "order": 3,
+      "title": "Location particle 에서 (at, in)",
+      "pattern": "N(place) + 에서",
+      "kind": "particle",
+      "summary": "The particle 에서 attaches to a place noun and marks where an action happens, the starting point or source of something, or the reason for an action. It is written after the place or source word, as in 학교에서 for at school.",
+      "related": [
+        "particle-kkeseo",
+        "particle-buteo-kkaji",
+        "particle-euro",
+        "particle-egeseo-robuteo",
+        "expression-e-daehae"
+      ],
+      "lookups": [
+        {
+          "headword": "에서",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "68853"
+      ]
+    },
+    {
+      "id": "particle-buteo-kkaji",
+      "lesson": 12,
+      "order": 4,
+      "title": "Range particles 부터 and 까지 (from ... until)",
+      "pattern": "N + 부터 / N + 까지",
+      "kind": "particle",
+      "summary": "The particle 부터 attaches to a noun to mark the start of a range, and 까지 attaches to a noun to mark its end, so they are often paired as 부터 ~ 까지 for from ... until. 까지 can also mean an addition to the current state or going beyond the normal degree.",
+      "related": [
+        "time-duration-dongan",
+        "particle-eseo"
+      ],
+      "lookups": [
+        {
+          "headword": "부터",
+          "pos": "조사"
+        },
+        {
+          "headword": "까지",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "70055",
+        "69698"
+      ]
+    },
+    {
+      "id": "particle-euro",
+      "lesson": 12,
+      "order": 5,
+      "title": "Direction and means particle (으)로",
+      "pattern": "N + 으로 / N + 로",
+      "kind": "particle",
+      "summary": "The particle 으로 attaches after a noun ending in a consonant, and 로 attaches after a noun ending in a vowel or ㄹ, to mark direction of movement, route, the result of a change, or the material an object is made of. It is the same particle in both forms, with the form chosen by the final sound of the preceding word.",
+      "related": [
+        "object-particle-eul-reul",
+        "particle-eseo"
+      ],
+      "lookups": [
+        {
+          "headword": "으로",
+          "pos": "조사"
+        },
+        {
+          "headword": "로",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "85784",
+        "85761"
+      ]
+    },
+    {
+      "id": "particle-gwa-wa-rang-hago",
+      "lesson": 13,
+      "order": 1,
+      "title": "Particles 과/와, (이)랑, 하고 (and, with)",
+      "pattern": "N + 과/와, N + (이)랑, N + 하고",
+      "kind": "particle",
+      "summary": "Attached to a noun to mean 'and' in a list, 'with' someone when doing something, or in a comparison: 과 follows a noun ending in a consonant and 와 follows one ending in a vowel. 이랑/랑 and 하고 are the colloquial forms with the same meanings, and 하고 is mainly used in speech.",
+      "related": [
+        "topic-particle-eun-neun",
+        "subject-particle-i-ga",
+        "expression-wa-hamkke",
+        "compare-dareuda-biseutada-gatda",
+        "connective-go"
+      ],
+      "lookups": [
+        {
+          "headword": "과",
+          "pos": "조사"
+        },
+        {
+          "headword": "와",
+          "pos": "조사"
+        },
+        {
+          "headword": "이랑",
+          "pos": "조사"
+        },
+        {
+          "headword": "랑",
+          "pos": "조사"
+        },
+        {
+          "headword": "하고",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "78624",
+        "78628",
+        "86141",
+        "80333",
+        "78635"
+      ]
+    },
+    {
+      "id": "expression-wa-hamkke",
+      "lesson": 13,
+      "order": 2,
+      "title": "와 함께 (together with)",
+      "pattern": "N + 와/과 함께",
+      "kind": "expression",
+      "summary": "N + 와/과 함께 means 'together with N'. 함께 is mainly used in this 과/와 form to mean that something happens together with, or at the same time as, the noun before it.",
+      "related": [
+        "particle-gwa-wa-rang-hago"
+      ],
+      "lookups": [
+        {
+          "headword": "함께",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "72465"
+      ]
+    },
+    {
+      "id": "particle-ege-hante-kke",
+      "lesson": 13,
+      "order": 3,
+      "title": "Particles 에게, 한테, 께 (to a person)",
+      "pattern": "N(person) + 에게/한테/께",
+      "kind": "particle",
+      "summary": "에게, 한테, and 께 attach to a person noun to mark the person an action is directed at, affects, or belongs to. 께 is the honorific form, and 한테 is mainly used in conversation.",
+      "related": [
+        "object-particle-eul-reul",
+        "particle-egeseo-robuteo"
+      ],
+      "lookups": [
+        {
+          "headword": "에게",
+          "pos": "조사"
+        },
+        {
+          "headword": "한테",
+          "pos": "조사"
+        },
+        {
+          "headword": "께",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "69713",
+        "69714",
+        "69701"
+      ]
+    },
+    {
+      "id": "particle-egeseo-robuteo",
+      "lesson": 13,
+      "order": 4,
+      "title": "Particles 에게서, 로부터 (from a person)",
+      "pattern": "N(person) + 에게서/로부터",
+      "kind": "particle",
+      "summary": "에게서 and 로부터 attach to a person or source noun to mark where an action or event comes from, or who causes it. 에게서 is the common form with people, while 로부터 is more formal.",
+      "related": [
+        "particle-eseo",
+        "particle-ege-hante-kke",
+        "expression-wihae"
+      ],
+      "lookups": [
+        {
+          "headword": "에게서",
+          "pos": "조사"
+        },
+        {
+          "headword": "로부터",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "70321",
+        "80332"
+      ]
+    },
+    {
+      "id": "expression-wihae",
+      "lesson": 13,
+      "order": 5,
+      "title": "위해 (for)",
+      "pattern": "N + 을/를 위해",
+      "kind": "expression",
+      "summary": "N + 을/를 위해 means 'for the sake of N', taken from the verb 위하다, 'to benefit or help someone' or 'to pursue a goal'. The written forms 위하여 and 위한 are used in formal writing.",
+      "related": [
+        "particle-egeseo-robuteo",
+        "expression-e-daehae"
+      ],
+      "lookups": [
+        {
+          "headword": "위하다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "29736"
+      ]
+    },
+    {
+      "id": "expression-e-daehae",
+      "lesson": 13,
+      "order": 6,
+      "title": "에 대해 (about)",
+      "pattern": "N + 에 대해",
+      "kind": "expression",
+      "summary": "N + 에 대해 means 'about N' or 'regarding N'. It comes from the verb 대하다, which in its basic sense means to face or deal with something, so the noun before 에 대해 is the thing being faced or discussed.",
+      "related": [
+        "particle-eseo",
+        "expression-wihae"
+      ],
+      "lookups": [
+        {
+          "headword": "대하다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "86300"
+      ]
+    },
+    {
+      "id": "passive-verbs-i-hi-ri-gi",
+      "lesson": 14,
+      "order": 1,
+      "title": "Passive verbs with -이-, -히-, -리-, -기-",
+      "pattern": "V stem + 이/히/리/기 + 다 (passive verb)",
+      "kind": "conjugation",
+      "summary": "Attach -이-, -히-, -리-, or -기- directly to the verb stem, then add -다 to make a passive verb meaning that the subject is acted upon by someone or something. The same suffixes can also mark causation, so the choice of form depends on the verb and is largely fixed by each verb. Only the passive-meaning senses of these suffixes are the core of this point; the ending -리- meaning guessing or intention is unrelated.",
+      "related": [
+        "verb-adjective-basics",
+        "become-adjective-a-eo-jida"
+      ],
+      "lookups": [
+        {
+          "headword": "-이-",
+          "pos": ""
+        },
+        {
+          "headword": "-히-",
+          "pos": ""
+        },
+        {
+          "headword": "-리-",
+          "pos": ""
+        },
+        {
+          "headword": "-기-",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "88926",
+        "88505",
+        "74921",
+        "73331"
+      ]
+    },
+    {
+      "id": "like-dislike-a-eo-hada",
+      "lesson": 15,
+      "order": 1,
+      "title": "Expressing like and dislike with 좋아하다 and 싫어하다",
+      "pattern": "N + 을/를 좋아하다 / 싫어하다",
+      "kind": "conjugation",
+      "summary": "좋아하다 expresses liking and 싫어하다 expresses disliking, and both take the object marked with 을/를 as in N + 을/를 좋아하다 / 싫어하다. They are used for things, foods, activities, and people.",
+      "related": [
+        "object-particle-eul-reul",
+        "good-vs-like",
+        "expression-go-sipda",
+        "become-adjective-a-eo-jida"
+      ],
+      "lookups": [
+        {
+          "headword": "좋아하다",
+          "pos": "동사"
+        },
+        {
+          "headword": "싫어하다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "27929",
+        "64963"
+      ]
+    },
+    {
+      "id": "deulda-take-cost",
+      "lesson": 15,
+      "order": 2,
+      "title": "Verb 들다 (to take or cost time/money)",
+      "pattern": "N(시간/돈) + 이/가 들다",
+      "kind": "usage",
+      "summary": "들다 in this sense means for time or money to be spent or required, and it takes the time or money noun marked with 이/가 as in N(시간/돈) + 이/가 들다. The other 들다 entries in the dictionary are unrelated homographs about entering, blades, holding, or eating.",
+      "related": [
+        "subject-particle-i-ga",
+        "time-duration-dongan"
+      ],
+      "lookups": [
+        {
+          "headword": "들다",
+          "pos": "동사"
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "compound-verbs",
+      "lesson": 15,
+      "order": 3,
+      "title": "Compound verbs",
+      "pattern": "V stem + 아/어 + V (e.g., 들어가다, 가져오다)",
+      "kind": "usage",
+      "summary": "A compound verb joins a verb stem with 아/어 and a second verb, as in V stem + 아/어 + V, and the result carries a combined meaning such as 들어가다 or 가져오다. The second verb keeps its own conjugation, so the whole compound is conjugated at the end.",
+      "related": [
+        "verb-adjective-basics"
+      ],
+      "lookups": [],
+      "sources": []
+    },
+    {
+      "id": "compare-dareuda-biseutada-gatda",
+      "lesson": 15,
+      "order": 4,
+      "title": "Comparing with 다르다, 비슷하다, and 같다",
+      "pattern": "N + 와/과 다르다 / 비슷하다 / 같다",
+      "kind": "expression",
+      "summary": "다르다, 비슷하다, and 같다 are used to say how things are different, similar, or the same, usually with the comparison partner marked by 와/과 as in N + 와/과 다르다 / 비슷하다 / 같다. 같다 also takes the adnominal form 같은 when it modifies a noun.",
+      "related": [
+        "subject-particle-i-ga",
+        "particle-gwa-wa-rang-hago",
+        "comparative-boda-deo",
+        "superlative-gajang"
+      ],
+      "lookups": [
+        {
+          "headword": "다르다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "비슷하다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "같다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "26824",
+        "65864",
+        "62076"
+      ]
+    },
+    {
+      "id": "homonyms",
+      "lesson": 15,
+      "order": 5,
+      "title": "Homonyms (words with the same sound but different meanings)",
+      "pattern": "Same sound, different meaning (e.g., 배 = pear / belly / boat)",
+      "kind": "usage",
+      "summary": "Homonyms are words that share the same sound but have different meanings, so the correct meaning must be judged from context. The dictionary entries for such words are listed separately under their own codes.",
+      "related": [],
+      "lookups": [],
+      "sources": []
+    },
+    {
+      "id": "being-sick",
+      "lesson": 15,
+      "order": 6,
+      "title": "Talking about being sick",
+      "pattern": "N + 이/가 아프다 / 감기에 걸리다",
+      "kind": "expression",
+      "summary": "아프다 describes a body part or person feeling pain or illness, used as N + 이/가 아프다. 감기 is the noun for a cold, and the phrase 감기에 걸리다 means to catch a cold, with 걸리다 used in that sense not being listed among the matching entries.",
+      "related": [
+        "verb-adjective-basics"
+      ],
+      "lookups": [
+        {
+          "headword": "아프다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "감기",
+          "pos": "명사"
+        },
+        {
+          "headword": "걸리다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "62239",
+        "28635"
+      ]
+    },
+    {
+      "id": "suffix-jeok",
+      "lesson": 16,
+      "order": 1,
+      "title": "Noun suffix 적 (-jeok)",
+      "pattern": "N + 적",
+      "kind": "usage",
+      "summary": "The suffix 적 (-jeok) attaches to a noun to form a descriptive word meaning having that character, being related to something, or being in such a state. It is written directly after the noun, as in N + 적.",
+      "related": [
+        "suffix-seureopda"
+      ],
+      "lookups": [
+        {
+          "headword": "-적",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "88966"
+      ]
+    },
+    {
+      "id": "suffix-seureopda",
+      "lesson": 16,
+      "order": 2,
+      "title": "Adjective suffix 스럽다 (-seureopda)",
+      "pattern": "N + 스럽다",
+      "kind": "conjugation",
+      "summary": "The suffix 스럽다 (-seureopda) attaches to a noun to form an adjective meaning having that quality. It is written as N + 스럽다 and works as a descriptive verb-type adjective.",
+      "related": [
+        "verb-adjective-basics",
+        "suffix-jeok"
+      ],
+      "lookups": [
+        {
+          "headword": "-스럽다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "71244"
+      ]
+    },
+    {
+      "id": "connective-go",
+      "lesson": 17,
+      "order": 1,
+      "title": "Connective ending ~고 (and)",
+      "pattern": "V/A stem + 고",
+      "kind": "ending",
+      "summary": "The connective ending -고 attaches to verb and adjective stems to join clauses meaning 'and.' It lists equal facts or opposites, shows actions happening in order, or links an action with a continuing state of the preceding action.",
+      "related": [
+        "particle-gwa-wa-rang-hago",
+        "expression-go-sipda",
+        "progressive-go-itda"
+      ],
+      "lookups": [
+        {
+          "headword": "-고",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "78583"
+      ]
+    },
+    {
+      "id": "expression-go-sipda",
+      "lesson": 17,
+      "order": 2,
+      "title": "Want to ~고 싶다",
+      "pattern": "V stem + 고 싶다",
+      "kind": "expression",
+      "summary": "The expression -고 싶다 attaches to a verb stem to say that the speaker wants to do the action. It is written as the verb stem plus 고 and then 싶다.",
+      "related": [
+        "like-dislike-a-eo-hada",
+        "connective-go",
+        "progressive-go-itda"
+      ],
+      "lookups": [
+        {
+          "headword": "-고 싶다",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "75269"
+      ]
+    },
+    {
+      "id": "progressive-go-itda",
+      "lesson": 18,
+      "order": 1,
+      "title": "Progressive ~고 있다 (is doing)",
+      "pattern": "V stem + 고 있어요",
+      "kind": "expression",
+      "summary": "Attach -고 있다 to a verb stem (verb stem + 고 있어요) to say that an action is in progress right now. It can also describe a continuing state that results from an earlier action.",
+      "related": [
+        "existence-verb-itda",
+        "present-tense",
+        "connective-go",
+        "expression-go-sipda"
+      ],
+      "lookups": [
+        {
+          "headword": "-고 있다",
+          "pos": ""
+        }
+      ],
+      "sources": [
+        "72238"
+      ]
+    },
+    {
+      "id": "become-adjective-a-eo-jida",
+      "lesson": 18,
+      "order": 2,
+      "title": "Adjective + 아/어지다 (to become)",
+      "pattern": "A stem + 아/어지다",
+      "kind": "conjugation",
+      "summary": "Attach -아지다 to an adjective stem whose last vowel is ㅏ or ㅗ, and -어지다 to all other adjective stems (A stem + 아/어지다), to say that someone or something gradually becomes that state. The same forms also appear with verbs in the entries, showing that the action is done by someone or by another force, or that one must do it.",
+      "related": [
+        "verb-adjective-basics",
+        "passive-verbs-i-hi-ri-gi",
+        "like-dislike-a-eo-hada"
+      ],
+      "lookups": [
+        {
+          "headword": "-아지다",
+          "pos": "보조 동사"
+        },
+        {
+          "headword": "-어지다",
+          "pos": "보조 동사"
+        }
+      ],
+      "sources": [
+        "77252",
+        "77253"
+      ]
+    },
+    {
+      "id": "comparative-boda-deo",
+      "lesson": 19,
+      "order": 1,
+      "title": "Comparative with 보다 and 더",
+      "pattern": "N1 + 보다 + N2 + 더 + A/V",
+      "kind": "usage",
+      "summary": "To compare two things, put the thing being compared as a noun followed by 보다 to mark the standard of comparison, then add 더 before the adjective or verb to show that one is more than the other. The particle 보다 attaches directly to the noun it marks.",
+      "related": [
+        "adverbs-basic",
+        "compare-dareuda-biseutada-gatda",
+        "superlative-gajang"
+      ],
+      "lookups": [
+        {
+          "headword": "보다",
+          "pos": "조사"
+        },
+        {
+          "headword": "더",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "70060",
+        "26829"
+      ]
+    },
+    {
+      "id": "superlative-gajang",
+      "lesson": 19,
+      "order": 2,
+      "title": "Superlative with 가장",
+      "pattern": "N 중에서 + 가장 + A/V",
+      "kind": "usage",
+      "summary": "To express the most of a group, place 가장 before an adjective or verb, with the group given as a noun phrase followed by 중에서. The adverb 가장 means most or in the highest degree, placed directly before the adjective or verb it modifies.",
+      "related": [
+        "compare-dareuda-biseutada-gatda",
+        "comparative-boda-deo"
+      ],
+      "lookups": [
+        {
+          "headword": "가장",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "26795"
+      ]
+    },
+    {
+      "id": "adverb-jal-mot",
+      "lesson": 20,
+      "order": 1,
+      "title": "Adverbs 잘 (well) and 못 (cannot)",
+      "pattern": "잘 + V / 못 + V",
+      "kind": "usage",
+      "summary": "잘 is an adverb meaning well or skillfully, placed before a verb (잘 + V) to describe how well an action is done. 못 is an adverb placed before a verb (못 + V) to negate the action, meaning cannot or not able to, or to express doing something insufficiently.",
+      "related": [
+        "adverbs-basic",
+        "negation-an",
+        "negation-ji-anda",
+        "jalhada-motada",
+        "jalmot"
+      ],
+      "lookups": [
+        {
+          "headword": "잘",
+          "pos": "부사"
+        },
+        {
+          "headword": "못",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "58939",
+        "17254"
+      ]
+    },
+    {
+      "id": "jalhada-motada",
+      "lesson": 20,
+      "order": 2,
+      "title": "Being good or bad at something: 잘하다 and 못하다",
+      "pattern": "N + 을/를 잘하다 / N + 을/를 못하다",
+      "kind": "expression",
+      "summary": "잘하다 and 못하다 are verbs used with the pattern N + 을/를 잘하다 or N + 을/를 못하다 to say that someone is good or bad at a thing. 잘하다 means to do something well or skillfully, and 못하다 means to fail to reach a certain level or to lack the ability to do it.",
+      "related": [
+        "adverb-jal-mot",
+        "jalmot"
+      ],
+      "lookups": [
+        {
+          "headword": "잘하다",
+          "pos": "동사"
+        },
+        {
+          "headword": "못하다",
+          "pos": "동사"
+        }
+      ],
+      "sources": [
+        "70073",
+        "91168"
+      ]
+    },
+    {
+      "id": "jalmot",
+      "lesson": 20,
+      "order": 3,
+      "title": "Mistake or wrongly: 잘못",
+      "pattern": "잘못 + N / 잘못 + V",
+      "kind": "usage",
+      "summary": "잘못 works as a noun meaning a mistake or fault, used as 잘못 + N, and as an adverb meaning wrongly or carelessly, used as 잘못 + V. Its meaning shifts depending on whether it functions as the noun or the adverb in the sentence.",
+      "related": [
+        "adverb-jal-mot",
+        "jalhada-motada"
+      ],
+      "lookups": [
+        {
+          "headword": "잘못",
+          "pos": "명사"
+        },
+        {
+          "headword": "잘못",
+          "pos": "부사"
+        }
+      ],
+      "sources": [
+        "62477",
+        "62478"
+      ]
+    },
+    {
+      "id": "question-words-why-when-where-who",
+      "lesson": 21,
+      "order": 1,
+      "title": "Question words: 왜 (why), 언제 (when), 어디 (where), 누구 (who)",
+      "pattern": "왜/언제/어디/누구 + V/N + ?",
+      "kind": "usage",
+      "summary": "Question words 왜 (why), 언제 (when), 어디 (where), and 누구 (who) ask about a reason, time, place, or person, and they usually appear in questions with a verb or noun. 왜 is an adverb placed before the verb, while 언제, 어디, and 누구 are pronouns that take particles like 에 or 가/이 and are often used with a question ending.",
+      "related": [
+        "what-mwo",
+        "how-eotteoke",
+        "anyone-everyone-nuguna-amuna"
+      ],
+      "lookups": [
+        {
+          "headword": "왜",
+          "pos": "부사"
+        },
+        {
+          "headword": "언제",
+          "pos": "대명사"
+        },
+        {
+          "headword": "어디",
+          "pos": "대명사"
+        },
+        {
+          "headword": "누구",
+          "pos": "대명사"
+        }
+      ],
+      "sources": [
+        "67848",
+        "17860",
+        "60319",
+        "62078"
+      ]
+    },
+    {
+      "id": "what-mwo",
+      "lesson": 22,
+      "order": 1,
+      "title": "Question word what 뭐/무엇",
+      "pattern": "뭐/무엇 + 이에요/예요?",
+      "kind": "usage",
+      "summary": "무엇 and 뭐 are the question words for 'what', asking about an unknown thing or fact. 뭐 is the casual spoken form of 무엇, and both can attach to 이에요/예요 to form a question like 뭐예요?",
+      "related": [
+        "demonstratives-i-geu-jeo",
+        "question-words-why-when-where-who",
+        "which-eoneu",
+        "how-eotteoke"
+      ],
+      "lookups": [
+        {
+          "headword": "무엇",
+          "pos": "대명사"
+        },
+        {
+          "headword": "뭐",
+          "pos": "대명사"
+        }
+      ],
+      "sources": [
+        "17199",
+        "84991"
+      ]
+    },
+    {
+      "id": "which-eoneu",
+      "lesson": 22,
+      "order": 2,
+      "title": "Question word which 어느",
+      "pattern": "어느 + N?",
+      "kind": "usage",
+      "summary": "어느 is a determiner meaning 'which', used before a noun to ask which particular one is meant among several. It is placed directly in front of the noun it modifies, as in 어느 + noun?",
+      "related": [
+        "demonstratives-i-geu-jeo",
+        "what-mwo"
+      ],
+      "lookups": [
+        {
+          "headword": "어느",
+          "pos": "관형사"
+        }
+      ],
+      "sources": [
+        "62822"
+      ]
+    },
+    {
+      "id": "how-eotteoke",
+      "lesson": 22,
+      "order": 3,
+      "title": "Question word how 어떻게",
+      "pattern": "어떻게 + V?",
+      "kind": "usage",
+      "summary": "어떻게 is an adverb meaning 'how', used to ask about the manner or means of doing something. It is placed before a verb, and it does not take a counter or noun directly after it.",
+      "related": [
+        "adverbs-basic",
+        "question-words-why-when-where-who",
+        "what-mwo"
+      ],
+      "lookups": [
+        {
+          "headword": "어떻게",
+          "pos": "부사"
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "how-many-myeot",
+      "lesson": 22,
+      "order": 4,
+      "title": "Question word how many 몇",
+      "pattern": "몇 + counter + N?",
+      "kind": "usage",
+      "summary": "몇 is a determiner meaning 'how many' or 'what number of', used to ask about the quantity of things or people. It goes before a counter and noun, as in 몇 + counter + noun?",
+      "related": [
+        "numbers-two-systems",
+        "counters"
+      ],
+      "lookups": [
+        {
+          "headword": "몇",
+          "pos": "관형사"
+        }
+      ],
+      "sources": [
+        "66236"
+      ]
+    },
+    {
+      "id": "colors",
+      "lesson": 23,
+      "order": 1,
+      "title": "Color words",
+      "pattern": "N (color word)",
+      "kind": "usage",
+      "summary": "Color words such as 빨갛다 (red), 파랗다 (blue), and 검다 (black) are descriptive adjectives, so they conjugate like other adjectives and modify nouns or take sentence endings. 색 is the noun meaning \"color\" and, per its usage note, is attached after certain nouns.",
+      "related": [
+        "adverbs-basic",
+        "irregular-h-adjectives"
+      ],
+      "lookups": [
+        {
+          "headword": "색",
+          "pos": "명사"
+        },
+        {
+          "headword": "빨갛다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "파랗다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "검다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "20231",
+        "71070",
+        "71306",
+        "62259"
+      ]
+    },
+    {
+      "id": "irregular-h-adjectives",
+      "lesson": 23,
+      "order": 2,
+      "title": "ㅎ irregular adjectives (빨갛다 → 빨개요)",
+      "pattern": "A stem (drop ㅎ) + 아/어요",
+      "kind": "conjugation",
+      "summary": "Adjectives whose stem ends in ㅎ, such as 빨갛다, drop the final ㅎ before the informal polite ending -아요 or -어요, and the vowel of the ending contracts with the stem. The -아요 ending then marks a statement, question, order, or advice in the informal polite style.",
+      "related": [
+        "irregular-h",
+        "colors"
+      ],
+      "lookups": [
+        {
+          "headword": "빨갛다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "-아요",
+          "pos": "어미"
+        }
+      ],
+      "sources": [
+        "71070",
+        "86568"
+      ]
+    },
+    {
+      "id": "demonstrative-adjectives-ireoda-geureoda-jeoreoda",
+      "lesson": 23,
+      "order": 3,
+      "title": "이렇다, 그렇다, 저렇다 (this, that, that way)",
+      "pattern": "이렇다 / 그렇다 / 저렇다 + N or + 아/어요",
+      "kind": "usage",
+      "summary": "이렇다, 그렇다, and 저렇다 mean \"like this,\" \"like that,\" and \"that way\" and describe a state, appearance, or nature. They attach directly before a noun as 이렇다/그렇다/저렇다 + N or take the -아/어요 ending as 이렇다/그렇다/저렇다 + 아/어요.",
+      "related": [
+        "demonstratives-i-geu-jeo"
+      ],
+      "lookups": [
+        {
+          "headword": "이렇다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "그렇다",
+          "pos": "형용사"
+        },
+        {
+          "headword": "저렇다",
+          "pos": "형용사"
+        }
+      ],
+      "sources": [
+        "71157",
+        "61178",
+        "71226"
+      ]
+    },
+    {
+      "id": "before-and-after-jeon-hu",
+      "lesson": 24,
+      "order": 1,
+      "title": "Before and after 전 and 후",
+      "pattern": "N + 전에 / 후에",
+      "kind": "usage",
+      "summary": "The noun 전 means before, a time before a specific point, and 후 means after, a point of time following a passage of time. They attach to a noun or a verb-based noun phrase with 에, as N + 전에 or N + 후에, and 전 is also often used as ~ 전 or -기 전.",
+      "related": [
+        "time-units-sigan-cho",
+        "since-irae-ro",
+        "within-i-nae-an"
+      ],
+      "lookups": [
+        {
+          "headword": "전",
+          "pos": "명사"
+        },
+        {
+          "headword": "후",
+          "pos": "명사"
+        }
+      ],
+      "sources": [
+        "17301",
+        "62885"
+      ]
+    },
+    {
+      "id": "since-irae-ro",
+      "lesson": 24,
+      "order": 2,
+      "title": "Since 이래로",
+      "pattern": "N + 이래로",
+      "kind": "usage",
+      "summary": "이래로 means since or ever since, marking the starting point of a continuing state up to now. It attaches directly after a noun denoting a time or event, as N + 이래로.",
+      "related": [
+        "time-duration-dongan",
+        "before-and-after-jeon-hu"
+      ],
+      "lookups": [
+        {
+          "headword": "이래로",
+          "pos": "부사"
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "within-i-nae-an",
+      "lesson": 24,
+      "order": 3,
+      "title": "Within 이내 and 안",
+      "pattern": "N + 이내 / N + 안에",
+      "kind": "usage",
+      "summary": "이내 means within a certain range, limit, or period, and attaches after a noun of time, distance, or quantity, as N + 이내. 안 in the 안에 form means inside, and in the N + 안에 pattern it indicates that something happens within a given time or range.",
+      "related": [
+        "time-duration-dongan",
+        "before-and-after-jeon-hu"
+      ],
+      "lookups": [
+        {
+          "headword": "이내",
+          "pos": "명사"
+        },
+        {
+          "headword": "안",
+          "pos": "명사"
+        }
+      ],
+      "sources": [
+        "24109",
+        "74890"
+      ]
+    },
+    {
+      "id": "anyone-everyone-nuguna-amuna",
+      "lesson": 25,
+      "order": 1,
+      "title": "Anyone and everyone 누구나, 아무나",
+      "pattern": "누구/아무 + 나",
+      "kind": "usage",
+      "summary": "Attach the particle 나 directly to the pronoun 누구 or 아무 to form 누구나 or 아무나, meaning anyone or everyone, any person at all. The particle 나 here means a free choice that is not restricted to one particular person.",
+      "related": [
+        "particle-do",
+        "particle-man",
+        "question-words-why-when-where-who",
+        "nobody-amudo"
+      ],
+      "lookups": [
+        {
+          "headword": "누구",
+          "pos": "대명사"
+        },
+        {
+          "headword": "아무",
+          "pos": "대명사"
+        },
+        {
+          "headword": "나",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "62078",
+        "71326",
+        "89218"
+      ]
+    },
+    {
+      "id": "nobody-amudo",
+      "lesson": 25,
+      "order": 2,
+      "title": "Nobody 아무도 with a negative verb",
+      "pattern": "아무 + 도 + negative V",
+      "kind": "usage",
+      "summary": "Attach the particle 도 directly to the pronoun 아무 to form 아무도, meaning nobody, and pair it with a negative verb such as 없다 or 안 + verb. The 도 adds an emphasis that not even one person is involved.",
+      "related": [
+        "particle-do",
+        "negation-an",
+        "anyone-everyone-nuguna-amuna"
+      ],
+      "lookups": [
+        {
+          "headword": "아무",
+          "pos": "대명사"
+        },
+        {
+          "headword": "도",
+          "pos": "조사"
+        }
+      ],
+      "sources": [
+        "71326",
+        "86258"
+      ]
+    }
+  ]
+}

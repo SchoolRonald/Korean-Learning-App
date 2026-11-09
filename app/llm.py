@@ -7,7 +7,8 @@ import time
 import anthropic
 
 MODEL = "claude-haiku-5-5"
-CALL_CAP = int(os.environ.get("GONGBU_LLM_CAP", "50"))
+TEACHING_MODEL = "claude-sonnet-5-5"
+CALL_CAP = int(os.environ.get("GONGBU_LLM_CAP", "500"))
 
 log = logging.getLogger("gongbu.llm")
 if not log.handlers:
@@ -42,7 +43,7 @@ def usage_summary():
     return {"calls": usage["calls"], "cap": CALL_CAP}
 
 
-def call_json(purpose, system, prompt, schema, max_tokens=2048, effort="low"):
+def call_json(purpose, system, prompt, schema, max_tokens=2048, effort="low", model=MODEL):
     """One Claude call that must return a JSON object matching schema."""
     client = get_client()
     # Count before calling so failing requests also use up the cap. Locked because the
@@ -55,7 +56,7 @@ def call_json(purpose, system, prompt, schema, max_tokens=2048, effort="low"):
     start = time.perf_counter()
     try:
         response = client.messages.create(
-            model=MODEL,
+            model=model,
             max_tokens=max_tokens,
             system=system,
             output_config={"effort": effort, "format": {"type": "json_schema", "schema": schema}},
@@ -68,6 +69,8 @@ def call_json(purpose, system, prompt, schema, max_tokens=2048, effort="low"):
     except anthropic.APIConnectionError:
         raise LLMError("Could not reach the Anthropic API.")
     except anthropic.APIStatusError as e:
+        if "credit balance" in str(e).lower():
+            raise LLMError("The Anthropic account is out of credit. Add credit in the Anthropic Console (Plans & Billing).")
         raise LLMError(f"The API returned an error ({e.status_code}).")
     except anthropic.AnthropicError as e:
         raise LLMError(f"LLM unavailable: {e}")
@@ -78,8 +81,8 @@ def call_json(purpose, system, prompt, schema, max_tokens=2048, effort="low"):
         usage["output_tokens"] += response.usage.output_tokens
         totals = usage["input_tokens"], usage["output_tokens"]
     log.info(
-        "%s call %d/%d: %.2fs in=%d out=%d (session total in=%d out=%d)",
-        purpose, call_no, CALL_CAP, seconds, response.usage.input_tokens, response.usage.output_tokens, *totals,
+        "%s (%s) call %d/%d: %.2fs in=%d out=%d (session total in=%d out=%d)",
+        purpose, model, call_no, CALL_CAP, seconds, response.usage.input_tokens, response.usage.output_tokens, *totals,
     )
 
     if response.stop_reason == "refusal":

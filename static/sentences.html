@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn</a> | <a href="/words">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
+<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn Words</a> | <a href="/grammar">Learn Grammar</a> | <a href="/words">Words</a> | <b>Sentences</b> | <a href="/stats">Stats</a></p>
 <h1>Sentence practice</h1>
 
 <label>Up to lesson <select id="lesson"></select></label>
@@ -32,23 +32,6 @@ let answered = false;
 
 function showUsage(llm) {
   if (llm) $("usage").textContent = `AI calls: ${llm.calls} / ${llm.cap}`;
-}
-
-// A word with its meaning on hover (title) or click (shown in #hint, for touch screens).
-function hintSpan(text, meaning, kind) {
-  const span = el("span", text, kind ? `hint ${kind}` : "hint");
-  span.title = meaning;
-  span.addEventListener("click", () => { $("hint").textContent = meaning; });
-  return span;
-}
-
-function tokenKind(t) {
-  return t.name ? "name" : t.new ? "new" : "";
-}
-
-function tokenMeaning(t) {
-  const label = t.name ? " (name)" : t.new ? " (new word)" : "";
-  return `${t.base} = ${t.english}${label}`;
 }
 
 // First case-insensitive occurrence of phrase in text as whole words ("is" must not match
@@ -152,7 +135,7 @@ async function checkAnswer() {
     });
     showUsage(result.llm);
     // Skip if the user already moved on to another sentence.
-    if (sentence === graded) showResult(result, reference);
+    if (sentence === graded) showResult(result, reference, graded, answer);
   } catch (e) {
     if (sentence === graded) $("feedback").replaceChildren(reference, el("p", e.message, "wrong"));
   }
@@ -165,11 +148,30 @@ const VERDICT_TEXT = {
   ungraded: ["Could not grade this answer.", "wrong"],
 };
 
-function showResult(result, reference) {
+// One line of ✓/✗ marks: grammar points link to their lesson; words show their meaning.
+function verdictList(label, items, grammar) {
+  const line = el("p", `${label}: `, "verdicts");
+  items.forEach((item, i) => {
+    if (i) line.append("  ");
+    const mark = el("span", item.correct ? "✓ " : "✗ ", item.correct ? "correct" : "wrong");
+    if (grammar) {
+      const a = el("a", item.title);
+      a.href = `/grammar?point=${encodeURIComponent(item.id)}`;
+      line.append(mark, a);
+    } else {
+      line.append(mark, hintSpan(item.hangul, `${item.hangul} = ${item.english}`, ""));
+    }
+  });
+  return line;
+}
+
+function showResult(result, reference, graded, answer) {
   const [text, className] = VERDICT_TEXT[result.verdict] || VERDICT_TEXT.ungraded;
   const parts = [el("p", text, className)];
   if (result.reason) parts.push(el("p", result.reason));
   parts.push(reference);
+  if (result.grammar && result.grammar.length) parts.push(verdictList("Grammar", result.grammar, true));
+  if (result.words && result.words.length) parts.push(verdictList("Words", result.words, false));
   if (result.graded_by === "exact") {
     parts.push(el("p", "Graded by exact match with the reference.", "muted"));
   } else if (result.graded_by === "llm") {

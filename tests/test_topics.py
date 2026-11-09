@@ -6,7 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 import app.main as main
-from app import llm, sentences
+from app import grammar, llm, sentences
 from app.db import connect, init_db
 from app.learn import batch, mark_learned
 from app.sentences import NotReady, get_sentence
@@ -137,14 +137,19 @@ def test_sentences_need_a_learned_topic_word(conn, fake, monkeypatch):
         get_sentence(conn, 1, topic_ids=ids)
 
 
+LESSON_ONE = [p["id"] for p in grammar.points() if p["lesson"] == 1]
+
+
 def sentence_json(english, korean, tokens):
-    return json.dumps({"english": english, "korean": korean, "tokens": [
+    return json.dumps({"english": english, "korean": korean, "grammar": LESSON_ONE, "tokens": [
         {"korean": k, "base": b, "english": b, "english_text": "", "is_name": False} for k, b in tokens
     ]})
 
 
 def test_topic_sentences(conn, fake, monkeypatch):
     monkeypatch.setattr(sentences, "MIN_LEARNED", 1)
+    for point_id in LESSON_ONE:
+        grammar.mark_learned(conn, point_id)
     for w in ("밥", "물", "학교"):
         mark_learned(conn, wid(conn, w))
     client = fake(
@@ -162,7 +167,8 @@ def test_topic_sentences(conn, fake, monkeypatch):
     assert set(focus.split(", ")) <= {"밥", "물"}
     # A saved sentence without a topic word is not served for the topic.
     conn.execute(
-        "INSERT INTO sentences (english, korean_ref, word_ids, created_at) VALUES ('School.', '학교요.', ?, '2026-10-01')",
+        "INSERT INTO sentences (english, korean_ref, word_ids, created_at, grammar) "
+        "VALUES ('School.', '학교요.', ?, '2026-10-01', '[]')",
         (json.dumps([wid(conn, "학교")]),),
     )
     assert get_sentence(conn, 1, topic_ids=ids)["english"] == "I eat rice."

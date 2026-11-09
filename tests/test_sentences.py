@@ -13,6 +13,9 @@ from app.db import connect, init_db
 from app.drill import record_word_attempt
 from app.learn import mark_learned
 from app.sentences import focus_pool, focus_words, get_sentence, grade_sentence, prefetch, reference_variants
+from app import grammar
+
+LESSON_ONE = [p["id"] for p in grammar.points() if p["lesson"] == 1]
 
 
 class FakeClient:
@@ -42,7 +45,7 @@ def sentence_json(english="I drink water.", korean="저는 물을 마셔요.", b
     assert len(words) == len(bases)
     texts = english_text or [""] * len(words)
     tokens = [{"korean": w, "base": b, "english": f"<{b}>", "english_text": t} for w, b, t in zip(words, bases, texts)]
-    return json.dumps({"english": english, "korean": korean, "tokens": tokens})
+    return json.dumps({"english": english, "korean": korean, "tokens": tokens, "grammar": LESSON_ONE})
 
 
 def verdict_json(verdict="almost", reason="Particle 을 is missing."):
@@ -64,6 +67,7 @@ def conn(db_file):
         [("물", "water", 1), ("마시다", "to drink", 1), ("책", "book", 1), ("학교", "school", 2)],
     )
     c.execute("INSERT INTO learned (word_id, learned_at) SELECT id, '2026-10-01' FROM words")
+    c.executemany("INSERT INTO grammar_learned (point_id, learned_at) VALUES (?, '2026-10-01')", [(g,) for g in LESSON_ONE])
     c.commit()
     return c
 
@@ -112,7 +116,7 @@ def test_same_spelling_picks_meaning_from_model(conn, fake):
     conn.executemany("INSERT INTO words (hangul, english, lesson) VALUES (?, ?, 1)",
                      [("저", "I, me (formal)"), ("저", "that (when something is far away)"), ("것", "thing")])
     conn.execute("INSERT OR IGNORE INTO learned (word_id, learned_at) SELECT id, '2026-10-01' FROM words")
-    reply = {"english": "That is water.", "korean": "저 것은 물이에요.", "tokens": [
+    reply = {"english": "That is water.", "korean": "저 것은 물이에요.", "grammar": LESSON_ONE, "tokens": [
         {"korean": "저", "base": "저", "english": "that", "english_text": "That"},
         {"korean": "것은", "base": "것", "english": "thing", "english_text": ""},
         {"korean": "물이에요", "base": "물", "english": "water", "english_text": "water"},
@@ -158,7 +162,7 @@ def test_new_flags_follow_learning(conn, fake):
 def test_old_sentence_without_tokens_needs_all_words_learned(conn, fake):
     conn.execute("INSERT INTO words (hangul, english, lesson) VALUES ('커피', 'coffee', 1)")
     conn.execute(
-        "INSERT INTO sentences (english, korean_ref, word_ids, created_at) VALUES (?, ?, ?, ?)",
+        "INSERT INTO sentences (english, korean_ref, word_ids, created_at, grammar) VALUES (?, ?, ?, ?, '[]')",
         ("Coffee.", "커피요.", json.dumps([word_id(conn, "커피")]), "2026-10-01"),
     )
     fake(sentence_json())
@@ -211,7 +215,7 @@ def test_cached_unattempted_sentence_is_reused(conn, fake):
 
 def test_cached_sentence_needs_all_words_in_lesson(conn, fake):
     conn.execute(
-        "INSERT INTO sentences (english, korean_ref, word_ids, created_at) VALUES (?, ?, ?, ?)",
+        "INSERT INTO sentences (english, korean_ref, word_ids, created_at, grammar) VALUES (?, ?, ?, ?, '[]')",
         ("I go to school.", "학교에 가요.", json.dumps([word_id(conn, "학교")]), "2026-10-01"),
     )
     fake(sentence_json())
@@ -254,8 +258,8 @@ def test_llm_grade_recorded(conn, fake):
     fake(sentence_json(), verdict_json("almost", "Particle 을 is missing."))
     s = get_sentence(conn, 1)
     r = grade_sentence(conn, s["id"], "저는 물 마셔요")
-    assert r == {"verdict": "almost", "reason": "Particle 을 is missing.",
-                 "reference": "저는 물을 마셔요.", "graded_by": "llm"}
+    assert {k: r[k] for k in ("verdict", "reason", "reference", "graded_by")} == {
+        "verdict": "almost", "reason": "Particle 을 is missing.", "reference": "저는 물을 마셔요.", "graded_by": "llm"}
     assert tuple(conn.execute("SELECT answer, correct FROM attempts").fetchone()) == ("저는 물 마셔요", 0)
 
 
@@ -417,7 +421,7 @@ def test_grader_told_both_demonstratives_are_fine(conn, fake):
 
 
 def name_reply(tokens, english="Minho drinks water.", korean="민호는 물을 마셔요."):
-    return json.dumps({"english": english, "korean": korean, "tokens": [
+    return json.dumps({"english": english, "korean": korean, "grammar": LESSON_ONE, "tokens": [
         {"korean": k, "base": b, "english": e, "english_text": t, "is_name": n} for k, b, e, t, n in tokens
     ]})
 
@@ -470,7 +474,7 @@ def test_list_word_cannot_be_called_a_name(conn, fake):
 
 def test_tokens_saved_before_names_existed(conn, fake):
     conn.execute(
-        "INSERT INTO sentences (english, korean_ref, word_ids, tokens, created_at) VALUES (?, ?, ?, ?, ?)",
+        "INSERT INTO sentences (english, korean_ref, word_ids, tokens, created_at, grammar) VALUES (?, ?, ?, ?, ?, '[]')",
         ("Water.", "물이에요.", json.dumps([word_id(conn, "물")]),
          json.dumps([{"korean": "물이에요", "base": "물", "english": "water", "english_text": "Water", "word_id": word_id(conn, "물")}]),
          "2026-10-01"),

@@ -42,6 +42,22 @@ Use a separate database for the sample (for example `GONGBU_DB=sample.db`) so it
 
 The database path defaults to `gongbu.db` and can be changed with the `GONGBU_DB` env var.
 
+## Grammar data
+
+The grammar curriculum is committed in `grammar/`, so a normal setup needs nothing more.
+
+- `grammar/htsk_lessons.json`: the grammar topics of each HowToStudyKorean lesson, from the public lesson list.
+- `grammar/curriculum.json`: the grammar points, made from those topics by AI.
+- `grammar/sources.json`: the matching NIKL Basic Korean Dictionary entries (CC BY-SA 2.0 KR).
+
+To build grammar for more lessons, add their topics to `htsk_lessons.json`, set `KRDICT_API_KEY` in `.env`, and run:
+
+```
+.venv/bin/python -m app.curriculum --lessons 26-50
+```
+
+Lessons already built are skipped. Add `--refresh` to look up sources and rewrite summaries for built lessons without splitting them again.
+
 ## Run
 
 ```
@@ -73,7 +89,7 @@ http://localhost:8000/sentences shows a short English sentence built from your l
 
 - Needs an Anthropic API key. Copy `.env.example` to `.env` (gitignored) and set `ANTHROPIC_API_KEY`, then restart the server. A real environment variable overrides `.env`. Uses `claude-haiku-5-5`.
 - An answer that exactly matches the reference translation (ignoring spaces and punctuation) is marked correct without an AI call. Anything else is graded by the AI, and that grading is **not validated**. Compare with the reference yourself.
-- AI calls are capped per server run (default 50, set `GONGBU_LLM_CAP`). Restart the server to reset. Token usage is printed and appended to `llm_usage.log`.
+- AI calls are capped per server run (default 500, set `GONGBU_LLM_CAP`). Restart the server to reset. Token usage is printed and appended to `llm_usage.log`.
 - Generated sentences are saved in the database and reused before new ones are generated. While you answer one sentence, the next is generated in the background, so New sentence is usually instant.
 
 ## Tests

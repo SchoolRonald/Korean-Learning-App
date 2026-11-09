@@ -117,3 +117,23 @@ def check_entry(entry, answer):
             return {**check(r["expected"], r["expected"]), "note": f"Correct. Usually written {r['expected']}."}
     # Wrong: give feedback against the closest form.
     return min(results, key=lambda r: sum(not s["ok"] for s in r["syllables"]))
+
+
+COPULA_SPACE = re.compile(r"[가-힣]\s+(이에요|예요|입니다|이었어요|였어요)")
+VOWEL_EYO = re.compile(r"([가-힣])에요")
+
+
+def korean_problems(text):
+    """Spelling mistakes the model makes often, which a native teacher would never accept."""
+    problems = []
+    if COPULA_SPACE.search(text):
+        problems.append("space before the copula")
+    if "이예요" in text:
+        problems.append("이예요 (should be 이에요)")
+    for m in VOWEL_EYO.finditer(text):
+        parts = jamo(m.group(1))
+        if parts and not parts[2] and m.group(1) != "이" and not text[:m.start()].endswith("아"):
+            problems.append(f"{m.group(1)}에요 (should be {m.group(1)}예요)")
+    if "것이에요" in text:
+        problems.append("것이에요 (should be 거예요)")
+    return problems

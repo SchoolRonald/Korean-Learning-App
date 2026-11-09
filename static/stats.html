@@ -7,14 +7,14 @@
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn</a> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <b>Stats</b></p>
+<p><a href="/basics">Basics and Introduction</a> | <a href="/">Learn Words</a> | <a href="/grammar">Learn Grammar</a> | <a href="/words">Words</a> | <a href="/sentences">Sentences</a> | <b>Stats</b></p>
 <h1>Stats</h1>
 
 <label>Up to lesson <select id="lesson"></select></label>
 <p id="summary"></p>
 
 <h2>Weakest words</h2>
-<p class="muted">Highest fail rate in the spelling drill.</p>
+<p class="muted">Highest fail rate in the spelling drill and in Sentences.</p>
 <div id="weakest"></div>
 
 <h2>Not seen in a while</h2>
@@ -25,13 +25,27 @@
   <div id="words"></div>
 </details>
 
+<h2>Grammar</h2>
+<p id="grammar-summary"></p>
+<h3>Weakest grammar points</h3>
+<div id="grammar-weakest"></div>
+<details>
+  <summary>All learned grammar points by confidence</summary>
+  <div id="grammar-points"></div>
+</details>
+
+<h2>How you like things explained</h2>
+<p class="muted">New grammar lessons follow these notes. Change them in Learn Grammar.</p>
+<ul id="notes"></ul>
+
 <h2>About confidence</h2>
 <p class="muted">Confidence estimates how likely you are to spell the word correctly right now.
 It is accuracy times two kinds of decay. Accuracy is (correct + 1) / (attempts + 2), so a single lucky answer
 does not count as certain. Both decays count from your last correct answer: time decay halves every few days
 since then, and answer decay every few drill answers since then. Both half-lives double with each correct answer
 in a row (1 day or 10 answers after a miss, then 2 days or 20 answers, and so on, up to 64 days or 640 answers).
-So a wrong answer can only lower confidence. Words never answered correctly are 0%. Only spelling-drill answers count, not sentence grading.
+So a wrong answer can only lower confidence. Words never answered correctly are 0%. Spelling-drill answers count, and so do Sentence answers: each learned word in a sentence gets its own right or wrong, and one sentence counts as one answer for the decay.
+Grammar points use the same formula, counting practice, review and Sentence answers about grammar.
 The spelling drill picks randomly from the 5 least confident words.</p>
 
 <div id="feedback"></div>
@@ -76,6 +90,25 @@ const WORD = ["Korean", (w) => w.hangul];
 const ENGLISH = ["English", (w) => w.english];
 const CONFIDENCE = ["Confidence", (w) => confidenceCell(w.confidence), true];
 
+function pointLink(p) {
+  const td = el("td");
+  const a = el("a", p.title);
+  a.href = `/grammar?point=${encodeURIComponent(p.id)}`;
+  td.append(a);
+  return td;
+}
+
+function showGrammar(g, notes) {
+  $("grammar-summary").textContent =
+    `Learned ${g.learned} of ${g.total} grammar points. Average confidence ${pct(g.avg_confidence)}.`;
+  const columns = [["Point", pointLink], ["Lesson", (p) => p.lesson, true], ["Answers", (p) => p.attempts, true], CONFIDENCE];
+  $("grammar-weakest").replaceChildren(table(g.weakest, columns, "No learned grammar points yet. Start in Learn Grammar."));
+  $("grammar-points").replaceChildren(table(g.points, columns, "No learned grammar points yet."));
+  $("notes").replaceChildren(...(notes.length
+    ? notes.map((n) => el("li", n.source === "learner" ? `${n.text} (yours)` : n.text))
+    : [el("li", "No notes yet.", "muted")]));
+}
+
 async function loadStats() {
   try {
     const s = await api(`/api/stats?${scopeQuery()}`);
@@ -98,6 +131,7 @@ async function loadStats() {
       ["Streak", (w) => w.streak, true],
       CONFIDENCE,
     ], "No learned words yet. Start in the Learn tab."));
+    showGrammar(s.grammar, s.notes);
   } catch (e) {
     showError(e.message);
   }

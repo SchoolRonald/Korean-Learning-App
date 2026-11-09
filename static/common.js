@@ -11,6 +11,7 @@ function saveLesson(value) {
 
 async function api(path, options) {
   const res = await fetch(path, options);
+  refreshUsage();
   const body = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(body.detail || `Request failed (${res.status})`);
   return body;
@@ -21,6 +22,23 @@ function el(tag, text, className) {
   if (text) node.textContent = text;
   if (className) node.className = className;
   return node;
+}
+
+// A spinning indicator with a message and the seconds elapsed, for slow AI work.
+function spinner(message) {
+  const box = el("p", "", "working");
+  const text = el("span", message);
+  const seconds = el("span", "", "muted");
+  box.append(el("span", "", "spin"), text, seconds);
+  const started = Date.now();
+  const timer = setInterval(() => {
+    if (!box.isConnected && Date.now() - started > 1000) {
+      clearInterval(timer);
+      return;
+    }
+    seconds.textContent = ` ${Math.floor((Date.now() - started) / 1000)}s`;
+  }, 1000);
+  return box;
 }
 
 function showError(message) {
@@ -139,6 +157,23 @@ async function initScope(onChange) {
   return true;
 }
 
+// A word with its meaning on hover (title) or click (shown in #hint, for touch screens).
+function hintSpan(text, meaning, kind) {
+  const span = el("span", text, kind ? `hint ${kind}` : "hint");
+  span.title = meaning;
+  span.addEventListener("click", () => { $("hint").textContent = meaning; });
+  return span;
+}
+
+function tokenKind(t) {
+  return t.name ? "name" : t.new ? "new" : "";
+}
+
+function tokenMeaning(t) {
+  const label = t.name ? " (name)" : t.new ? " (new word)" : "";
+  return `${t.base} = ${t.english}${label}`;
+}
+
 // Debug panel for the demo (Words and Sentences): every learned word in scope with its
 // confidence broken down, how it changed since the last refresh, and where the next pick
 // comes from. Toggled with the "Debug" checkbox in the nav bar; remembered per browser.
@@ -150,24 +185,58 @@ const DEBUG_ROWS = 20;
 
 function initDebug(mode) {
   debugMode = mode;
-  try { debugOn = localStorage.getItem("debug") === "1"; } catch {}
+  const panel = el("div");
+  panel.id = "debug";
+  document.body.append(panel);
+  addDebugToggle((on) => {
+    panel.hidden = !on;
+    refreshDebug();
+  });
+  panel.hidden = !debugOn;
+}
+
+// The "Debug" checkbox in the nav bar. onChange(on) runs after each toggle.
+function addDebugToggle(onChange) {
+  debugOn = debugStored();
   const box = el("input");
   box.type = "checkbox";
   box.checked = debugOn;
   const label = el("label");
   label.append(box, " Debug");
   document.querySelector("body > p").append(" | ", label);
-  const panel = el("div");
-  panel.id = "debug";
-  panel.hidden = !debugOn;
-  document.body.append(panel);
   box.addEventListener("change", () => {
     debugOn = box.checked;
     try { localStorage.setItem("debug", debugOn ? "1" : "0"); } catch {}
-    panel.hidden = !debugOn;
-    refreshDebug();
+    showUsageCounter(debugOn);
+    onChange(debugOn);
   });
 }
+
+function debugStored() {
+  try { return localStorage.getItem("debug") === "1"; } catch { return false; }
+}
+
+// With Debug on, every page shows the AI calls made in this server run in the bottom-left corner.
+let usageBox = null;
+
+function showUsageCounter(on) {
+  if (!usageBox) {
+    usageBox = el("div", "", "usage-counter");
+    document.body.append(usageBox);
+  }
+  usageBox.hidden = !on;
+  refreshUsage();
+}
+
+async function refreshUsage() {
+  if (!usageBox || usageBox.hidden) return;
+  try {
+    const u = await (await fetch("/api/usage")).json();
+    usageBox.textContent = `AI calls: ${u.calls} / ${u.cap}`;
+  } catch {}
+}
+
+document.addEventListener("DOMContentLoaded", () => showUsageCounter(debugStored()));
 
 const pct = (x) => `${Math.round(x * 100)}%`;
 
@@ -220,7 +289,7 @@ async function refreshDebug(exclude) {
   }
   const pickNote = debugMode === "words"
     ? `Highlighted: the next word is picked at random from these (the ${d.top_k} least confident, not counting the word on screen; ties included).`
-    : `Highlighted: the next generated sentence's ${d.focus_count} focus words are picked at random from these (your weakest words). Sentence answers do not change confidence.`;
+    : `Highlighted: the next generated sentence's ${d.focus_count} focus words are picked at random from these (your weakest words). Each learned word in a graded sentence gets its own right or wrong.`;
   $("debug").replaceChildren(
     el("h2", "Debug"),
     el("p", "confidence = accuracy × time decay × answer decay. Accuracy = (correct + 1) / (attempts + 2). " +

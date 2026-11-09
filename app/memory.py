@@ -1,3 +1,4 @@
+import bisect
 from datetime import datetime, timezone
 
 
@@ -39,25 +40,34 @@ def confidence(attempts, fails, streak, last_correct, now, gap=0):
     return confidence_parts(attempts, fails, streak, last_correct, now, gap)["confidence"]
 
 
+def word_events(conn):
+    """Every answer about a word as (word id, correct, ts, attempt id): Words-drill answers, and the
+    per-word verdicts of Sentence answers, which carry the id and time of their sentence answer."""
+    rows = conn.execute("SELECT ref_id, correct, ts, id FROM attempts WHERE kind = 'word'").fetchall()
+    rows += conn.execute(
+        """SELECT v.word_id, v.correct, a.ts, a.id FROM sentence_word_verdicts v
+           JOIN attempts a ON a.id = v.attempt_id"""
+    ).fetchall()
+    return [tuple(r) for r in rows]
+
+
 def since_correct(conn):
-    """For each word answered correctly at least once: when it last was, and how many drill
-    answers (to any word, including misses of this one) came after it."""
-    rows = conn.execute(
-        """SELECT a.ref_id, a.ts, (SELECT count(*) FROM attempts b WHERE b.kind = 'word' AND b.id > a.id)
-           FROM attempts a
-           JOIN (SELECT max(id) AS id FROM attempts WHERE kind = 'word' AND correct = 1 GROUP BY ref_id) last
-             ON a.id = last.id"""
-    )
-    return {word_id: (ts, gap) for word_id, ts, gap in rows}
+    """For each word answered correctly at least once: when it last was, and how many answers
+    (Words-drill answers to any word, and Sentence answers, one each) came after it."""
+    last = {}
+    for word_id, correct, ts, attempt_id in word_events(conn):
+        if correct and attempt_id > last.get(word_id, (-1, None))[0]:
+            last[word_id] = (attempt_id, ts)
+    answer_ids = sorted(r[0] for r in conn.execute("SELECT id FROM attempts WHERE kind IN ('word', 'sentence')"))
+    return {word_id: (ts, len(answer_ids) - bisect.bisect_right(answer_ids, attempt_id))
+            for word_id, (attempt_id, ts) in last.items()}
 
 
 def streaks(conn):
     """Number of correct answers in a row, counting back from the latest, per word id."""
     result, finished = {}, set()
-    rows = conn.execute(
-        "SELECT ref_id, correct FROM attempts WHERE kind = 'word' ORDER BY ref_id, ts DESC, id DESC"
-    )
-    for word_id, correct in rows:
+    rows = sorted(word_events(conn), key=lambda e: (e[0], e[2], e[3]), reverse=True)
+    for word_id, correct, _, _ in rows:
         if word_id in finished:
             continue
         if correct:

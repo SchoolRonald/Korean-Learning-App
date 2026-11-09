@@ -1,0 +1,31 @@
+{
+  "source": "https://www.howtostudykorean.com/other-stuff/lesson-list/",
+  "note": "Lesson numbers and grammar point names only, as listed publicly by HowToStudyKorean. No lesson text is copied.",
+  "lessons": [
+    {"lesson": 1, "topics": ["Korean word order (subject, object, verb)", "Basic particles: topic particle 은/는 and object particle 을/를", "이다 (to be)", "이/그/저 (this/that)"]},
+    {"lesson": 2, "topics": ["Subject particle 이/가", "있다 (to be somewhere, to have)"]},
+    {"lesson": 3, "topics": ["Verbs and adjectives", "Possessive particle 의", "좋다 vs 좋아하다"]},
+    {"lesson": 4, "topics": ["Describing nouns with adjectives: ㄴ/은", "많다", "Particle 도 (also)"]},
+    {"lesson": 5, "topics": ["Past tense", "Present tense", "Future tense"]},
+    {"lesson": 6, "topics": ["Honorifics"]},
+    {"lesson": 7, "topics": ["Irregular verbs and adjectives"]},
+    {"lesson": 8, "topics": ["Adverbs", "Negative sentences: 안 and ~지 않다"]},
+    {"lesson": 9, "topics": ["Conjugating 이다", "Future tense with 것이다"]},
+    {"lesson": 10, "topics": ["Numbers: the two number systems", "Counters", "처음 and 마지막"]},
+    {"lesson": 11, "topics": ["Time words: 동안, 시간, 초, 지난, 다음"]},
+    {"lesson": 12, "topics": ["Particle 들 (plural)", "Particle 만 (only)", "Particle 에서", "Particles 부터 and 까지", "Particle (으)로"]},
+    {"lesson": 13, "topics": ["Particles 과/와, (이)랑, 하고 (and, with)", "와 함께", "Particles 에게, 한테, 께 (to a person)", "Particles 에게서, 로부터 (from a person)", "위해 (for)", "에 대해 (about)"]},
+    {"lesson": 14, "topics": ["Passive verbs"]},
+    {"lesson": 15, "topics": ["~아/어 하다 with 좋다 and 싫다", "들다", "Compound verbs", "다르다, 비슷하다, 같다", "Homonyms", "Being sick"]},
+    {"lesson": 16, "topics": ["~적", "~스럽다"]},
+    {"lesson": 17, "topics": ["Connecting particle ~고 (and)", "~고 싶다 (want to)"]},
+    {"lesson": 18, "topics": ["~고 있다 (progressive)", "Adjective + ~아/어지다 (to become)"]},
+    {"lesson": 19, "topics": ["Comparatives and superlatives: 보다, 더, 가장"]},
+    {"lesson": 20, "topics": ["잘 and 못", "잘하다 and 못하다", "잘못"]},
+    {"lesson": 21, "topics": ["Question words: why, when, where, who"]},
+    {"lesson": 22, "topics": ["Question words: how, what, which, how many"]},
+    {"lesson": 23, "topics": ["ㅎ irregular", "Colors", "이렇다, 그렇다, 저렇다"]},
+    {"lesson": 24, "topics": ["전 and 후 (before, after)", "이래로 (since)", "이내 and 안 (within)"]},
+    {"lesson": 25, "topics": ["아무나, 누구나, 아무도 (anybody, everybody, nobody)"]}
+  ]
+}
