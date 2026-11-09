@@ -60,11 +60,12 @@ The Words drill picks the next word at random from the 5 least confident learned
 
 - Model `claude-haiku-5-5`, low effort for sentences and grading, medium for topics (resolved once and saved). Grammar lessons, other explanations and answers to questions use `claude-sonnet-5-5` at medium effort, because they teach. Every call asks for JSON with a fixed schema; malformed output, refusals and API errors become a friendly message, never a crash.
 - At most 500 AI calls per server run (`GONGBU_LLM_CAP`). Restart the server to reset. Each call's duration and tokens are logged to the console and `llm_usage.log`.
+- **Jev** (TypeSafe, `jev-1.14.0`, key `JEV_API_KEY`) grades free answers that do not match exactly, in Sentences and grammar practice. It answers yes/no questions with probabilities in a fraction of a second: "same meaning as the English", "spelled and conjugated exactly right" and, in grammar practice, "uses the point". An answer is correct only when every probability is at least 0.7, so a typo is always wrong. Jev gives no reason, so a wrong answer has a **Why is this wrong?** button that asks Haiku to explain. The explanation never changes the recorded grade. If Haiku thinks the answer was right after all, the page says so. When Jev fails, Haiku grades as before. Jev calls are not counted in the 500 cap, and are logged the same way.
 - The API key comes from `ANTHROPIC_API_KEY` (or `.env`).
 
 ### AI call counter
 
-With Debug on, every page shows a small, muted counter in the bottom-left corner: "AI calls: N / 500". N is the number of AI calls in this server run. It updates after each action that can make an AI call. API: `GET /api/usage` returns `{calls, cap}`.
+With Debug on, every page shows a small, muted counter in the bottom-left corner: "AI calls: N / 500 · Jev: M". N is the number of AI calls in this server run. It updates after each action that can make an AI call. API: `GET /api/usage` returns `{calls, cap}`.
 
 ### Debug panel (Words and Sentences)
 
@@ -251,7 +252,7 @@ The profile is a short list of plain-English notes on how the learner likes gram
 | Conjugation | "가다 + past polite" → 갔어요 | Made and checked by the conjugation engine. No AI. |
 | Fill the blank | "저___ 학생이에요" → 는 | Deterministic, against the item's accepted answers. |
 | Compare | Pick between related points: "저(는/가) 학생이에요" | Deterministic. An item may accept both, and then the feedback explains the difference in meaning. |
-| Transform | Change a sentence as told: to the past, to the negative, to the honorific | Exact match first, then Haiku. |
+| Transform | Change a sentence as told: to the past, to the negative, to the honorific | Exact match first, then Jev (Haiku if Jev fails). |
 | Translate | English to Korean, using the point | Exact match first, then AI, like Sentences. |
 | Spot the error | Find and fix the one grammar error in a sentence | Exact match with the corrected sentence first, then AI. |
 
@@ -259,7 +260,7 @@ The profile is a short list of plain-English notes on how the learner likes gram
 - One AI call (Sonnet) writes a set of 3 items of every type that fits the point, and saves them in the `grammar_items` table with their accepted answers and reasons. Sonnet writes them because the saved answers decide what is correct.
 - The set is written in the background when the lesson opens, but only when the point has no unseen items at all. When a request asks for a type with no unseen item left, that request writes a new set. So a type the check keeps dropping never costs a set on every visit. A lock makes sure two requests never write the same set.
 - The server drops broken items: a blank that is missing or appears twice, Compare answers that are not among the choices, or a Spot the error sentence that is already correct.
-- Free answers (Fill the blank, Translate, Spot the error, Transform) that match no accepted answer are graded by Haiku. Any mistake in the point being practiced is "incorrect", and "almost" is only for one small slip outside it.
+- Free answers (Fill the blank, Translate, Spot the error) that match no accepted answer are graded by Jev: correct only with the same meaning, exact spelling, and the point used. A wrong answer shows the item's reason and a "Why is this wrong?" button (Haiku). If Jev fails, Haiku grades: any mistake in the point being practiced is "incorrect", and "almost" is only for one small slip outside it.
 - Every new item set is reviewed by a second Sonnet call, which keeps, fixes or drops each item. Only checked items are served. Fixed rules also reject a space before the copula, 에요 after a vowel (except 아니에요), 이예요, 것이에요, dictionary forms as answers, and Compare items whose wrong choice is only a dictionary form.
 - Items use learned words where possible, with at most 2 other words. Unlike explanations, items do not underline unlearned words yet.
 - A point uses only the types that fit it. Compare needs related points. Conjugation and Transform need a point the engine supports (tenses, honorific, negation, ~고 forms, the modifier, 아/어지다, and the irregular classes); `CONJ_POINTS` in `app/practice.py` lists them with their endings and verb classes.
@@ -406,10 +407,10 @@ Practice learned words and learned grammar in context: translate a short English
 - Saved sentences from before this change have no grammar list. They are not served.
 - The server checks the tokens against the list: the list's meaning replaces the AI's; an attached copula is stripped (뭐예요 → 뭐); for a spelling with several entries (저: "I" or "that"), the AI's meaning picks the entry; a list word can never be called a name. A sentence is rejected if it uses no learned word, more than 2 unlearned words (names do not count), no topic word (with a topic), or repeats a saved sentence.
 - **Caching**: sentences are saved. A saved sentence not yet attempted is served first; while the learner answers, the next one is generated in the background, so "New sentence" is usually instant. If generation fails, the least recently practiced saved sentence is reused. "New word" flags are recomputed each time, so hints disappear as words are learned.
-- **Grading**: an exact match with the reference (spacing and punctuation ignored), or with the reference with 그/저-type words swapped when they mean "that/there", is correct with no AI call. Otherwise one Haiku call returns correct, almost or incorrect with a reason; either 그- or 저- forms are accepted unless the English says which. If grading fails, the answer is "ungraded" and not recorded.
+- **Grading**: an exact match with the reference (spacing and punctuation ignored), or with the reference with 그/저-type words swapped when they mean "that/there", is correct with no AI call. Otherwise Jev decides correct or incorrect (see Shared parts: AI usage); either 그- or 저- forms are accepted unless the English says which. "Why is this wrong?" asks Haiku for the reason. If Jev fails, one Haiku call returns correct, almost or incorrect with a reason. If grading fails, the answer is "ungraded" and not recorded.
 - **Verdicts per word and point**: grading also returns a verdict for each learned word in the reference and each grammar point the sentence uses: correct or wrong.
   - An exact match makes every verdict correct with no AI call.
-  - With AI grading, the grader names the wrong words and points. A different correct word with the same meaning counts as right, which is why verdicts are per word: one English word can have several right Korean words.
+  - With Jev, the same call asks one yes/no question per learned word ("a correct word for this meaning, used correctly") and per grammar point. An answer Jev marks correct makes every verdict correct. With the Haiku fallback, the grader names the wrong words and points. A different correct word with the same meaning counts as right, which is why verdicts are per word: one English word can have several right Korean words.
   - Unlearned words and names get no verdict.
 - Word verdicts change word confidence. Grammar verdicts change grammar confidence. An "ungraded" answer changes nothing.
 

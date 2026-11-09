@@ -112,3 +112,4 @@ td.num, th.num { text-align: right; }
 .choice.right { background: #eaf6ec; border-color: #1a7f37; }
 .choice.picked-wrong { background: #fdecea; border-color: #c62828; }
 #practice-lesson { margin-top: 1.5rem; }
+.why { margin: 0.5rem 0; }

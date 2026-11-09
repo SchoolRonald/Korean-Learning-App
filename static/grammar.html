@@ -619,9 +619,14 @@ function showVerdict(r, item, answer) {
   }
   const head = { correct: "✓ Correct", almost: "≈ Almost", incorrect: "✗ Not quite" }[r.verdict];
   const cls = { correct: "correct", almost: "verdict-almost", incorrect: "wrong" }[r.verdict];
-  const nodes = [el("p", head, cls), el("p", r.reason)];
+  const jevWrong = r.graded_by === "jev" && !r.correct;
+  const nodes = [el("p", head, cls), el("p", jevWrong ? `About the answer: ${r.reason}` : r.reason)];
   if (!r.correct || r.answers.length > 1) {
     nodes.push(el("p", `${r.answers.length > 1 ? "Accepted answers" : "Answer"}: ${r.answers.join("  /  ")}`, "korean"));
+  }
+  if (jevWrong) nodes.push(whyButton("/api/grammar/why", { item_id: item.id, answer }));
+  if (r.graded_by === "jev") {
+    nodes.push(el("p", "Checked by Jev (AI, unvalidated): same meaning, spelled exactly right, and uses this point.", "label"));
   }
   if (r.graded_by === "llm") nodes.push(el("p", "Graded by AI (unvalidated). Compare with the answers yourself.", "label"));
   nodes.push(el("p", `Confidence for this point: ${pct(r.confidence_before)} → ${pct(r.confidence)}`, "muted"));

@@ -4,7 +4,7 @@ import random
 import re
 import threading
 
-from app import llm
+from app import jev, llm
 from app.checker import DEMONSTRATIVE_SWAP, answer_variants, normalize
 from app.drill import now_iso
 from app.learn import english_ok
@@ -404,6 +404,33 @@ def parse_verdict(data):
     return verdict, reason.strip()
 
 
+JEV_TASK = ("Translate the English sentence into Korean. English \"that\" and \"there\" do not say near or far, "
+            "so 그/거기/그것 and 저/저기/저것 forms both count unless the English says which.")
+
+
+def word_question(word):
+    return {"instructions": f"The learner's answer contains a correct Korean word for \"{word['english']}\" "
+                            f"({word['hangul']}), or another correct word with the same meaning, used correctly.",
+            "criteria": {"true": "That meaning is there, spelled and used correctly.",
+                         "false": "That meaning is missing, misspelled, or used wrongly."}}
+
+
+def point_question(point):
+    return {"instructions": f"The learner's answer uses the grammar point {point['title']} ({point['pattern']}) correctly.",
+            "criteria": {"true": "The point is used, with the right form.",
+                         "false": "The point is missing or used with a wrong form."}}
+
+
+def grade_with_jev(english, accepted, answer, words, points):
+    """Jev's verdict, plus one verdict per learned word and grammar point from the same call."""
+    extra = {f"word_{w['id']}": word_question(w) for w in words}
+    extra.update({f"point_{p['id']}": point_question(p) for p in points})
+    correct, probabilities = jev.judge(JEV_TASK, english, accepted, answer, extra=extra)
+    word_ok = {w["id"]: correct or probabilities[f"word_{w['id']}"] >= jev.THRESHOLD for w in words}
+    point_ok = {p["id"]: correct or probabilities[f"point_{p['id']}"] >= jev.THRESHOLD for p in points}
+    return ("correct" if correct else "incorrect"), "", word_ok, point_ok
+
+
 def haiku_grade(english, reference, answer, words=(), points=()):
     prompt = f"English: {english}\nReference Korean: {reference}\nStudent's Korean: {answer}"
     if words:
@@ -429,6 +456,15 @@ def sentence_parts(conn, tokens, word_ids, grammar_ids):
     by_id = grammar.curriculum()[0]
     points = [by_id[g] for g in grammar_ids if g in by_id]
     return words, points
+
+
+def explain_sentence(conn, sentence_id, answer):
+    """Haiku's explanation of an answer, for "Why is this wrong?". Not recorded: the grade stands."""
+    row = conn.execute("SELECT english, korean_ref FROM sentences WHERE id = ?", (sentence_id,)).fetchone()
+    if row is None:
+        return None
+    verdict, reason, _, _ = haiku_grade(row[0], row[1], normalize(answer))
+    return {"verdict": verdict, "reason": reason}
 
 
 def record_verdicts(conn, attempt_id, answer, words, points, word_ok, point_ok, ts):
@@ -469,11 +505,15 @@ def grade_sentence(conn, sentence_id, answer):
         word_ok, point_ok = all_right
     else:
         try:
-            verdict, reason, word_ok, point_ok = haiku_grade(english, reference, answer, words, points)
-        except LLMError as e:
-            # Not recorded: a failed grading call should not count as a wrong answer.
-            return {"verdict": "ungraded", "reason": str(e), "graded_by": None}
-        graded_by = "llm"
+            verdict, reason, word_ok, point_ok = grade_with_jev(english, accepted, answer, words, points)
+            graded_by = "jev"
+        except jev.JevError:
+            try:
+                verdict, reason, word_ok, point_ok = haiku_grade(english, reference, answer, words, points)
+            except LLMError as e:
+                # Not recorded: a failed grading call should not count as a wrong answer.
+                return {"verdict": "ungraded", "reason": str(e), "graded_by": None}
+            graded_by = "llm"
 
     ts = now_iso()
     cur = conn.execute(

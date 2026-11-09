@@ -10,13 +10,13 @@ from pydantic import BaseModel
 
 from app.db import DB_PATH, connect, init_db
 from app.drill import grade_word, record_word_attempt
-from app import grammar, practice, profile
+from app import grammar, jev, practice, profile
 from app.checker import answer_variants
 from app.learn import HANGUL, batch, cloze_check, english_ok, get_word, mark_learned
 from app.llm import LLMError, usage_summary
 from app.memory import ANSWERS_PER_DAY, in_scope, word_stats
 from app.scheduler import TOP_K, next_word, pick_pool
-from app.sentences import FOCUS_COUNT, NotReady, focus_pool, get_sentence, grade_sentence, prefetch
+from app.sentences import FOCUS_COUNT, NotReady, explain_sentence, focus_pool, get_sentence, grade_sentence, prefetch
 from app.stats import summary
 from app.topics import TopicError, resolve, topic_word_ids
 
@@ -126,6 +126,16 @@ class GrammarAnswer(BaseModel):
 class ProfileChange(BaseModel):
     add: str | None = None
     remove: int | None = None
+
+
+class SentenceWhy(BaseModel):
+    sentence_id: int
+    answer: str
+
+
+class GrammarWhy(BaseModel):
+    item_id: int
+    answer: str
 
 
 class GrammarQuestion(BaseModel):
@@ -241,6 +251,17 @@ def api_sentence_answer(body: SentenceAnswer):
     return {**result, "llm": usage_summary()}
 
 
+@app.post("/api/sentence/why")
+def api_sentence_why(body: SentenceWhy):
+    try:
+        result = explain_sentence(db(), body.sentence_id, body.answer)
+    except LLMError as e:
+        raise HTTPException(503, str(e))
+    if result is None:
+        raise HTTPException(404, "Unknown sentence")
+    return {**result, "llm": usage_summary()}
+
+
 @app.get("/api/stats")
 def api_stats(lesson: int, topic: int | None = None):
     return {**summary(db(), lesson, topic_ids=scope_ids(topic)),
@@ -259,7 +280,7 @@ def api_topics(body: TopicRequest):
 
 @app.get("/api/usage")
 def api_usage():
-    return usage_summary()
+    return {**usage_summary(), "jev_calls": jev.usage_summary()["calls"]}
 
 
 def grammar_call(fn, *args):
@@ -366,6 +387,14 @@ def api_profile_change(body: ProfileChange):
     except profile.ProfileError as e:
         raise HTTPException(400, str(e))
     return profile.summary(db())
+
+
+@app.post("/api/grammar/why")
+def api_grammar_why(body: GrammarWhy):
+    result = grammar_call(practice.explain_answer, db(), body.item_id, body.answer)
+    if result is None:
+        raise HTTPException(404, "Unknown practice item")
+    return {**result, "llm": usage_summary()}
 
 
 @app.get("/api/grammar/debug")

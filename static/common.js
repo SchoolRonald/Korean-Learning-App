@@ -41,6 +41,35 @@ function spinner(message) {
   return box;
 }
 
+// "Why is this wrong?": Haiku explains an answer Jev marked wrong. The grade itself stays as it is.
+function whyButton(path, body) {
+  const box = el("div", "", "why");
+  const button = el("button", "Why is this wrong?");
+  button.addEventListener("click", async () => {
+    button.disabled = true;
+    box.replaceChildren(spinner("Asking for an explanation"));
+    try {
+      const why = await api(path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const nodes = [el("p", why.reason)];
+      if (why.verdict === "correct") {
+        nodes.unshift(el("p", "The explainer thinks your answer may be right. It still counts as wrong, " +
+          "so compare it with the answer yourself.", "verdict-almost"));
+      }
+      nodes.push(el("p", "Explained by AI (unvalidated).", "muted"));
+      box.replaceChildren(...nodes);
+    } catch (e) {
+      box.replaceChildren(el("p", e.message, "wrong"), button);
+      button.disabled = false;
+    }
+  });
+  box.append(button);
+  return box;
+}
+
 function showError(message) {
   $("feedback").replaceChildren(el("p", message, "wrong"));
 }
@@ -232,7 +261,7 @@ async function refreshUsage() {
   if (!usageBox || usageBox.hidden) return;
   try {
     const u = await (await fetch("/api/usage")).json();
-    usageBox.textContent = `AI calls: ${u.calls} / ${u.cap}`;
+    usageBox.textContent = `AI calls: ${u.calls} / ${u.cap} · Jev: ${u.jev_calls}`;
   } catch {}
 }
 

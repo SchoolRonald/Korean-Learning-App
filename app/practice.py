@@ -3,7 +3,7 @@ import random
 import threading
 from datetime import datetime, timezone
 
-from app import conjugate, grammar, verbs
+from app import conjugate, grammar, jev, verbs
 from app.checker import korean_problems
 from app.drill import now_iso
 from app.llm import TEACHING_MODEL, LLMError, call_json
@@ -415,6 +415,41 @@ def grade_free(point, item_type, prompt, answers, answer):
     return parse_verdict(call_json("grammar-grade", GRADE_SYSTEM, text, GRADE_SCHEMA))
 
 
+JEV_TASKS = {
+    "translate": "Translate the English sentence into Korean, using the grammar point being practiced.",
+    "spot": "The shown Korean sentence has one grammar mistake. Write the whole sentence with the mistake fixed.",
+    "fill": "Fill the blank (___) in the shown Korean sentence. The learner answer is the finished sentence.",
+    "transform": "Rewrite the shown Korean sentence exactly as the instruction says, changing nothing else.",
+}
+
+
+def jev_grade(point, item_type, prompt, answers, answer):
+    """Jev's near-instant verdict on a free answer that matched no accepted answer: correct or incorrect."""
+    if item_type == "fill":
+        sentence = prompt["sentence"]
+        finished = answer if len(answer) > len(sentence) / 2 else sentence.replace(BLANK, answer)
+        accepted, shown, answer = [sentence.replace(BLANK, a) for a in answers], sentence, finished
+    elif item_type == "transform":
+        accepted, shown = answers, f"{prompt['sentence']} (instruction: {prompt['instruction']})"
+    else:
+        accepted, shown = answers, prompt["english"] if item_type == "translate" else prompt["wrong"]
+    correct, _ = jev.judge(JEV_TASKS[item_type], shown, accepted, answer,
+                           point=f"{point['title']} ({point['pattern']}): {point['summary']}",
+                           english=prompt.get("english") if item_type != "translate" else None)
+    return "correct" if correct else "incorrect"
+
+
+def explain_answer(conn, item_id, answer):
+    """Haiku's explanation of an answer, for "Why is this wrong?". Not recorded: the grade stands."""
+    row = conn.execute("SELECT * FROM grammar_items WHERE id = ?", (item_id,)).fetchone()
+    if row is None:
+        return None
+    prompt, answers = json.loads(row["prompt"]), json.loads(row["answers"])
+    item_type = "fill" if row["type"] == "compare" else row["type"]
+    verdict, reason = grade_free(grammar.get_point(row["point_id"]), item_type, prompt, answers, " ".join(answer.split()))
+    return {"verdict": verdict, "reason": reason}
+
+
 def grade(conn, item_id, answer, source="practice"):
     """Check and record an answer. Returns None for an unknown item."""
     if source not in SOURCES:
@@ -436,10 +471,14 @@ def grade(conn, item_id, answer, source="practice"):
         verdict, reason, graded_by = "incorrect", row["reason"], "exact"
     else:
         try:
-            verdict, reason = grade_free(point, item_type, prompt, answers, answer)
-        except LLMError as e:
-            return {"verdict": "ungraded", "correct": False, "reason": str(e), "answers": answers, "graded_by": None}
-        graded_by = "llm"
+            verdict = jev_grade(point, item_type, prompt, answers, answer)
+            reason, graded_by = row["reason"], "jev"
+        except jev.JevError:
+            try:
+                verdict, reason = grade_free(point, item_type, prompt, answers, answer)
+            except LLMError as e:
+                return {"verdict": "ungraded", "correct": False, "reason": str(e), "answers": answers, "graded_by": None}
+            graded_by = "llm"
 
     before = point_confidence(conn, point["id"])
     record(conn, point["id"], item_id, source, answer, verdict)

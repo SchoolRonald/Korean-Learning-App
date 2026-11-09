@@ -196,4 +196,4 @@ def test_pages_and_scripts_are_revalidated(client):
 
 def test_usage_endpoint(client):
     data = client.get("/api/usage").json()
-    assert set(data) == {"calls", "cap"}
+    assert set(data) == {"calls", "cap", "jev_calls"}

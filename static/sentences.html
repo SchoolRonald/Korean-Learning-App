@@ -172,8 +172,13 @@ function showResult(result, reference, graded, answer) {
   parts.push(reference);
   if (result.grammar && result.grammar.length) parts.push(verdictList("Grammar", result.grammar, true));
   if (result.words && result.words.length) parts.push(verdictList("Words", result.words, false));
+  if (result.graded_by === "jev" && result.verdict !== "correct") {
+    parts.push(whyButton("/api/sentence/why", { sentence_id: graded.id, answer }));
+  }
   if (result.graded_by === "exact") {
     parts.push(el("p", "Graded by exact match with the reference.", "muted"));
+  } else if (result.graded_by === "jev") {
+    parts.push(el("p", "Checked by Jev (AI, unvalidated): same meaning and spelled exactly right. Compare with the reference yourself.", "label"));
   } else if (result.graded_by === "llm") {
     parts.push(el("p", "Graded by AI (unvalidated). Compare with the reference yourself.", "label"));
   } else {

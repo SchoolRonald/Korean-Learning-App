@@ -1,10 +1,12 @@
 import json
 
+import httpx
 import pytest
 
 from app import grammar, llm, sentences
 from app.memory import since_correct, word_stats
 from app.sentences import NotReady, get_sentence, grade_sentence
+from tests.test_jev import Response
 from tests.test_sentences import LESSON_ONE, conn, db_file, fake, few_words_ok, sentence_json, word_id  # noqa: F401
 
 
@@ -68,7 +70,25 @@ def test_exact_match_marks_every_word_and_point_right(conn, fake):
     assert stats["물"]["attempts"] == 1 and stats["물"]["confidence"] > 0
 
 
-def test_haiku_names_wrong_words_and_points(conn, fake):
+def test_jev_gives_a_verdict_per_word_and_point(conn, fake, monkeypatch):
+    fake(sentence_json())
+    s = get_sentence(conn, 1)
+    monkeypatch.setenv("JEV_API_KEY", "k")
+    low = {"meaning": 0.2, f"word_{word_id(conn, '물')}": 0.1, f"point_{LESSON_ONE[1]}": 0.2}
+
+    def post(url, json, timeout, headers):
+        answers = {n: {"type": "noul", "noul": low.get(n, 0.95)} for n in json["questions"]}
+        return Response(200, {"answers": answers, "usage": {"input_tokens": 50}})
+    monkeypatch.setattr(httpx, "post", post)
+    r = grade_sentence(conn, s["id"], "저는 주스를 마셔요.")
+    assert r["verdict"] == "incorrect" and r["graded_by"] == "jev"
+    assert {w["hangul"]: w["correct"] for w in r["words"]} == {"물": False, "마시다": True}
+    assert {g["id"]: g["correct"] for g in r["grammar"]}[LESSON_ONE[1]] is False
+    stats = {w["hangul"]: w for w in word_stats(conn, 1)}
+    assert stats["물"]["fails"] == 1 and stats["마시다"]["fails"] == 0
+
+
+def test_haiku_fallback_names_wrong_words_and_points(conn, fake):
     fake(sentence_json(), verdicts(wrong_words=["물"], wrong_points=[LESSON_ONE[2]]))
     s = get_sentence(conn, 1)
     r = grade_sentence(conn, s["id"], "저는 주스 마셔요")

@@ -15,4 +15,5 @@ def no_real_ai(monkeypatch):
     install their own fake client or fake call_json on top of this."""
     monkeypatch.setattr(llm, "_client", None)
     monkeypatch.setattr(llm.anthropic, "Anthropic", lambda *args, **kwargs: NoKeyClient())
+    monkeypatch.delenv("JEV_API_KEY", raising=False)
     monkeypatch.delenv("KRDICT_API_KEY", raising=False)
