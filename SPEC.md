@@ -223,17 +223,22 @@ The krdict API: `https://krdict.korean.go.kr/api/search` and `/api/view`, XML re
 
 Each point has one main lesson. It is written once (Sonnet), saved, and free to show again. The page shows its parts in this order:
 
-1. **Intro**: one or two sentences on what the point is for.
-2. **The rule**: the rule in plain sentences.
-3. **Forms**: a table of every form (after a vowel, after a consonant, irregular cases), with an example each. Left out when the point has one form.
-4. **Examples**: at least 8, simple to harder, covering every form in the table. Each has the Korean with the grammar part highlighted (only the grammar part, such as 는 in 저는), the English, a breakdown into labeled parts (저 "I" + 는 "topic particle"), and a short note.
-5. **Nuance**: when to use the point, when not to, and how it differs from related points.
-6. **Common mistakes**: two or three, each with the wrong sentence, the right one, and why.
-7. The source line (see Grammar data) and "AI-written, not validated by a native speaker".
+1. **Intro**: why the point matters to the learner, in one or two short paragraphs.
+2. **Sections**: three to five, numbered. Each has a heading, a body, and optionally:
+   - a **table** of forms (after a vowel, after a consonant, irregular cases), each with an example,
+   - **examples**: 10 asked for in the whole lesson (a lesson with fewer than 6 usable ones is refused), simple to harder, covering every form. Each has the Korean with the grammar part highlighted (only the grammar part, such as 는 in 저는), the English, a breakdown into labeled parts (저 "I" + 는 "topic particle"), and a short note,
+   - **quizzes**: one or two multiple-choice questions after the teaching they test. A click shows right or wrong at once, with a one-sentence reason for every choice, and the learner can try again. The lesson has at least two quizzes, one in a middle section and one in the last section,
+   - **nuances**: one to four fine points, shown last in the section as "Nuance 1:", "Nuance 2:" and so on. The model writes the text and the page adds the label.
+3. **Worked example**: one problem solved in steps.
+4. **Common mix-ups**: two or three, each with the wrong sentence, the right one, and why.
+5. **Summary**: three to five bullets.
+6. The source line (see Grammar data) and "AI-written, not validated by a native speaker".
+
+The server keeps a quiz only when it has 2 to 4 different choices and exactly one correct choice, and the correct choice passes the fixed spelling rules. It shuffles the choices once, so the right answer is not always first. A section with no heading or body is dropped. Lessons saved before sections existed (rule, table, examples, one nuance) are shown as plain sections and are not regenerated.
 
 Examples use learned words where possible. They may use at most 2 unlearned words. Unlearned words and names are underlined with a hover hint, the same as on the Sentences tab.
 
-The server removes any example, or "right" sentence in Common mistakes, with a spelling mistake the model often makes (see Practice: fixed rules). A lesson left with fewer than 8 examples is refused, and the page shows an error.
+The server removes any example, or "right" sentence in Common mistakes, with a spelling mistake the model often makes (see Practice: fixed rules). A lesson left with fewer than 6 examples is refused, and the page shows an error.
 
 **No waiting between points**: when a point opens, the server writes the next unlearned point's lesson in the background. Usually it is ready when the learner gets there. A lock makes sure the page and the background job never write the same lesson twice.
 
@@ -369,7 +374,7 @@ With Debug on, the page shows:
 
 - `grammar/curriculum.json` has points for every lesson from 1 to 25. Every point has all fields, and every `related` id exists.
 - Every point with sources shows the source line and a working krdict link.
-- The first point's lesson shows the rule and forms before at least 8 examples, each with a breakdown.
+- The first point's lesson shows the rule and forms before at least 6 examples, each with a breakdown.
 - Opening a point with a saved lesson makes no AI call. Opening a point writes the next point's lesson in the background.
 - "Explain it differently" and "Explain it like..." add a tab, and switching tabs makes no AI call.
 - A spinner with elapsed seconds shows while the AI writes.

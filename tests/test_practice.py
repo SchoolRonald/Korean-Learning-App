@@ -220,8 +220,10 @@ def test_confidence_rises_on_right_and_never_on_wrong(client, ai):
 
 def test_explain_writes_practice_items_ahead(client, ai, monkeypatch):
     monkeypatch.setattr(grammar, "call_json", lambda *a, **k: {
-        "intro": "i", "rule": "r", "table": [], "nuance": "n", "mistakes": [],
-        "examples": [{"korean": "저는 학생이에요.", "english": "e", "highlight": "는", "note": "", "parts": [], "tokens": []}] * 8,
+        "intro": "i", "mistakes": [], "summary": [], "worked_example": None,
+        "sections": [{"heading": "h", "body": "b", "table": [], "nuances": [], "quizzes": [],
+                      "examples": [{"korean": "저는 학생이에요.", "english": "e", "highlight": "는", "note": "",
+                                    "parts": [], "tokens": []}] * 8}],
     })
     client.get(f"/api/grammar/explain?point={POINT['id']}&lesson=25")
     assert ("grammar-items", TEACHING_MODEL) in ai.calls

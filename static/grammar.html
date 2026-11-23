@@ -225,22 +225,70 @@ function showView(view) {
 }
 
 function renderExplanation(x, target = $("explanation"), hint = $("hint")) {
-  const sections = {
-    intro: () => x.intro ? paragraphs(x.intro) : [],
-    examples: () => [el("h3", "Examples"), renderExamples(x.examples)],
-    rule: () => [el("h3", "The rule"), ...paragraphs(x.rule)],
-    table: () => x.table.length ? [el("h3", "Forms"), renderTable(x.table)] : [],
-    nuance: () => x.nuance ? [el("h3", "Nuance"), ...paragraphs(x.nuance)] : [],
-    mistakes: () => x.mistakes.length ? [el("h3", "Common mistakes"), renderMistakes(x.mistakes)] : [],
-  };
-  const order = ["intro", "rule", "table", "examples", "nuance", "mistakes"];
   const nodes = x.style === "lesson" ? [] : [el("p", x.request ? `Explained like: "${x.request}"` : x.style_name, "muted")];
-  for (const name of order) nodes.push(...sections[name]());
+  if (x.intro) nodes.push(...paragraphs(x.intro));
+  x.sections.forEach((section, i) => nodes.push(renderSection(section, i + 1)));
+  if (x.worked_example) nodes.push(renderWorked(x.worked_example));
+  if (x.mistakes.length) nodes.push(el("h3", "Common mix-ups"), renderMistakes(x.mistakes));
+  if (x.summary.length) {
+    const box = el("div", "", "box");
+    const list = el("ul");
+    for (const line of x.summary) list.append(el("li", line));
+    box.append(el("h3", "Summary"), list);
+    nodes.push(box);
+  }
   target.replaceChildren(...nodes);
-  const unlearned = x.examples.some((ex) => ex.tokens.some((t) => t.new));
+  const unlearned = x.sections.some((s) => s.examples.some((ex) => ex.tokens.some((t) => t.new)));
   const note = unlearned ? "Underlined words are not learned yet. Hover or click to see them." : "";
   if (hint) hint.textContent = note;
   else if (note) target.append(el("p", note, "muted"));
+}
+
+function renderSection(section, number) {
+  const box = el("section", "", "lesson-section");
+  box.append(el("h3", `${number}. ${section.heading}`), ...paragraphs(section.body));
+  if (section.table.length) box.append(renderTable(section.table));
+  if (section.examples.length) box.append(renderExamples(section.examples));
+  for (const quiz of section.quizzes) box.append(renderQuiz(quiz));
+  if (section.nuances.length) {
+    const list = el("div", "", "nuances");
+    section.nuances.forEach((n, i) => {
+      const p = el("p");
+      p.append(el("b", `Nuance ${i + 1}: `), n);
+      list.append(p);
+    });
+    box.append(list);
+  }
+  return box;
+}
+
+function renderQuiz(quiz) {
+  const box = el("div", "", "quiz");
+  const feedback = el("p", "", "quiz-feedback");
+  const buttons = quiz.choices.map((choice) => {
+    const b = el("button", choice.text, "quiz-choice");
+    b.addEventListener("click", () => {
+      for (const other of buttons) other.classList.remove("right", "picked-wrong");
+      b.classList.add(choice.correct ? "right" : "picked-wrong");
+      feedback.className = `quiz-feedback ${choice.correct ? "correct" : "wrong"}`;
+      feedback.textContent = `${choice.correct ? "Yes. " : "Not quite. "}${choice.why}`;
+    });
+    return b;
+  });
+  const choices = el("div", "", "quiz-choices");
+  choices.append(...buttons);
+  box.append(el("span", "Check yourself", "quiz-label"), el("p", quiz.question), choices, feedback);
+  return box;
+}
+
+function renderWorked(w) {
+  const box = el("div", "", "box");
+  const steps = el("ol");
+  for (const step of w.steps) steps.append(el("li", step));
+  const answer = el("p");
+  answer.append(el("b", "Result: "), el("span", w.answer, "korean"));
+  box.append(el("h3", "Worked example"), el("p", w.task), steps, answer);
+  return box;
 }
 
 function paragraphs(text) {

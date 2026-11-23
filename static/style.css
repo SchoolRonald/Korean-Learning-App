@@ -111,3 +111,19 @@ td.num, th.num { text-align: right; }
 .choice.picked-wrong { background: #fdecea; border-color: #c62828; }
 #practice-lesson { margin-top: 1.5rem; }
 .why { margin: 0.5rem 0; }
+/* Lesson sections, quizzes and nuances. */
+.lesson-section { margin: 2rem 0; }
+.lesson-section h3 { margin-bottom: 0.4rem; }
+.nuances { border-left: 3px solid #9a6700; background: #fffaf0; padding: 0.4rem 0.8rem; margin: 1rem 0; }
+.nuances p { margin: 0.4rem 0; }
+.quiz { border: 1px solid #0b6e99; border-radius: 6px; padding: 0.75rem 1rem; margin: 1.25rem 0; background: #f5f9fd; }
+.quiz-label { font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.08em; color: #0b6e99; }
+.quiz-choices { display: grid; gap: 0.4rem; }
+.quiz-choice { margin-top: 0; text-align: left; background: #fff; border: 1px solid #aaa; border-radius: 6px; }
+.quiz-choice { cursor: pointer; }
+.quiz-choice:hover { border-color: #0b6e99; }
+.quiz-choice.right { background: #eaf6ec; border-color: #1a7f37; }
+.quiz-choice.picked-wrong { background: #fdecea; border-color: #c62828; }
+.quiz-feedback { margin: 0.5rem 0 0; }
+.quiz-feedback:empty { margin: 0; }
+.box { border: 1px solid #ddd; border-radius: 6px; padding: 0.5rem 1rem; margin: 1.5rem 0; }
