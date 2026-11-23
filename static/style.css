@@ -1,4 +1,4 @@
-body { font-family: system-ui, sans-serif; max-width: 32rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+body { font-family: system-ui, sans-serif; max-width: 55rem; margin: 2rem auto; padding: 0 2rem; line-height: 1.5; }
 #prompt { font-size: 2rem; margin: 1.5rem 0 1rem; }
 #answer { font-size: 1.5rem; width: 100%; box-sizing: border-box; padding: 0.4rem; }
 button { font-size: 1rem; padding: 0.4rem 1rem; margin-top: 0.75rem; }
@@ -38,7 +38,7 @@ td.num, th.num { text-align: right; }
 .card .char { font-size: 2rem; line-height: 1.2; }
 .card .roman { font-weight: bold; }
 .card .muted { font-size: 0.75rem; }
-#keyboard { margin: 1rem 0 0.5rem; }
+#keyboard { margin: 1rem 0 0.5rem; max-width: 40rem; }
 /* Every key is one unit (u) wide, like a real keyboard. The top row is 0.5u + 10 keys and fills the
    width; the rows start where Tab, Caps Lock and Shift would end (0.5u, 0.75u, 1.25u), so each row
    sits further right and the top row (ending in ㅔ) reaches furthest. */
@@ -60,9 +60,7 @@ td.num, th.num { text-align: right; }
 .review tr:not(:first-child):hover { background: #f6f6f6; }
 #practice, #quiz-answer { font-size: 1.5rem; width: 100%; box-sizing: border-box; padding: 0.4rem; }
 
-/* Debug panel: wider than the page column so the table fits. */
-#debug { margin-top: 2rem; padding-top: 0.5rem; border-top: 2px dashed #999; font-size: 0.85rem;
-         width: min(56rem, 96vw); position: relative; left: 50%; transform: translateX(-50%); overflow-x: auto; }
+#debug { margin-top: 2rem; padding-top: 0.5rem; border-top: 2px dashed #999; font-size: 0.85rem; overflow-x: auto; }
 #debug tr.pool { background: #fff3cd; }
 #debug .up { color: #1a7f37; }
 #debug .down { color: #c62828; }

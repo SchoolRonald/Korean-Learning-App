@@ -20,6 +20,8 @@ The site has six tabs, in this order in every page's menu:
 
 Stack: Python, FastAPI, SQLite (no ORM), one static HTML/JS page per tab (no build step), the Anthropic API (Haiku and Sonnet, see Shared parts: AI usage), TypeSafe Jev for fast grading of free answers, and the NIKL Basic Korean Dictionary API (krdict) as the grammar source.
 
+Project-wide decisions, and the reasons for them, are in [DECISIONS.md](DECISIONS.md).
+
 ## Shared parts
 
 ### Word data

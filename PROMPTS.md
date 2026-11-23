@@ -395,3 +395,24 @@ Tests use the real list's entries (6 cases plus the note). 180 passing. Checked 
 **Prompt:** "also, go through and make sure SPEC.md is updated to reflect each of the 5 tabs we currently have on our website."
 
 **What was generated:** `SPEC.md` (renamed from `spec.md` in the working tree; the README link was updated to match, since GitHub and Linux are case-sensitive) was rewritten from a Basics-only spec into a spec for the whole site: an overview with the five tabs, the shared parts (word data and loader, the lesson/topic scope, learned words, the confidence model and word selection, AI usage and the call cap, the debug panel, Korean input handling), then one section per tab with goal, what the page shows, rules, API endpoints and acceptance criteria. The teammate's Basics section was kept and updated with this session's keyboard changes (fixed-width staggered keys, lighting keys from typed Hangul, Shift letters). Facts were checked against the code (routes, which pages use the scope selector and debug panel, and constants such as batch size 5, pick pool 5, at most 2 new words, at least 5 learned words, and the 50-call cap).
+
+## Docs and layout: DECISIONS.md, and a wider page
+
+**Prompt:** "Let's go ahead and create a DECISIONS.md file, alongside our SPEC.md file, that contains any important decisions we make that can have a global impact on the project and future features or changes. As an example, one decision I want to make right now is to widen the page a little more. ... I'm primarily expecting to use this on a desktop. Maybe planning for like having half a 16:9 monitor to show the app. So that's an 8:9 aspect ratio?"
+
+**What was generated:**
+- `DECISIONS.md`: how to add a decision (numbered entries, a template with context, decision and consequences, and old decisions marked as replaced instead of deleted), and the first entry, D-001. `SPEC.md` links to it.
+- D-001: design for half of a 1920 × 1080 monitor (960 × 1080 px, about 945 px after the scrollbar). In `static/style.css`, the page `max-width` went from 32rem (512 px) to 56rem (896 px) plus 1rem padding per side. Wider windows keep the 56rem column, centered, so lines stay readable.
+- Side effects handled: the Basics keyboard scales with the page, so at 896 px its keys would be about 82 px wide and 45 px tall. It is now capped at 40rem. The debug panel's trick to be wider than the old page was removed, since the page is now as wide as the panel was.
+
+**Issues and fixes:** none found. Not checked in a browser: the Gongbu server was not running (port 8000 was in use by another project).
+
+## Layout and docs: margins, and earlier decisions in DECISIONS.md
+
+**Prompt:** "Maybe make a little thinner. It should have a little bit of margins on the side when opened on half a 16:9 monitor ... Some margine number that makes sense, not a random arbitrary if possible(?) ... Also yes, add the earlier decisions too"
+
+**What was generated:**
+- Margin rule: the side margins equal the page's existing top margin (2rem). `body` padding went from 1rem to 2rem, and `max-width` from 56rem to 55rem: on the target window (about 945 px after the scrollbar), 945 − 2 × 32 = 881 px, rounded down to 55rem. The margin stays 2rem on narrower windows, for example a half-screen window on a scaled laptop display (about 750 px), where the old 1rem padding left almost no visible margin.
+- `DECISIONS.md` now has 11 decisions in date order (the file was not committed yet, so the width decision was renumbered from D-001 to D-011): the small stack with no build step, word lists out of the repository, code checks before AI with AI output labeled, never trusting ids or claims in AI output, confidence deciding practice (with its history), practice on learned words only, the lesson number as the difficulty limit, one database connection per thread, AI call rules and model roles, no browser reuse of old files, and the page width.
+
+**Issues and fixes:** the project changed after my last session (grammar tab, Jev grading, a 500-call cap, Sentence answers counting toward confidence). I read the current SPEC.md and git history first, so the decisions describe the project as it is now, not as I last saw it.

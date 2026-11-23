@@ -5,3 +5,5 @@ __pycache__/
 .pytest_cache/
 llm_usage.log
 .env
+*.db.bak
+.claude/
